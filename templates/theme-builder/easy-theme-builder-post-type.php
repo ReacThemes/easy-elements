@@ -224,7 +224,7 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                         <h2 class="easyel-choose-template">Edit Template Type</h2>
                         <div class="easyel-template-type">
                             <select class="easyel-builder-tmpl-type" name="easyel_builder_tmpl_type">
-                                <option value="">Select</option>
+                                <option value="">Select Your Template</option>
                                 <option value="archive">Archive</option>
                                 <option value="single">Single</option>
                             </select>
@@ -327,10 +327,9 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
 
                 if( $post_id && !is_wp_error( $post_id ) ){
 
-                    update_post_meta($post_id, '_wp_page_template', 'elementor_canvas');
-                    update_post_meta($post_id, '_elementor_template_type', 'fullwidth');
+                    update_post_meta($post_id, '_wp_page_template', 'elementor_header_footer'); // Elementor Full Width
+                    update_post_meta($post_id, '_elementor_template_type', 'wp-page');
                     update_post_meta($post_id, '_elementor_edit_mode', 'builder');
-                    update_post_meta($post_id, '_elementor_data', '[]');
 
                     $edit_url = add_query_arg(
                         [
@@ -511,17 +510,43 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             // ----- WooCommerce Special Handling -----
             if ( class_exists('WooCommerce') ) {
                 $archives['products_archive'][] = [
-                    'value' => 'shop_page',
-                    'label' => __('Shop Page [Pro]', 'easy-elements'),
-                    'pro'   => true,
+                    'value' => 'all_product_archive',
+                    'label' => __('All Product Archives', 'easy-elements'),
+                    'pro'   => false,
                     'group' => 'Products'
                 ];
-                $archives['products_archive'][] = [
-                    'value' => 'product_search',
-                    'label' => __('Search Results [Pro]', 'easy-elements'),
-                    'pro'   => true,
-                    'group' => 'Products'
-                ];
+
+                $woo_taxonomies = ['shop_page', 'product_search', 'product_brand', 'product_cat', 'product_tag'];
+
+                $pro_active_check =  class_exists('Easy_Elements_Pro') ? '' : "[Pro]"; 
+
+                foreach ($woo_taxonomies as $tax) {
+                    if ($tax === 'shop_page') {
+                        $archives['products_archive'][] = [
+                            'value' => $tax,
+                            'label' => __('Shop Page [Pro]', 'easy-elements'),
+                            'pro'   => true,
+                            'group' => 'Products'
+                        ];
+                    } elseif ($tax === 'product_search') {
+                        $archives['products_archive'][] = [
+                            'value' => $tax,
+                            'label' => __('Search Results [Pro]', 'easy-elements'),
+                            'pro'   => true,
+                            'group' => 'Products'
+                        ];
+                    } else {
+                        $taxonomy_obj = get_taxonomy($tax);
+                        if ($taxonomy_obj) {
+                            $archives['products_archive'][] = [
+                                'value' => $tax,
+                                'label' => "Product ". $taxonomy_obj->labels->singular_name . " " . $pro_active_check,
+                                'pro'   => true,
+                                'group' => 'Products'
+                            ];
+                        }
+                    }
+                }
             }
 
             /**
@@ -553,7 +578,7 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             $post_items = [
                 ['value'=>'post','label'=>__('Posts [Pro]','easy-elements'),'pro'=>true],
                 ['value'=>'in_category','label'=>__('In Category [Pro]','easy-elements'),'pro'=>true],
-                ['value'=>'in_category_children','label'=>__('In Category [Pro]','easy-elements'),'pro'=>true],
+                ['value'=>'in_category_children','label'=>__('In Category Children [Pro]','easy-elements'),'pro'=>true],
                 ['value'=>'in_post_tag','label'=>__('In Tag [Pro]','easy-elements'),'pro'=>true],
                 ['value'=>'post_by_author','label'=>__('Posts By Author [Pro]','easy-elements'),'pro'=>true],
             ];
@@ -582,6 +607,22 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             foreach( $others as $item ){
                 $item['group'] = null;
                 $singulars[] = $item;
+            }
+
+            // WooCommerce product single
+            if ( class_exists('WooCommerce') ) {
+                $singulars[] = [
+                    'value' => 'product',
+                    'label' => __('Products [Pro]', 'easy-elements'),
+                    'pro'   => true,
+                    'group' => 'Products'
+                ];
+                $singulars[] = [
+                    'value' => 'product_by_author',
+                    'label' => __('Products By Author [Pro]', 'easy-elements'),
+                    'pro'   => true,
+                    'group' => 'Products'
+                ];
             }
 
             /**
@@ -673,8 +714,6 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                 'post_title' => $template_name,
             ]);
 
-           
-
             // Update meta
             update_post_meta($post_id, 'easyel_template_type', $template_type);
             update_post_meta($post_id, 'easyel_conditions', wp_json_encode($conditions));
@@ -683,8 +722,6 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
         }
 
     }
-
-
 
     // Initialize single instance
     Easyel_Theme_Builder_CPT::instance();

@@ -7,7 +7,7 @@
             <h2 class="easyel-choose-template">Choose Template Type</h2>
             <div class="easyel-template-type">
                 <select class="easyel-builder-tmpl-type" name="easyel_builder_tmpl_type">
-                    <option value="">Select</option>
+                    <option value="">Select Your Template</option>
                     <option value="archive">Archive</option>
                     <option value="single">Single</option>
                 </select>

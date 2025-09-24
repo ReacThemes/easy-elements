@@ -39,14 +39,20 @@
       // Add new condition row
       self.$addRowBtn.on("click.easyel", function () {
         self.addConditionRow();
+
       });
 
-      // Remove row (delegated)
       $(document).on("click.easyel", ".easyel-remove-row", function () {
-        if (self.$conditionsWrapper.find(".easyel-condition-row").length > 1) {
-          $(this).closest(".easyel-condition-row").remove();
+      
+        let $wrapper = $(this).closest("#easyel-conditions-wrapper, .easyel-conditions-wrapper-edit");
+
+        let $row  = $(this).closest(".easyel-condition-row-edit, .easyel-condition-row");
+        let $rows = $wrapper.children(".easyel-condition-row-edit, .easyel-condition-row");
+
+        if ($rows.length > 1 && !$row.is($rows.first())) {
+            $row.remove();
         }
-      });
+    });
 
       // Close success modal
       $(document).on(
@@ -69,11 +75,24 @@
     },
 
     addConditionRow: function () {
-      const $row = this.$conditionsWrapper
-        .find(".easyel-condition-row:first")
-        .clone();
-      $row.find("input, select").val(""); // reset values
-      this.$conditionsWrapper.append($row);
+      // Decide which wrapper to use
+      const $wrapper =  this.$conditionsWrapper;
+
+      // Clone first row
+      const $row = $wrapper.find(".easyel-condition-row").first().clone();
+
+      $row.find("select.easyel-include-type").val("include");
+      $row.find("select.easyel-condition-main").val("entire-site");
+      $row.find("select.easyel-condition-sub").empty();
+
+      if ($row.find("select.easyel-condition-main").val() === "entire-site") {
+          $row.find("select.easyel-condition-sub").hide();
+      } else {
+          $row.find("select.easyel-condition-sub").show();
+      }
+
+      // Append to wrapper
+      $wrapper.append($row);
     },
 
     saveConditions: function () {
@@ -171,120 +190,7 @@
     EasyEL.init();
   });
 
-  jQuery(document).ready(function ($) {
-    // function populateSubOptions($mainSelect) {
-    //   var $row = $mainSelect.closest(
-    //     ".easyel-condition-row,.easyel-condition-row-edit"
-    //   );
-    //   var $subSelect = $row.find(".easyel-condition-sub");
-
-    //   var mainValue = $mainSelect.val();
-
-    //   $subSelect.empty();
-
-    //   if (mainValue === "entire-site") {
-    //     $subSelect.hide();
-    //   } else if (mainValue === "archives") {
-    //     $subSelect.show();
-    //     $subSelect.empty();
-
-    //     $.ajax({
-    //       url: easyel_builder_obj.ajax_url,
-    //       method: "POST",
-    //       data: { action: "easyel_get_archives" },
-    //       success: function (response) {
-    //         if (response.success) {
-    //           let data = response.data;
-
-    //           // helper function: option create
-    //           function createOption(item) {
-    //             let attrs = { value: item.value, text: item.label };
-    //             if (item.pro === true) {
-
-    //               attrs.disabled = true;
-    //               attrs["data-pro"] = "1"; // future use
-    //             }
-    //             return $("<option>", attrs);
-    //           }
-
-    //           // Core Archives
-    //           if (data.core && data.core.length) {
-    //             let $group = $("<optgroup>", { label: "Core Archives" });
-    //             data.core.forEach((item) => $group.append(createOption(item)));
-    //             $subSelect.append($group);
-    //           }
-
-    //           // Posts archive
-    //           if (data.posts_archive && data.posts_archive.length) {
-    //             let $group = $("<optgroup>", { label: "Posts Archive" });
-    //             data.posts_archive.forEach((item) =>
-    //               $group.append(createOption(item))
-    //             );
-    //             $subSelect.append($group);
-    //           }
-
-    //           // Products archive
-    //           if (data.products_archive && data.products_archive.length) {
-    //             let $group = $("<optgroup>", { label: "Products Archive" });
-    //             data.products_archive.forEach((item) =>
-    //               $group.append(createOption(item))
-    //             );
-    //             $subSelect.append($group);
-    //           }
-
-    //           // Custom archive
-    //           // if (data.custom && data.custom.length) {
-    //           //   let $group = $("<optgroup>", { label: "Custom Archives" });
-    //           //   data.custom.forEach((item) =>
-    //           //     $group.append(createOption(item))
-    //           //   );
-    //           //   $subSelect.append($group);
-    //           // }
-    //         }
-    //       },
-    //     });
-    //   } else if (mainValue === "singular") {
-    //     $subSelect.show();
-    //     $subSelect.empty();
-
-    //     $.ajax({
-    //       url: easyel_builder_obj.ajax_url,
-    //       method: "POST",
-    //       data: { action: "easyel_get_singulars" },
-    //       success: function (response) {
-    //         if (response.success && Array.isArray(response.data)) {
-    //           $subSelect.empty();
-    //           response.data.forEach(function (item) {
-    //             if (item.group) {
-    //               let $group = $subSelect.find(
-    //                 'optgroup[label="' + item.group + '"]'
-    //               );
-    //               if (!$group.length) {
-    //                 $group = $("<optgroup>", { label: item.group });
-    //                 $subSelect.append($group);
-    //               }
-    //               $group.append(
-    //                 $("<option>", {
-    //                   value: item.value,
-    //                   text: item.label,
-    //                   disabled: item.pro,
-    //                 })
-    //               );
-    //             } else {
-    //               $subSelect.append(
-    //                 $("<option>", {
-    //                   value: item.value,
-    //                   text: item.label,
-    //                   disabled: item.pro,
-    //                 })
-    //               );
-    //             }
-    //           });
-    //         }
-    //       },
-    //     });
-    //   }
-    // }
+  $(document).ready(function ($) {
 
     function populateSubOptions($mainSelect, selectedSub = "") {
       var $row = $mainSelect.closest(
@@ -420,6 +326,7 @@
         $(".easyel-edit-template-condition").attr("data-post-id", post_id);
 
         easyelUpdateEditWithElementorUrl();
+        
 
         // AJAX Call
         $.ajax({
@@ -439,21 +346,35 @@
               $(".easyel-builder-template-name").val(data.template_name);
               $(".easyel-builder-tmpl-type").val(data.template_type);
 
+              const $wrapper = $("#easyel-conditions-wrapper-edit");
               // Reset old conditions
-              $(".easyel-conditions-wrapper-edit").empty();
+              $wrapper.empty();
 
               if (data.conditions.length) {
                 data.conditions.forEach(function (cond) {
                   let $row = $(easyel_render_condition_row(cond));
-                  $(".easyel-conditions-wrapper-edit").append($row);
+                  $wrapper.append($row);
 
                   populateSubOptions($(".easyel-condition-main", $row), cond.sub || 'all');
+
                 });
               } else {
                 let $row = $(easyel_render_condition_row());
-                $(".easyel-conditions-wrapper-edit").append($row);
+                $wrapper.append($row);
                 populateSubOptions($(".easyel-condition-main", $row), 'all');
               }
+
+              // $wrapper.find(".easyel-condition-row-edit").each(function () {
+               
+              //   const $main = $(this).find(".easyel-condition-main");
+              //    console.log( $main.val() );
+              //   const $sub = $(this).find(".easyel-condition-sub");
+              //   if ( $main.val() === "entire-site" ) {
+              //       $sub.hide();
+              //   } else {
+              //       $sub.show();
+              //   }
+              // });
 
               $(".easyel-edit-template-condition").fadeIn().css({
                 visibility: "visible",
@@ -485,12 +406,6 @@
         easyel_render_condition_row()
       );
     });
-
-    // Remove condition row
-    $(document).on("click", ".easyel-remove-row", function () {
-      $(this).closest(".easyel-condition-row").remove();
-    });
-
 
     function easyel_render_condition_row(cond = {}) {
       let include = cond.include || "include";
@@ -524,4 +439,5 @@
         </div>`;
     }
   });
+
 })(jQuery);
