@@ -1,0 +1,32 @@
+:root {
+  --e-global-color-primary: #EAA638;
+}
+
+.eel-page-title {
+  line-height: 100%;
+  margin: 0;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eel-page-title .eel-border-left {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1490196078);
+}
+
+.eel-highlighted {
+  color: var(--e-global-color-primary);
+}
+
+.eel-title-size-small .eel-page-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #0B3665;
+}
+
+.eel-border-position-right .eel-border-left {
+  order: 2;
+}/*# sourceMappingURL=page-title.css.map */

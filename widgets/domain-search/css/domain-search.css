@@ -1,0 +1,59 @@
+:root {
+  --e-global-color-primary: #FFD012;
+  --e-global-color-secondary: #0B3665;
+}
+
+.eel-domain-search {
+  /* Input field styling */
+  /* Button styling */
+}
+.eel-domain-search form {
+  display: flex;
+  width: 100%; /* or set a fixed width like 400px */
+  border: none;
+  overflow: hidden;
+  gap: 16px;
+  position: relative;
+}
+@media screen and (max-width: 575px) {
+  .eel-domain-search form {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+.eel-domain-search .unicon-search {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  font-size: 22px;
+  transform: translateY(-50%);
+}
+@media screen and (max-width: 575px) {
+  .eel-domain-search .unicon-search {
+    top: 20%;
+  }
+}
+.eel-domain-search form input[type=text] {
+  flex: 1; /* take up remaining space */
+  padding: 16px 16px 16px 40px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  border-radius: 16px;
+  width: 500px;
+}
+.eel-domain-search form button {
+  padding: 18px 32px;
+  background-color: var(--e-global-color-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  border-radius: 16px;
+}
+@media screen and (max-width: 575px) {
+  .eel-domain-search form button {
+    width: 100%;
+  }
+}/*# sourceMappingURL=domain-search.css.map */

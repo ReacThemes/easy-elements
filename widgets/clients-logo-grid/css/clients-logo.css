@@ -1,0 +1,25 @@
+.e-e-clients-logo .grid-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.e-e-clients-logo .grid-item {
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.e-e-clients-logo .grid-item .ee--logo-img {
+  box-sizing: border-box;
+}
+
+.e-e-clients-logo .ee--logo-img {
+  text-align: center;
+}
+
+.e-e-clients-logo .e-e-grid-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}/*# sourceMappingURL=clients-logo.css.map */

@@ -1,0 +1,23 @@
+:root {    
+    --e-global-color-primary: #FFD012;
+    --e-global-color-secondary: #0B3665;
+}
+
+.breadcrumb-separator {
+    display: inline-block;
+    margin: 0 6px;
+    font-weight: 400;
+    color: var(--e-global-color-secondary, #0B3665);
+    font-size: 1em;
+    vertical-align: middle;
+}
+
+.breadcrumb-path a svg{
+    height: 1em;
+    width: 1em;
+}
+
+.breadcrumb-home-icon{
+    position: relative;
+    top: 1px;
+}

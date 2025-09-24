@@ -1,0 +1,129 @@
+:root {
+  --e-global-color-primary: #EAA638;
+  --e-global-color-secondary: #0B3665;
+  --e-global-color-text: #7A8986;
+}
+
+.ee--icon-box {
+  width: 100%;
+}
+.ee--icon-box svg {
+  height: 1em;
+}
+.ee--icon-box .icon-box-title {
+  color: var(--e-global-color-secondary);
+  margin-bottom: 14px;
+}
+.ee--icon-box .icon-box-title a {
+  color: currentColor;
+}
+.ee--icon-box .eel-icon {
+  min-width: 60px;
+  height: 60px;
+  background: var(--e-global-color-primary);
+  display: inline-grid;
+  margin-bottom: 36px;
+  border-radius: 16px;
+  font-size: 20px;
+  place-content: center;
+  transition: all 0.4s ease-in;
+}
+.ee--icon-box .icon-box-description {
+  font-size: 18px;
+  color: var(--e-global-color-text);
+}
+.ee--icon-box .icon-box-description a {
+  color: currentColor;
+  transition: all 0.4s ease-in;
+}
+.ee--icon-box .eel-read-more .eel-icon-to-text {
+  font-size: 15px;
+  font-weight: bold;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  max-width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  overflow: hidden;
+  border: solid 1px var(--e-global-color-text);
+  color: var(--e-global-color-text);
+  transition: 0.5s;
+}
+.ee--icon-box .eel-read-more .eel-icon-to-text .eel-text {
+  opacity: 0;
+  display: inline-block;
+  overflow: hidden;
+  margin-left: 36px;
+  line-height: 2.2em;
+  padding-right: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: 0.5s;
+}
+.ee--icon-box .eel-read-more .eel-icon-to-text .eel-read-more-text-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 7px;
+  font-size: 22px;
+  display: inline-flex;
+}
+.ee--icon-box .eel-read-more .eel-icon-to-text:hover {
+  max-width: 100%;
+}
+.ee--icon-box .eel-read-more .eel-icon-to-text:hover .eel-text {
+  opacity: 1;
+}
+.ee--icon-box.right, .ee--icon-box.left {
+  display: flex;
+  gap: 20px;
+}
+.ee--icon-box.right .eel-icon, .ee--icon-box.left .eel-icon {
+  margin-bottom: 0;
+  margin-top: 4px;
+}
+.ee--icon-box.right .eel-icon {
+  order: 2;
+}
+
+.eel-read-more-text svg path,
+.eel-read-more-text svg,
+.eel-read-more-text {
+  transition: all 0.4s ease-in;
+  display: inline-block;
+}
+
+.easyel-gradeint-yes {
+  background: linear-gradient(180deg, #FFD000 0%, rgba(255, 255, 255, 0.24) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.eel-icon.ee--gradient-border {
+  position: relative;
+}
+.eel-icon.ee--gradient-border::after {
+  position: absolute;
+  left: -0.5px;
+  content: "";
+  height: 56px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 25%, rgba(255, 255, 255, 0) 100%);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.4;
+}
+.eel-icon.ee--gradient-border::before {
+  position: absolute;
+  right: -0.5px;
+  content: "";
+  height: 56px;
+  width: 1px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 25%, rgba(255, 255, 255, 0) 100%);
+  top: 50%;
+  transform: translate(50%, -50%);
+  opacity: 0.4;
+}/*# sourceMappingURL=icon-box.css.map */

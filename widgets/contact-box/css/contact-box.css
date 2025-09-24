@@ -1,0 +1,47 @@
+:root {
+  --e-global-color-primary: #EAA638;
+  --e-global-color-secondary: #0B3665;
+  --e-global-color-text: #7A8986;
+}
+
+.ee--contact-box {
+  width: 100%;
+}
+.ee--contact-box svg {
+  height: 1em;
+}
+.ee--contact-box .contact-box-title {
+  color: var(--e-global-color-secondary);
+  margin-bottom: 14px;
+}
+.ee--contact-box .contact-box-title a {
+  color: currentColor;
+}
+.ee--contact-box .eel-icon {
+  min-width: 60px;
+  height: 60px;
+  background: var(--e-global-color-primary);
+  display: inline-grid;
+  margin-bottom: 36px;
+  border-radius: 16px;
+  font-size: 20px;
+  place-content: center;
+}
+.ee--contact-box .contact-box-description {
+  font-size: 18px;
+  color: var(--e-global-color-text);
+}
+.ee--contact-box .contact-box-description a {
+  color: currentColor;
+}
+.ee--contact-box.right, .ee--contact-box.left {
+  display: flex;
+  gap: 20px;
+}
+.ee--contact-box.right .eel-icon, .ee--contact-box.left .eel-icon {
+  margin-bottom: 0;
+  margin-top: 4px;
+}
+.ee--contact-box.right .eel-icon {
+  order: 2;
+}/*# sourceMappingURL=contact-box.css.map */

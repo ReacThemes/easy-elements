@@ -1,0 +1,235 @@
+:root {
+  --e-global-color-primary: #FFD012;
+  --e-global-color-secondary: #0B3665;
+}
+
+.eel-post-grid-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 575px) {
+  .eel-post-grid-wrap .grid-item-inner {
+    flex-wrap: wrap;
+  }
+}
+
+.eel-post-grid-wrap .grid-item {
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.eel-post-grid-wrap .eel-blog-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.eel--blog-img img {
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+.eel--blog-img.eel--animate {
+  overflow: hidden;
+}
+.eel--blog-img.eel--animate img {
+  transition: all 0.5s ease;
+  transform: scale(1.1);
+}
+.eel--blog-img.eel--animate.left_right:hover img {
+  transform: translateX(15px) scale(1.1);
+}
+.eel--blog-img.eel--animate.top_bottom:hover img {
+  transform: translateY(15px) scale(1.1);
+}
+
+.eel-post-grid-wrap .grid-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transform: scale(1.2);
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.eel-post-grid-wrap .grid-item .eel--blog-img {
+  overflow: hidden;
+}
+
+.eel-post-grid-wrap .grid-item:hover img {
+  transform: scale(1.2) translateX(10px);
+}
+
+.eel-post-grid-wrap .post-title {
+  font-weight: bold;
+  margin: 10px 0 5px;
+  font-size: 1.2em;
+}
+
+.eel-post-grid-wrap .eel--blog-meta {
+  margin: 20px 0 5px;
+  padding: 0;
+  list-style: none;
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  line-height: 120%;
+  align-items: center;
+}
+.eel-post-grid-wrap .eel--blog-meta a {
+  color: currentColor;
+}
+.eel-post-grid-wrap .eel--blog-meta a:hover {
+  color: var(--e-global-color-primary);
+}
+.eel-post-grid-wrap .eel--blog-meta li {
+  position: relative;
+}
+
+.eel--separator--line li + li {
+  padding-left: 10px;
+}
+.eel--separator--line li + li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  background: #000;
+  width: 1px;
+  height: 10px;
+}
+
+.eel--separator--circle li + li {
+  padding-left: 14px;
+}
+.eel--separator--circle li + li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  background: #000;
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+}
+
+.eel-post-grid-wrap .read-more {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.eel--blog-excerpt {
+  margin-bottom: 20px;
+}
+.eel--blog-excerpt a {
+  color: currentColor;
+}
+
+.ee--blog-title a {
+  color: currentColor;
+}
+.ee--blog-title a:hover {
+  color: var(--e-global-color-primary);
+}
+
+.eel-post-grid-wrap .read-more:hover {
+  text-decoration: underline;
+}
+
+.eel--read-more a {
+  display: inline-flex;
+  align-items: center;
+  color: currentColor;
+}
+.eel--read-more a:hover {
+  color: var(--e-global-color-primary);
+}
+
+.eel--read-more-icon.after {
+  margin-left: 6px;
+  top: 1px;
+}
+
+.eel--read-more-icon.before {
+  margin-right: 6px;
+  top: 1px;
+}
+
+.eel-post-grid-wrap svg,
+.eel-post-grid-wrap i {
+  font-size: 16px;
+  height: 1em;
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+}
+
+.eel--button-icon {
+  display: inline-grid;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  place-content: center;
+  transition: all 0.5s ease;
+  background: var(--e-global-color-primary);
+  align-items: center;
+  cursor: pointer;
+}
+.eel--button-icon svg,
+.eel--button-icon i {
+  margin: 0;
+  top: 0;
+  color: #fff;
+  fill: #fff;
+}
+
+.eel-blog-pagination {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.eel-blog-pagination ul {
+  display: inline-flex;
+  gap: 8px;
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.eel-blog-pagination ul li {
+  display: inline-block;
+}
+
+.eel-blog-pagination ul li a,
+.eel-blog-pagination ul li span {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  color: #333;
+  background-color: #f3f3f3;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 10px rgba(14, 13, 13, 0.1019607843);
+}
+
+.eel-blog-pagination ul li a:hover {
+  background-color: var(--e-global-color-primary);
+  color: #fff;
+  border-color: var(--e-global-color-primary);
+}
+
+.eel-blog-pagination ul li span.current {
+  background-color: var(--e-global-color-primary);
+  color: #fff;
+  border-color: var(--e-global-color-primary);
+  cursor: default;
+}/*# sourceMappingURL=blog-grid.css.map */

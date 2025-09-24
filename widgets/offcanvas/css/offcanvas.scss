@@ -1,0 +1,76 @@
+.eel-offcanvas {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    height: 100%;
+    background: #fff;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 999999;
+    padding: 60px 25px 40px 40px;
+    overflow-y: auto;
+	&.eel-offcanvas-left{
+		left: 0;
+		right: auto;
+		transform: translateX(-100%);
+	}
+}
+
+body.logged-in{
+    .eel-offcanvas {
+        padding: 80px 25px 40px 40px;
+        .eel-nav-menu-icon{
+            top: 50px;
+        }
+    }    
+}
+
+body.eel-offcanvas-active .eel-offcanvas {
+    transform: translateX(0);
+}
+
+body.eel-offcanvas-active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 99999;
+}
+
+.eel-offcanvas-close{
+	position: absolute;
+	top: 20px;
+	right: 25px;
+	font-size: 25px;
+	border-radius: 100%;
+	border: none;
+	cursor: pointer;
+	color: #000;
+	z-index: 1;
+	padding: 0;
+	display: grid;
+	place-content: center;
+	margin: 0 auto;
+	svg{
+		height: 1em;
+		fill: currentColor;
+	}
+}
+
+.eel-offcanvas-toggle-text{
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	svg{
+		width: 20px;
+		height: 20px;
+	}
+	.eel-icon-text{
+		margin-right: 5px;
+		font-style: normal;
+	}
+}

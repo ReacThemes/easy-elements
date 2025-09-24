@@ -1,0 +1,13 @@
+:root {
+  --e-global-color-primary: #EAA638;
+}
+
+.eel-social-buttons {
+  display: inline-flex;
+}
+
+.eel-social-button {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}/*# sourceMappingURL=social.css.map */

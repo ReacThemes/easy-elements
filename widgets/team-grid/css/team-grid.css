@@ -1,0 +1,122 @@
+.eel-team-wraps .grid-item {
+  box-sizing: border-box;
+}
+.eel-team-wraps .grid-item .eel-name {
+  margin: 0 0 5px;
+}
+
+.eel-team-wraps .eel-team-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.ee--team-img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.ee--team-img .eel-name-deg-wrap {
+  background: #fff;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  padding: 26px 24px 24px 24px;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 2;
+}
+.ee--team-img img {
+  transition: all 0.5s ease;
+}
+.ee--team-img:hover img {
+  transform: scale(1.1);
+}
+.ee--team-img a {
+  color: currentColor;
+}
+
+.eel-popup-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.eel-popup-content {
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 40px 50px;
+  border-radius: 8px;
+  max-width: 550px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+}
+
+.eel-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+}
+
+.eel-popup-details {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.6;
+  margin-top: 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.eel-popup-header {
+  margin-bottom: 12px;
+}
+
+.eel-popup-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 2px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.eel-popup-designation {
+  font-size: 15px;
+  color: #888;
+  margin-bottom: 6px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.eel-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: background 0.3s, opacity 0.3s;
+  z-index: 1;
+}
+
+.ee--team-img img {
+  position: relative;
+  z-index: 0;
+}/*# sourceMappingURL=team-grid.css.map */

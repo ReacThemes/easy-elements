@@ -1,0 +1,19 @@
+.eel-site-logo a img {
+  width: auto;
+  display: block;
+}
+
+.eel-site-logo {
+  display: inline-block;
+  height: auto;
+}
+
+.eel-site-logo-added {
+  width: 120px;
+}
+
+.eel-site-logo svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}/*# sourceMappingURL=logo.css.map */
