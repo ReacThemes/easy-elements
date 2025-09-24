@@ -64,6 +64,19 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	        ]
 	    );
 
+		$this->add_control(
+			'select_style',
+			[
+				'label' => esc_html__( 'Search Skin', 'easy-elements' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => '1',
+				'options' => [
+					'1' => esc_html__( 'Search Popup', 'easy-elements' ),
+					'2' => esc_html__( 'Search Fields', 'easy-elements' ),
+				],
+			]
+		);
+
 	    $this->add_control(
 	        'search_placeholder',
 	        [
@@ -85,7 +98,7 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	        ]
 	    );
 
-		$this->add_control(
+		$this->add_responsive_control(
 	        'search_icon_size',
 	        [
 	            'label' => esc_html__('Icon Size (px)', 'easy-elements'),
@@ -98,11 +111,12 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	            ],
 	            'selectors' => [
 	                '{{WRAPPER}} .eel-search-open-btn i, {{WRAPPER}} .eel-search-open-btn svg' => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+	                '{{WRAPPER}} .eel-search-submit-btn i, {{WRAPPER}} .eel-search-submit-btn svg' => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 	            ],
 	        ]
 	    );
 
-	    $this->add_control(
+	    $this->add_responsive_control(
 	        'search_icon_vertical_position',
 	        [
 	            'label' => esc_html__('Icon Vertical Position (px)', 'easy-elements'),
@@ -120,8 +134,25 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	            'selectors' => [
 	                '{{WRAPPER}} .eel-search-open-btn' => 'transform: translateY({{SIZE}}{{UNIT}});',
 	            ],
+					'condition' => [
+						'select_style' => '1'
+					]
 	        ]
 	    );
+
+		$this->add_responsive_control(
+			'search_icon_horizontal_position',
+			[
+				'label' => esc_html__('Icon Horizontal Position (px)', 'easy-elements'),
+				'type' => Controls_Manager::SLIDER,
+				'selectors' => [
+						'{{WRAPPER}} .eel-search-submit-btn' => 'right: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'select_style' => '2'
+				]
+			]
+	   );
 
 
 	    $this->add_control(
@@ -133,10 +164,13 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	                'value' => 'fas fa-arrow-up', 
 	                'library' => 'fa-solid', 
 	            ],
+					'condition' => [
+						'select_style' => '1'
+					]
 	        ]
 	    );
 
-	    $this->add_control(
+	    $this->add_responsive_control(
 	        'icon_size',
 	        [
 	            'label' => esc_html__('Close Icon Size (px)', 'easy-elements'),
@@ -150,6 +184,9 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	            'selectors' => [
 	                '{{WRAPPER}} .eel-search-close-btn i, {{WRAPPER}} .eel-search-close-btn svg' => 'font-size: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 	            ],
+					'condition' => [
+						'select_style' => '1'
+					]
 	        ]
 	    );
 
@@ -163,9 +200,11 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	            'selectors' => [
 	                '{{WRAPPER}} .eel-search-lightbox, {{WRAPPER}} .eel-search-overlay' => 'background: {{VALUE}};',
 	            ],
+					'condition' => [
+						'select_style' => '1'
+					]
 	        ]
 	    );
-
 
 	    $this->add_control(
 	        'input_text_color',
@@ -174,6 +213,7 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	            'type' => Controls_Manager::COLOR,
 	            'selectors' => [
 	                '{{WRAPPER}} .eel-search-content .eel-search-field' => 'color: {{VALUE}};',
+	                '{{WRAPPER}} .eel-search-style-2 .eel-search-field' => 'color: {{VALUE}};',
 	            ],
 	        ]
 	    );
@@ -185,7 +225,36 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	            'type' => Controls_Manager::COLOR,
 	            'selectors' => [
 	                '{{WRAPPER}} .eel-search-content .eel-search-field' => 'background-color: {{VALUE}};',
+	                '{{WRAPPER}} .eel-search-style-2 .eel-search-field' => 'background: {{VALUE}};',
 	            ],
+	        ]
+	    );
+
+	    $this->add_control(
+	        'input_border_color',
+	        [
+	            'label' => esc_html__('Input Border Color', 'easy-elements'),
+	            'type' => Controls_Manager::COLOR,
+	            'selectors' => [
+	                '{{WRAPPER}} .eel-search-style-2 .eel-search-field' => 'border-color: {{VALUE}};',
+	            ],
+					'condition' => [
+						'select_style' => '2'
+					]
+	        ]
+	    );
+
+	    $this->add_control(
+	        'input_focus_border_color',
+	        [
+	            'label' => esc_html__('Border Color (Focus)', 'easy-elements'),
+	            'type' => Controls_Manager::COLOR,
+	            'selectors' => [
+	                '{{WRAPPER}} .eel-search-style-2 .eel-search-field:focus' => 'border-color: {{VALUE}};',
+	            ],
+					'condition' => [
+						'select_style' => '2'
+					]
 	        ]
 	    );
 
@@ -197,38 +266,56 @@ class Easyel_Search_Widget extends \Elementor\Widget_Base {
 	            'selectors' => [
 	                '{{WRAPPER}} .eel-search-content .eel-search-submit' => 'background-color: {{VALUE}};',
 	            ],
+					'condition' => [
+						'select_style' => '1'
+					]
 	        ]
 	    );
-
-	    $this->end_controls_section();
+	   $this->end_controls_section();
 	}
 
-
 	protected function render() {
-	    $settings = $this->get_settings_for_display();
-	    ?>
+		$settings = $this->get_settings_for_display();
+		$style	  = $settings['select_style'];  
 
-	    <a href="#" role="button" class="eel-search-open-btn" aria-label="<?php esc_attr_e('Open Search', 'easy-elements'); ?>">
-	        <?php \Elementor\Icons_Manager::render_icon( $settings['open_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-	    </a>
+		if ( $style == '2' ) : ?>
+			<div class="eel-search-style-<?php echo esc_attr( $style ); ?>">				          
+				<form role="search" method="get" class="eel-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<input type="search" class="eel-search-field" placeholder="<?php echo esc_attr( $settings['search_placeholder'] ?? 'Search..' ); ?>" value="" name="s" />
+					<button type="submit" class="eel-search-submit-btn" aria-label="Submit Search">
+						<?php 
+						if( $settings['open_icon']['value'] ) :
+							\Elementor\Icons_Manager::render_icon( $settings['open_icon'], [ 'aria-hidden' => 'true' ] );
+						else : ?>
+							<i class="eel-absl unicon-search"></i>
+							<?php 
+						endif; ?>
+					</button>
+				</form>
+			</div>
+	    	<?php
+		else: ?>
+			<a href="#" role="button" class="eel-search-open-btn" aria-label="<?php esc_attr_e('Open Search', 'easy-elements'); ?>">
+				<?php \Elementor\Icons_Manager::render_icon( $settings['open_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+			</a>
 
-	    <div class="eel-search-lightbox">
-	        <div class="eel-search-overlay">
-	            <a href="#" role="button" class="eel-search-close-btn" aria-label="<?php esc_attr_e('Close Search', 'easy-elements'); ?>">
-	                <?php \Elementor\Icons_Manager::render_icon( $settings['close_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-	            </a>
-	        </div>
-	        <div class="eel-search-content">
-				<h4><?php esc_html_e('What are you looking for?', 'easy-elements'); ?></h4>	            
-	            <form role="search" method="get" class="eel-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-	                <input type="search" class="eel-search-field" placeholder="<?php echo esc_attr( $settings['search_placeholder'] ?? 'Type keywords here...' ); ?>" value="" name="s" />
-	                <button type="submit" class="eel-search-submit" aria-label="Submit Search">
-	                    <i class="eel-absl unicon-search"></i>
-	                </button>
-	            </form>
-	        </div>
-	    </div>
-
-	    <?php
+			<div class="eel-search-lightbox">
+				<div class="eel-search-overlay">
+						<a href="#" role="button" class="eel-search-close-btn" aria-label="<?php esc_attr_e('Close Search', 'easy-elements'); ?>">
+							<?php \Elementor\Icons_Manager::render_icon( $settings['close_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+						</a>
+				</div>
+				<div class="eel-search-content">
+					<h4><?php esc_html_e('What are you looking for?', 'easy-elements'); ?></h4>	            
+						<form role="search" method="get" class="eel-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+							<input type="search" class="eel-search-field" placeholder="<?php echo esc_attr( $settings['search_placeholder'] ?? 'Type keywords here...' ); ?>" value="" name="s" />
+							<button type="submit" class="eel-search-submit" aria-label="Submit Search">
+								<i class="eel-absl unicon-search"></i>
+							</button>
+						</form>
+				</div>
+			</div>			
+			<?php
+		endif;
 	}
 }
