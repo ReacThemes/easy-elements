@@ -175,13 +175,13 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                 ?>
                 <div class="easyel-builder-tabs">
                     <a href="<?php echo esc_url( $base_url ); ?>" class="easyel-tab <?php echo $current=='' ? 'active' : ''; ?>">
-                        <?php esc_html_e( 'All', 'easy-theme-builder' ); ?>
+                        <?php esc_html_e( 'All', 'easy-elements' ); ?>
                     </a>
                     <a href="<?php echo esc_url( $base_url . '&easy_etb_type=archive' ); ?>" class="easyel-tab <?php echo $current=='archive' ? 'active' : ''; ?>">
-                        <?php esc_html_e( 'Archive', 'easy-theme-builder' ); ?>
+                        <?php esc_html_e( 'Archive', 'easy-elements' ); ?>
                     </a>
                     <a href="<?php echo esc_url( $base_url . '&easy_etb_type=single' ); ?>" class="easyel-tab <?php echo $current=='single' ? 'active' : ''; ?>">
-                        <?php esc_html_e( 'Single', 'easy-theme-builder' ); ?>
+                        <?php esc_html_e( 'Single', 'easy-elements' ); ?>
                     </a>
                 </div>
                 <?php
@@ -224,7 +224,7 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                         <h2 class="easyel-choose-template">Edit Template Type</h2>
                         <div class="easyel-template-type">
                             <select class="easyel-builder-tmpl-type" name="easyel_builder_tmpl_type">
-                                <option value="">Select Your Template</option>
+                                <option value="">Select Template Type</option>
                                 <option value="archive">Archive</option>
                                 <option value="single">Single</option>
                             </select>
