@@ -407,6 +407,88 @@ class Easyel_Icon_Box__Widget extends \Elementor\Widget_Base {
         );
 
 
+         $this->add_control(
+            'icon_direction',
+            [
+                'label' => esc_html__( 'Direction', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'default' => 'top',
+                'options' => [                    
+                    'left' => [
+                        'title' => esc_html__( 'Left', 'easy-elements' ),
+                        'icon'  => 'eicon-h-align-left',
+                    ],
+                    'top' => [
+                        'title' => esc_html__( 'Top', 'easy-elements' ),
+                        'icon'  => 'eicon-v-align-top',
+                    ],
+                    'right' => [
+                        'title' => esc_html__( 'Right', 'easy-elements' ),
+                        'icon'  => 'eicon-h-align-right',
+                    ],
+                ],
+                'toggle' => false,
+            ]
+        );
+
+        // Vertical Alignment Control
+        $this->add_responsive_control(
+            'icon_vertical_alignment',
+            [
+                'label' => esc_html__( 'Vertical Alignment', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'default' => 'center',
+                'options' => [
+                    'flex-start' => [
+                        'title' => esc_html__( 'Top', 'easy-elements' ),
+                        'icon'  => 'eicon-v-align-top',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Middle', 'easy-elements' ),
+                        'icon'  => 'eicon-v-align-middle',
+                    ],
+                    'flex-end' => [
+                        'title' => esc_html__( 'Bottom', 'easy-elements' ),
+                        'icon'  => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ee--icon-box.right, {{WRAPPER}} .ee--icon-box.left' => 'align-items: {{VALUE}};',
+                ],
+                'condition' => [
+                    'icon_direction' => ['left', 'right'],
+                ],
+            ]
+        );
+
+
+        $this->add_responsive_control(
+            '_text_align',
+            [
+                'label' => esc_html__( 'Alignment', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__( 'Left', 'easy-elements' ),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'easy-elements' ),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__( 'Right', 'easy-elements' ),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' => [
+                    '{{WRAPPER}} .ee--icon-box, {{WRAPPER}} .eel-pro-number' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
+
         $this->end_controls_tab();
 
 
@@ -851,89 +933,6 @@ class Easyel_Icon_Box__Widget extends \Elementor\Widget_Base {
                 ],
             ]
         );
-    
-
-        $this->add_control(
-            'icon_direction',
-            [
-                'label' => esc_html__( 'Direction', 'easy-elements' ),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
-                'default' => 'top',
-                'options' => [                    
-                    'left' => [
-                        'title' => esc_html__( 'Left', 'easy-elements' ),
-                        'icon'  => 'eicon-h-align-left',
-                    ],
-                    'top' => [
-                        'title' => esc_html__( 'Top', 'easy-elements' ),
-                        'icon'  => 'eicon-v-align-top',
-                    ],
-                    'right' => [
-                        'title' => esc_html__( 'Right', 'easy-elements' ),
-                        'icon'  => 'eicon-h-align-right',
-                    ],
-                ],
-                'toggle' => false,
-            ]
-        );
-
-        // Vertical Alignment Control
-        $this->add_responsive_control(
-            'icon_vertical_alignment',
-            [
-                'label' => esc_html__( 'Vertical Alignment', 'easy-elements' ),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
-                'default' => 'center',
-                'options' => [
-                    'flex-start' => [
-                        'title' => esc_html__( 'Top', 'easy-elements' ),
-                        'icon'  => 'eicon-v-align-top',
-                    ],
-                    'center' => [
-                        'title' => esc_html__( 'Middle', 'easy-elements' ),
-                        'icon'  => 'eicon-v-align-middle',
-                    ],
-                    'flex-end' => [
-                        'title' => esc_html__( 'Bottom', 'easy-elements' ),
-                        'icon'  => 'eicon-v-align-bottom',
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .ee--icon-box.right, {{WRAPPER}} .ee--icon-box.left' => 'align-items: {{VALUE}};',
-                ],
-                'condition' => [
-                    'icon_direction' => ['left', 'right'],
-                ],
-            ]
-        );
-
-
-        $this->add_responsive_control(
-            '_text_align',
-            [
-                'label' => esc_html__( 'Alignment', 'easy-elements' ),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
-                'options' => [
-                    'left' => [
-                        'title' => esc_html__( 'Left', 'easy-elements' ),
-                        'icon' => 'eicon-text-align-left',
-                    ],
-                    'center' => [
-                        'title' => esc_html__( 'Center', 'easy-elements' ),
-                        'icon' => 'eicon-text-align-center',
-                    ],
-                    'right' => [
-                        'title' => esc_html__( 'Right', 'easy-elements' ),
-                        'icon' => 'eicon-text-align-right',
-                    ],
-                ],
-                'default' => 'center',
-                'selectors' => [
-                    '{{WRAPPER}} .ee--icon-box, {{WRAPPER}} .eel-pro-number' => 'text-align: {{VALUE}};',
-                ],
-            ]
-        );
-
         $this->end_controls_section();
     }
 
