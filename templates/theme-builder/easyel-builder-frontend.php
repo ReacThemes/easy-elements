@@ -136,6 +136,7 @@ class Easyel_Theme_Builder_Front {
     public function easyel_archive_content_elementor( $query = null ) {
         $template_id = $this->easyel_match_template();
         if ( $template_id ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe because output is intended HTML.
             echo $this->get_builder_content_for_display( $template_id ); 
         } else {
             the_content();
@@ -150,6 +151,7 @@ class Easyel_Theme_Builder_Front {
 
         $template_id = $this->easyel_match_template();
         if ( $template_id ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe because output is intended HTML.
             echo $this->get_builder_content_for_display( $template_id ); 
         } else {
             the_content();

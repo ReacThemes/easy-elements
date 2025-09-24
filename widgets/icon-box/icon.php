@@ -70,7 +70,7 @@ class Easyel_Icon_Box__Widget extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__( 'Number Title', 'easy-elements' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( '', 'easy-elements' ),
+                'default' =>  '',
                 'label_block' => true,
             ]
         );

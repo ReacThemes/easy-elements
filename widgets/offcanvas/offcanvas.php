@@ -181,7 +181,7 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 			$this->add_control(
 				'open_icon_options',
 				[
-					'label' => esc_html__( 'Opener Icon', 'textdomain' ),
+					'label' => esc_html__( 'Opener Icon', 'easy-elements' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -238,7 +238,7 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 			$this->add_control(
 				'closing_icon_options',
 				[
-					'label' => esc_html__( 'Closing Icon', 'textdomain' ),
+					'label' => esc_html__( 'Closing Icon', 'easy-elements' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -267,7 +267,7 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 			$this->add_control(
 				'offcanvas_item',
 				[
-					'label' => esc_html__( 'OffCanvas Item', 'textdomain' ),
+					'label' => esc_html__( 'OffCanvas Item', 'easy-elements' ),
 					'type' => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'after',
 				]
@@ -315,7 +315,7 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 	protected function render() {
 		$settings  = $this->get_settings_for_display();
 		$position  = $settings['position_offcanvas'];
-		$btn_text  = ! empty( $settings['menu_text'] ) ? $settings['menu_text'] : __( '', 'easy-elements' );
+		$btn_text  = ! empty( $settings['menu_text'] ) ? $settings['menu_text'] :  '';
 		$content_template = ! empty( $settings['content_template'] ) ? $settings['content_template'] : '';
 		$unique_id = 'eel-offcanvas-' . $this->get_id();
 		?>
@@ -346,13 +346,15 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 								if ( ! empty( $settings['close_icon']['value'] ) ) {
 									\Elementor\Icons_Manager::render_icon( $settings['close_icon'], [ 'aria-hidden' => 'true' ] );
 								}else{
-									echo '<i class="unicon-close"></i>';
+									$unicon_icon = '<i class="unicon-close"></i>';
+									echo wp_kses_post( $unicon_icon );
 								}
 							?>
 						</span>
 						<div class="eel-offcanvas-content">
 							<?php
 							if ( ! empty( $settings['content_template'] ) ) {
+								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe, Elementor outputs prepared HTML.
 								echo \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $settings['content_template'] );
 							} else {								
 							}

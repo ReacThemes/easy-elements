@@ -167,8 +167,8 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             global $typenow;
 
             if ( $typenow === 'easy_theme_builder' ) {
-
-                $current  = isset($_GET['easy_etb_type']) ? sanitize_text_field($_GET['easy_etb_type']) : '';
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- This is a read-only filter, no action performed.
+                $current = isset($_GET['easy_etb_type']) ? sanitize_key( wp_unslash($_GET['easy_etb_type']) ) : '';
                 $base_url = admin_url( 'edit.php?post_type=easy_theme_builder' );
 
                 ob_start();
@@ -185,6 +185,7 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                     </a>
                 </div>
                 <?php
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe because output is intended HTML.
                 echo ob_get_clean();
             }
 
@@ -272,6 +273,7 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
 			ob_start();
             require_once EASYELEMENTS_DIR_PATH . '/templates/theme-builder/popup-content.php';
 			$template = ob_get_clean();
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe because output is intended HTML.
 			echo $template;
 		}
 
@@ -286,9 +288,9 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             
             if( isset($_POST['conditions'], $_POST['template_type'], $_POST['template_name']) ) {
 
-                $conditions    = sanitize_text_field(json_encode($_POST['conditions']));
-                $template_type = sanitize_text_field($_POST['template_type']);
-                $template_name = sanitize_text_field($_POST['template_name']);
+                $conditions    = isset($_POST['conditions']) ? wp_json_encode( array_map('sanitize_text_field', wp_unslash((array) $_POST['conditions']) ) ) : '';
+                $template_type = isset($_POST['template_type']) ? sanitize_text_field( wp_unslash($_POST['template_type']) ) : '';
+                $template_name = isset($_POST['template_name']) ? sanitize_text_field( wp_unslash($_POST['template_name']) ) : '';
 
                 // Check if same template_type with same conditions already exists
                 $existing_posts = get_posts([
@@ -416,7 +418,7 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                     $query->set( 'meta_query', [
                         [
                             'key'   => 'easyel_template_type', 
-                            'value' => sanitize_text_field( $_GET['easy_etb_type'] ),
+                            'value' => sanitize_text_field( wp_unslash( $_GET['easy_etb_type'] ) ),
                         ]
                     ]);
                 }
@@ -498,7 +500,12 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                         if ( in_array($post_type->name, $taxonomy->object_type, true) ) {
                             $archives['custom'][] = [
                                 'value' => $taxonomy->name,
-                                'label' => sprintf(__('%s (%s) [Pro]', 'easy-elements'), $taxonomy->labels->singular_name, $post_type->labels->singular_name),
+                                'label' => sprintf(
+                                    /* translators: 1: Taxonomy singular name, 2: Post type singular name */
+                                    __('%1$s (%2$s) [Pro]', 'easy-elements'),
+                                    $taxonomy->labels->singular_name,
+                                    $post_type->labels->singular_name
+                                ),
                                 'pro'   => true,
                                 'group' => 'Custom'
                             ];
@@ -659,8 +666,6 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             $conditions    = get_post_meta($post_id, 'easyel_conditions', true);
             $conditions    = !empty($conditions) ? json_decode($conditions, true) : [];
 
-            error_log(  "condition checking...". print_r(  $conditions, true )  );
-
             wp_send_json_success([
                 'post_id'       => $post_id,
                 'template_name' => $post->post_title,
@@ -676,11 +681,11 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                 wp_send_json_error(['message' => 'Permission denied']);
             }
 
-            $post_id       = intval( $_POST['post_id'] );
-            $template_name = sanitize_text_field($_POST['template_name']);
-            $template_type = sanitize_text_field($_POST['template_type']);
-            $conditions    = isset($_POST['conditions']) ? wp_unslash($_POST['conditions']) : [];
-
+            $post_id       = isset($_POST['post_id']) ? absint(wp_unslash($_POST['post_id'])) : 0;
+            $template_name = isset($_POST['template_name']) ? sanitize_text_field(wp_unslash($_POST['template_name'])) : '';
+            $template_type = isset($_POST['template_type']) ? sanitize_text_field(wp_unslash($_POST['template_type'])) : '';
+            $conditions = isset($_POST['conditions'])
+                ? map_deep( wp_unslash( $_POST['conditions'] ), 'sanitize_text_field' ) : [];
 
             if (!$post_id) {
                 wp_send_json_error(['message' => 'Invalid post ID']);

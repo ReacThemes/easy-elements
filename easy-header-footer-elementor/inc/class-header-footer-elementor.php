@@ -44,7 +44,6 @@ class EE_Header_Footer_Elementor {
 		$required_elementor_version = '3.5.0';
 		$is_elementor_outdated = ( $is_elementor_callable && ( ! version_compare( ELEMENTOR_VERSION, $required_elementor_version, '>=' ) ) ) ? true : false;
 
-		// ✅ Notice remove: আর কিছু হবে না Elementor না থাকলে
 		if ( ! $is_elementor_callable || $is_elementor_outdated ) {
 			return;
 		}
@@ -228,6 +227,7 @@ class EE_Header_Footer_Elementor {
 			$header_id = pll_get_post( $header_id, ( function_exists('pll_current_language') ? pll_current_language() : null ) );
 		}
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe because Elementor outputs prepared HTML.
 		echo self::$elementor_instance->frontend->get_builder_content_for_display( $header_id );
 	}
 
@@ -244,6 +244,7 @@ class EE_Header_Footer_Elementor {
 		}
 
 		echo "<div class='footer-width-fixer'>";
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe because Elementor outputs prepared HTML.
 		echo self::$elementor_instance->frontend->get_builder_content_for_display( $footer_id );
 		echo '</div>';
 	}

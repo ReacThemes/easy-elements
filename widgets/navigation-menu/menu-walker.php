@@ -124,7 +124,7 @@ class Easyel_Menu_Walker extends \Walker_Nav_Menu {
 					<i class="unicon-chevron-down" aria-hidden="true"></i>
 				</span>',
 				$item->ID,
-				esc_attr__('Toggle Submenu', 'your-textdomain')
+				esc_attr__('Toggle Submenu', 'easy-elements')
 			);
 			
 		}
