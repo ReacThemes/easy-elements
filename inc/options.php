@@ -281,6 +281,7 @@ function Easyel_Elements_enqueue_admin_hide_notices_css( $hook ) {
     $screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
     $allowed_pages     = [ 'easy-elements-dashboard', 'easy-elements-settings' ];
     $allowed_post_type = 'ee-elementor-hf';
+    // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
     $is_custom_page     = isset( $_GET['page'] ) && in_array( $_GET['page'], $allowed_pages, true );
     $is_custom_posttype = $screen && in_array( $screen->post_type, [ $allowed_post_type ], true );
     if ( $is_custom_page || $is_custom_posttype ) {

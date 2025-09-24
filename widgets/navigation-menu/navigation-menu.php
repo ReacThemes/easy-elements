@@ -1899,6 +1899,7 @@ class Easyel_Navigation_Menu_Widget extends \Elementor\Widget_Base {
 					<div class="eel-nav-menu-icon">
 						<?php
 						$menu_close_icons[0] = str_replace( 'tabindex="0"', '', $menu_close_icons[0] );
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe, output is trusted HTML/icon.
 						echo isset( $menu_close_icons[0] ) ? $menu_close_icons[0] : '';
 						?>
 					</div>

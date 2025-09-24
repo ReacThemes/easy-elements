@@ -71,7 +71,11 @@ if ( ! class_exists( 'HFE_Addons_Actions' ) ) {
 
 			$api_domain = trailingslashit( $this->get_api_domain() );
 
-			$arguments = isset( $_POST['data'] ) ? array_map( 'sanitize_text_field', json_decode( stripslashes( $_POST['data'] ), true ) ) : [];
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Input is handled and sanitized safely.
+			$arguments = isset( $_POST['data'] ) ? map_deep( wp_unslash( json_decode( wp_unslash( $_POST['data'] ), true ) ), 'sanitize_text_field' )
+				: [];
+
+
 
 			$url = add_query_arg( $arguments, $api_domain . 'wp-json/starter-templates/v1/subscribe/' ); // add URL of your site or mail API.
 
@@ -117,7 +121,8 @@ if ( ! class_exists( 'HFE_Addons_Actions' ) ) {
 					$type = sanitize_key( wp_unslash( $_POST['type'] ) );
 				}
 
-				$plugin = sanitize_text_field( $_POST['plugin'] );
+				$plugin = isset( $_POST['plugin'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin'] ) ) : '';
+
 
 				if ( 'plugin' === $type ) {
 
@@ -138,7 +143,7 @@ if ( ! class_exists( 'HFE_Addons_Actions' ) ) {
 
 				if ( 'theme' === $type ) {
 
-					$slug = sanitize_key( wp_unslash( $_POST['slug'] ) );
+					$slug = isset( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
 
 					// Check for permissions.
 					if ( ! ( current_user_can( 'switch_themes' ) ) ) {

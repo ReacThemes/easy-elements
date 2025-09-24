@@ -52,7 +52,6 @@ class EE_Header_Footer_Elementor {
 			self::$elementor_instance = Elementor\Plugin::instance();
 
 			$this->includes();
-			$this->load_textdomain();
 
 			add_filter( 'hfe_settings_tabs', [ $this, 'setup_unsupported_theme' ] );
 			add_action( 'init', [ $this, 'setup_fallback_support' ] );
@@ -84,13 +83,6 @@ class EE_Header_Footer_Elementor {
 		require_once RTSHFE_DIR . 'inc/easy-functions.php';
 		require_once RTSHFE_DIR . 'inc/class-hfe-elementor-canvas-compat.php';
 		require_once RTSHFE_DIR . 'inc/lib/target-rule/class-easy-target-rules-fields.php';
-	}
-
-	/**
-	 * Loads textdomain for the plugin.
-	 */
-	public function load_textdomain() {
-		load_plugin_textdomain( 'easy-elements' );
 	}
 
 	/**
@@ -154,7 +146,8 @@ class EE_Header_Footer_Elementor {
 
 		$upload_dir = wp_upload_dir();
 		$path = $upload_dir['baseurl'] . '/elementor/css/post-' . $post_id . '.css';
-		wp_enqueue_style( 'elementor-post-' . $post_id, $path, [], null );
+		wp_enqueue_style( 'elementor-post-' . $post_id, $path, [], get_post_field( 'post_modified_gmt', $post_id ), 'all' );
+
 
 		$css_file->enqueue();
 

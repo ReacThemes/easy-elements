@@ -301,10 +301,10 @@ class Easyel_Domain_Search_Widget extends \Elementor\Widget_Base {
         $button_text = ! empty( $settings['button_text'] ) ? $settings['button_text'] : 'Create my website';
         ?>
         <div class="eel-domain-search">
-            <form method="get" action="<?php echo $base_url; ?>" target="_blank">
+            <form method="get" action="<?php echo esc_url( $base_url ); ?>" target="_blank">
                 <i class="unicon-search"> </i>
-                <input type="text" name="domain" placeholder="<?php echo esc_attr($placeholder); ?>" required> 
-                <button type="submit"> <?php echo esc_html($button_text); ?></button>
+                <input type="text" name="domain" placeholder="<?php echo esc_attr( $placeholder ); ?>" required> 
+                <button type="submit"> <?php echo esc_html( $button_text ); ?></button>
             </form>
         </div>
         <?php

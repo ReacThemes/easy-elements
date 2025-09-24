@@ -300,7 +300,8 @@ class RSHF_Target_Rules_Fields {
 
 		check_ajax_referer( 'hfe-get-posts-by-query', 'nonce' );
 
-		$search_string = isset( $_POST['q'] ) ? sanitize_text_field( $_POST['q'] ) : '';
+		$search_string = isset( $_POST['q'] ) ? sanitize_text_field( wp_unslash( $_POST['q'] ) ) : '';
+
 		$data          = array();
 		$result        = array();
 
@@ -365,14 +366,12 @@ class RSHF_Target_Rules_Fields {
 		$taxonomies = get_taxonomies( $args, $output, $operator );
 
 		foreach ( $taxonomies as $taxonomy ) {
-			$terms = get_terms(
-				$taxonomy->name,
-				array(
-					'orderby'    => 'count',
-					'hide_empty' => 0,
-					'name__like' => $search_string,
-				)
-			);
+			$terms = get_terms( array(
+				'taxonomy'   => $taxonomy->name,
+				'orderby'    => 'count',
+				'hide_empty' => false,    
+				'name__like' => $search_string,
+			) );
 
 			$data = array();
 
@@ -562,6 +561,7 @@ class RSHF_Target_Rules_Fields {
 		/* Wrapper end */
 		$output .= '</div>';
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe, $output contains intended HTML markup.
 		echo $output;
 	}
 
@@ -990,6 +990,7 @@ class RSHF_Target_Rules_Fields {
 			$output     .= '</div>';
 		$output         .= '</div>';
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe, $output contains intended HTML markup.
 		echo $output;
 	}
 
@@ -1279,17 +1280,35 @@ class RSHF_Target_Rules_Fields {
 
 		$location = isset( $option['location'] ) ? $option['location'] : '';
 
-		$all_headers = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT p.ID, p.post_title, pm.meta_value FROM {$wpdb->postmeta} as pm
-			INNER JOIN {$wpdb->posts} as p ON pm.post_id = p.ID
-			WHERE pm.meta_key = %s
-			AND p.post_type = %s
-			AND p.post_status = 'publish'",
+		// $all_headers = $wpdb->get_results(
+		// 	$wpdb->prepare(
+		// 		"SELECT p.ID, p.post_title, pm.meta_value FROM {$wpdb->postmeta} as pm
+		// 	INNER JOIN {$wpdb->posts} as p ON pm.post_id = p.ID
+		// 	WHERE pm.meta_key = %s
+		// 	AND p.post_type = %s
+		// 	AND p.post_status = 'publish'",
+		// 		$location,
+		// 		$post_type
+		// 	)
+		// );
+
+		$cache_key = 'easyel_all_headers_' . md5( $location . $post_type );
+		$all_headers = wp_cache_get( $cache_key );
+
+		if ( false === $all_headers ) {
+			$all_headers = $wpdb->get_results( $wpdb->prepare(
+				"SELECT p.ID, p.post_title, pm.meta_value 
+				FROM {$wpdb->postmeta} pm 
+				INNER JOIN {$wpdb->posts} p ON pm.post_id = p.ID 
+				WHERE pm.meta_key = %s 
+				AND p.post_type = %s 
+				AND p.post_status = 'publish'",
 				$location,
 				$post_type
-			)
-		);
+			));
+			wp_cache_set( $cache_key, $all_headers, '', 3600 );
+		}
+
 
 		foreach ( $all_headers as $header ) {
 			$location_rules = unserialize( $header->meta_value );
@@ -1363,7 +1382,7 @@ class RSHF_Target_Rules_Fields {
 					$notice = sprintf( __( 'The same display setting is already exist in %s post/s.', 'easy-elements' ), $rule_set_titles );
 
 					echo '<div class="error">';
-					echo '<p>' . $notice . '</p>';
+					echo '<p>' . wp_kses_post( $notice ) . '</p>';
 					echo '</div>';
 				}
 			);

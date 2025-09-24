@@ -623,7 +623,7 @@ class Easyel_Video_Popup_Widget extends \Elementor\Widget_Base {
 	            $icon_html = '<i class="unicon-play" aria-hidden="true"></i>';
 	        }
 
-			$button_label = ! empty( $settings['popup_trigger_text'] ) ? strip_tags( $settings['popup_trigger_text'] ) : 'Play Video';
+			$button_label = ! empty( $settings['popup_trigger_text'] ) ? wp_strip_all_tags( $settings['popup_trigger_text'] ) : 'Play Video';
 	        ?>
 
 			<button class="eel-video-popup-btn entro-all-video-popup <?php echo esc_attr($circle_glow); ?>"

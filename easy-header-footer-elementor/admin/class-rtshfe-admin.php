@@ -417,7 +417,7 @@ public function EE_HFE_Admin_scripts() {
 		}
 
 		// if our nonce isn't there, or we can't verify it, bail.
-		if ( ! isset( $_POST['ehf_meta_nounce'] ) || ! wp_verify_nonce( $_POST['ehf_meta_nounce'], 'ehf_meta_nounce' ) ) {
+		if ( ! isset( $_POST['ehf_meta_nounce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash ( $_POST['ehf_meta_nounce'] ) ), 'ehf_meta_nounce' ) ) {
 			return;
 		}
 
@@ -431,19 +431,28 @@ public function EE_HFE_Admin_scripts() {
 		$target_users     = [];
 
 		if ( isset( $_POST['bsf-target-rules-users'] ) ) {
-			$target_users = array_map( 'sanitize_text_field', $_POST['bsf-target-rules-users'] );
+			$target_users = map_deep( wp_unslash( $_POST['bsf-target-rules-users'] ), 'sanitize_text_field' );
+		} else {
+			$target_users = [];
 		}
+
 
 		update_post_meta( $post_id, 'ehf_target_include_locations', $target_locations );
 		update_post_meta( $post_id, 'ehf_target_exclude_locations', $target_exclusion );
 		update_post_meta( $post_id, 'ehf_target_user_roles', $target_users );
 
 		if ( isset( $_POST['ehf_template_type'] ) ) {
-			update_post_meta( $post_id, 'ehf_template_type', esc_attr( $_POST['ehf_template_type'] ) );
+			$template_type = isset( $_POST['ehf_template_type'] )
+				? map_deep( wp_unslash( $_POST['ehf_template_type'] ), 'sanitize_text_field' )
+				: '';
+			update_post_meta( $post_id, 'ehf_template_type', $template_type );
 		}
 
 		if ( isset( $_POST['display-on-canvas-template'] ) ) {
-			update_post_meta( $post_id, 'display-on-canvas-template', esc_attr( $_POST['display-on-canvas-template'] ) );
+			$canvas_template = isset( $_POST['display-on-canvas-template'] )
+				? map_deep( wp_unslash( $_POST['display-on-canvas-template'] ), 'sanitize_text_field' )
+				: '';
+			update_post_meta( $post_id, 'display-on-canvas-template', $canvas_template );
 		} else {
 			delete_post_meta( $post_id, 'display-on-canvas-template' );
 		}

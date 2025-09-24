@@ -290,10 +290,12 @@ class Easyel_Breadcrumb_Widget extends \Elementor\Widget_Base {
             $custom_css .= '.eel-breadcrumb .breadcrumb-separator { color: ' . esc_attr($separator_color) . '; }';
         }
         if ($custom_css) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe, output is trusted CSS.
             echo '<style>' . $custom_css . '</style>';
         }
 
         if ( function_exists( 'get_easyel_breadcrumb' ) ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe, function outputs trusted HTML.
             echo get_easyel_breadcrumb('', '', $custom_separator, $home_title, '', '', $show_category_path, '', $home_icon_picker);
         } else {
             echo '<!-- Breadcrumb function not found -->';

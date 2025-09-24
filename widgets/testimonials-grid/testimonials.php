@@ -34,7 +34,7 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
                 return [ $handle ];
             } catch ( Exception $e ) {
                 // Fallback to normal loading if minification fails
-                error_log( 'Easy Elements: JS minification failed for ' . $handle . ': ' . $e->getMessage() );
+               
             }
         }
 		

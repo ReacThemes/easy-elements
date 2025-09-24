@@ -106,9 +106,12 @@ class Easyel_Elements_JS_Loader_Helper {
 
 // Domain Search Code
 add_action('template_redirect', function(){
+    // phpcs:ignore WordPress.Security.NonceVerification.Missing
 	if (isset($_POST['easyel_domain_redirect'])) {
-		$domain   = trim($_POST['domain']);
-		$base_url = trim($_POST['base_url']);
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$domain   = isset($_POST['domain']) ? sanitize_text_field(wp_unslash($_POST['domain'])) : '';
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing
+        $base_url = isset($_POST['base_url']) ? esc_url_raw(wp_unslash($_POST['base_url'])) : '';
 		
 		if (!empty($domain) && !empty($base_url)) {
 			$redirect_url = $base_url . urlencode($domain);

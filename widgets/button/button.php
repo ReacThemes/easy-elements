@@ -541,7 +541,9 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 		if ($nofollow) {
 			$rel[] = 'nofollow';
 		}
-		$rel_attr = !empty($rel) ? ' rel="' . implode(' ', $rel) . '"' : '';
+
+		$rel_attr = !empty($rel) ? implode(' ', array_map('sanitize_html_class', $rel)) : '';
+
 		
 		// Get button classes
 		$button_classes = ['eel-button'];
@@ -549,24 +551,24 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 			$button_classes[] = 'eel-button-' . $settings['button_type'];
 		}
 
-		if (!empty($settings['show_gradient']) && 'yes' === $settings['show_gradient']) {
+		if (!empty( $settings['show_gradient']) && 'yes' === $settings['show_gradient'] ) {
 			$button_classes[] = 'eel-button-gradient';
 		}
 		
 		?>
-		<a href="<?php echo esc_url($button_url); ?>"
-			class="<?php echo esc_attr(implode(' ', $button_classes)); ?>"
-			target="<?php echo esc_attr($target); ?>"
-			<?php echo $rel_attr; ?>>
+		<a href="<?php echo esc_url( $button_url ); ?>"
+			class="<?php echo esc_attr( implode(' ', $button_classes ) ); ?>"
+			target="<?php echo esc_attr( $target ); ?>"
+			<?php if ( $rel_attr ) : ?>rel="<?php echo esc_attr( $rel_attr ); ?>">
 			<?php if (!empty($settings['button_icon']['value']) && $settings['icon_position'] === 'before'): ?>
 				<span class="eel-button-icon-before">
 					<?php \Elementor\Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 				</span>
 			<?php endif; ?>
 			
-			<span class="eel-button-text"><?php echo esc_html($settings['button_text']); ?></span>
+			<span class="eel-button-text"><?php echo esc_html( $settings['button_text'] ); ?></span>
 			
-			<?php if (!empty($settings['button_icon']['value']) && $settings['icon_position'] === 'after'): ?>
+			<?php if (!empty( $settings['button_icon']['value'] ) && $settings['icon_position'] === 'after'): ?>
 				<span class="eel-button-icon-after">
 					<?php \Elementor\Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 				</span>

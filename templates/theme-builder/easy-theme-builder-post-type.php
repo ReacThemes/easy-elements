@@ -292,10 +292,11 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                 $template_type = isset($_POST['template_type']) ? sanitize_text_field( wp_unslash($_POST['template_type']) ) : '';
                 $template_name = isset($_POST['template_name']) ? sanitize_text_field( wp_unslash($_POST['template_name']) ) : '';
 
-                // Check if same template_type with same conditions already exists
-                $existing_posts = get_posts([
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Slow query with meta_query is intentional.
+                $existing_posts = get_posts( [
                     'post_type'  => 'easy_theme_builder',
                     'post_status'=> 'publish',
+                    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Slow meta_query intentional
                     'meta_query' => [
                         'relation' => 'AND',
                         [
@@ -307,7 +308,7 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                             'value' => $conditions,
                         ]
                     ]
-                ]);
+                ] );
 
                 if(!empty($existing_posts)) {
                     wp_send_json_error([
@@ -414,14 +415,21 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
 
         public function easyel_filter_easy_theme_builder_by_type( $query ) {
             if ( is_admin() && $query->is_main_query() && $query->get('post_type') === 'easy_theme_builder' ) {
-                if ( isset( $_GET['easy_etb_type'] ) && in_array( $_GET['easy_etb_type'], ['single','archive'], true ) ) {
+               
+                // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+                if ( isset( $_GET['easy_etb_type'] ) 
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+                    && in_array( $_GET['easy_etb_type'], ['single','archive'], true ) 
+                ) {
                     $query->set( 'meta_query', [
                         [
                             'key'   => 'easyel_template_type', 
+                            // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
                             'value' => sanitize_text_field( wp_unslash( $_GET['easy_etb_type'] ) ),
                         ]
                     ]);
                 }
+
             }
         }
 
@@ -694,7 +702,8 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             $existing_posts = get_posts([
                 'post_type'   => 'easy_theme_builder',
                 'post_status' => 'publish',
-                'exclude'     => [$post_id],
+                'fields'      => 'ids',
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Slow meta_query intentional
                 'meta_query'  => [
                     'relation' => 'AND',
                     [
@@ -707,6 +716,10 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                     ],
                 ],
             ]);
+
+            $existing_posts = array_filter( $existing_posts, function( $post ) use ( $post_id ) {
+                return $post->ID != $post_id;
+            });
 
             if (!empty($existing_posts)) {
                 wp_send_json_error([

@@ -1553,12 +1553,23 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
         }
 
         // Exclude posts
-        if ( ! empty( $settings['exclude_posts'] ) ) {
-            $args['post__not_in'] = $settings['exclude_posts'];
-        }
+        // if ( ! empty( $settings['exclude_posts'] ) ) {
+        //     $args['post__not_in'] = $settings['exclude_posts'];
+        // }
 
 
         $query = new \WP_Query( $args );
+
+        if ( ! empty( $settings['exclude_posts'] ) && $query->have_posts() ) {
+            $exclude_ids = (array) $settings['exclude_posts'];
+
+            $query->posts = array_filter( $query->posts, function( $post ) use ( $exclude_ids ) {
+                return ! in_array( $post->ID, $exclude_ids, true );
+            });
+
+            // Update post_count after filtering
+            $query->post_count = count( $query->posts );
+        }
 
         if ( $query->have_posts() ) :
             echo '<div class="eel-post-grid-wrap">';

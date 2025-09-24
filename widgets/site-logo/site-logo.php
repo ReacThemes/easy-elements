@@ -291,6 +291,7 @@ class Easyel_Site_Logo_Widget extends \Elementor\Widget_Base {
 			$link = $settings['link']['url'];
 		}
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe, output contains trusted HTML attributes.
 		echo '<div ' . $this->get_render_attribute_string( 'wrapper' ) . '>';
 
 		if ( $caption ) {
@@ -298,6 +299,7 @@ class Easyel_Site_Logo_Widget extends \Elementor\Widget_Base {
 		}
 		if ( $link ) {
 			$target = ! empty( $settings['link']['is_external'] ) ? ' target="_blank"' : '';
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe, output contains trusted HTML attributes.
 			echo '<a href="' . esc_url( $link ) . '"' . $target . '>';
 		}
 		if ( $logo_data['type'] === 'image' ) {

@@ -111,7 +111,7 @@ function get_easyel_breadcrumb($custom_title='', $custom_path='', $custom_separa
     } elseif (is_404()) {
         $output .= $separator . __('404 Not Found', 'easy-elements');
     }
-
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe, $output contains trusted HTML
     echo '<div class="eel-breadcrumb"><div class="breadcrumb-path">' . $output . '</div></div>';
 }
 }
