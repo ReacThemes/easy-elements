@@ -28,7 +28,7 @@ $required_files = [
 	'inc/helper.php',
 	'inc/canvas-content.php',
 	'base.php',
-	'inc/options.php',
+	'admin/settings.php',
 	'easy-header-footer-elementor/easy-header-footer-elementor.php',
 	'templates/theme-builder/easy-theme-builder-post-type.php',
 	'templates/theme-builder/easyel-builder-frontend.php',

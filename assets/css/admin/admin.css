@@ -331,3 +331,36 @@ h1,h2 { color: #0073aa; }
     color: #aaa;
     font-style: italic;
 }
+
+/* easy elements tab css */
+
+.easyel-nav-tab-wrapper {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.easyel-nav-tab {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 5px;
+    background: #f1f1f1;
+    color: #555;
+    text-decoration: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    transition: background 0.3s, color 0.3s;
+}
+.easyel-nav-tab:hover {
+    background: #e0e0e0;
+    color: #000;
+}
+.easyel-nav-tab-active {
+    background: #fff;
+    color: #000;
+    border: 1px solid #ddd;
+    border-bottom: none;
+}
+.easyel-tab-panel {
+    padding: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+}

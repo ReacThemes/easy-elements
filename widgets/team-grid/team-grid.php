@@ -145,8 +145,6 @@ class Easyel_Team_Grid__Widget extends \Elementor\Widget_Base {
             ]
         );
 
-
-        $is_pro = class_exists('Easy_Elements_Pro');
         $this->add_control(
             'action_type',
             [

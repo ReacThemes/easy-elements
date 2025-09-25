@@ -17,6 +17,7 @@
             this.initAdvanceSettings();
             this.initAllExtensions();
             this.initNotifications();
+            this.easyEltab();
         },
 
         // Initialize widget toggle functionality
@@ -342,7 +343,57 @@
                 timeout = setTimeout(later, wait);
                 if (callNow) func.apply(context, args);
             };
+        },
+
+       easyEltab: function () {
+
+            // --------- Admin Menu Submenu Click Handle ---------
+            $('#toplevel_page_easy-elements-dashboard ul.wp-submenu a').on('click', function (e) {
+                const href = $(this).attr('href');
+
+                if (href.includes('easy-elements-dashboard')) {
+                    e.preventDefault();
+
+                    let tab = 'overview';
+                    if (href.includes('#widget')) tab = 'widget';
+                    if (href.includes('#extensions')) tab = 'extensions';
+                    if (href.includes('#advsettings')) tab = 'advsettings';
+
+                    window.location.hash = tab;
+                    activateTab(tab);
+                }
+            });
+
+            var hash = window.location.hash.substring(1);
+            if (hash) {
+                activateTab(hash);
+            } else {
+                activateTab('overview'); 
+            }
+
+            $('.easyel-nav-tab').click(function (e) {
+                e.preventDefault();
+                var tab = $(this).data('tab');
+                activateTab(tab);
+                history.replaceState(null, null, '#'+tab); 
+            });
+
+            // --------- Tab Active Function ---------
+            function activateTab(tab) {
+                // Tabs active class
+                $('.easyel-nav-tab').removeClass('easyel-nav-tab-active');
+                $('.easyel-nav-tab[data-tab="' + tab + '"]').addClass('easyel-nav-tab-active');
+
+                // Panels show/hide
+                $('.easyel-tab-panel').hide();
+                $('#tab-' + tab).show();
+
+                // Admin submenu active state sync
+                $('#toplevel_page_easy-elements-dashboard ul.wp-submenu li').removeClass('current');
+                $('#toplevel_page_easy-elements-dashboard ul.wp-submenu a[href*="#' + tab + '"]').parent().addClass('current');
+            }
         }
+
     };
 
     // Initialize when document is ready
