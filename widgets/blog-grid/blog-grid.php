@@ -399,15 +399,14 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        $is_pro = class_exists( 'Easy_Elements_Pro' );
         $this->add_control(
             'post_type',
             [
                 'label' => esc_html__( 'Post Type', 'easy-elements' ),
                 'type' => Controls_Manager::SELECT,
-                'options' => $is_pro ? $this->get_post_type_options() : [ 'post' => 'Post (Pro Only)' ],
+                'options' =>  $this->get_post_type_options(),
                 'default' => 'post',
-                'description' => $is_pro ? '' : esc_html__( 'This option is available in Pro version.', 'easy-elements' ),
+                'description' =>  '',
             ]
         );
 
@@ -443,11 +442,11 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             'post__in',
             [
                 'label' => esc_html__( 'Select Specific Posts', 'easy-elements' ),
-                'type' => $is_pro ? Controls_Manager::SELECT2 : Controls_Manager::SELECT,
-                'options' => $is_pro ? $this->get_all_posts() : [ '' => esc_html__( 'Pro Version Only', 'easy-elements' ) ],
-                'multiple' => $is_pro ? true : false,
+                'type' =>  Controls_Manager::SELECT2,
+                'options' =>  $this->get_all_posts(),
+                'multiple' =>  true,
                 'label_block' => true,
-                'description' => $is_pro ? '' : esc_html__( 'This feature is available in the Pro version.', 'easy-elements' ),
+                'description' =>  '',
                 'condition' => [
                     'source_type' => 'post',
                 ],
@@ -459,11 +458,11 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             'exclude_posts',
             [
                 'label' => esc_html__( 'Exclude Posts', 'easy-elements' ),
-                'type' => $is_pro ? \Elementor\Controls_Manager::SELECT2 : \Elementor\Controls_Manager::SELECT,
-                'multiple' => $is_pro ? true : false,
-                'options' => $is_pro ? $this->get_all_posts() : [ '' => esc_html__( 'Pro Version Only', 'easy-elements' ) ],
+                'type' =>  \Elementor\Controls_Manager::SELECT2,
+                'multiple' =>  true,
+                'options' =>  $this->get_all_posts(),
                 'label_block' => true,
-                'description' => $is_pro ? '' : esc_html__( 'This feature is available in the Pro version.', 'easy-elements' ),
+                'description' =>  '',
                 'condition' => [
                     'source_type!' => 'post',
                 ],
@@ -495,9 +494,8 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
                         'menu_order' => esc_html__( 'Menu Order', 'easy-elements' ),
                     ]
                     : [ '' => esc_html__( 'Available in Pro version', 'easy-elements' ) ],
-                'default'     => $is_pro ? 'date' : '',
-                'description' => $is_pro ? '' : esc_html__( 'This option is available in Pro version.', 'easy-elements' ),
-                'disabled'    => ! $is_pro,
+                'default'     =>  'date',
+                'description' =>  '',
             ]
         );
 
@@ -506,15 +504,12 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             [
                 'label'       => esc_html__( 'Order', 'easy-elements' ),
                 'type'        => Controls_Manager::SELECT,
-                'options'     => $is_pro
-                    ? [
+                'options'     =>  [
                         'DESC' => esc_html__( 'Descending', 'easy-elements' ),
                         'ASC'  => esc_html__( 'Ascending', 'easy-elements' ),
-                    ]
-                    : [ '' => esc_html__( 'Available in Pro version', 'easy-elements' ) ],
-                'default'     => $is_pro ? 'DESC' : '',
-                'description' => $is_pro ? '' : esc_html__( 'This option is available in Pro version.', 'easy-elements' ),
-                'disabled'    => ! $is_pro,
+                    ],
+                'default'     =>  'DESC',
+                'description' =>  '',
             ]
         );
 
@@ -734,16 +729,13 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             [
                 'label'       => esc_html__( 'Meta Position', 'easy-elements' ),
                 'type'        => \Elementor\Controls_Manager::SELECT,
-                'default'     => $is_pro ? 'up_title' : '',
-                'options'     => $is_pro
-                    ? [
+                'default'     =>  'up_title',
+                'options'     =>  [
                         'up_title'     => esc_html__( 'Up Title', 'easy-elements' ),
                         'below_title'  => esc_html__( 'Below Title', 'easy-elements' ),
                         'below_content'=> esc_html__( 'Below Content', 'easy-elements' ),
-                    ]
-                    : [ '' => esc_html__( 'Available in Pro version', 'easy-elements' ) ],
-                'description' => $is_pro ? '' : esc_html__( 'This option is available in Pro version.', 'easy-elements' ),
-                'disabled'    => ! $is_pro,
+                    ],
+                'description' =>  '',
             ]
         );
 
@@ -1065,28 +1057,18 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        if ( $is_pro ) {
-            $this->add_control(
-                'only_icon',
-                [
-                    'label'   => esc_html__( 'Icon', 'easy-elements' ),
-                    'type'    => \Elementor\Controls_Manager::ICONS,
-                    'default' => [
-                        'value'   => '',
-                        'library' => 'fa-solid',
-                    ],
-                ]
-            );
-        } else {
-            $this->add_control(
-                'only_icon_message',
-                [
-                    'type' => \Elementor\Controls_Manager::RAW_HTML,
-                    'raw'  => '<div style="padding:10px; color: #d94a4a; font-weight:bold;">' . esc_html__( 'This option is available in the Pro version only.', 'easy-elements' ) . '</div>',
-                ]
-            );
-        }
-
+        $this->add_control(
+            'only_icon',
+            [
+                'label'   => esc_html__( 'Icon', 'easy-elements' ),
+                'type'    => \Elementor\Controls_Manager::ICONS,
+                'default' => [
+                    'value'   => '',
+                    'library' => 'fa-solid',
+                ],
+            ]
+        );
+       
         $this->start_controls_tabs( 'button_style_tabs' );
 
         $this->start_controls_tab(
@@ -1552,11 +1534,7 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             $args['orderby'] = 'post__in'; // Preserve selected order
         }
 
-        // Exclude posts
-        // if ( ! empty( $settings['exclude_posts'] ) ) {
-        //     $args['post__not_in'] = $settings['exclude_posts'];
-        // }
-
+       
 
         $query = new \WP_Query( $args );
 

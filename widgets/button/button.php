@@ -559,7 +559,7 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 		<a href="<?php echo esc_url( $button_url ); ?>"
 			class="<?php echo esc_attr( implode(' ', $button_classes ) ); ?>"
 			target="<?php echo esc_attr( $target ); ?>"
-			<?php if ( $rel_attr ) : ?>rel="<?php echo esc_attr( $rel_attr ); ?>">
+			<?php if ( $rel_attr ) : ?> rel="<?php echo esc_attr( $rel_attr ); ?> <?php endif; ?>">
 			<?php if (!empty($settings['button_icon']['value']) && $settings['icon_position'] === 'before'): ?>
 				<span class="eel-button-icon-before">
 					<?php \Elementor\Icons_Manager::render_icon( $settings['button_icon'], [ 'aria-hidden' => 'true' ] ); ?>
