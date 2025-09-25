@@ -117,10 +117,10 @@
 					var $toggle = $( '.elementor-element-' + id + ' .eel-nav-menu__toggle' );
                     var $nextElement= $toggle.next();
                     var width = $nextElement.parent().width();
-                    // if( $nextElement.length ){
-					// 	$nextElement.css( 'width', width + 'px' );
-					// 	$nextElement.css( 'left', '0' );
-					// }
+                    if( $nextElement.length ){
+						$nextElement.css( 'width', width + 'px' );
+						$nextElement.css( 'left', '0' );
+					}
 				}
 			}
 		});
@@ -383,7 +383,7 @@
 			$('.sidebar-on-mobile .sub-arrow').removeClass('active').attr('aria-expanded', false);
 		});
 
-		$('.sidebar-on-mobile, .eel-nav-menu').on('click', 'li a', function(e){
+		$('.sidebar-on-mobile, .eel-nav-menu').on('click', 'li:not(.menu-item-has-children) a', function(e){
 			$('.sidebar-on-mobile li a, .eel-nav-menu li a').removeClass('eel-active');
 			$(this).addClass('eel-active');
 			$('.sidebar-on-mobile').removeClass('easyel-open');

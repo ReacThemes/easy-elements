@@ -2076,6 +2076,11 @@ header.eel-up-scroll {
   .easyel--elementor-template-mega-menu.sub-menu {
     width: 100% !important;
   }
+  nav.eel-nav-menu__layout-horizontal:not(.menu-is-active) {
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+  }
 }
 .easyel-mega--current-active .eel-nav-menu {
   display: block;
