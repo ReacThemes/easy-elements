@@ -120,3 +120,16 @@ add_action('template_redirect', function(){
 		}
 	}
 });
+
+add_action('deactivated_plugin', function($plugin) {
+   
+    if ($plugin === 'easy-elements-pro/easy-elements-pro.php') {
+         $available_elements = Easyel_Elements::get_instance()->easyel_elements_get_available_widgets();
+
+        foreach ($available_elements as $key => $widget) {
+            if (isset($widget['is_pro']) && $widget['is_pro']) {
+                update_option('easy_element_' . $key, '0'); 
+            }
+        }
+    }
+});

@@ -17,6 +17,8 @@
             this.initAdvanceSettings();
             this.initAllExtensions();
             this.initNotifications();
+            this.easyEltab();
+            this.easyElFilter();
         },
 
         // Initialize widget toggle functionality
@@ -108,9 +110,21 @@
             .done(function(response) {
                 if (response.success) {
                     // Update all checkboxes
-                    var newStatus = action === 'activate_all' ? true : false;
-                    $('.widget-toggle-checkbox').prop('checked', newStatus);
-                    
+
+                    $('.widget-toggle-checkbox').each(function() {
+                        let $checkbox = $(this);
+                        let isPro = $checkbox.closest('.easy-widget-item').hasClass('easyel-pro-enable');
+
+                        if (isPro) {
+                            if (!response.data.is_pro_active) {
+                                $checkbox.prop('checked', false).prop('disabled', true);
+                            }
+                        } else {
+                            $checkbox.prop('checked', action === 'activate_all' ? true : false);
+                            $checkbox.prop('disabled', false);
+                        }
+                    });
+
                     // Show success message
                     EasyElementsAdmin.showBulkMessage(response.data.message, 'success');
                     EasyElementsAdmin.showNotification(response.data.message, 'success');
@@ -342,6 +356,89 @@
                 timeout = setTimeout(later, wait);
                 if (callNow) func.apply(context, args);
             };
+        },
+
+        easyEltab: function () {
+
+            // --------- Admin Menu Submenu Click Handle ---------
+            $('#toplevel_page_easy-elements-dashboard ul.wp-submenu a').on('click', function (e) {
+                const href = $(this).attr('href');
+
+                if (href.includes('easy-elements-dashboard')) {
+                    e.preventDefault();
+
+                    let tab = 'overview';
+                    if (href.includes('#widget')) tab = 'widget';
+                    if (href.includes('#extensions')) tab = 'extensions';
+                    if (href.includes('#advsettings')) tab = 'advsettings';
+
+                    window.location.hash = tab;
+                    activateTab(tab);
+                }
+            });
+
+            var hash = window.location.hash.substring(1);
+            if (hash) {
+                activateTab(hash);
+            } else {
+                activateTab('overview'); 
+            }
+
+            $('.easyel-nav-tab').click(function (e) {
+                e.preventDefault();
+                var tab = $(this).data('tab');
+                activateTab(tab);
+                history.replaceState(null, null, '#'+tab); 
+            });
+
+            // --------- Tab Active Function ---------
+            function activateTab(tab) {
+                // Tabs active class
+                $('.easyel-nav-tab').removeClass('easyel-nav-tab-active');
+                $('.easyel-nav-tab[data-tab="' + tab + '"]').addClass('easyel-nav-tab-active');
+
+                // Panels show/hide
+                $('.easyel-tab-panel').hide();
+                $('#tab-' + tab).show();
+
+                // Admin submenu active state sync
+                $('#toplevel_page_easy-elements-dashboard ul.wp-submenu li').removeClass('current');
+                $('#toplevel_page_easy-elements-dashboard ul.wp-submenu a[href*="#' + tab + '"]').parent().addClass('current');
+            }
+        },
+
+        easyElFilter: function() {
+            $(".easyel-action-btn").on("click", function() {
+                var filter = $(this).data("filter");
+
+                // active class handle
+                $(".easyel-action-btn").removeClass("active");
+                $(this).addClass("active");
+
+                $(".easy-widget-item").each(function() {
+                    var $widget = $(this);
+
+                 
+                    if (filter === "easyel_all") {
+                        $widget.show();
+                    } 
+                  
+                    else if (filter === "easyel_free") {
+                        if ($widget.hasClass("easyel-pro-enable")) {
+                            $widget.hide();
+                        } else {
+                            $widget.show();
+                        }
+                    } 
+                    else if (filter === "easyel_pro") {
+                        if ($widget.hasClass("easyel-pro-enable")) {
+                            $widget.show();
+                        } else {
+                            $widget.hide();
+                        }
+                    }
+                });
+            });
         }
     };
 

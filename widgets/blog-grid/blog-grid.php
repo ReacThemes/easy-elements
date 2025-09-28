@@ -486,14 +486,12 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             [
                 'label'       => esc_html__( 'Order By', 'easy-elements' ),
                 'type'        => Controls_Manager::SELECT,
-                'options'     => $is_pro
-                    ? [
+                'options'     =>  [
                         'date'       => esc_html__( 'Date', 'easy-elements' ),
                         'title'      => esc_html__( 'Title', 'easy-elements' ),
                         'rand'       => esc_html__( 'Random', 'easy-elements' ),
                         'menu_order' => esc_html__( 'Menu Order', 'easy-elements' ),
-                    ]
-                    : [ '' => esc_html__( 'Available in Pro version', 'easy-elements' ) ],
+                    ],
                 'default'     =>  'date',
                 'description' =>  '',
             ]
