@@ -78,9 +78,9 @@ class RSHF_Target_Rules_Fields {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		define( 'AST_TARGET_RULE_URI', plugins_url( '/', __FILE__ ) );
-		define( 'AST_TARGET_RULE_VER', '1.0.0' );
-		define( 'AST_TARGET_RULE_DIR', plugin_dir_path( __FILE__ ) );
+		define( 'EASYEL_AST_TARGET_RULE_URI', plugins_url( '/', __FILE__ ) );
+		define( 'EASYEL_AST_TARGET_RULE_VER', '1.0.0' );
+		define( 'EASYEL_AST_TARGET_RULE_DIR', plugin_dir_path( __FILE__ ) );
 
 		add_action( 'admin_action_edit', array( $this, 'initialize_options' ) );
 		add_action( 'wp_ajax_hfe_get_posts_by_query', array( $this, 'hfe_get_posts_by_query' ) );
@@ -442,20 +442,20 @@ class RSHF_Target_Rules_Fields {
 	 * Function Description: admin_styles.
 	 */
 	public function admin_styles() {
-		wp_enqueue_script( 'astra-select2', AST_TARGET_RULE_URI . 'select2.js', array( 'jquery' ), AST_TARGET_RULE_VER, true );
+		wp_enqueue_script( 'astra-select2', EASYEL_AST_TARGET_RULE_URI . 'select2.js', array( 'jquery' ), EASYEL_AST_TARGET_RULE_VER, true );
 
 		$wp_lang  = get_locale();
 		$ast_lang = '';
 
 		wp_register_script(
 			'astra-target-rule',
-			AST_TARGET_RULE_URI . 'target-rule.js',
+			EASYEL_AST_TARGET_RULE_URI . 'target-rule.js',
 			array(
 				'jquery',
 				'astra-select2',
 				'wp-util',
 			),
-			AST_TARGET_RULE_VER,
+			EASYEL_AST_TARGET_RULE_VER,
 			true
 		);
 
@@ -463,19 +463,19 @@ class RSHF_Target_Rules_Fields {
 
 		wp_register_script(
 			'astra-user-role',
-			AST_TARGET_RULE_URI . 'user-role.js',
+			EASYEL_AST_TARGET_RULE_URI . 'user-role.js',
 			array(
 				'jquery',
 			),
-			AST_TARGET_RULE_VER,
+			EASYEL_AST_TARGET_RULE_VER,
 			true
 		);
 
 		wp_enqueue_script( 'astra-user-role' );
 
-		wp_register_style( 'astra-select2', AST_TARGET_RULE_URI . 'select2.css', '', AST_TARGET_RULE_VER );
+		wp_register_style( 'astra-select2', EASYEL_AST_TARGET_RULE_URI . 'select2.css', '', EASYEL_AST_TARGET_RULE_VER );
 		wp_enqueue_style( 'astra-select2' );
-		wp_register_style( 'astra-target-rule', AST_TARGET_RULE_URI . 'target-rule.css', '', AST_TARGET_RULE_VER );
+		wp_register_style( 'astra-target-rule', EASYEL_AST_TARGET_RULE_URI . 'target-rule.css', '', EASYEL_AST_TARGET_RULE_VER );
 		wp_enqueue_style( 'astra-target-rule' );
 
 		/**

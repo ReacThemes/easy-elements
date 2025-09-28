@@ -329,10 +329,10 @@ class Easyel_Site_Logo_Widget extends \Elementor\Widget_Base {
 			
 				// Output sticky logo if available
 				if ( $sticky_logo_url ) {
-					echo '<img class="eel-sticky-logo" src="' . esc_url( $sticky_logo_url ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" loading="lazy" decoding="async">';
+					echo '<img class="eel-sticky-logo" src="' . esc_url( $sticky_logo_url ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" decoding="async">';
 				}
 			} else {
-				$img_html = '<img src="' . esc_url( $logo_data['url'] ) . '" alt="' . esc_attr( $alt_text ) . '" loading="lazy" decoding="async">';
+				$img_html = '<img src="' . esc_url( $logo_data['url'] ) . '" alt="' . esc_attr( $alt_text ) . '" decoding="async">';
 				echo wp_kses_post( apply_filters( 'easy_elements_site_logo_fallback_img_html', $img_html, $logo_data['url'], $alt_text, $settings ) );
 			}			
 		} else {

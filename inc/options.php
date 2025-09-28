@@ -11,7 +11,7 @@ function easy_elements_admin_menu() {
         __( 'Easy Elements', 'easy-elements' ),
         'manage_options',
         'easy-elements-dashboard',
-        'Easyel_Elements_dashboard_callback',
+        'Easyel_Elements_settings_callback',
         'dashicons-layout',
         59
     );
@@ -27,19 +27,6 @@ function Easyel_Elements_header_footer_menu() {
         __( 'Header & Footer', 'easy-elements' ),
         'manage_options',
         'edit.php?post_type=ee-elementor-hf'
-    );
-}
-
-
-add_action( 'admin_menu', 'Easyel_Elements_settings_menu' );
-function Easyel_Elements_settings_menu() {
-    add_submenu_page(
-        'easy-elements-dashboard',
-        __( 'Elements Settings', 'easy-elements' ),
-        __( 'Elements Settings', 'easy-elements' ),
-        'manage_options',
-        'easy-elements-settings',
-        'Easyel_Elements_settings_callback'
     );
 }
 
@@ -250,29 +237,6 @@ add_action('wp_ajax_easy_elements_bulk_action', function() {
         'count' => $updated_count
     ]);
 });
-
-
-// Callback for the main dashboard
-function Easyel_Elements_dashboard_callback() {
-    ?>
-    <div class="wrap">
-        <h3><?php echo esc_html__( 'Welcome to Easy Elements', 'easy-elements' ); ?></h3>
-        <p><?php echo esc_html__( 'Easy Elements is a custom Elementor widget plugin built for speed and flexibility. Use it to add beautiful widgets to your pages with ease.', 'easy-elements' ); ?></p>
-
-        <?php
-            echo esc_html('Logo', 'easy-elements');
-        ?>
-        <div>
-            <iframe width="560" height="315" 
-                src="<?php echo esc_url( 'https://www.youtube.com/embed/YOUR_VIDEO_ID' ); ?>" 
-                frameborder="0" 
-                allowfullscreen 
-                title="<?php echo esc_attr__( 'Easy Elements Video Tutorial', 'easy-elements' ); ?>">
-            </iframe>
-        </div>
-    </div>
-    <?php
-}
 
 
 add_action( 'admin_enqueue_scripts', 'Easyel_Elements_enqueue_admin_hide_notices_css' );
@@ -714,8 +678,8 @@ function Easyel_Elements_get_available_widgets() {
 add_action( 'admin_menu', function() {
     add_submenu_page(
         'easy-elements-dashboard',
-        __( 'Upload Custom Fonts', 'easy-elements' ),
-        __( 'Upload Custom Fonts', 'easy-elements' ),
+        __( 'Custom Fonts', 'easy-elements' ),
+        __( 'Custom Fonts', 'easy-elements' ),
         'manage_options',
         'easyel-custom-fonts',
         'easyel_custom_fonts_page_html'
@@ -729,7 +693,7 @@ function easyel_custom_fonts_page_html() {
     if ( ! current_user_can( 'manage_options' ) ) return;
 
     if ( ! defined( 'EASY_ELEMENTS_PRO_ACTIVE' ) || ! EASY_ELEMENTS_PRO_ACTIVE ) {
-        echo '<div class="wrap"><h1>' . esc_html__( 'Upload Custom Fonts', 'easy-elements' ) . '</h1>';
+        echo '<div class="wrap"><h1>' . esc_html__( 'Custom Fonts', 'easy-elements' ) . '</h1>';
         echo '<p style="font-size:16px;color:#cc0000;">' . esc_html__( 'This feature is available in Easy Elements Pro. Please install and activate the Pro version to use it.', 'easy-elements' ) . '</p>';
         echo '</div>';
         return;
