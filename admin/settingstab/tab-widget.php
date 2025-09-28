@@ -11,14 +11,18 @@ foreach ( $available_elements as $key => $widget ) {
     <?php foreach ( $grouped_widgets as $group_name => $widgets ) : ?>
         <h2 class="easy-widget-group-title"><?php echo esc_html($group_name); ?></h2>
         <div class="easy-widgets-grid">
-            <?php foreach ( $widgets as $key => $widget ) : 
+            <?php 
+            foreach ( $widgets as $key => $widget ) : 
                 $enabled = get_option('easy_element_' . $key, '1');
                 $is_pro_enable = isset( $widget['is_pro'] ) && $widget['is_pro'];
                 $is_pro = $is_pro_enable && ! class_exists('Easy_Elements_Pro');
                 $disabled_attr = $is_pro ? 'disabled="disabled"' : '';
                 $checked = $enabled === '1' ? 'checked' : '';
+
+                $pro_widget = ( ( int ) $is_pro_enable === 1 ) ? 'easyel-pro-widget' : '';
+
             ?>
-                <div class="easy-widget-item <?php echo $is_pro ? 'easyel-pro-enable' : ''; ?>" data-widget-key="<?php echo esc_attr($key); ?>">
+                <div class="easy-widget-item <?php echo $is_pro ? 'easyel-pro-enable' : ''; ?> <?php echo esc_attr(  $pro_widget ); ?>" data-widget-key="<?php echo esc_attr($key); ?>">
                     <div class="widget-header">
                         <span class="dashicons <?php echo esc_attr($widget['icon']); ?>"></span>
                         <strong><?php echo esc_html($widget['title']); ?></strong>
