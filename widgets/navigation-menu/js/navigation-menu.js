@@ -272,9 +272,7 @@
 				$this.attr( 'aria-expanded', 'false' );
 				
 				if ( 'yes' == full_width ){
-
-					$this.removeClass( 'eel-active-menu-full-width' );
-					
+					$this.removeClass( 'eel-active-menu-full-width' );					
 					$selector.css( 'width', 'auto' );
 					$selector.css( 'left', '0' );
 					$selector.css( 'z-index', '0' );
