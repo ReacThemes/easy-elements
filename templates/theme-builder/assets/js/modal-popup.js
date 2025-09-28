@@ -218,7 +218,6 @@
                 return $("<option>", {
                   value: item.value,
                   text: item.label,
-                  disabled: item.pro,
                   selected: item.value === selectedSub ? true : false,
                 });
               }
@@ -267,7 +266,6 @@
                     $("<option>", {
                       value: item.value,
                       text: item.label,
-                      disabled: item.pro,
                       selected: item.value === selectedSub,
                     })
                   );
@@ -276,7 +274,6 @@
                     $("<option>", {
                       value: item.value,
                       text: item.label,
-                      disabled: item.pro,
                       selected: item.value === selectedSub,
                     })
                   );

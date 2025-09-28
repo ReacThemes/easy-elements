@@ -33,6 +33,7 @@
 }
 .eel-addon-search{
     display: flex;
+    justify-content: space-between;
 }
 .eel-addon-search input[type=text]{
     padding: 5px 18px !important;
@@ -363,4 +364,42 @@ h1,h2 { color: #0073aa; }
     padding: 20px;
     border: 1px solid #ddd;
     background: #fff;
+}
+
+.easy-widget-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.easyel-widget-search-enable {
+    display: flex;
+    align-items: center;
+}
+
+.easy-widget-item .easyel-pro-badge {
+    position: absolute;
+    right: -25px;  
+    bottom: -2px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 30px; 
+    text-align: center;
+    transform: rotate(-45deg);
+    transform-origin: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.easy-widget-group-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 30px 0 15px;
+    padding-bottom: 10px;
+}
+
+.easy-widget-item.easyel-pro-enable {
+    opacity: 0.7;
 }

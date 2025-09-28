@@ -114,13 +114,13 @@
 					
 					_toggleClick( id );
 				}else{
-					var $toggle = $( '.elementor-element-' + id + ' .eel-nav-menu__toggle' );
-                    var $nextElement= $toggle.next();
-                    var width = $nextElement.parent().width();
-                    if( $nextElement.length ){
-						$nextElement.css( 'width', width + 'px' );
-						$nextElement.css( 'left', '0' );
-					}
+					// var $toggle = $( '.elementor-element-' + id + ' .eel-nav-menu__toggle' );
+                    // var $nextElement= $toggle.next();
+                    // var width = $nextElement.parent().width();
+                    // if( $nextElement.length ){
+					// 	$nextElement.css( 'width', width + 'px' );
+					// 	$nextElement.css( 'left', '0' );
+					// }
 				}
 			}
 		});
