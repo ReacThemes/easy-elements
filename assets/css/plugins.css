@@ -1894,14 +1894,14 @@
 
 
 /************ All Css Important ************/
-.easyel-fixed-header .site-header {
+.easyel-fixed-header .easy-site-header {
     position: absolute;
     top: 0;
     width: 100%;
     z-index: 999;
 }
 
-body.logged-in.easyel-fixed-header .site-header {
+body.logged-in.easyel-fixed-header .easy-site-header {
     top: 30px !important;
 }
 
@@ -1984,4 +1984,9 @@ body.sticky-enabled-overlap{
 .eel-nav-menu-icon svg{
     width: 16px;
     height: 16px;
+}
+
+html,
+body{
+    overflow-x: hidden;
 }

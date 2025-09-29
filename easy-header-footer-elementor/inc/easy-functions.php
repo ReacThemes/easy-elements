@@ -81,7 +81,7 @@ function ee_hfe_render_header() {
 		return;
 	}
 	?>
-	<header class="site-header">
+	<header class="easy-site-header">
 	<?php
 		EE_Header_Footer_Elementor::get_header_content();
 	?>
