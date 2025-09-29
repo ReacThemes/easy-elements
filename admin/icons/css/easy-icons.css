@@ -1,0 +1,106 @@
+@font-face {
+  font-family: 'easy-icons';
+  src: url('../font/easy-icons.eot?79886833');
+  src: url('../font/easy-icons.eot?79886833#iefix') format('embedded-opentype'),
+       url('../font/easy-icons.woff2?79886833') format('woff2'),
+       url('../font/easy-icons.woff?79886833') format('woff'),
+       url('../font/easy-icons.ttf?79886833') format('truetype'),
+       url('../font/easy-icons.svg?79886833#easy-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'easy-icons';
+    src: url('../font/easy-icons.svg?79886833#easy-icons') format('svg');
+  }
+}
+*/
+[class^="ee-"]:before, [class*=" ee-"]:before {
+  font-family: "easy-icons";
+  font-style: normal;
+  font-weight: normal;
+  speak: never;
+
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.ee-clients-logo-slider:before { content: '\e800'; } /* '' */
+.ee-comments:before { content: '\e801'; } /* '' */
+.ee-contact-box:before { content: '\e802'; } /* '' */
+.ee-demo:before { content: '\e803'; } /* '' */
+.ee-custom-projects:before { content: '\e804'; } /* '' */
+.ee-domain-search:before { content: '\e805'; } /* '' */
+.ee-faq:before { content: '\e806'; } /* '' */
+.ee-heading:before { content: '\e807'; } /* '' */
+.ee-icon-box-slider:before { content: '\e808'; } /* '' */
+.ee-iconbox:before { content: '\e809'; } /* '' */
+.ee-image-accordion:before { content: '\e80a'; } /* '' */
+.ee-image-carousel:before { content: '\e80b'; } /* '' */
+.ee-marquee-logo:before { content: '\e80c'; } /* '' */
+.ee-meta:before { content: '\e80d'; } /* '' */
+.ee-page-title:before { content: '\e80e'; } /* '' */
+.ee-pagination:before { content: '\e80f'; } /* '' */
+.ee-post-content:before { content: '\e810'; } /* '' */
+.ee-post-excerpt:before { content: '\e811'; } /* '' */
+.ee-post-grid:before { content: '\e812'; } /* '' */
+.ee-post-slider:before { content: '\e813'; } /* '' */
+.ee-post-tag:before { content: '\e814'; } /* '' */
+.ee-post-title:before { content: '\e815'; } /* '' */
+.ee-pricing-list:before { content: '\e816'; } /* '' */
+.ee-pricing-table:before { content: '\e817'; } /* '' */
+.ee-process-grid:before { content: '\e818'; } /* '' */
+.ee-process-list:before { content: '\e819'; } /* '' */
+.ee-process-slider:before { content: '\e81a'; } /* '' */
+.ee-related-post:before { content: '\e81b'; } /* '' */
+.ee-search:before { content: '\e81c'; } /* '' */
+.ee-service-list:before { content: '\e81d'; } /* '' */
+.ee-slider:before { content: '\e81e'; } /* '' */
+.ee-site-logo:before { content: '\e81f'; } /* '' */
+.ee-social-icons:before { content: '\e820'; } /* '' */
+.ee-social-share:before { content: '\e821'; } /* '' */
+.ee-team-grid:before { content: '\e822'; } /* '' */
+.ee-tab:before { content: '\e823'; } /* '' */
+.ee-team-slider:before { content: '\e824'; } /* '' */
+.ee-testimonials-grid:before { content: '\e825'; } /* '' */
+.ee-testimonials-slider:before { content: '\e826'; } /* '' */
+.ee-timeline-slider:before { content: '\e827'; } /* '' */
+.ee-video:before { content: '\e828'; } /* '' */
+.ee-author:before { content: '\e829'; } /* '' */
+.ee-breadcumb:before { content: '\e82a'; } /* '' */
+.ee-button:before { content: '\e82b'; } /* '' */
+.ee-canvas:before { content: '\e82c'; } /* '' */
+.ee-clients-logo-grid:before { content: '\e82d'; } /* '' */
+.ee-extension:before { content: '\e82e'; } /* '' */
+.ee-home:before { content: '\e82f'; } /* '' */
+.ee-image-horizontal-scroll:before { content: '\e830'; } /* '' */
+.ee-widgets:before { content: '\e831'; } /* '' */

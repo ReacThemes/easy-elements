@@ -47,6 +47,8 @@ final class Easyel_Elements_Elementor_Extension {
 	public function enqueue_admin_styles() {
 		$dir = plugin_dir_url( __FILE__ );
 		wp_enqueue_style( 'e-e-elements-admin', $dir . 'assets/css/admin/admin.css', [], self::VERSION );
+		wp_enqueue_style( 'e-e-easy-custom-icons', $dir . 'admin/icons/css/easy-icons.css', [], self::VERSION );
+		wp_enqueue_style('e-e-admin-fonts-inter','https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',false);
 	}
 
 	public function enqueue_editor_scripts() {
@@ -100,6 +102,7 @@ final class Easyel_Elements_Elementor_Extension {
 			'domain_search'  				=> [ 'class' => '\Easyel_Domain_Search_Widget',    		'file' => __DIR__ . '/widgets/domain-search/domain-search.php' ],
 			'easy_offcanvas'  				=> [ 'class' => '\Easyel_Offcanvas_Widget',    			'file' => __DIR__ . '/widgets/offcanvas/offcanvas.php' ],
 			'easy_scroll_to_top'  			=> [ 'class' => '\Easyel_Scroll_To_Top_Widget',    			'file' => __DIR__ . '/widgets/scroll-to-top/scroll.php' ],
+			'easy_table'  					=> [ 'class' => '\Easyel_Table_Elementor_Widget',    				'file' => __DIR__ . '/widgets/table/table-normal.php' ],
 		];
 
 	    foreach ( $widgets as $key => $data ) {
