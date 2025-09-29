@@ -23,10 +23,6 @@ final class Easyel_Elements_Elementor_Extension {
 
 	public function init() {
 		// Safety checks
-		if ( ! did_action( 'elementor/loaded' ) || ! class_exists( '\Elementor\Plugin' ) ) {
-			add_action( 'admin_notices', [ $this, 'admin_notice_missing_main_plugin' ] );
-			return;
-		}
 
 		add_action( 'elementor/widgets/register', [ $this, 'init_widgets' ] );
 		add_action( 'elementor/elements/categories_registered', [ $this, 'add_elementor_categories' ] );
@@ -72,58 +68,6 @@ final class Easyel_Elements_Elementor_Extension {
 			'icon'  => 'fa fa-header',
 		] );
 	}
-
-
-	public function admin_notice_missing_main_plugin() {
-		$elementor_slug = 'elementor/elementor.php';
-
-		// Elementor install URL
-		$install_url = wp_nonce_url(
-			esc_url_raw(
-				add_query_arg(
-					[
-						'action' => 'install-plugin',
-						'plugin' => 'elementor',
-					],
-					admin_url( 'update.php' )
-				)
-			),
-			'install-plugin_elementor'
-		);
-
-		// Elementor activate URL
-		$activate_url = wp_nonce_url(
-			esc_url_raw(
-				add_query_arg(
-					[
-						'action' => 'activate',
-						'plugin' => $elementor_slug,
-					],
-					admin_url( 'plugins.php' )
-				)
-			),
-			'activate-plugin_' . $elementor_slug
-		);
-
-		echo '<div class="' . esc_attr( 'notice notice-warning' ) . '">';
-		echo '<p><strong>' . esc_html__( 'Easy Elements requires Elementor to be installed and activated.', 'easy-elements' ) . '</strong></p>';
-
-		// Elementor not installed
-		if ( ! file_exists( WP_PLUGIN_DIR . '/' . $elementor_slug ) ) {
-			echo '<p><a href="' . esc_url( $install_url ) . '" class="' . esc_attr( 'button button-primary' ) . '">';
-			echo esc_html__( 'Install Elementor', 'easy-elements' );
-			echo '</a></p>';
-		}
-		// Elementor installed but not active
-		elseif ( ! is_plugin_active( $elementor_slug ) ) {
-			echo '<p><a href="' . esc_url( $activate_url ) . '" class="' . esc_attr( 'button button-primary' ) . '">';
-			echo esc_html__( 'Activate Elementor', 'easy-elements' );
-			echo '</a></p>';
-		}
-
-		echo '</div>';
-	}
-
 
 	public function init_widgets() {
 	    $widgets_manager = \Elementor\Plugin::instance()->widgets_manager;
