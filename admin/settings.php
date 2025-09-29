@@ -25,9 +25,8 @@ class Easyel_Elements {
         add_action('wp_ajax_easyel_save_js_animation', array ( $this, 'easyel_save_js_animation') ); 
         add_action('wp_ajax_easyel_save_cursor', array( $this, 'easyel_save_cursor') );
         // AJAX handler for saving minify js option
-        add_action('wp_ajax_easy_elements_save_minify_js', array( $this, "easy_elements_save_minify_js") );
-        add_action('wp_ajax_easy_elements_save_minify_css', array( $this, "easy_elements_save_minify_css") );
 
+    
         add_action('wp_ajax_easy_elements_save_widget_setting', array( $this, "easy_elements_save_widget_setting" ) );
         add_action('wp_ajax_easy_elements_bulk_action', array( $this, 'easy_elements_bulk_action') );
         add_action( 'admin_enqueue_scripts', array( $this, 'easyel_elements_enqueue_admin_hide_notices_css' ) );
