@@ -698,7 +698,14 @@ class Easyel_Elements {
                 'is_pro'      => true,
                 'group'       => 'Theme Builder Widget'
             ],
-            
+            'easy_scroll_to_top' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Scroll To Top',
+                'description' => 'Easy Scroll To Top.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => true,
+                'group'       => 'Theme Builder Widget'
+            ],            
         ];
 
         return apply_filters( 'easyel_available_widgets', $widgets );

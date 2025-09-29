@@ -1,0 +1,22 @@
+:root {    
+    --e-global-color-primary: #EAA638;
+}
+
+#easyel-top-to-bottom{
+    position: fixed;
+    bottom: 0;
+    cursor: pointer;    
+    right: 28px;
+    z-index: 10;
+
+    text-align: center;
+    transform: translateY(0px);
+    transition: all 0.5s ease 0s;
+    opacity: 1;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background: var(--e-global-color-primary);
+    border-radius: 100px; 
+    color: var(--e-global-color-secondary); 
+}

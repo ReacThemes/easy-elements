@@ -95,6 +95,7 @@ final class Easyel_Elements_Elementor_Extension {
 			'breadcrumb'  					=> [ 'class' => '\Easyel_Breadcrumb_Widget',    			'file' => __DIR__ . '/widgets/breadcrumb/breadcrumb.php' ],
 			'domain_search'  				=> [ 'class' => '\Easyel_Domain_Search_Widget',    		'file' => __DIR__ . '/widgets/domain-search/domain-search.php' ],
 			'easy_offcanvas'  				=> [ 'class' => '\Easyel_Offcanvas_Widget',    			'file' => __DIR__ . '/widgets/offcanvas/offcanvas.php' ],
+			'easy_scroll_to_top'  			=> [ 'class' => '\Easyel_Scroll_To_Top_Widget',    			'file' => __DIR__ . '/widgets/scroll-to-top/scroll.php' ],
 		];
 
 	    foreach ( $widgets as $key => $data ) {
