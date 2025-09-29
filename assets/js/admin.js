@@ -25,6 +25,7 @@
             $('.widget-toggle-checkbox').on('change', function() {
                 var checkbox = $(this);
                 var widgetKey = checkbox.data('widget-key');
+                var tabSlug   = checkbox.data('tab');
                 var status = checkbox.is(':checked') ? '1' : '0';
                 var statusSpan = checkbox.closest('.widget-toggle').find('.toggle-status');
                 
@@ -37,6 +38,7 @@
                     action: 'easy_elements_save_widget_setting',
                     widget_key: widgetKey,
                     status: status,
+                    tab: tabSlug,
                     nonce: easyElementsData.widget_settings_nonce
                 })
                 .done(function(response) {
@@ -81,58 +83,111 @@
         initBulkActions: function() {
             // Bulk activate all
             $('#activate-all-btn').on('click', function() {
-                            if (confirm(easyElementsData.strings.confirm_activate_all)) {
-                EasyElementsAdmin.performBulkAction('activate_all');
-            }
+                if (confirm(easyElementsData.strings.confirm_activate_all)) {
+                    var currentTab = $('.easyel-nav-tab-active').data('tab');
+                    EasyElementsAdmin.performBulkAction('activate_all', currentTab );
+                }
             });
 
             // Bulk deactivate all
             $('#deactivate-all-btn').on('click', function() {
-                            if (confirm(easyElementsData.strings.confirm_deactivate_all)) {
-                EasyElementsAdmin.performBulkAction('deactivate_all');
-            }
+                if (confirm(easyElementsData.strings.confirm_deactivate_all)) {
+                    EasyElementsAdmin.performBulkAction('deactivate_all');
+                }
             });
         },
 
         // Perform bulk action
+        // performBulkAction: function( action, tab ) {
+        //     var btn = action === 'activate_all' ? $('#activate-all-btn') : $('#deactivate-all-btn');
+        //     var originalText = btn.text();
+            
+        //     btn.prop('disabled', true).text(easyElementsData.strings.processing);
+            
+        //     $.post(ajaxurl, {
+        //         action: 'easy_elements_bulk_action',
+        //         bulk_action: action,
+        //         tab: tab,
+        //         nonce: easyElementsData.bulk_action_nonce
+        //     })
+        //     .done(function(response) {
+        //         if (response.success) {
+        //             // Update all checkboxes
+
+        //             $('.widget-toggle-checkbox').each(function() {
+        //                 let $checkbox = $(this);
+        //                 let isPro = $checkbox.closest('.easy-widget-item').hasClass('easyel-pro-enable');
+
+        //                 if (isPro) {
+        //                     if (!response.data.is_pro_active) {
+        //                         $checkbox.prop('checked', false).prop('disabled', true);
+        //                     }
+        //                 } else {
+        //                     $checkbox.prop('checked', action === 'activate_all' ? true : false);
+        //                     $checkbox.prop('disabled', false);
+        //                 }
+        //             });
+
+        //             // Show success message
+        //             EasyElementsAdmin.showBulkMessage(response.data.message, 'success');
+        //             EasyElementsAdmin.showNotification(response.data.message, 'success');
+                    
+        //             // Update status spans
+        //             $('.toggle-status').text(easyElementsData.strings.updated).removeClass('error').addClass('success');
+        //             setTimeout(function() {
+        //                 $('.toggle-status').fadeOut();
+        //             }, 3000);
+        //         } else {
+        //             EasyElementsAdmin.showBulkMessage('Error: ' + response.data.message, 'error');
+        //             EasyElementsAdmin.showNotification('Bulk action failed', 'error');
+        //         }
+        //     })
+        //     .fail(function() {
+        //         EasyElementsAdmin.showBulkMessage('An error occurred while processing the bulk action.', 'error');
+        //         EasyElementsAdmin.showNotification('Network error occurred', 'error');
+        //     })
+        //     .always(function() {
+        //         btn.prop('disabled', false).text(originalText);
+        //     });
+        // },
+
         performBulkAction: function(action) {
+            var currentTab = $('.easyel-nav-tab-active').data('tab');
             var btn = action === 'activate_all' ? $('#activate-all-btn') : $('#deactivate-all-btn');
             var originalText = btn.text();
-            
+
             btn.prop('disabled', true).text(easyElementsData.strings.processing);
-            
+
             $.post(ajaxurl, {
                 action: 'easy_elements_bulk_action',
                 bulk_action: action,
+                tab: currentTab,
                 nonce: easyElementsData.bulk_action_nonce
             })
             .done(function(response) {
                 if (response.success) {
-                    // Update all checkboxes
-
                     $('.widget-toggle-checkbox').each(function() {
-                        let $checkbox = $(this);
-                        let isPro = $checkbox.closest('.easy-widget-item').hasClass('easyel-pro-enable');
+                        var $checkbox = $(this);
 
-                        if (isPro) {
-                            if (!response.data.is_pro_active) {
+                        if ($checkbox.data('tab') === currentTab) {
+                            var isPro = $checkbox.closest('.easy-widget-item').hasClass('easyel-pro-enable');
+
+                            if (isPro && !response.data.is_pro_active) {
                                 $checkbox.prop('checked', false).prop('disabled', true);
+                            } else {
+                                // Free or Pro (active) widgets
+                                if(action === 'activate_all') {
+                                    $checkbox.prop('checked', true).prop('disabled', false);
+                                } else if(action === 'deactivate_all') {
+                                    $checkbox.prop('checked', false).prop('disabled', false);
+                                }
                             }
-                        } else {
-                            $checkbox.prop('checked', action === 'activate_all' ? true : false);
-                            $checkbox.prop('disabled', false);
                         }
                     });
 
-                    // Show success message
+
                     EasyElementsAdmin.showBulkMessage(response.data.message, 'success');
                     EasyElementsAdmin.showNotification(response.data.message, 'success');
-                    
-                    // Update status spans
-                    $('.toggle-status').text(easyElementsData.strings.updated).removeClass('error').addClass('success');
-                    setTimeout(function() {
-                        $('.toggle-status').fadeOut();
-                    }, 3000);
                 } else {
                     EasyElementsAdmin.showBulkMessage('Error: ' + response.data.message, 'error');
                     EasyElementsAdmin.showNotification('Bulk action failed', 'error');
@@ -191,107 +246,191 @@
             });
         },
 
-        // Initialize all extensions
         initAllExtensions: function() {
-            var checkbox = $('#easyel_enable_js_animation');
-            if (checkbox.length === 0) return;
-            
-            // Create notification span
-            var notification = $('<span class="js-animation-status"></span>');
-            notification.css({
-                'marginLeft': '10px',
-                'fontWeight': 'bold',
-                'display': 'none'
-            });
-            checkbox.closest('td').append(notification);
-            
-            checkbox.on('change', function() {
+            var $extensionsTab = $('.easyel-tab-panel.extensions');
+           // Single toggle
+            $('.easyel-extension-toggle').on('change', function() {
                 var checkbox = $(this);
-                var value = checkbox.is(':checked') ? '1' : '0';
-                
-                // Show saving status
-                notification.text(easyElementsData.strings.saving).css('color', '#2196F3').show();
-                
+                var key      = checkbox.data('key');
+                var tab      = checkbox.data('tab');
+                var status   = checkbox.is(':checked') ? 1 : 0;
+                var statusSpan = $('<span class="toggle-status"></span>');
+
+                console.log( tab)
+
+                checkbox.closest('td').append(statusSpan);
+                statusSpan.text('Saving...').show();
+
                 $.post(ajaxurl, {
-                    action: 'easyel_save_js_animation',
-                    value: value,
-                    nonce: easyElementsData.js_animation_nonce
+                    action: 'easy_elements_save_global_extensions',
+                    tab: tab,
+                    key: key,
+                    status: status,
+                    nonce: easyElementsData.widget_settings_nonce
                 })
-                .done(function(response) {
-                    if (response.success) {
-                        notification.text(easyElementsData.strings.saved).css('color', '#4CAF50');
-                        EasyElementsAdmin.showNotification('JS Animation setting saved', 'success');
-                        setTimeout(function() {
-                            notification.fadeOut();
-                        }, 2000);
+                .done(function(response){
+                    if(response.success){
+                        statusSpan.text('Saved').removeClass('error').addClass('success');
+                        setTimeout(function(){ statusSpan.fadeOut(); }, 2000);
                     } else {
-                        notification.text(easyElementsData.strings.error).css('color', '#f44336');
-                        checkbox.prop('checked', !checkbox.is(':checked')); // Revert checkbox
-                        EasyElementsAdmin.showNotification('Failed to save JS Animation setting', 'error');
-                        setTimeout(function() {
-                            notification.fadeOut();
-                        }, 3000);
+                        statusSpan.text('Error').removeClass('success').addClass('error');
+                        checkbox.prop('checked', !checkbox.is(':checked'));
                     }
                 })
-                .fail(function() {
-                    notification.text(easyElementsData.strings.error).css('color', '#f44336');
-                    checkbox.prop('checked', !checkbox.is(':checked')); // Revert checkbox
-                    EasyElementsAdmin.showNotification('Network error occurred', 'error');
-                    setTimeout(function() {
-                        notification.fadeOut();
-                    }, 3000);
+                .fail(function(){
+                    statusSpan.text('Network error').removeClass('success').addClass('error');
+                    checkbox.prop('checked', !checkbox.is(':checked'));
                 });
             });
 
-            // Cursor toggle
-            var cursorCheckbox = $('#easyel_enable_cursor');
-            if (cursorCheckbox.length) {
-                var cursorNotification = $('<span class="cursor-status"></span>');
-                cursorNotification.css({
-                    'marginLeft': '10px',
-                    'fontWeight': 'bold',
-                    'display': 'none'
+            // Enable All
+            $extensionsTab.on('click', '#activate-all-btn', function(){
+                var tab = 'extensions';
+                var keys = [];
+
+                $('.easyel-extension-toggle').each(function(){
+                    var checkbox = $(this);
+                    if (checkbox.closest('td').hasClass('easyel-pro-enable')) return;
+                    checkbox.prop('checked', true);
+                    keys.push(checkbox.data('key'));
                 });
-                cursorCheckbox.closest('td').append(cursorNotification);
 
-                cursorCheckbox.on('change', function() {
-                    var el = $(this);
-                    var value = el.is(':checked') ? '1' : '0';
-
-                    cursorNotification.text(easyElementsData.strings.saving).css('color', '#2196F3').show();
-
+                if(keys.length){
                     $.post(ajaxurl, {
-                        action: 'easyel_save_cursor',
-                        value: value,
-                        nonce: easyElementsData.nonce
-                    })
-                    .done(function(response) {
-                        if (response.success) {
-                            cursorNotification.text(easyElementsData.strings.saved).css('color', '#4CAF50');
-                            EasyElementsAdmin.showNotification('Cursor setting saved', 'success');
-                            setTimeout(function() {
-                                cursorNotification.fadeOut();
-                            }, 2000);
-                        } else {
-                            cursorNotification.text(easyElementsData.strings.error).css('color', '#f44336');
-                            el.prop('checked', !el.is(':checked'));
-                            EasyElementsAdmin.showNotification('Failed to save Cursor setting', 'error');
-                            setTimeout(function() {
-                                cursorNotification.fadeOut();
-                            }, 3000);
-                        }
-                    })
-                    .fail(function() {
-                        cursorNotification.text(easyElementsData.strings.error).css('color', '#f44336');
-                        el.prop('checked', !el.is(':checked'));
-                        EasyElementsAdmin.showNotification('Network error occurred', 'error');
-                        setTimeout(function() {
-                            cursorNotification.fadeOut();
-                        }, 3000);
+                        action: 'easy_elements_save_global_extensions_bulk',
+                        tab: tab,
+                        keys: keys,
+                        status: 1,
+                        nonce: easyElementsData.widget_settings_nonce
                     });
+                }
+            });
+
+            // Disable All
+            $extensionsTab.on('click', '#deactivate-all-btn', function(){
+                var tab = 'extensions';
+                var keys = [];
+
+                $('.easyel-extension-toggle').each(function(){
+                    var checkbox = $(this);
+                    if (checkbox.closest('td').hasClass('easyel-pro-enable')) return;
+                    checkbox.prop('checked', false);
+                    keys.push(checkbox.data('key'));
                 });
-            }
+
+                if(keys.length){
+                    $.post(ajaxurl, {
+                        action: 'easy_elements_save_global_extensions_bulk',
+                        tab: tab,
+                        keys: keys,
+                        status: 0,
+                        nonce: easyElementsData.widget_settings_nonce
+                    });
+                }
+            });
         },
+
+        // Initialize all extensions
+        // initAllExtensions: function() {
+        //     var checkbox = $('#easyel_enable_js_animation');
+        //     if (checkbox.length === 0) return;
+            
+        //     // Create notification span
+        //     var notification = $('<span class="js-animation-status"></span>');
+        //     notification.css({
+        //         'marginLeft': '10px',
+        //         'fontWeight': 'bold',
+        //         'display': 'none'
+        //     });
+        //     checkbox.closest('td').append(notification);
+            
+        //     checkbox.on('change', function() {
+        //         var checkbox = $(this);
+        //         var value = checkbox.is(':checked') ? '1' : '0';
+                
+        //         // Show saving status
+        //         notification.text(easyElementsData.strings.saving).css('color', '#2196F3').show();
+                
+        //         $.post(ajaxurl, {
+        //             action: 'easyel_save_js_animation',
+        //             value: value,
+        //             nonce: easyElementsData.js_animation_nonce
+        //         })
+        //         .done(function(response) {
+        //             if (response.success) {
+        //                 notification.text(easyElementsData.strings.saved).css('color', '#4CAF50');
+        //                 EasyElementsAdmin.showNotification('JS Animation setting saved', 'success');
+        //                 setTimeout(function() {
+        //                     notification.fadeOut();
+        //                 }, 2000);
+        //             } else {
+        //                 notification.text(easyElementsData.strings.error).css('color', '#f44336');
+        //                 checkbox.prop('checked', !checkbox.is(':checked')); // Revert checkbox
+        //                 EasyElementsAdmin.showNotification('Failed to save JS Animation setting', 'error');
+        //                 setTimeout(function() {
+        //                     notification.fadeOut();
+        //                 }, 3000);
+        //             }
+        //         })
+        //         .fail(function() {
+        //             notification.text(easyElementsData.strings.error).css('color', '#f44336');
+        //             checkbox.prop('checked', !checkbox.is(':checked')); // Revert checkbox
+        //             EasyElementsAdmin.showNotification('Network error occurred', 'error');
+        //             setTimeout(function() {
+        //                 notification.fadeOut();
+        //             }, 3000);
+        //         });
+        //     });
+
+        //     // Cursor toggle
+        //     var cursorCheckbox = $('#easyel_enable_cursor');
+        //     if (cursorCheckbox.length) {
+        //         var cursorNotification = $('<span class="cursor-status"></span>');
+        //         cursorNotification.css({
+        //             'marginLeft': '10px',
+        //             'fontWeight': 'bold',
+        //             'display': 'none'
+        //         });
+        //         cursorCheckbox.closest('td').append(cursorNotification);
+
+        //         cursorCheckbox.on('change', function() {
+        //             var el = $(this);
+        //             var value = el.is(':checked') ? '1' : '0';
+
+        //             cursorNotification.text(easyElementsData.strings.saving).css('color', '#2196F3').show();
+
+        //             $.post(ajaxurl, {
+        //                 action: 'easyel_save_cursor',
+        //                 value: value,
+        //                 nonce: easyElementsData.nonce
+        //             })
+        //             .done(function(response) {
+        //                 if (response.success) {
+        //                     cursorNotification.text(easyElementsData.strings.saved).css('color', '#4CAF50');
+        //                     EasyElementsAdmin.showNotification('Cursor setting saved', 'success');
+        //                     setTimeout(function() {
+        //                         cursorNotification.fadeOut();
+        //                     }, 2000);
+        //                 } else {
+        //                     cursorNotification.text(easyElementsData.strings.error).css('color', '#f44336');
+        //                     el.prop('checked', !el.is(':checked'));
+        //                     EasyElementsAdmin.showNotification('Failed to save Cursor setting', 'error');
+        //                     setTimeout(function() {
+        //                         cursorNotification.fadeOut();
+        //                     }, 3000);
+        //                 }
+        //             })
+        //             .fail(function() {
+        //                 cursorNotification.text(easyElementsData.strings.error).css('color', '#f44336');
+        //                 el.prop('checked', !el.is(':checked'));
+        //                 EasyElementsAdmin.showNotification('Network error occurred', 'error');
+        //                 setTimeout(function() {
+        //                     cursorNotification.fadeOut();
+        //                 }, 3000);
+        //             });
+        //         });
+        //     }
+        // },
 
         // Initialize notifications system
         initNotifications: function() {
@@ -395,7 +534,7 @@
                 $(".easyel-action-btn").removeClass("active");
                 $(this).addClass("active");
 
-                $(".easy-widget-item").each(function() {
+                $(".easy-widget-item,.easyel-extension-item").each(function() {
                     var $widget = $(this);
 
                  
@@ -404,14 +543,14 @@
                     } 
                   
                     else if (filter === "easyel_free") {
-                        if ($widget.hasClass("easyel-pro-enable")) {
+                        if ($widget.hasClass("easyel-pro-widget")) {
                             $widget.hide();
                         } else {
                             $widget.show();
                         }
                     } 
                     else if (filter === "easyel_pro") {
-                        if ($widget.hasClass("easyel-pro-enable")) {
+                        if ($widget.hasClass("easyel-pro-widget")) {
                             $widget.show();
                         } else {
                             $widget.hide();

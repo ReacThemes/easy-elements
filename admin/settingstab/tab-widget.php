@@ -1,6 +1,8 @@
 <?php
-// Grouping
+$tab_slug = isset($current_tab) ? $current_tab : 'widget';
 $grouped_widgets = [];
+
+// Group widgets
 foreach ( $available_elements as $key => $widget ) {
     $group = isset($widget['group']) ? $widget['group'] : 'General Widgets';
     $grouped_widgets[$group][$key] = $widget;
@@ -11,23 +13,20 @@ foreach ( $available_elements as $key => $widget ) {
     <?php foreach ( $grouped_widgets as $group_name => $widgets ) : ?>
         <h2 class="easy-widget-group-title"><?php echo esc_html($group_name); ?></h2>
         <div class="easy-widgets-grid">
-            <?php 
-            foreach ( $widgets as $key => $widget ) : 
-                $enabled = get_option('easy_element_' . $key, '1');
-                $is_pro_enable = isset( $widget['is_pro'] ) && $widget['is_pro'];
+            <?php foreach ( $widgets as $key => $widget ) : 
+                $option_name = 'easy_element_' . $tab_slug . '_' . $key;
+                $enabled = get_option($option_name, '1');
+
+                error_log( print_r( $enabled, true ) );
+
+
+
+                $is_pro_enable = isset($widget['is_pro']) && $widget['is_pro'];
                 $is_pro = $is_pro_enable && ! class_exists('Easy_Elements_Pro');
-                $disabled_attr = $is_pro ? 'disabled="disabled"' : '';
-                $checked = $enabled === '1' ? 'checked' : '';
-                $easyel_pro_attr_class = '';
-
-                if( $is_pro || ( int ) $is_pro_enable === 1 ) {
-                    $easyel_pro_attr_class .= ' easyel-pro-enable'; 
-                }
-
-                $pro_widget = ! class_exists('Easy_Elements_Pro') ? 'easyel-pro-widget' : '';
-
+                $easyel_pro_attr_class = $is_pro ? ' easyel-pro-enable' : '';
+                $pro_widget = $is_pro_enable ? 'easyel-pro-widget' : '';
             ?>
-                <div class="easy-widget-item <?php echo esc_attr( $easyel_pro_attr_class . " " . $pro_widget ); ?> " data-widget-key="<?php echo esc_attr($key); ?>">
+                <div class="easy-widget-item <?php echo esc_attr($easyel_pro_attr_class . ' ' . $pro_widget); ?>" data-widget-key="<?php echo esc_attr($key); ?>">
                     <div class="widget-header">
                         <span class="dashicons <?php echo esc_attr($widget['icon']); ?>"></span>
                         <strong><?php echo esc_html($widget['title']); ?></strong>
@@ -43,6 +42,7 @@ foreach ( $available_elements as $key => $widget ) {
                             <input type="checkbox" 
                                 class="widget-toggle-checkbox" 
                                 data-widget-key="<?php echo esc_attr($key); ?>"
+                                data-tab="<?php echo esc_attr($tab_slug); ?>"
                                 value="1"
                                 <?php checked( $enabled, '1' ); ?>
                                 <?php disabled( $is_pro ); ?> />

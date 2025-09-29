@@ -22,15 +22,15 @@ class Easyel_Elements {
 
     public function easyel_settings_ajax( ) {
         
-        add_action('wp_ajax_easyel_save_js_animation', array ( $this, 'easyel_save_js_animation') ); 
-        add_action('wp_ajax_easyel_save_cursor', array( $this, 'easyel_save_cursor') );
         // AJAX handler for saving minify js option
 
-    
         add_action('wp_ajax_easy_elements_save_widget_setting', array( $this, "easy_elements_save_widget_setting" ) );
         add_action('wp_ajax_easy_elements_bulk_action', array( $this, 'easy_elements_bulk_action') );
         add_action( 'admin_enqueue_scripts', array( $this, 'easyel_elements_enqueue_admin_hide_notices_css' ) );
         add_action('wp_ajax_easy_elements_toggle_widget', array( $this, 'easyel_elements_toggle_widget_callback') ) ;
+        add_action('wp_ajax_easy_elements_save_global_extensions', array( $this, 'easy_elements_save_global_extensions') ) ;
+        add_action('wp_ajax_easy_elements_save_global_extensions_bulk', array( $this, 'easy_elements_save_global_extensions_bulk') ) ;
+        
         add_action('admin_enqueue_scripts', array( $this, 'easyel_elements_enqueue_admin_assets') );
         add_action( 'admin_head', array( $this, 'easyel_hide_admin_notices' ) );
     }
@@ -99,30 +99,6 @@ class Easyel_Elements {
         ] );
     }
 
-    // AJAX handler for JS Animation checkbox
-    public function easyel_save_js_animation() {
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(__('Unauthorized', 'easy-elements'));
-        }
-        check_ajax_referer('easyel_js_animation_nonce', 'nonce');
-        $value = isset($_POST['value']) && $_POST['value'] == '1' ? 1 : 0;
-        update_option('easyel_enable_js_animation', $value);
-        wp_send_json_success();
-    }
-
-
-    // AJAX handler for Cursor checkbox
-    public function easyel_save_cursor() {
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(__('Unauthorized', 'easy-elements'));
-        }
-        check_ajax_referer('easy_elements_nonce', 'nonce');
-        $value = isset($_POST['value']) && $_POST['value'] === '1' ? '1' : '0';
-        update_option('easyel_enable_cursor', $value);
-        wp_send_json_success(['message' => 'Cursor setting saved']);
-    }
-
-
     // AJAX handler for saving minify css option
     public function easy_elements_save_minify_css() {
         if (!current_user_can('manage_options')) {
@@ -144,6 +120,58 @@ class Easyel_Elements {
         wp_send_json_success();
     }
 
+    public function easy_elements_save_global_extensions_bulk() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(__('Unauthorized', 'easy-elements'));
+        }
+
+        check_ajax_referer('easy_elements_widget_settings_nonce', 'nonce');
+
+        $tab    = isset($_POST['tab']) ? sanitize_text_field($_POST['tab']) : 'extensions';
+        $keys   = isset($_POST['keys']) ? (array) $_POST['keys'] : [];
+        $status = isset($_POST['status']) ? intval($_POST['status']) : 0;
+
+        if (empty($keys)) {
+            wp_send_json_error(['message' => __('No keys provided', 'easy-elements')]);
+        }
+
+        $settings = get_option('easy_element_' . $tab, []);
+
+        foreach ($keys as $key) {
+            $key = sanitize_text_field($key);
+            $settings[$key] = $status;
+        }
+
+        update_option('easy_element_' . $tab, $settings);
+
+        wp_send_json_success(['message' => __('Bulk settings updated', 'easy-elements')]);
+    }
+
+
+    public function easy_elements_save_global_extensions() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(__('Unauthorized', 'easy-elements'));
+        }
+
+        check_ajax_referer('easy_elements_widget_settings_nonce', 'nonce');
+
+        $tab    = isset($_POST['tab']) ? sanitize_text_field($_POST['tab']) : 'extensions';
+        $key    = isset($_POST['key']) ? sanitize_text_field($_POST['key']) : '';
+        $status = isset($_POST['status']) ? intval($_POST['status']) : 0;
+
+        if (!$key) {
+            wp_send_json_error(['message' => __('Invalid key', 'easy-elements')]);
+        }
+
+        $settings = get_option('easy_element_' . $tab, []);
+        $settings[$key] = $status;
+
+        update_option('easy_element_' . $tab, $settings);
+
+        wp_send_json_success(['message' => __('Settings updated', 'easy-elements')]);
+    }
+
+
     // AJAX handler for saving individual widget settings
   
     public function easy_elements_save_widget_setting() {
@@ -154,12 +182,20 @@ class Easyel_Elements {
         
         $widget_key = isset($_POST['widget_key']) ? sanitize_text_field(wp_unslash($_POST['widget_key'])) : '';
         $status = isset($_POST['status']) && $_POST['status'] === '1' ? '1' : '0';
+        $tab_slug   = isset($_POST['tab']) ? sanitize_text_field(wp_unslash($_POST['tab'])) : 'widget';
         
         if (!empty($widget_key)) {
-            update_option('easy_element_' . $widget_key, $status);
-            wp_send_json_success(['message' => 'Widget setting updated successfully']);
+            $option_name = 'easy_element_' . $tab_slug . '_' . $widget_key;
+
+            // Save option in DB
+            update_option($option_name, $status);
+
+            wp_send_json_success([
+                'message' => __('Widget setting updated successfully', 'easy-elements'),
+                'status'  => $status,
+            ]);
         } else {
-            wp_send_json_error(['message' => 'Invalid widget key']);
+            wp_send_json_error(['message' => __('Invalid widget key', 'easy-elements')]);
         }
     }
 
@@ -171,6 +207,7 @@ class Easyel_Elements {
         check_ajax_referer('easy_elements_bulk_action_nonce', 'nonce');
         
         $bulk_action = isset($_POST['bulk_action']) ? sanitize_text_field(wp_unslash($_POST['bulk_action'])) : '';
+        $tab = isset($_POST['tab']) ? sanitize_text_field($_POST['tab']) : 'widget';
         $status = $bulk_action === 'activate_all' ? '1' : '0';
         
         $available_elements = $this->easyel_elements_get_available_widgets();
@@ -179,12 +216,16 @@ class Easyel_Elements {
         $is_pro_active = class_exists('Easy_Elements_Pro');
 
         foreach ($available_elements as $key => $widget) {
-            if (!$is_pro_active && isset($widget['is_pro']) && $widget['is_pro']) {
-                update_option('easy_element_' . $key, '0');
-            } else {
-                update_option('easy_element_' . $key, $status);
+            if (isset($widget['tab']) && $widget['tab'] === $tab) {
+                $option_name = 'easy_element_' . $tab . '_' . $key;
+
+                if (!$is_pro_active && isset($widget['is_pro']) && $widget['is_pro']) {
+                    update_option($option_name, '0'); 
+                } else {
+                    $status = $bulk_action === 'activate_all' ? '1' : '0';
+                    update_option($option_name, $status);
+                }
             }
-            $updated_count++;
         }
         
         wp_send_json_success([
@@ -247,19 +288,21 @@ class Easyel_Elements {
             <div id="easyel-tab-content">
                 <?php foreach ( $easyel_tabs as $tab_slug => $tab_label ) : ?>
                     <div id="tab-<?php echo esc_attr($tab_slug); ?>" 
-                        class="easyel-tab-panel" 
+                        class="easyel-tab-panel <?php echo esc_attr($tab_slug); ?>" 
                         style="<?php echo $tab_slug === 'overview' ? '' : 'display:none;'; ?>">
 
                         <?php 
-                       
-                        if ( $tab_slug === 'widget' ) : ?>
+                        if ( $tab_slug === 'widget' || $tab_slug === 'extensions' ) : ?>
                             <div class="eel-addon-search">
+                                
                                 <div class="easyel-widget-search-enable">
+                                    <?php if ( $tab_slug === 'widget' ) { ?>
                                     <input type="text" id="element-search" placeholder="<?php esc_attr_e('Search widgets...', 'easy-elements'); ?>">
+                                    <?php } ?>
                                     <button type="button" id="activate-all-btn" class="button button-secondary"><?php esc_html_e('Activate All', 'easy-elements'); ?></button>
                                     <button type="button" id="deactivate-all-btn" class="button button-secondary"><?php esc_html_e('Deactivate All', 'easy-elements'); ?></button>
-                                    
                                 </div>
+                                
                                 <div class="easyel-widget-filter">
                                     <button type="button" id="easyel_all" class="easyel-action-btn button button-secondary" data-filter="easyel_all"><?php esc_html_e('All', 'easy-elements'); ?></button>
                                     <button type="button" id="easyel_free" class="easyel-action-btn button button-secondary" data-filter="easyel_free"><?php esc_html_e('Free', 'easy-elements'); ?></button>
@@ -338,182 +381,208 @@ class Easyel_Elements {
                 'title'       => 'Easy Heading',
                 'description' => 'Add customizable headings with style options.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'clients_logo' => [
                 'icon'        => 'dashicons-groups',
                 'title'       => 'Easy Clients Logo Grid',
                 'description' => 'Showcase client logos in a neat grid layout.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'clients_logo_slider' => [
                 'icon'        => 'dashicons-format-gallery',
                 'title'       => 'Easy Clients Logo Slider',
                 'description' => 'Display client logos in a slider format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'tab' => [
                 'icon'        => 'dashicons-editor-insertmore',
                 'title'       => 'Easy Tab',
                 'description' => 'Add simple tab content.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'tab_advance' => [
                 'icon'        => 'dashicons-editor-insertmore',
                 'title'       => 'Easy Advanced Tab',
                 'description' => 'Create advanced tab content.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'testimonials' => [
                 'icon'        => 'dashicons-format-quote',
                 'title'       => 'Easy Testimonials Grid',
                 'description' => 'Show testimonials in a grid format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'testimonials_slider' => [
                 'icon'        => 'dashicons-format-gallery',
                 'title'       => 'Easy Testimonials Slider',
                 'description' => 'Display testimonials in a slider format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'image_carousel' => [
                 'icon'        => 'dashicons-format-gallery',
                 'title'       => 'Image Carousel',
                 'description' => 'Create an image slider with multiple images.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'icon_box' => [
                 'icon'        => 'dashicons-smiley',
                 'title'       => 'Easy Icon Box',
                 'description' => 'Display content with an icon.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'process_grid' => [
                 'icon'        => 'dashicons-screenoptions',
                 'title'       => 'Easy Process Grid',
                 'description' => 'Show process steps in a grid format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'process_slider' => [
                 'icon'        => 'dashicons-controls-repeat',
                 'title'       => 'Easy Process Slider',
                 'description' => 'Show process steps in a slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'team_grid' => [
                 'icon'        => 'dashicons-groups',
                 'title'       => 'Easy Team Grid',
                 'description' => 'Display team members in a grid format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'team_slider' => [
                 'icon'        => 'dashicons-controls-play',
                 'title'       => 'Easy Team Slider',
                 'description' => 'Showcase team members in a slider format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'contact_box' => [
                 'icon'        => 'dashicons-phone',
                 'title'       => 'Easy Contact Box',
                 'description' => 'Easy Contact.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],        
             'icon_box_slider' => [
                 'icon'        => 'dashicons-format-gallery',
                 'title'       => 'Easy Icon Box Slider',
                 'description' => 'Easy Icon Box Slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],  
             'timeline_slider' => [
                 'icon'        => 'dashicons-admin-post',    
                 'title'       => 'Easy Timeline Slider',
                 'description' => 'Easy Timeline Slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],      
             'faq' => [
                 'icon'        => 'dashicons-editor-help',
                 'title'       => 'Easy FAQ',
                 'description' => 'Easy FAQ.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],       
             'blog_grid' => [
                 'icon'        => 'dashicons-format-gallery',
                 'title'       => 'Easy Post Grid',
                 'description' => 'Easy Post.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],        
             'post_slider' => [
                 'icon'        => 'dashicons-format-gallery',
                 'title'       => 'Easy Post Slider',
                 'description' => 'Easy Post Slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],        
             'video' => [
                 'icon'        => 'dashicons-format-video',
                 'title'       => 'Easy Video',
                 'description' => 'Easy Video.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'pricing_table' => [
                 'icon'        => 'dashicons-editor-table',
                 'title'       => 'Easy Pricing Table',
                 'description' => 'Easy Pricing Table.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],        
             'pricing_list' => [
                 'icon'        => 'dashicons-editor-table',
                 'title'       => 'Easy Pricing List',
                 'description' => 'Easy Pricing List.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],        
             'service_list' => [
                 'icon'        => 'dashicons-editor-table',
                 'title'       => 'Easy Service List',
                 'description' => 'Easy Service List.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'process_list' => [
                 'icon'        => 'dashicons-editor-table',
                 'title'       => 'Easy Process List',
                 'description' => 'Easy Process List.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'marquee_logo' => [
                 'icon'        => 'dashicons-format-gallery',
                 'title'       => 'Easy Marquee Logo',
                 'description' => 'Easy Marquee Logo.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'button' => [
                 'icon'        => 'dashicons-controls-buoy',
                 'title'       => 'Easy Button',
                 'description' => 'Easy Button.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],        
            
             'social_share' => [
@@ -521,14 +590,16 @@ class Easyel_Elements {
                 'title'       => 'Easy Social Share',
                 'description' => 'Easy Social Share.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'social_icon' => [
                 'icon'        => 'dashicons-share',
                 'title'       => 'Easy Social Icon',
                 'description' => 'Easy Social Icon.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
            
             'breadcrumb' => [
@@ -536,49 +607,56 @@ class Easyel_Elements {
                 'title'       => 'Easy Breadcrumb',
                 'description' => 'Easy Breadcrumb.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'easy_slider' => [
                 'icon'        => 'dashicons-format-gallery',
                 'title'       => 'Easy Slider',
                 'description' => 'Easy Slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'image_accordion' => [
                 'icon'        => 'dashicons-format-gallery',
                 'title'       => 'Easy Image Accordion',
                 'description' => 'Easy Image Accordion',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'domain_search' => [
                 'icon'        => 'dashicons-admin-post',    
                 'title'       => 'Easy Domain Search',
                 'description' => 'Easy Domain Search.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'featured_project' => [
                 'icon'        => 'dashicons-admin-post',    
                 'title'       => 'Easy Custom Projects',
                 'description' => 'Easy Custom Projects.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => false
+                'is_pro'      => false,
+                'tab' => 'widget',
             ],
             'advance_button' => [
                 'icon'        => 'dashicons-admin-post',    
                 'title'       => 'Easy Advance Button',
                 'description' => 'Easy Advance Button.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'hr_image_scroll' => [
                 'icon'        => 'dashicons-admin-post',    
                 'title'       => 'Easy Image Horizontal Scroll',
                 'description' => 'Easy Image Horizontal Scroll.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
-                'is_pro'      => true
+                'is_pro'      => true,
+                'tab' => 'widget',
             ], 
 
             'easy_offcanvas' => [
@@ -587,7 +665,8 @@ class Easyel_Elements {
                 'description' => 'Easy Offcanvas.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Header & Footer Widget'
+                'group'       => 'Header & Footer Widget',
+                'tab' => 'widget',
             ],
             'site_logo' => [
                 'icon'        => 'dashicons-format-image',
@@ -595,7 +674,8 @@ class Easyel_Elements {
                 'description' => 'Display your website logo easily with this widget.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Header & Footer Widget'
+                'group'       => 'Header & Footer Widget',
+                'tab' => 'widget',
             ],
             'search' => [
                 'icon'        => 'dashicons-search',
@@ -603,7 +683,8 @@ class Easyel_Elements {
                 'description' => 'Easy Search All Content.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Header & Footer Widget'
+                'group'       => 'Header & Footer Widget',
+                'tab' => 'widget',
             ],
             'navigation_menu' => [
                 'icon'        => 'dashicons-search',
@@ -611,7 +692,8 @@ class Easyel_Elements {
                 'description' => 'Easy Navigation Menu.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Header & Footer Widget'
+                'group'       => 'Header & Footer Widget',
+                'tab' => 'widget',
             ],
             'page_title' => [
                 'icon'        => 'dashicons-admin-page',
@@ -619,7 +701,8 @@ class Easyel_Elements {
                 'description' => 'Easy Page Title.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Header & Footer Widget'
+                'group'       => 'Header & Footer Widget',
+                'tab' => 'widget',
             ],
 
 
@@ -629,7 +712,8 @@ class Easyel_Elements {
                 'description' => 'Easy Current Post Tags.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ],
             'post_author' => [
                 'icon'        => 'dashicons-admin-post',    
@@ -637,7 +721,8 @@ class Easyel_Elements {
                 'description' => 'Easy Current Post Author.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ],
             'post_title' => [
                 'icon'        => 'dashicons-admin-post',
@@ -645,7 +730,8 @@ class Easyel_Elements {
                 'description' => 'Easy Post Title.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ],
             'post_content' => [
                 'icon'        => 'dashicons-admin-post',
@@ -653,7 +739,8 @@ class Easyel_Elements {
                 'description' => 'Easy Post Content.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ],        
             'excerpt' => [
                 'icon'        => 'dashicons-admin-post',
@@ -661,7 +748,8 @@ class Easyel_Elements {
                 'description' => 'Easy Post Excerpt.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ],  
             'related_post' => [
                 'icon'        => 'dashicons-admin-post',
@@ -669,7 +757,8 @@ class Easyel_Elements {
                 'description' => 'Easy Related Post.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ], 
             'post_pagination' => [
                 'icon'        => 'dashicons-admin-post',
@@ -677,7 +766,8 @@ class Easyel_Elements {
                 'description' => 'Easy Post Pagination.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ],
             'post_meta' => [
                 'icon'        => 'dashicons-admin-post',
@@ -685,7 +775,8 @@ class Easyel_Elements {
                 'description' => 'Easy Post Meta.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ],
             'post_comments' => [
                 'icon'        => 'dashicons-admin-comments',
@@ -693,7 +784,8 @@ class Easyel_Elements {
                 'description' => 'Easy Post Comments.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ],
             'featured_image' => [
                 'icon'        => 'dashicons-format-image',
@@ -701,7 +793,8 @@ class Easyel_Elements {
                 'description' => 'Easy Featured Image.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ],
             'easy_scroll_to_top' => [
                 'icon'        => 'dashicons-format-image',
