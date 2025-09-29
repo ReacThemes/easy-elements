@@ -18,11 +18,16 @@ foreach ( $available_elements as $key => $widget ) {
                 $is_pro = $is_pro_enable && ! class_exists('Easy_Elements_Pro');
                 $disabled_attr = $is_pro ? 'disabled="disabled"' : '';
                 $checked = $enabled === '1' ? 'checked' : '';
+                $easyel_pro_attr_class = '';
 
-                $pro_widget = ( ( int ) $is_pro_enable === 1 ) ? 'easyel-pro-widget' : '';
+                if( $is_pro || ( int ) $is_pro_enable === 1 ) {
+                    $easyel_pro_attr_class .= ' easyel-pro-enable'; 
+                }
+
+                $pro_widget = ! class_exists('Easy_Elements_Pro') ? 'easyel-pro-widget' : '';
 
             ?>
-                <div class="easy-widget-item <?php echo $is_pro ? 'easyel-pro-enable' : ''; ?> <?php echo esc_attr(  $pro_widget ); ?>" data-widget-key="<?php echo esc_attr($key); ?>">
+                <div class="easy-widget-item <?php echo esc_attr( $easyel_pro_attr_class . " " . $pro_widget ); ?> " data-widget-key="<?php echo esc_attr($key); ?>">
                     <div class="widget-header">
                         <span class="dashicons <?php echo esc_attr($widget['icon']); ?>"></span>
                         <strong><?php echo esc_html($widget['title']); ?></strong>
@@ -44,7 +49,7 @@ foreach ( $available_elements as $key => $widget ) {
                             <span class="slider"></span>
                         </label>
                         <span class="toggle-status"></span>
-                        <?php if( $is_pro ) : ?>
+                        <?php if( $is_pro_enable ) : ?>
                             <div class="easyel-pro-badge">Pro</div>
                         <?php endif; ?>
                     </div>

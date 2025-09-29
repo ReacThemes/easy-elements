@@ -424,14 +424,14 @@
                     } 
                   
                     else if (filter === "easyel_free") {
-                        if ($widget.hasClass("easyel-pro-widget")) {
+                        if ($widget.hasClass("easyel-pro-enable")) {
                             $widget.hide();
                         } else {
                             $widget.show();
                         }
                     } 
                     else if (filter === "easyel_pro") {
-                        if ($widget.hasClass("easyel-pro-widget")) {
+                        if ($widget.hasClass("easyel-pro-enable")) {
                             $widget.show();
                         } else {
                             $widget.hide();

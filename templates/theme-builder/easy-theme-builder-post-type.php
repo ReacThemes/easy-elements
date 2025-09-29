@@ -153,6 +153,7 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
                 'exclude_from_search'   => true,
                 'publicly_queryable'    => true,
                 'capability_type'       => 'post',
+              //  'rewrite'            => [ 'slug' => 'theme-template' ],
                 'show_in_rest'          => true,
             );
 
@@ -288,9 +289,13 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             
             if( isset($_POST['conditions'], $_POST['template_type'], $_POST['template_name']) ) {
 
-                $conditions    = isset($_POST['conditions']) ? wp_json_encode( array_map('sanitize_text_field', wp_unslash((array) $_POST['conditions']) ) ) : '';
+               // $conditions    = isset($_POST['conditions']) ? wp_json_encode( array_map('sanitize_text_field', wp_unslash((array) $_POST['conditions']) ) ) : '';
                 $template_type = isset($_POST['template_type']) ? sanitize_text_field( wp_unslash($_POST['template_type']) ) : '';
                 $template_name = isset($_POST['template_name']) ? sanitize_text_field( wp_unslash($_POST['template_name']) ) : '';
+
+                $conditions = isset($_POST['conditions']) 
+                ? wp_json_encode( sanitize_conditions_array($_POST['conditions']) )
+                : '';
 
                 // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Slow query with meta_query is intentional.
                 $existing_posts = get_posts( [
@@ -394,23 +399,28 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             if ( $column === 'display_conditions' ) {
                 $conditions = get_post_meta( $post_id, 'easyel_conditions', true );
 
-                if ( $conditions ) {
-                    $decoded = json_decode( $conditions, true );
-
-                    if ( is_array( $decoded ) ) {
-                        foreach ( $decoded as $cond ) {
-                            // include/exclude + main → sub
-                            $include_type = isset( $cond['include'] ) ? $cond['include'] : 'include';
-                            echo '<div>';
-                            echo '<strong>' . esc_html( ucfirst($include_type) ) . '</strong> : ';
-                            echo esc_html( $cond['main'] ) . ' → ' . esc_html( $cond['sub'] );
-                            echo '</div>';
-                        }
-                    }
+                if ( is_array( $conditions ) ) {
+                    $decoded = $conditions; 
                 } else {
-                    echo '<em>—</em>';
+                    $decoded = json_decode( $conditions, true );
+                }
+
+                if ( is_array( $decoded ) ) {
+                    foreach ( $decoded as $cond ) {
+                        if ( ! is_array( $cond ) ) continue;
+
+                        $include_type = $cond['include'] ?? 'include';
+                        $main = $cond['main'] ?? '';
+                        $sub  = $cond['sub'] ?? '';
+
+                        echo '<div>';
+                        echo '<strong>' . esc_html( ucfirst($include_type) ) . '</strong> : ';
+                        echo esc_html( $main ) . ' → ' . esc_html( $sub );
+                        echo '</div>';
+                    }
                 }
             }
+
         }
 
         public function easyel_filter_easy_theme_builder_by_type( $query ) {

@@ -57,6 +57,7 @@ class Easyel_Theme_Builder_Front {
     /**
      * Template Condition Match System
      */
+
     public function easyel_match_template() {
         $templates = get_posts([
             'post_type'   => self::CPT,
@@ -67,15 +68,36 @@ class Easyel_Theme_Builder_Front {
         foreach ( $templates as $tmpl ) {
             $template_type = get_post_meta( $tmpl->ID, 'easyel_template_type', true );
             $conditions    = get_post_meta($tmpl->ID, 'easyel_conditions', true );
-            $conditions    = !empty($conditions) ? json_decode($conditions, true ) : [];
 
-            if ( $this->check_conditions( $template_type, $conditions) ) {
+            error_log( "json". print_r( $conditions, true ) );
+
+            // safe decode
+            $conditions = safe_json_decode($conditions);
+
+            foreach ( $conditions as $key => $cond ) {
+                if ( ! is_array($cond) ) {
+                    $conditions[$key] = [
+                        'include' => 'include',
+                        'main'    => '',
+                        'sub'     => '',
+                    ];
+                } else {
+                    $conditions[$key]['include'] = $cond['include'] ?? 'include';
+                    $conditions[$key]['main']    = $cond['main'] ?? '';
+                    $conditions[$key]['sub']     = $cond['sub'] ?? '';
+                }
+            }
+
+            if ( $this->check_conditions( $template_type, $conditions ) ) {
                 return $tmpl->ID; 
             }
         }
 
         return false;
     }
+
+
+
 
     public function check_conditions( $type, $conditions ) {
        

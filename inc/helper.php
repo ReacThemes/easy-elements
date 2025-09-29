@@ -133,3 +133,42 @@ add_action('deactivated_plugin', function($plugin) {
         }
     }
 });
+
+
+function sanitize_conditions_array( $conditions ) {
+    if ( ! is_array( $conditions ) ) {
+        return [];
+    }
+
+    $sanitized = [];
+    foreach ( $conditions as $cond ) {
+        if ( ! is_array( $cond ) ) continue;
+
+        $sanitized[] = [
+            'include' => isset($cond['include']) ? sanitize_text_field($cond['include']) : 'include',
+            'main'    => isset($cond['main']) ? sanitize_text_field($cond['main']) : '',
+            'sub'     => isset($cond['sub']) ? sanitize_text_field($cond['sub']) : '',
+        ];
+    }
+
+    return $sanitized;
+}
+
+
+/**
+ * Safely decode JSON or return array as-is
+ */
+function safe_json_decode( $data ) {
+    if ( is_string($data) ) {
+        $decoded = json_decode($data, true);
+        if ( json_last_error() === JSON_ERROR_NONE && is_array($decoded) ) {
+            return $decoded;
+        }
+        return []; 
+    } elseif ( is_array($data) ) {
+        return $data; 
+    } else {
+        return []; 
+    }
+}
+
