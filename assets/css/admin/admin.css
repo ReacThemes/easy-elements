@@ -1,4 +1,3 @@
-
 .elementor-panel .elementor-element .icon i.rt-icon::before{
 	display: none;
 }
@@ -126,7 +125,6 @@
 }
 
 /* Uploaded fonts grid */
-
 #easyel-custom-fonts-upload-form input[type="file"] {
     padding: 10px;
     border: 2px dashed #0073aa;
@@ -264,7 +262,6 @@ h1,h2 { color: #0073aa; }
 
 
 /*Theme builder css*/
-
 .easyel-builder-tabs { 
     display:flex; 
     gap:10px; 
@@ -334,7 +331,10 @@ h1,h2 { color: #0073aa; }
 }
 
 /* easy elements tab css */
-
+.easyel-overview-header{
+    padding: 24px 30px;
+    background: #fff;
+}
 .easyel-nav-tab-wrapper {
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;

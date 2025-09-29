@@ -228,6 +228,9 @@ class Easyel_Elements {
 
         $easyel_tab_list = apply_filters("easyel_all_tab_list",  $easyel_tabs );
         ?>
+        <div class="easyel-overview-header">
+            <img src="<?php plugin_dir_path( __FILE__ ).'imgeasy-logo.png'; ?>" alt="logo">
+        </div>
         <div class="wrap easyel-plugin-settings-wrapper">
 
             <div class="easyel-nav-tab-wrapper">
