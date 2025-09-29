@@ -457,6 +457,7 @@ h1,h2 { color: #0073aa; }
     padding-right: 28px;
     border-radius: 30px;
     background: #7455FF;
+    color: var(--easy-white-color);
     display: inline-flex;
     align-items: center;
     gap: 10px;
