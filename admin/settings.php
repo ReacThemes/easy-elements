@@ -65,7 +65,6 @@ class Easyel_Elements {
         $submenu[$slug][] = [ __('Overview', 'easy-elements'), 'manage_options', 'admin.php?page='.$slug.'#overview' ];
         $submenu[$slug][] = [ __('Widgets', 'easy-elements'), 'manage_options', 'admin.php?page='.$slug.'#widget' ];
         $submenu[$slug][] = [ __('All Extensions', 'easy-elements'), 'manage_options', 'admin.php?page='.$slug.'#extensions' ];
-        $submenu[$slug][] = [ __('Advance Settings', 'easy-elements'), 'manage_options', 'admin.php?page='.$slug.'#advsettings' ];
 
         // Header & Footer Submenu
         add_submenu_page(

@@ -14,7 +14,6 @@
             this.initWidgetToggles();
             this.initSearchFunctionality();
             this.initBulkActions();
-            this.initAdvanceSettings();
             this.initAllExtensions();
             this.initNotifications();
             this.easyEltab();
@@ -156,25 +155,6 @@
             setTimeout(function() {
                 messageDiv.fadeOut();
             }, 5000);
-        },
-
-        // Initialize advance settings
-        initAdvanceSettings: function() {
-            // Add status spans for notifications
-            $('.easy-toggle-switch').each(function() {
-                var statusSpan = $('<span class="setting-status"></span>');
-                $(this).after(statusSpan);
-            });
-
-            // Minify CSS toggle
-            $('#easyel_elements_minify_css').on('change', function() {
-                EasyElementsAdmin.saveAdvanceSetting('easy_elements_save_minify_css', 'minify_css', $(this));
-            });
-            
-            // Minify JS toggle
-            $('#easyel_elements_minify_js').on('change', function() {
-                EasyElementsAdmin.saveAdvanceSetting('easy_elements_save_minify_js', 'minify_js', $(this));
-            });
         },
 
         // Save advance setting

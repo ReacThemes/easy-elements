@@ -1980,3 +1980,8 @@ body.sticky-enabled-overlap{
     border: 0;
     display: block;
 }
+
+.eel-nav-menu-icon svg{
+    width: 16px;
+    height: 16px;
+}
