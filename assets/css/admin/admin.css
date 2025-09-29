@@ -2,6 +2,7 @@
     --easy-primary-color: #7455FF;
     --easy-white-color: #ffffff;
     --easy-title-color: #090914;
+    --easy-black-color: #000000;
 }
 /* Common Class CSS  */
 .easy-tColor{
@@ -10,28 +11,28 @@
 .overflow-hidden{
   overflow: hidden;
 }
-.easy-decoration-none{
+.easyel-decoration-none{
     text-decoration: none;
 }
-.easy-border-radius-20{
+.easyel-border-radius-20{
   border-radius: 20px;
 }
-.easy-position-rl{
+.easyel-position-rl{
     position: relative;
 }
-.easy-position-ab{
+.easyel-position-ab{
     position: absolute;
 }
-.easy-top-0{
+.easyel-top-0{
  top: 0;
 }
-.easy-bottom-0{
+.easyel-bottom-0{
  bottom: 0;
 }
-.easy-star-0{
+.easyel-star-0{
  left: 0;
 }
-.easy-end-0{
+.easyel-end-0{
  right: 0;
 }
 /* End Common Class CSS  */
@@ -85,7 +86,7 @@ body.toplevel_page_easy-elements-dashboard #wpbody-content{
     padding: 25px !important;
     text-align: center;
     box-sizing: border-box;
-    background: #ffffff;
+    background: var(--easy-white-color);
 }
 
 .easy-form-table td:nth-child(2n+0) {
@@ -271,7 +272,7 @@ h1,h2 { color: #0073aa; }
 }
 
 .easy-elements-notification {
-    background: #fff;
+    background: var(--easy-white-color);
     border-left: 4px solid;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     margin-bottom: 10px;
@@ -306,7 +307,7 @@ h1,h2 { color: #0073aa; }
     gap:10px; 
     margin:15px 0; 
     padding:10px; 
-    background:#fff; 
+    background:var(--easy-white-color); 
     border:1px solid #ccd0d4;
 }
 
@@ -319,7 +320,7 @@ h1,h2 { color: #0073aa; }
 .easyel-tab.active,
 .easyel-tab:hover { 
     background:#2271b1; 
-    color:#fff; 
+    color:var(--easy-white-color); 
 }
 
 .easyel-choose-template {
@@ -372,7 +373,7 @@ h1,h2 { color: #0073aa; }
 /* easy elements tab css */
 .easyel-overview-header{
     padding: 24px 30px;
-    background: #fff;
+    background: var(--easy-white-color);
 }
 .easyel-plugin-settings-wrapper{
     display: flex;
@@ -389,7 +390,7 @@ h1,h2 { color: #0073aa; }
 .easyel-tab-panel{
     padding: 20px;
     border-radius: 20px;
-    background: #fff;
+    background: var(--easy-white-color);
     height: 100%;
 }
 .easyel-nav-tab {
@@ -417,32 +418,50 @@ h1,h2 { color: #0073aa; }
 #easyel-tab-content{
     width: 100%;
 }
-.easy-overview-area{
+.easyel-overview-area{
     margin: 0;
 }
-.easy-banner-content-area{
+.easyel-banner-content-area{
     background: #f1f2fa80;
     padding: 120px 60px 78px;
 }
-.easy-banner-content{
+.easyel-banner-content{
     max-width: 432px;
     width: 100%;
     position: relative;
     z-index: 2;
 }
-.easy-banner-content .title{
+.easyel-banner-content .title{
     margin-top: 40px;
     font-size: 56px;
     line-height: 1em;
 }
-.easy-banner-content .title span{
+.easyel-banner-content .title span{
     color: var(--easy-primary-color);
     font-weight: 700;
 }
-.easy-banner-rating h3{
+.easyel-banner-rating h3{
     font-size: 40px;
 }
-
+.easyel-rating .rating-icon{
+  color: #1CB165;
+  margin-bottom: 8px;
+}
+.easyel-rating span{
+    color: var(--easy-black-color);
+    font-size: 14px;
+}
+.easyel-btn{
+    font-size: 16px;
+    padding: 16px;
+    padding-right: 28px;
+    border-radius: 30px;
+    background: #7455FF;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #C2B4FF;
+}
 /* ....... */
 
 .easy-widget-item {
@@ -460,7 +479,7 @@ h1,h2 { color: #0073aa; }
     right: -25px;  
     bottom: -2px;
     background-color: #4CAF50;
-    color: #fff;
+    color: var(--easy-white-color);
     font-size: 11px;
     font-weight: bold;
     padding: 3px 30px; 
