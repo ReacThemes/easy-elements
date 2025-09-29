@@ -1,8 +1,46 @@
-
+:root{
+    --easy-primary-color: #7455FF;
+    --easy-white-color: #ffffff;
+    --easy-title-color: #090914;
+}
+/* Common Class CSS  */
+.easy-tColor{
+    color: var(--easy-title-color);
+}
+.overflow-hidden{
+  overflow: hidden;
+}
+.easy-decoration-none{
+    text-decoration: none;
+}
+.easy-border-radius-20{
+  border-radius: 20px;
+}
+.easy-position-rl{
+    position: relative;
+}
+.easy-position-ab{
+    position: absolute;
+}
+.easy-top-0{
+ top: 0;
+}
+.easy-bottom-0{
+ bottom: 0;
+}
+.easy-star-0{
+ left: 0;
+}
+.easy-end-0{
+ right: 0;
+}
+/* End Common Class CSS  */
+body.toplevel_page_easy-elements-dashboard #wpbody-content{
+    font-family: "Inter", sans-serif !important;
+}
 .elementor-panel .elementor-element .icon i.rt-icon::before{
 	display: none;
 }
-
 .elementor-panel .elementor-element .icon i.rt-icon::after{
     width: 30px;
     height: 30px;
@@ -126,7 +164,6 @@
 }
 
 /* Uploaded fonts grid */
-
 #easyel-custom-fonts-upload-form input[type="file"] {
     padding: 10px;
     border: 2px dashed #0073aa;
@@ -264,7 +301,6 @@ h1,h2 { color: #0073aa; }
 
 
 /*Theme builder css*/
-
 .easyel-builder-tabs { 
     display:flex; 
     gap:10px; 
@@ -334,37 +370,80 @@ h1,h2 { color: #0073aa; }
 }
 
 /* easy elements tab css */
-
-.easyel-nav-tab-wrapper {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
+.easyel-overview-header{
+    padding: 24px 30px;
+    background: #fff;
+}
+.easyel-plugin-settings-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+    margin-top: 35px;
+}
+/* Left Side */
+.easyel-nav-tab-item{
+  max-width: 340px;
+  width: 100%;
+}
+.easyel-nav-tab-wrapper,
+.easyel-tab-panel{
+    padding: 20px;
+    border-radius: 20px;
+    background: #fff;
+    height: 100%;
 }
 .easyel-nav-tab {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-right: 5px;
-    background: #f1f1f1;
-    color: #555;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 18px;
+    color: var(--easy-title-color);
+    font-weight: 500;
     text-decoration: none;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    transition: background 0.3s, color 0.3s;
+    padding: 16px;
+    margin-bottom: 24px;
+    border-radius: 10px;
+    transition:  0.3s;
 }
-.easyel-nav-tab:hover {
-    background: #e0e0e0;
-    color: #000;
-}
+.easyel-nav-tab:focus,
+.easyel-nav-tab:hover,
 .easyel-nav-tab-active {
-    background: #fff;
-    color: #000;
-    border: 1px solid #ddd;
-    border-bottom: none;
+    background: var(--easy-primary-color);
+    color: var(--easy-white-color);
+    outline: none;
+    box-shadow: none;
 }
-.easyel-tab-panel {
-    padding: 20px;
-    border: 1px solid #ddd;
-    background: #fff;
+/* Right Side  */
+#easyel-tab-content{
+    width: 100%;
 }
+.easy-overview-area{
+    margin: 0;
+}
+.easy-banner-content-area{
+    background: #f1f2fa80;
+    padding: 120px 60px 78px;
+}
+.easy-banner-content{
+    max-width: 432px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+.easy-banner-content .title{
+    margin-top: 40px;
+    font-size: 56px;
+    line-height: 1em;
+}
+.easy-banner-content .title span{
+    color: var(--easy-primary-color);
+    font-weight: 700;
+}
+.easy-banner-rating h3{
+    font-size: 40px;
+}
+
+/* ....... */
 
 .easy-widget-item {
     position: relative;

@@ -269,12 +269,17 @@ class Easyel_Elements {
 
         $easyel_tab_list = apply_filters("easyel_all_tab_list",  $easyel_tabs );
         ?>
+        <div class="easyel-overview-header">
+            <img src="<?php echo plugin_dir_url( __DIR__ ).'admin/img/easy-logo.png'; ?>" alt="logo">
+        </div>
         <div class="wrap easyel-plugin-settings-wrapper">
 
-            <div class="easyel-nav-tab-wrapper">
-                <a href="#overview" class="easyel-nav-tab easyel-nav-tab-active easyel-tab-overview" data-tab="overview"><?php esc_html_e ('Overview','easy-elements'); ?></a>
-                <a href="#widget" class="easyel-nav-tab easyel-tab-widget" data-tab="widget"><?php esc_html_e('All Widget','easy-elements'); ?></a>
-                <a href="#extensions" class="easyel-nav-tab easyel-tab-extension" data-tab="extensions"><?php esc_html_e('All Extensions','easy-elements'); ?></a>
+            <div class="easyel-nav-tab-item">
+                <div class="easyel-nav-tab-wrapper">
+                    <a href="#overview" class="easyel-nav-tab easyel-nav-tab-active" data-tab="overview"><i class="ee-home"></i> <?php esc_html_e ('Overview','easy-elements'); ?></a>
+                    <a href="#widget" class="easyel-nav-tab" data-tab="widget"><i class="ee-widgets"></i><?php esc_html_e('All Widget','easy-elements'); ?></a>
+                    <a href="#extensions" class="easyel-nav-tab" data-tab="extensions"><i class="ee-extension"></i><?php esc_html_e('All Extensions','easy-elements'); ?></a>
+                </div>
             </div>
             <!-- Status Messages -->
             <div id="bulk-action-message" class="notice" style="display: none;"></div>
@@ -791,7 +796,22 @@ class Easyel_Elements {
                 'group'       => 'Theme Builder Widget',
                 'tab' => 'widget',
             ],
-            
+            'easy_scroll_to_top' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Scroll To Top',
+                'description' => 'Easy Scroll To Top.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => true,
+                'group'       => 'Theme Builder Widget'
+            ], 
+            'easy_table' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Table',
+                'description' => 'Easy Table.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => true,
+                'group'       => 'Theme Builder Widget'
+            ],
         ];
 
         return apply_filters( 'easyel_available_widgets', $widgets );
