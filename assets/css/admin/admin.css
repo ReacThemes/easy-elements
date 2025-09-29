@@ -5,7 +5,7 @@
     --easy-black-color: #000000;
 }
 /* Common Class CSS  */
-.easy-tColor{
+.easyel-tColor{
     color: var(--easy-title-color);
 }
 .overflow-hidden{

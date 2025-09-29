@@ -2,7 +2,7 @@
     <div class="easyel-banner-area easyel-border-radius-20 overflow-hidden easyel-position-rl">
         <div class="easyel-banner-content-area">
             <div class="easyel-banner-content">
-                <img src="<?php echo plugin_dir_url(__DIR__).'img/easyel-logo.png';?>" alt="logo">
+                <img src="<?php echo plugin_dir_url(__DIR__).'img/easy-logo.png';?>" alt="logo">
                 <h2 class="title easyel-tColor"><?php echo wp_kses_post( __( 'All <span>addons</span> for Elementor page builder', 'easyel-elements' ) ); ?></h2>
                 <div class="easyel-banner-rating">
                     <div class="easyel-rating-content">
