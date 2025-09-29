@@ -76,34 +76,36 @@ final class Easyel_Elements_Elementor_Extension {
 	public function init_widgets() {
 	    $widgets_manager = \Elementor\Plugin::instance()->widgets_manager;
 	    $widgets = [
-			'site_logo'     				=> [ 'class' => '\Easyel_Site_Logo_Widget',        		'file' => __DIR__ . '/widgets/site-logo/site-logo.php' ],
-			'heading'       				=> [ 'class' => '\Easyel_Heading_Widget',           		'file' => __DIR__ . '/widgets/heading/heading.php' ],
-			'clients_logo'  				=> [ 'class' => '\Easyel_Clients_Logo__Widget',     		'file' => __DIR__ . '/widgets/clients-logo-grid/logo.php' ],
-			'icon_box'  					=> [ 'class' => '\Easyel_Icon_Box__Widget',    			'file' => __DIR__ . '/widgets/icon-box/icon.php' ],
-			'tab'           				=> [ 'class' => '\Easyel_Tab_Widget',               		'file' => __DIR__ . '/widgets/tab/tab.php' ],
-			'testimonials'  				=> [ 'class' => '\Easyel_Testimonials__Widget',     		'file' => __DIR__ . '/widgets/testimonials-grid/testimonials.php' ],
-			'team_grid'  					=> [ 'class' => '\Easyel_Team_Grid__Widget',    			'file' => __DIR__ . '/widgets/team-grid/team-grid.php' ],
-			'search'  						=> [ 'class' => '\Easyel_Search_Widget',    				'file' => __DIR__ . '/widgets/search/search.php' ],
-			'contact_box'  					=> [ 'class' => '\Easyel_Contact_Box__Widget',    		'file' => __DIR__ . '/widgets/contact-box/contact.php' ],
-			'faq'  							=> [ 'class' => '\Easyel_FAQ_Accordion_Widget',    		'file' => __DIR__ . '/widgets/faq/faq.php' ],
-			'blog_grid'  					=> [ 'class' => '\Easyel_Blog_Grid__Widget',    			'file' => __DIR__ . '/widgets/blog-grid/blog-grid.php' ],
-			'video'  						=> [ 'class' => '\Easyel_Video_Popup_Widget',    			'file' => __DIR__ . '/widgets/video/video.php' ],
-			'pricing_table'  				=> [ 'class' => '\Easyel_Pricing_Table_Widget',    		'file' => __DIR__ . '/widgets/pricing-table/pricing.php' ],
-			'pricing_list'  				=> [ 'class' => '\Easyel_Pricing_Table_List_Widget',    	'file' => __DIR__ . '/widgets/pricing-list/pricing-list.php' ],
-			'service_list'  				=> [ 'class' => '\Easyel_Service_List_Widget',    		'file' => __DIR__ . '/widgets/service-list/service-list.php' ],
-			'navigation_menu'  				=> [ 'class' => '\Easyel_Navigation_Menu_Widget',    		'file' => __DIR__ . '/widgets/navigation-menu/navigation-menu.php' ],
-			'page_title'  					=> [ 'class' => '\Easyel_Page_Title_Widget',    			'file' => __DIR__ . '/widgets/page-title/page-title.php' ],
-			'button'  						=> [ 'class' => '\Easyel_Button_Widget',    				'file' => __DIR__ . '/widgets/button/button.php' ],
-			'social_share'  				=> [ 'class' => '\Easyel_Social_Share_Widget',    		'file' => __DIR__ . '/widgets/social-share/social-share.php' ],
-			'social_icon'  					=> [ 'class' => '\Easyel_Social_Icon_Widget',    			'file' => __DIR__ . '/widgets/social-icon/social.php' ],
-			'breadcrumb'  					=> [ 'class' => '\Easyel_Breadcrumb_Widget',    			'file' => __DIR__ . '/widgets/breadcrumb/breadcrumb.php' ],
-			'domain_search'  				=> [ 'class' => '\Easyel_Domain_Search_Widget',    		'file' => __DIR__ . '/widgets/domain-search/domain-search.php' ],
-			'easy_offcanvas'  				=> [ 'class' => '\Easyel_Offcanvas_Widget',    			'file' => __DIR__ . '/widgets/offcanvas/offcanvas.php' ],
+			'site_logo'     				=> [ 'class' => '\Easyel_Site_Logo_Widget',        		'file' => __DIR__ . '/widgets/site-logo/site-logo.php','tab' => 'widget' ],
+			'heading'       				=> [ 'class' => '\Easyel_Heading_Widget',           		'file' => __DIR__ . '/widgets/heading/heading.php','tab' => 'widget'  ],
+			'clients_logo'  				=> [ 'class' => '\Easyel_Clients_Logo__Widget',     		'file' => __DIR__ . '/widgets/clients-logo-grid/logo.php','tab' => 'widget' ],
+			'icon_box'  					=> [ 'class' => '\Easyel_Icon_Box__Widget',    			'file' => __DIR__ . '/widgets/icon-box/icon.php','tab' => 'widget' ],
+			'tab'           				=> [ 'class' => '\Easyel_Tab_Widget',               		'file' => __DIR__ . '/widgets/tab/tab.php','tab' => 'widget' ],
+			'testimonials'  				=> [ 'class' => '\Easyel_Testimonials__Widget',     		'file' => __DIR__ . '/widgets/testimonials-grid/testimonials.php' ,'tab' => 'widget' ],
+			'team_grid'  					=> [ 'class' => '\Easyel_Team_Grid__Widget',    			'file' => __DIR__ . '/widgets/team-grid/team-grid.php','tab' => 'widget' ],
+			'search'  						=> [ 'class' => '\Easyel_Search_Widget',    				'file' => __DIR__ . '/widgets/search/search.php' ,'tab' => 'widget'],
+			'contact_box'  					=> [ 'class' => '\Easyel_Contact_Box__Widget',    		'file' => __DIR__ . '/widgets/contact-box/contact.php','tab' => 'widget' ],
+			'faq'  							=> [ 'class' => '\Easyel_FAQ_Accordion_Widget',    		'file' => __DIR__ . '/widgets/faq/faq.php' ,'tab' => 'widget'],
+			'blog_grid'  					=> [ 'class' => '\Easyel_Blog_Grid__Widget',    			'file' => __DIR__ . '/widgets/blog-grid/blog-grid.php','tab' => 'widget' ],
+			'video'  						=> [ 'class' => '\Easyel_Video_Popup_Widget',    			'file' => __DIR__ . '/widgets/video/video.php','tab' => 'widget' ],
+			'pricing_table'  				=> [ 'class' => '\Easyel_Pricing_Table_Widget',    		'file' => __DIR__ . '/widgets/pricing-table/pricing.php' ,'tab' => 'widget'],
+			'pricing_list'  				=> [ 'class' => '\Easyel_Pricing_Table_List_Widget',    	'file' => __DIR__ . '/widgets/pricing-list/pricing-list.php','tab' => 'widget' ],
+			'service_list'  				=> [ 'class' => '\Easyel_Service_List_Widget',    		'file' => __DIR__ . '/widgets/service-list/service-list.php','tab' => 'widget' ],
+			'navigation_menu'  				=> [ 'class' => '\Easyel_Navigation_Menu_Widget',    		'file' => __DIR__ . '/widgets/navigation-menu/navigation-menu.php','tab' => 'widget' ],
+			'page_title'  					=> [ 'class' => '\Easyel_Page_Title_Widget',    			'file' => __DIR__ . '/widgets/page-title/page-title.php','tab' => 'widget' ],
+			'button'  						=> [ 'class' => '\Easyel_Button_Widget',    				'file' => __DIR__ . '/widgets/button/button.php','tab' => 'widget' ],
+			'social_share'  				=> [ 'class' => '\Easyel_Social_Share_Widget',    		'file' => __DIR__ . '/widgets/social-share/social-share.php','tab' => 'widget' ],
+			'social_icon'  					=> [ 'class' => '\Easyel_Social_Icon_Widget',    			'file' => __DIR__ . '/widgets/social-icon/social.php','tab' => 'widget' ],
+			'breadcrumb'  					=> [ 'class' => '\Easyel_Breadcrumb_Widget',    			'file' => __DIR__ . '/widgets/breadcrumb/breadcrumb.php','tab' => 'widget' ],
+			'domain_search'  				=> [ 'class' => '\Easyel_Domain_Search_Widget',    		'file' => __DIR__ . '/widgets/domain-search/domain-search.php','tab' => 'widget' ],
+			'easy_offcanvas'  				=> [ 'class' => '\Easyel_Offcanvas_Widget',    			'file' => __DIR__ . '/widgets/offcanvas/offcanvas.php' ,'tab' => 'widget'],
 		];
 
 	    foreach ( $widgets as $key => $data ) {
-			if ( get_option( 'easy_element_' . $key, '1' ) !== '1' ) {
-				continue;
+			$option_name = 'easy_element_' . $data['tab'] . '_' . $key;
+			$enabled = get_option($option_name, '1');
+			if ( $enabled !== '1' ) {
+				continue; // Skip disabled
 			}
 			if ( file_exists( $data['file'] ) ) {
 				require_once $data['file'];

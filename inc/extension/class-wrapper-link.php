@@ -16,6 +16,17 @@ final class EasyEl_Wrapper_Link {
     }
 
     private function easyel_setup_hooks() {
+
+        $tab_slug = 'extensions';
+        $extensions_settings = get_option('easy_element_' . $tab_slug, [] );
+
+        $enable_wrapper_link = isset( $extensions_settings['enable_wrapper_link'] ) ? $extensions_settings['enable_wrapper_link'] : 0;
+
+        if(  (int) $enable_wrapper_link !== 1 ) {
+            return;
+        }
+        
+        error_log( "extensions" . print_r( $extensions_settings, true ) );
         add_action( 'plugins_loaded', [ $this, 'easyel_check_elementor' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'easyel_enqueue_styles' ] );
     }

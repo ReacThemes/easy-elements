@@ -47,6 +47,7 @@ $includes = [
 ];
 
 function easyelements_include_file( $file ) {
+
     $filepath = EASYELEMENTS_DIR_PATH . $file;
     if ( file_exists( $filepath ) ) {
         require_once $filepath;
@@ -63,13 +64,8 @@ foreach ( $includes as $group ) {
     }
 }
 
-
 register_activation_hook( __FILE__, 'easy_elements_activate' );
 function easy_elements_activate() {
-	// Register post types first
-	if (function_exists('easy_elements_register_archive_template_post_type')) {
-		easy_elements_register_archive_template_post_type();
-	}
 	flush_rewrite_rules();
 }
 
