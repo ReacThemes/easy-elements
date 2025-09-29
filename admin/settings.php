@@ -25,9 +25,8 @@ class Easyel_Elements {
         add_action('wp_ajax_easyel_save_js_animation', array ( $this, 'easyel_save_js_animation') ); 
         add_action('wp_ajax_easyel_save_cursor', array( $this, 'easyel_save_cursor') );
         // AJAX handler for saving minify js option
-        add_action('wp_ajax_easy_elements_save_minify_js', array( $this, "easy_elements_save_minify_js") );
-        add_action('wp_ajax_easy_elements_save_minify_css', array( $this, "easy_elements_save_minify_css") );
 
+    
         add_action('wp_ajax_easy_elements_save_widget_setting', array( $this, "easy_elements_save_widget_setting" ) );
         add_action('wp_ajax_easy_elements_bulk_action', array( $this, 'easy_elements_bulk_action') );
         add_action( 'admin_enqueue_scripts', array( $this, 'easyel_elements_enqueue_admin_hide_notices_css' ) );
@@ -65,7 +64,6 @@ class Easyel_Elements {
         $submenu[$slug][] = [ __('Overview', 'easy-elements'), 'manage_options', 'admin.php?page='.$slug.'#overview' ];
         $submenu[$slug][] = [ __('Widgets', 'easy-elements'), 'manage_options', 'admin.php?page='.$slug.'#widget' ];
         $submenu[$slug][] = [ __('All Extensions', 'easy-elements'), 'manage_options', 'admin.php?page='.$slug.'#extensions' ];
-        $submenu[$slug][] = [ __('Advance Settings', 'easy-elements'), 'manage_options', 'admin.php?page='.$slug.'#advsettings' ];
 
         // Header & Footer Submenu
         add_submenu_page(
@@ -236,7 +234,6 @@ class Easyel_Elements {
                 <a href="#overview" class="easyel-nav-tab easyel-nav-tab-active" data-tab="overview"><?php esc_html_e ('Overview','easy-elements'); ?></a>
                 <a href="#widget" class="easyel-nav-tab" data-tab="widget"><?php esc_html_e('All Widget','easy-elements'); ?></a>
                 <a href="#extensions" class="easyel-nav-tab" data-tab="extensions"><?php esc_html_e('All Extensions','easy-elements'); ?></a>
-                <a href="#advsettings" class="easyel-nav-tab" data-tab="advsettings"><?php esc_html_e('Advanced Settings','easy-elements'); ?></a>
             </div>
             <!-- Status Messages -->
             <div id="bulk-action-message" class="notice" style="display: none;"></div>
