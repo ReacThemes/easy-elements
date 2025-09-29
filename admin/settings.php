@@ -235,7 +235,6 @@ class Easyel_Elements {
                 <a href="#overview" class="easyel-nav-tab easyel-nav-tab-active" data-tab="overview"><?php esc_html_e ('Overview','easy-elements'); ?></a>
                 <a href="#widget" class="easyel-nav-tab" data-tab="widget"><?php esc_html_e('All Widget','easy-elements'); ?></a>
                 <a href="#extensions" class="easyel-nav-tab" data-tab="extensions"><?php esc_html_e('All Extensions','easy-elements'); ?></a>
-                <a href="#advsettings" class="easyel-nav-tab" data-tab="advsettings"><?php esc_html_e('Advanced Settings','easy-elements'); ?></a>
             </div>
             <!-- Status Messages -->
             <div id="bulk-action-message" class="notice" style="display: none;"></div>
