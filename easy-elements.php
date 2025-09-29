@@ -25,22 +25,42 @@ define( 'EASYELEMENTS_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'EASYELEMENTS_ASSETS_URL', EASYELEMENTS_DIR_URL . 'assets/' );
 
 
-$required_files = [
-	'inc/helper.php',
-	'inc/canvas-content.php',
-	'base.php',
-	'admin/settings.php',
-	'easy-header-footer-elementor/easy-header-footer-elementor.php',
-	'templates/theme-builder/easy-theme-builder-post-type.php',
-	'templates/theme-builder/easyel-builder-frontend.php',
+$includes = [
+    'helpers' => [
+        'inc/helper.php',
+        'inc/canvas-content.php',
+		'inc/extension/class-wrapper-link.php'
+    ],
+    'admin' => [
+        'admin/settings.php',
+    ],
+    'frontend' => [
+        'base.php',
+        'templates/theme-builder/easyel-builder-frontend.php',
+    ],
+    'addons' => [
+        'easy-header-footer-elementor/easy-header-footer-elementor.php',
+    ],
+    'cpt' => [
+        'templates/theme-builder/easy-theme-builder-post-type.php',
+    ],
 ];
 
-foreach ( $required_files as $file ) {
-	$filepath = EASYELEMENTS_DIR_PATH . $file;
-	if ( file_exists( $filepath ) ) {
-		require_once $filepath;
-	} else {
-	}
+function easyelements_include_file( $file ) {
+    $filepath = EASYELEMENTS_DIR_PATH . $file;
+    if ( file_exists( $filepath ) ) {
+        require_once $filepath;
+    } else {
+        if ( is_admin() ) {
+            trigger_error( "EasyElements missing file: $file", E_USER_WARNING );
+        }
+    }
+}
+
+foreach ( $includes as $group ) {
+    foreach ( $group as $file ) {
+        easyelements_include_file( $file );
+    }
 }
 
 
