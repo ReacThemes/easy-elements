@@ -67,6 +67,10 @@ final class Easyel_Elements_Elementor_Extension {
 			'title' => esc_html__( 'Easy Header Footer Elements', 'easy-elements' ),
 			'icon'  => 'fa fa-header',
 		] );
+		$elements_manager->add_category( 'easyelements_category_pro', [
+			'title' => esc_html__( 'Easy Elements Pro', 'easy-elements-pro' ),
+			'icon'  => 'fa fa-plug',
+		] );
 	}
 
 	public function init_widgets() {
