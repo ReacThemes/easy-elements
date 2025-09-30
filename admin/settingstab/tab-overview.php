@@ -178,16 +178,17 @@
 </style>
 
 <script>
-jQuery(document).ready(function () {
-    jQuery(".faq-question").click(function () {
-        var parentItem = jQuery(this).parent();
+jQuery(document).ready(function($){
+    $(".easyel-faq-heading").on("click", function () {
+        var parentItem = $(this).parent(".easyel-faq-item");
 
-        // অন্য সব বন্ধ করে দাও
-        jQuery(".faq-item").not(parentItem).removeClass("active");
+        // অন্য সব বন্ধ করো
+        $(".easyel-faq-item").not(parentItem).removeClass("active")
+            .find(".easyel-faq-content").slideUp(300);
 
-        // যেটায় ক্লিক করা হয়েছে সেটাকে toggle করো
-        parentItem.toggleClass("active");
+        // যেটাতে ক্লিক করা হয়েছে সেটাকে toggle করো
+        parentItem.toggleClass("active")
+            .find(".easyel-faq-content").stop(true, true).slideToggle(300);
     });
 });
-
 </script>
