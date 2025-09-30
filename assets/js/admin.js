@@ -18,6 +18,7 @@
             this.initNotifications();
             this.easyEltab();
             this.easyElFilter();
+            this.easyelVideoPopuo();
         },
 
         // Initialize widget toggle functionality
@@ -98,7 +99,6 @@
         },
 
         // Perform bulk action
-
         performBulkAction: function(action) {
             var currentTab = $('.easyel-nav-tab-active').data('tab');
             var btn = action === 'activate_all' ? $('#activate-all-btn') : $('#deactivate-all-btn');
@@ -403,7 +403,25 @@
                     }
                 });
             });
-        }
+        },
+
+        // Overview Video Popup 
+        easyelVideoPopuo: function() {
+            var $popup = $('#easyel-popup-video-area'),
+            $videoContainer = $popup.find('.easyel-popup-video');
+            $('.easyel-video-popup').on('click', function(e){
+                e.preventDefault();
+                var videoId = $(this).attr('href').split('v=')[1].split('&')[0];
+                $videoContainer.html('<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+                $popup.fadeIn();
+            });
+            $popup.on('click', '.easyel-popup-close, #easyel-popup-video-area', function(e){
+                if($(e.target).is('.easyel-popup-close') || $(e.target).is('#easyel-popup-video-area')){
+                    $popup.fadeOut();
+                    $videoContainer.html('');
+                }
+            });
+        },
     };
 
     // Initialize when document is ready
@@ -413,5 +431,6 @@
 
     // Make it available globally
     window.EasyElementsAdmin = EasyElementsAdmin;
+
 
 })(jQuery);
