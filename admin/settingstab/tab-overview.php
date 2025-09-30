@@ -109,7 +109,7 @@
     <div class="easyel-faq-section easyel-section-gap">
         <div class="easyel-faq-area easyel-dflex easyel-align-center">
             <div class="easyel-faq-content-area">
-                <div class="easyel-faq-content easyel-section-heading">
+                <div class="easyel-faq-heading easyel-section-heading">
                     <h2 class="easyel-title"><?php esc_html_e('Read Easy Documentation','easy-elements');?></h2>
                     <p class="easyel-desc"><?php esc_html_e('Get started by spending some time with the documentation to get familiar with ElementsKit. Build awesome websites for you or your clients with ease.', 'easy-elements'); ?></p>
                 </div>
@@ -117,10 +117,10 @@
             <div class="easyel-faq-item-area">
                 <div class="easyel-faq-items">
                     <div class="easyel-faq-item active">
-                        <button class="easyel-faq-heading">
+                        <button class="easyel-faq-item-heading">
                             What is Easy Elements?						
                         </button>
-                        <div class="easyel-faq-content">
+                        <div class="easyel-faq-item-content">
                             Easy Elements is a custom Elementor addon plugin that offers useful widgets.					
                         </div>
                     </div>
