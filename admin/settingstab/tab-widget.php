@@ -10,16 +10,14 @@ foreach ( $available_elements as $key => $widget ) {
 ?>
 
 <div class="easy-widgets-wrapper">
-    <?php foreach ( $grouped_widgets as $group_name => $widgets ) : ?>
+    <?php foreach ( $grouped_widgets as $group_name => $widgets ) : 
+        $group_slug = str_replace(' ', '-', strtolower($group_name));
+        ?>
         <h2 class="easy-widget-group-title"><?php echo esc_html($group_name); ?></h2>
-        <div class="easy-widgets-grid">
+        <div class="easy-widgets-grid <?php echo esc_attr( $group_slug ); ?>">
             <?php foreach ( $widgets as $key => $widget ) : 
                 $option_name = 'easy_element_' . $tab_slug . '_' . $key;
                 $enabled = get_option($option_name, '1');
-
-                error_log( print_r( $enabled, true ) );
-
-
 
                 $is_pro_enable = isset($widget['is_pro']) && $widget['is_pro'];
                 $is_pro = $is_pro_enable && ! class_exists('Easy_Elements_Pro');

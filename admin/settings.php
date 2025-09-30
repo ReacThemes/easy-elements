@@ -121,32 +121,34 @@ class Easyel_Elements {
     }
 
     public function easy_elements_save_global_extensions_bulk() {
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(__('Unauthorized', 'easy-elements'));
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( __( 'Unauthorized', 'easy-elements' ) );
         }
 
-        check_ajax_referer('easy_elements_widget_settings_nonce', 'nonce');
+        check_ajax_referer( 'easy_elements_widget_settings_nonce', 'nonce' );
 
-        $tab    = isset($_POST['tab']) ? sanitize_text_field($_POST['tab']) : 'extensions';
-        $keys   = isset($_POST['keys']) ? (array) $_POST['keys'] : [];
-        $status = isset($_POST['status']) ? intval($_POST['status']) : 0;
+        $tab        = isset( $_POST['tab'] ) ? sanitize_text_field( $_POST['tab'] ) : 'extensions';
+        $keys       = isset( $_POST['keys'] ) ? (array) $_POST['keys'] : [];
+        $status     = isset( $_POST['status'] ) ? intval( $_POST['status'] ) : 0;
+        $group_slug = isset( $_POST['group'] ) ? sanitize_text_field( $_POST['group'] ) : '';
 
-        if (empty($keys)) {
-            wp_send_json_error(['message' => __('No keys provided', 'easy-elements')]);
+        if ( empty( $keys ) ) {
+            wp_send_json_error( [ 'message' => __( 'No keys provided', 'easy-elements' ) ] );
         }
 
-        $settings = get_option('easy_element_' . $tab, []);
+        $settings = get_option( 'easy_element_' . $tab, [] );
+        foreach ( $keys as $key ) {
+            $key = sanitize_text_field( $key );
+            $settings[ $key ] = $status;
+        }
+        update_option( 'easy_element_' . $tab, $settings );
 
-        foreach ($keys as $key) {
-            $key = sanitize_text_field($key);
-            $settings[$key] = $status;
+        if ( $group_slug ) {
+            update_option( 'easy_element_group_' . $group_slug, $status );
         }
 
-        update_option('easy_element_' . $tab, $settings);
-
-        wp_send_json_success(['message' => __('Bulk settings updated', 'easy-elements')]);
+        wp_send_json_success( [ 'message' => __( 'Bulk settings updated', 'easy-elements' ) ] );
     }
-
 
     public function easy_elements_save_global_extensions() {
         if (!current_user_can('manage_options')) {
@@ -184,10 +186,9 @@ class Easyel_Elements {
         $status = isset($_POST['status']) && $_POST['status'] === '1' ? '1' : '0';
         $tab_slug   = isset($_POST['tab']) ? sanitize_text_field(wp_unslash($_POST['tab'])) : 'widget';
         
-        if (!empty($widget_key)) {
+        if (!empty( $widget_key ) ) {
             $option_name = 'easy_element_' . $tab_slug . '_' . $widget_key;
 
-            // Save option in DB
             update_option($option_name, $status);
 
             wp_send_json_success([
@@ -262,12 +263,13 @@ class Easyel_Elements {
 
         $easyel_tabs = [
             'overview'   => __('Overview', 'easy-elements'),
-            'widget'     => __('All Widget', 'easy-elements'),
+            'widget'     => __('All Widgets', 'easy-elements'),
             'extensions' => __('All Extensions', 'easy-elements'),
             'advsettings' => __('Advanced Settings', 'easy-elements'),
         ];
 
         $easyel_tab_list = apply_filters("easyel_all_tab_list",  $easyel_tabs );
+
         ?>
         <div class="easyel-overview-header">
             <img src="<?php echo plugin_dir_url( __DIR__ ).'admin/img/easy-logo.png'; ?>" alt="logo">
@@ -277,7 +279,7 @@ class Easyel_Elements {
             <div class="easyel-nav-tab-item">
                 <div class="easyel-nav-tab-wrapper">
                     <a href="#overview" class="easyel-nav-tab easyel-nav-tab-active" data-tab="overview"><i class="ee-home"></i> <?php esc_html_e ('Overview','easy-elements'); ?></a>
-                    <a href="#widget" class="easyel-nav-tab" data-tab="widget"><i class="ee-widgets"></i><?php esc_html_e('All Widget','easy-elements'); ?></a>
+                    <a href="#widget" class="easyel-nav-tab" data-tab="widget"><i class="ee-widgets"></i><?php esc_html_e('All Widgets','easy-elements'); ?></a>
                     <a href="#extensions" class="easyel-nav-tab" data-tab="extensions"><i class="ee-extension"></i><?php esc_html_e('All Extensions','easy-elements'); ?></a>
                 </div>
             </div>
@@ -292,7 +294,7 @@ class Easyel_Elements {
                         style="<?php echo $tab_slug === 'overview' ? '' : 'display:none;'; ?>">
 
                         <?php 
-                        if ( $tab_slug === 'widget' || $tab_slug === 'extensions' ) : ?>
+                        if ( $tab_slug === 'widget' ) : ?>
                             <div class="eel-addon-search">
                                 
                                 <div class="easyel-widget-search-enable">
@@ -460,6 +462,14 @@ class Easyel_Elements {
                 'icon'        => 'dashicons-controls-repeat',
                 'title'       => 'Easy Process Slider',
                 'description' => 'Show process steps in a slider.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => true,
+                'tab' => 'widget',
+            ],
+            'gallery_filter' => [
+                'icon'        => 'dashicons-controls-repeat',
+                'title'       => 'Gallery Filter ',
+                'description' => 'Gallery fiter widget enable.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
                 'tab' => 'widget',
@@ -811,6 +821,38 @@ class Easyel_Elements {
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
                 'group'       => 'Theme Builder Widget'
+            ],
+            'easytypewriter' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Typewriter',
+                'description' => 'Animated typewriter text effect.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => false,
+                'group'       => 'Animations'
+            ],
+            'animated_title' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Animated Title',
+                'description' => 'Animated title text effect.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => false,
+                'group'       => 'Animations'
+            ],
+            'animated_heading' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Animated Heading',
+                'description' => 'Animated heading text effect.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => false,
+                'group'       => 'Animations'
+            ],
+            'easytext_animation' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Text Animation',
+                'description' => 'Animated text animation effect.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => false,
+                'group'       => 'Animations'
             ],
         ];
 

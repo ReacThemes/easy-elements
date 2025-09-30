@@ -136,7 +136,7 @@
         </div>
     </div>
     <!-- End Faq Area  -->
-      <div class="faq-wrapper ">
+     <div class="faq-wrapper">
   <div class="faq-item">
     <h3 class="faq-question">Question 1</h3>
     <div class="faq-answer">
@@ -209,27 +209,15 @@ faq-wrapper {
 </style>
 
 <script>
-document.querySelectorAll('.faq-item').forEach(item => {
-    let question = item.querySelector('.faq-question');
-    let answer   = item.querySelector('.faq-answer');
+$(document).ready(function () {
+  $(".faq-question").click(function () {
+    var parent = $(this).parent();
 
-    question.addEventListener('click', () => {
-        // Close all other items
-        document.querySelectorAll('.faq-item').forEach(i => {
-            if (i !== item) {
-                i.classList.remove('active');
-                i.querySelector('.faq-answer').style.maxHeight = null;
-            }
-        });
+    // Close all other items
+    $(".faq-item").not(parent).removeClass("active");
 
-        // Toggle current item
-        if (item.classList.contains('active')) {
-            item.classList.remove('active');
-            answer.style.maxHeight = null;
-        } else {
-            item.classList.add('active');
-            answer.style.maxHeight = answer.scrollHeight + "px";
-        }
-    });
+    // Toggle current item
+    parent.toggleClass("active");
+  });
 });
 </script>
