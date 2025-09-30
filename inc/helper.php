@@ -52,6 +52,28 @@ add_action('template_redirect', function(){
 	}
 });
 
+function easyel_get_extension_fields() {
+    $fields = [
+        'enable_js_animation' => [
+            'label'   => __('Enable Easy Animation', 'easy-elements'),
+            'is_pro'  => true,
+            'group' => 'GSAP Extension',
+        ],
+        'enable_cursor' => [
+            'label'   => __('Enable Easy Cursor', 'easy-elements'),
+            'is_pro'  => true,
+            'group' => 'GSAP Extension',
+        ],
+        'enable_wrapper_link' => [
+            'label'   => __('Enable Wrapper Link', 'easy-elements'),
+            'is_pro'  => false,
+            'group' => 'General Extension',
+        ],
+    ];
+
+    return apply_filters('easyel_extension_fields', $fields);
+}
+
 add_action('deactivated_plugin', function($plugin) {
    
     if ($plugin === 'easy-elements-pro/easy-elements-pro.php') {
@@ -59,10 +81,22 @@ add_action('deactivated_plugin', function($plugin) {
 
         foreach ($available_elements as $key => $widget) {
             if (isset($widget['is_pro']) && $widget['is_pro']) {
-                update_option('easy_element_' . $key, '0'); 
+                update_option('easy_element_widget_' . $key, '0'); 
             }
         }
     }
+
+    $extensions_settings = get_option('easy_element_extensions', []);
+    $fields = easyel_get_extension_fields();
+
+    foreach ($fields as $ext_key => $data) {
+        if (!empty($data['is_pro']) && $data['is_pro']) {
+            $extensions_settings[$ext_key] = 0;
+        }
+    }
+
+    update_option('easy_element_extensions', $extensions_settings);
+
 });
 
 
@@ -84,7 +118,6 @@ function sanitize_conditions_array( $conditions ) {
 
     return $sanitized;
 }
-
 
 /**
  * Safely decode JSON or return array as-is

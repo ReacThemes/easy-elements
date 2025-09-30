@@ -137,7 +137,7 @@ class Easyel_Elements {
 
         $settings = get_option('easy_element_' . $tab, []);
 
-        foreach ($keys as $key) {
+        foreach ( $keys as $key ) {
             $key = sanitize_text_field($key);
             $settings[$key] = $status;
         }
@@ -262,12 +262,13 @@ class Easyel_Elements {
 
         $easyel_tabs = [
             'overview'   => __('Overview', 'easy-elements'),
-            'widget'     => __('All Widget', 'easy-elements'),
+            'widget'     => __('All Widgets', 'easy-elements'),
             'extensions' => __('All Extensions', 'easy-elements'),
             'advsettings' => __('Advanced Settings', 'easy-elements'),
         ];
 
         $easyel_tab_list = apply_filters("easyel_all_tab_list",  $easyel_tabs );
+
         ?>
         <div class="easyel-overview-header">
             <img src="<?php echo plugin_dir_url( __DIR__ ).'admin/img/easy-logo.png'; ?>" alt="logo">
@@ -811,6 +812,38 @@ class Easyel_Elements {
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
                 'group'       => 'Theme Builder Widget'
+            ],
+            'easytypewriter' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Typewriter',
+                'description' => 'Animated typewriter text effect.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => false,
+                'group'       => 'Animations'
+            ],
+            'animated_title' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Animated Title',
+                'description' => 'Animated title text effect.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => false,
+                'group'       => 'Animations'
+            ],
+            'animated_heading' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Animated Heading',
+                'description' => 'Animated heading text effect.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => false,
+                'group'       => 'Animations'
+            ],
+            'easytext_animation' => [
+                'icon'        => 'dashicons-format-image',
+                'title'       => 'Text Animation',
+                'description' => 'Animated text animation effect.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => false,
+                'group'       => 'Animations'
             ],
         ];
 

@@ -2,29 +2,12 @@
 $tab_slug = 'extensions';
 $extensions_settings = get_option('easy_element_' . $tab_slug, []);
 
-// Default values
-$defaults = [
-    'enable_js_animation' => 0,
-    'enable_cursor'       => 0,
-    'enable_wrapper_link' => 0,
-];
+$defaults = array_fill_keys(array_keys(easyel_get_extension_fields()), 0);
 
-$extensions_settings = wp_parse_args( $extensions_settings, $defaults );
+$extensions_settings = wp_parse_args($extensions_settings, $defaults);
 
-$fields = [
-    'enable_js_animation' => [
-        'label'   => __('Enable Easy Animation', 'easy-elements'),
-        'is_pro'  => true,
-    ],
-    'enable_cursor' => [
-        'label'   => __('Enable Easy Cursor', 'easy-elements'),
-        'is_pro'  => true,
-    ],
-    'enable_wrapper_link' => [
-        'label'   => __('Enable Wrapper Link', 'easy-elements'),
-        'is_pro'  => false, // free
-    ],
-];
+$fields = easyel_get_extension_fields();
+
 ?>
 
 <div class="wrap">
