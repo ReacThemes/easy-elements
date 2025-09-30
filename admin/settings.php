@@ -121,32 +121,34 @@ class Easyel_Elements {
     }
 
     public function easy_elements_save_global_extensions_bulk() {
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(__('Unauthorized', 'easy-elements'));
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( __( 'Unauthorized', 'easy-elements' ) );
         }
 
-        check_ajax_referer('easy_elements_widget_settings_nonce', 'nonce');
+        check_ajax_referer( 'easy_elements_widget_settings_nonce', 'nonce' );
 
-        $tab    = isset($_POST['tab']) ? sanitize_text_field($_POST['tab']) : 'extensions';
-        $keys   = isset($_POST['keys']) ? (array) $_POST['keys'] : [];
-        $status = isset($_POST['status']) ? intval($_POST['status']) : 0;
+        $tab        = isset( $_POST['tab'] ) ? sanitize_text_field( $_POST['tab'] ) : 'extensions';
+        $keys       = isset( $_POST['keys'] ) ? (array) $_POST['keys'] : [];
+        $status     = isset( $_POST['status'] ) ? intval( $_POST['status'] ) : 0;
+        $group_slug = isset( $_POST['group'] ) ? sanitize_text_field( $_POST['group'] ) : '';
 
-        if (empty($keys)) {
-            wp_send_json_error(['message' => __('No keys provided', 'easy-elements')]);
+        if ( empty( $keys ) ) {
+            wp_send_json_error( [ 'message' => __( 'No keys provided', 'easy-elements' ) ] );
         }
 
-        $settings = get_option('easy_element_' . $tab, []);
-
+        $settings = get_option( 'easy_element_' . $tab, [] );
         foreach ( $keys as $key ) {
-            $key = sanitize_text_field($key);
-            $settings[$key] = $status;
+            $key = sanitize_text_field( $key );
+            $settings[ $key ] = $status;
+        }
+        update_option( 'easy_element_' . $tab, $settings );
+
+        if ( $group_slug ) {
+            update_option( 'easy_element_group_' . $group_slug, $status );
         }
 
-        update_option('easy_element_' . $tab, $settings);
-
-        wp_send_json_success(['message' => __('Bulk settings updated', 'easy-elements')]);
+        wp_send_json_success( [ 'message' => __( 'Bulk settings updated', 'easy-elements' ) ] );
     }
-
 
     public function easy_elements_save_global_extensions() {
         if (!current_user_can('manage_options')) {
@@ -184,10 +186,9 @@ class Easyel_Elements {
         $status = isset($_POST['status']) && $_POST['status'] === '1' ? '1' : '0';
         $tab_slug   = isset($_POST['tab']) ? sanitize_text_field(wp_unslash($_POST['tab'])) : 'widget';
         
-        if (!empty($widget_key)) {
+        if (!empty( $widget_key ) ) {
             $option_name = 'easy_element_' . $tab_slug . '_' . $widget_key;
 
-            // Save option in DB
             update_option($option_name, $status);
 
             wp_send_json_success([
@@ -293,7 +294,7 @@ class Easyel_Elements {
                         style="<?php echo $tab_slug === 'overview' ? '' : 'display:none;'; ?>">
 
                         <?php 
-                        if ( $tab_slug === 'widget' || $tab_slug === 'extensions' ) : ?>
+                        if ( $tab_slug === 'widget' ) : ?>
                             <div class="eel-addon-search">
                                 
                                 <div class="easyel-widget-search-enable">

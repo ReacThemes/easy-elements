@@ -490,4 +490,74 @@ h1,h2 { color: #0073aa; }
 
 .easyel-extension-item {
     flex: 0 0 22%;
+    margin-bottom: 35px;
+}
+
+.easyel-extension-heading-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f3dcdc;
+}
+
+
+/* Parent wrapper */
+.easyel-toggle-switch-extension {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  user-select: none;
+  margin-left: 10px;
+}
+
+/* Hide default checkbox */
+.easyel-toggle-switch-extension input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+/* Enable All text */
+.easyel-toggle-switch-extension .easyel-enable-all {
+  margin-left: 8px;
+  margin-right: 6px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Slider design */
+.easyel-toggle-switch-extension .slider {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: .4s;
+}
+
+.easyel-toggle-switch-extension .slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: .4s;
+}
+
+/* Checked state */
+.easyel-toggle-switch-extension input:checked ~ .slider {
+  background-color: #4CAF50;
+}
+
+.easyel-toggle-switch-extension input:checked ~ .slider:before {
+  transform: translateX(20px);
 }

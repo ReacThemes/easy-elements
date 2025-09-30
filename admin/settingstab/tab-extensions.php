@@ -16,16 +16,25 @@ foreach ($fields as $key => $data) {
 
 <div class="wrap easyel-extension-main-wrapper">
     <div class="form-table easyel-extension">
-        <?php 
-            foreach($grouped_fields as $group_name => $group_fields) : 
-
+        <?php foreach($grouped_fields as $group_name => $group_fields) : 
             $group_slug = str_replace(' ', '-', strtolower($group_name));
+            $group_enabled = get_option('easy_element_group_' . $group_slug, 0);
             ?>
-            <div valign="top" class="easyel-extension-heading-group">
-                <div  style="padding-top:15px; text-align:left; font-weight:bold;"><?php echo esc_html( $group_name ); ?></div>
-                <button type="button" id="enable_all_all" class="button button-secondary <?php echo esc_attr($group_slug); ?>"><?php esc_html_e('Enable All', 'easy-elements'); ?></button>
+            <div class="easyel-extension-heading-group">
+                <div style="padding-top:15px; text-align:left; font-weight:bold;"><?php echo esc_html( $group_name ); ?></div>
+                <label class="easyel-toggle-switch-extension">
+                    <input type="checkbox" 
+                           class="easyel-group-toggle" 
+                           data-group="<?php echo esc_attr($group_slug); ?>" 
+                           <?php checked(1, $group_enabled); ?> /> <span class="easyel-enable-all">Enable All</span>
+                    <span class="slider round"></span>
+                </label>
+                <input type="hidden" name="easy_element_group_<?php echo esc_attr($group_slug); ?>" 
+                       class="easyel-group-hidden" 
+                       value="<?php echo esc_attr($group_enabled); ?>" />
             </div>
-            <div  class="easyel-extension-wrapper">
+
+            <div class="easyel-extension-wrapper" data-group="<?php echo esc_attr($group_slug); ?>">
                 <?php foreach($group_fields as $key => $data) : 
                     $is_pro_enable = $data['is_pro'];
                     $is_pro        = $is_pro_enable && ! class_exists('Easy_Elements_Pro');

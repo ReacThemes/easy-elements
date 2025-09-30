@@ -194,17 +194,16 @@
             });
         },
 
-        initAllExtensions: function() {
-            var $extensionsTab = $('.easyel-tab-panel.extensions');
-           // Single toggle
-            $('.easyel-extension-toggle').on('change', function() {
-                var checkbox = $(this);
-                var key      = checkbox.data('key');
-                var tab      = checkbox.data('tab');
-                var status   = checkbox.is(':checked') ? 1 : 0;
-                var statusSpan = $('<span class="toggle-status"></span>');
+        initAllExtensions: function () {
+            let $extensionsTab = $('.easyel-tab-panel.extensions');
 
-                console.log( tab)
+            // Single toggle (same as before)
+            $('.easyel-extension-toggle').on('change', function () {
+                let checkbox = $(this);
+                let key = checkbox.data('key');
+                let tab = checkbox.data('tab');
+                let status = checkbox.is(':checked') ? 1 : 0;
+                let statusSpan = $('<span class="toggle-status"></span>');
 
                 checkbox.closest('.easyel-extension-item').append(statusSpan);
                 statusSpan.text('Saving...').show();
@@ -216,62 +215,47 @@
                     status: status,
                     nonce: easyElementsData.widget_settings_nonce
                 })
-                .done(function(response){
-                    if(response.success){
+                .done(function (response) {
+                    if (response.success) {
                         statusSpan.text('Saved').removeClass('error').addClass('success');
-                        setTimeout(function(){ statusSpan.fadeOut(); }, 2000);
+                        setTimeout(function () { statusSpan.fadeOut(); }, 2000);
                     } else {
                         statusSpan.text('Error').removeClass('success').addClass('error');
                         checkbox.prop('checked', !checkbox.is(':checked'));
                     }
                 })
-                .fail(function(){
+                .fail(function () {
                     statusSpan.text('Network error').removeClass('success').addClass('error');
                     checkbox.prop('checked', !checkbox.is(':checked'));
                 });
             });
 
-            // Enable All
-            $extensionsTab.on('click', '#activate-all-btn', function(){
-                var tab = 'extensions';
-                var keys = [];
+            // Group Enable/Disable All
+            $extensionsTab.on('change', '.easyel-group-toggle', function () {
+                let groupCheckbox = $(this);
+                let groupSlug = groupCheckbox.data('group');
+                let groupWrapper = $('.easyel-extension-wrapper[data-group="' + groupSlug + '"]');
+                let hiddenField = $('input.easyel-group-hidden[name="easy_element_group_' + groupSlug + '"]');
 
-                $('.easyel-extension-toggle').each(function(){
-                    var checkbox = $(this);
+                let status = groupCheckbox.is(':checked') ? 1 : 0;
+                let keys = [];
+
+                groupWrapper.find('.easyel-extension-toggle').each(function () {
+                    let checkbox = $(this);
                     if (checkbox.closest('.easyel-extension-item').hasClass('easyel-pro-enable')) return;
-                    checkbox.prop('checked', true);
+                    checkbox.prop('checked', status === 1);
                     keys.push(checkbox.data('key'));
                 });
 
-                if(keys.length){
+                hiddenField.val(status);
+
+                if (keys.length) {
                     $.post(ajaxurl, {
                         action: 'easy_elements_save_global_extensions_bulk',
-                        tab: tab,
+                        tab: 'extensions',
                         keys: keys,
-                        status: 1,
-                        nonce: easyElementsData.widget_settings_nonce
-                    });
-                }
-            });
-
-            // Disable All
-            $extensionsTab.on('click', '#deactivate-all-btn', function(){
-                var tab = 'extensions';
-                var keys = [];
-
-                $('.easyel-extension-toggle').each(function(){
-                    var checkbox = $(this);
-                    if (checkbox.closest('.easyel-extension-item').hasClass('easyel-pro-enable')) return;
-                    checkbox.prop('checked', false);
-                    keys.push(checkbox.data('key'));
-                });
-
-                if(keys.length){
-                    $.post(ajaxurl, {
-                        action: 'easy_elements_save_global_extensions_bulk',
-                        tab: tab,
-                        keys: keys,
-                        status: 0,
+                        status: status,
+                        group: groupSlug, 
                         nonce: easyElementsData.widget_settings_nonce
                     });
                 }
@@ -403,7 +387,33 @@
                     }
                 });
             });
-        }
+        },
+        easyelGroupExtension: function() {
+            $('.easyel-group-toggle').on('change', function(){
+                let checkbox = $(this);
+                let group = checkbox.data('group');
+                let checked = checkbox.is(':checked');
+
+                // Toggle all checkboxes in this group
+                $('.easyel-extension-wrapper[data-group="' + group + '"] .easyel-extension-toggle').each(function(){
+                    let cb = $(this);
+                    if(!cb.closest('.easyel-extension-item').hasClass('easyel-pro-enable')){
+                        cb.prop('checked', checked).trigger('change');
+                    }
+                });
+
+                // Update hidden input value
+                $('.easyel-group-hidden[name="easy_element_group_' + group + '"]').val(checked ? 1 : 0);
+
+                // Optionally, save via AJAX
+                $.post(ajaxurl, {
+                    action: 'easy_elements_save_group_toggle',
+                    group: group,
+                    status: checked ? 1 : 0,
+                    nonce: easyElementsData.widget_settings_nonce
+                });
+            });
+        },
     };
 
     // Initialize when document is ready
