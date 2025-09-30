@@ -108,114 +108,86 @@
     <!-- Start Faq Area  -->
     <div class="easyel-faq-section easyel-section-gap">
         <div class="easyel-faq-area easyel-dflex easyel-align-center">
-            <!-- <div class="easyel-faq-content-area">
+            <div class="easyel-faq-content-area">
                 <div class="easyel-faq-content easyel-section-heading">
                     <h2 class="easyel-title"><?php esc_html_e('Read Easy Documentation','easy-elements');?></h2>
                     <p class="easyel-desc"><?php esc_html_e('Get started by spending some time with the documentation to get familiar with ElementsKit. Build awesome websites for you or your clients with ease.', 'easy-elements'); ?></p>
                 </div>
             </div>
-            <div class="easyel-faq-item-area eel-faq-accordion">
-                <div class="easyel-faq-item eel-faq-item active">
-                    <div class="eel-faq-question">
-						<h4 class="eel-faq-title" tabindex="0">
-							What is Easy Elements?						
-                        </h4>
-						<span class="eel-faq-icon eel-faq-icon-open">
-							<i class="unicon-close" aria-hidden="true"></i>						
-                        </span>
-						<span class="eel-faq-icon eel-faq-icon-close">
-							<i class="unicon-add" aria-hidden="true"></i>						
-                        </span>
-					</div>
-					<div class="eel-faq-answer">
-						Easy Elements is a custom Elementor addon plugin that offers useful widgets.					
+            <div class="easyel-faq-item-area">
+                <div class="easyel-faq-items">
+                    <div class="easyel-faq-item active">
+                        <button class="easyel-faq-heading">
+                            What is Easy Elements?						
+                        </button>
+                        <div class="easyel-faq-content">
+                            Easy Elements is a custom Elementor addon plugin that offers useful widgets.					
+                        </div>
+                    </div>
+                    <div class="easyel-faq-item ">
+                        <button class="easyel-faq-heading">
+                            What is Easy Elements?						
+                        </button>
+                        <div class="easyel-faq-content">
+                            Easy Elements is a custom Elementor addon plugin that offers useful widgets.					
+                        </div>
                     </div>
 				</div>
-            </div> -->
-           
+            </div>
         </div>
     </div>
     <!-- End Faq Area  -->
-     <div class="faq-wrapper">
-  <div class="faq-item">
-    <h3 class="faq-question">Question 1</h3>
-    <div class="faq-answer">
-      <p>This is the answer for question 1.</p>
-    </div>
-  </div>
-  <div class="faq-item">
-    <h3 class="faq-question">Question 2</h3>
-    <div class="faq-answer">
-      <p>This is the answer for question 2.</p>
-    </div>
-  </div>
-  <div class="faq-item">
-    <h3 class="faq-question">Question 3</h3>
-    <div class="faq-answer">
-      <p>This is the answer for question 3.</p>
-    </div>
-  </div>
-</div>
-
-<div class="side-element">
-  <h3>Side Element</h3>
-  <p>This is a fixed height side element.</p>
-</div>
 
 </div>
 
 <style>
-faq-wrapper {
-  width: 60%;
-  float: left;
-  padding: 10px;
-}
-
-.side-element {
-  width: 35%;
-  float: right;
-  padding: 20px;
-  background: #f1f1f1;
-  min-height: 200px;
-}
-
-/* FAQ Styles */
-.faq-item {
+.easyel-faq-item {
   border: 1px solid #ddd;
-  margin-bottom: 10px;
   border-radius: 6px;
+  margin-bottom: 12px;
   overflow: hidden;
+  background: #fff;
 }
 
-.faq-question {
-  margin: 0;
-  padding: 12px 16px;
-  cursor: pointer;
-  background: #eee;
+.easyel-faq-heading {
+  width: 100%;
+  text-align: left;
+  padding: 14px 18px;
   font-size: 16px;
+  font-weight: 600;
+  border: none;
+  background: #f8f8f8;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
-  padding: 0 16px;
+.easyel-faq-heading:hover {
+  background: #eee;
 }
 
-.faq-item.active .faq-answer {
-  max-height: 200px; /* enough space for answer text */
-  padding: 12px 16px;
+.easyel-faq-content {
+  display: none;
+  padding: 14px 18px;
+  background: #fff;
+  line-height: 1.6;
+}
+
+.easyel-faq-item.active .easyel-faq-heading {
+  background: #e9e9ff;
 }
 </style>
 
 <script>
 jQuery(document).ready(function () {
-  jQuery(".faq-question").click(function () {
-    var parent = jQuery(this).parent();
-    // Close all other items
-    jQuery(".faq-item").not(parent).removeClass("active");
-    // Toggle current item
-    parent.toggleClass("active");
-  });
+    jQuery(".faq-question").click(function () {
+        var parentItem = jQuery(this).parent();
+
+        // অন্য সব বন্ধ করে দাও
+        jQuery(".faq-item").not(parentItem).removeClass("active");
+
+        // যেটায় ক্লিক করা হয়েছে সেটাকে toggle করো
+        parentItem.toggleClass("active");
+    });
 });
+
 </script>

@@ -356,6 +356,30 @@
             }
         },
 
+        easyelGroupExtension: function() {
+            $('.easyel-group-toggle').on('change', function(){
+                let checkbox = $(this);
+                let group = checkbox.data('group');
+                let checked = checkbox.is(':checked');
+                // Toggle all checkboxes in this group
+                $('.easyel-extension-wrapper[data-group="' + group + '"] .easyel-extension-toggle').each(function(){
+                    let cb = $(this);
+                    if(!cb.closest('.easyel-extension-item').hasClass('easyel-pro-enable')){
+                        cb.prop('checked', checked).trigger('change');
+                    }
+                });
+                // Update hidden input value
+                $('.easyel-group-hidden[name="easy_element_group_' + group + '"]').val(checked ? 1 : 0);
+                // Optionally, save via AJAX
+                $.post(ajaxurl, {
+                    action: 'easy_elements_save_group_toggle',
+                    group: group,
+                    status: checked ? 1 : 0,
+                    nonce: easyElementsData.widget_settings_nonce
+                });
+            });
+        },
+
         easyElFilter: function() {
             $(".easyel-action-btn").on("click", function() {
                 var filter = $(this).data("filter");
@@ -388,7 +412,6 @@
                 });
             });
         },
-<<<<<<< HEAD
 
         // Overview Video Popup 
         easyelVideoPopuo: function() {
@@ -405,32 +428,6 @@
                     $popup.fadeOut();
                     $videoContainer.html('');
                 }
-=======
-        easyelGroupExtension: function() {
-            $('.easyel-group-toggle').on('change', function(){
-                let checkbox = $(this);
-                let group = checkbox.data('group');
-                let checked = checkbox.is(':checked');
-
-                // Toggle all checkboxes in this group
-                $('.easyel-extension-wrapper[data-group="' + group + '"] .easyel-extension-toggle').each(function(){
-                    let cb = $(this);
-                    if(!cb.closest('.easyel-extension-item').hasClass('easyel-pro-enable')){
-                        cb.prop('checked', checked).trigger('change');
-                    }
-                });
-
-                // Update hidden input value
-                $('.easyel-group-hidden[name="easy_element_group_' + group + '"]').val(checked ? 1 : 0);
-
-                // Optionally, save via AJAX
-                $.post(ajaxurl, {
-                    action: 'easy_elements_save_group_toggle',
-                    group: group,
-                    status: checked ? 1 : 0,
-                    nonce: easyElementsData.widget_settings_nonce
-                });
->>>>>>> fef09a81ee1fe5a6704dbb24c7ab4f9214109b1a
             });
         },
     };
