@@ -19,6 +19,7 @@
             this.easyEltab();
             this.easyElFilter();
             this.easyelVideoPopuo();
+            this.easyelFaq();
         },
 
         // Initialize widget toggle functionality
@@ -427,6 +428,24 @@
                 if($(e.target).is('.easyel-popup-close') || $(e.target).is('#easyel-popup-video-area')){
                     $popup.fadeOut();
                     $videoContainer.html('');
+                }
+            });
+        },
+
+        // Overview Faq 
+        easyelFaq: function() {
+            $(".easyel-faq-item.active").find(".easyel-faq-item-content").show();
+            $(".easyel-faq-item-heading").click(function(){
+                var faqItem = $(this).closest(".easyel-faq-item");
+                var content = faqItem.children(".easyel-faq-item-content");
+
+                if(faqItem.hasClass("active")){
+                    faqItem.removeClass("active");
+                    content.slideUp(300);
+                } else {
+                    $(".easyel-faq-item.active").removeClass("active").children(".easyel-faq-item-content").slideUp(300);
+                    faqItem.addClass("active");
+                    content.slideDown(300);
                 }
             });
         },

@@ -1634,7 +1634,7 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             if ( $settings['show_pagination'] === 'yes' ) {
                 $big = 999999999;
                 echo '<nav class="eel-blog-pagination">';
-                echo esc_html( paginate_links( [
+                echo wp_kses_post( paginate_links( [
                     'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
                     'format' => '?paged=%#%',
                     'current' => $paged,
