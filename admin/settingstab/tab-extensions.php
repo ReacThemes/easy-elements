@@ -9,31 +9,34 @@ $fields = easyel_get_extension_fields();
 // Group fields
 $grouped_fields = [];
 foreach ($fields as $key => $data) {
-    $group_name = $data['group'] ?? 'General';
+    $group_name = $data['group'] ?? 'General Extensions';
     $grouped_fields[$group_name][$key] = $data;
 }
 ?>
 
 <div class="wrap easyel-extension-main-wrapper">
-    <table class="form-table">
-        <?php foreach($grouped_fields as $group_name => $group_fields) : ?>
-            <tr valign="top" class="easyel-extension-heading-group">
-                <th  style="padding-top:15px; text-align:left; font-weight:bold;"><?php echo esc_html($group_name); ?></th>
-            </tr>
-            <tr valign="top" class="easyel-extension-wrapper">
+    <div class="form-table easyel-extension">
+        <?php 
+            foreach($grouped_fields as $group_name => $group_fields) : 
+
+            $group_slug = str_replace(' ', '-', strtolower($group_name));
+            ?>
+            <div valign="top" class="easyel-extension-heading-group">
+                <div  style="padding-top:15px; text-align:left; font-weight:bold;"><?php echo esc_html( $group_name ); ?></div>
+                <button type="button" id="enable_all_all" class="button button-secondary <?php echo esc_attr($group_slug); ?>"><?php esc_html_e('Enable All', 'easy-elements'); ?></button>
+            </div>
+            <div  class="easyel-extension-wrapper">
                 <?php foreach($group_fields as $key => $data) : 
                     $is_pro_enable = $data['is_pro'];
                     $is_pro        = $is_pro_enable && ! class_exists('Easy_Elements_Pro');
                     $pro_class     = $is_pro ? ' easyel-pro-enable' : '';
                     $pro_widget    = $is_pro_enable ? ' easyel-pro-widget' : '';
                 ?>
-                    <td class="easyel-extension-item <?php echo esc_attr($pro_class . $pro_widget); ?>" style="padding-right:20px;">
-                       
+                    <div class="easyel-extension-item <?php echo esc_attr( $pro_class . $pro_widget ); ?>" style="padding-right:20px;">
                         <div class="widget-header">
                             <span class="dashicons <?php echo esc_attr($data['icon']); ?>"></span>
                             <strong><?php echo esc_html($data['label']); ?></strong>
                         </div>
-
                         <p class="widget-demo">
                             <a href="<?php echo esc_url($data['demo_url']); ?>" target="_blank" rel="noopener noreferrer">
                                 <?php esc_html_e('View Demo / docs', 'easy-elements'); ?>
@@ -52,9 +55,9 @@ foreach ($fields as $key => $data) {
                         <?php if ( $is_pro ) : ?>
                             <span class="easyel-pro-badge">Pro</span>
                         <?php endif; ?>
-                    </td>
+                    </div>
                 <?php endforeach; ?>
-            </tr>
+            </div>
         <?php endforeach; ?>
-    </table>
+    </div>
 </div>

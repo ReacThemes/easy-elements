@@ -206,7 +206,7 @@
 
                 console.log( tab)
 
-                checkbox.closest('td').append(statusSpan);
+                checkbox.closest('.easyel-extension-item').append(statusSpan);
                 statusSpan.text('Saving...').show();
 
                 $.post(ajaxurl, {
@@ -238,7 +238,7 @@
 
                 $('.easyel-extension-toggle').each(function(){
                     var checkbox = $(this);
-                    if (checkbox.closest('td').hasClass('easyel-pro-enable')) return;
+                    if (checkbox.closest('.easyel-extension-item').hasClass('easyel-pro-enable')) return;
                     checkbox.prop('checked', true);
                     keys.push(checkbox.data('key'));
                 });
@@ -261,7 +261,7 @@
 
                 $('.easyel-extension-toggle').each(function(){
                     var checkbox = $(this);
-                    if (checkbox.closest('td').hasClass('easyel-pro-enable')) return;
+                    if (checkbox.closest('.easyel-extension-item').hasClass('easyel-pro-enable')) return;
                     checkbox.prop('checked', false);
                     keys.push(checkbox.data('key'));
                 });
