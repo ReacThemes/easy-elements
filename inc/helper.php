@@ -56,19 +56,90 @@ function easyel_get_extension_fields() {
     $fields = [
         'enable_js_animation' => [
             'label'   => __('Enable Easy Animation', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
-            'group' => 'GSAP Extension',
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
         'enable_cursor' => [
             'label'   => __('Enable Easy Cursor', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
-            'group' => 'GSAP Extension',
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
+        'enable_sticky_elements' => [
+            'label'   => __('Sticky Elements', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_image_animation' => [
+            'label'   => __('Image Animation', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_cursor_hover_effect' => [
+            'label'   => __('Cursor Hover Effect', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_cursor_move_effect' => [
+            'label'   => __('Cursor Move Effect', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_parallax_image' => [
+            'label'   => __('Parallax  Image', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_horizontal_scroll_trigger' => [
+            'label'   => __('Horizontal ScrollTrigger', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_vertical_scroll_trigger' => [
+            'label'   => __('Vertical ScrollTrigger', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_drawsvg' => [
+            'label'   => __('DrawSVG', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_image_3d_effect' => [
+            'label'   => __('Image 3D Effect', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+
         'enable_wrapper_link' => [
             'label'   => __('Enable Wrapper Link', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
             'is_pro'  => false,
-            'group' => 'General Extension',
+            'group' => 'General Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
+        
     ];
 
     return apply_filters('easyel_extension_fields', $fields);

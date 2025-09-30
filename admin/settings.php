@@ -278,7 +278,7 @@ class Easyel_Elements {
             <div class="easyel-nav-tab-item">
                 <div class="easyel-nav-tab-wrapper">
                     <a href="#overview" class="easyel-nav-tab easyel-nav-tab-active" data-tab="overview"><i class="ee-home"></i> <?php esc_html_e ('Overview','easy-elements'); ?></a>
-                    <a href="#widget" class="easyel-nav-tab" data-tab="widget"><i class="ee-widgets"></i><?php esc_html_e('All Widget','easy-elements'); ?></a>
+                    <a href="#widget" class="easyel-nav-tab" data-tab="widget"><i class="ee-widgets"></i><?php esc_html_e('All Widgets','easy-elements'); ?></a>
                     <a href="#extensions" class="easyel-nav-tab" data-tab="extensions"><i class="ee-extension"></i><?php esc_html_e('All Extensions','easy-elements'); ?></a>
                 </div>
             </div>
@@ -461,6 +461,14 @@ class Easyel_Elements {
                 'icon'        => 'dashicons-controls-repeat',
                 'title'       => 'Easy Process Slider',
                 'description' => 'Show process steps in a slider.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => true,
+                'tab' => 'widget',
+            ],
+            'gallery_filter' => [
+                'icon'        => 'dashicons-controls-repeat',
+                'title'       => 'Gallery Filter ',
+                'description' => 'Gallery fiter widget enable.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
                 'tab' => 'widget',
