@@ -209,13 +209,11 @@ faq-wrapper {
 </style>
 
 <script>
-$(document).ready(function () {
-  $(".faq-question").click(function () {
-    var parent = $(this).parent();
-
+jQuery(document).ready(function () {
+  jQuery(".faq-question").click(function () {
+    var parent = jQuery(this).parent();
     // Close all other items
-    $(".faq-item").not(parent).removeClass("active");
-
+    jQuery(".faq-item").not(parent).removeClass("active");
     // Toggle current item
     parent.toggleClass("active");
   });
