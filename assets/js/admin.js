@@ -98,58 +98,6 @@
         },
 
         // Perform bulk action
-        // performBulkAction: function( action, tab ) {
-        //     var btn = action === 'activate_all' ? $('#activate-all-btn') : $('#deactivate-all-btn');
-        //     var originalText = btn.text();
-            
-        //     btn.prop('disabled', true).text(easyElementsData.strings.processing);
-            
-        //     $.post(ajaxurl, {
-        //         action: 'easy_elements_bulk_action',
-        //         bulk_action: action,
-        //         tab: tab,
-        //         nonce: easyElementsData.bulk_action_nonce
-        //     })
-        //     .done(function(response) {
-        //         if (response.success) {
-        //             // Update all checkboxes
-
-        //             $('.widget-toggle-checkbox').each(function() {
-        //                 let $checkbox = $(this);
-        //                 let isPro = $checkbox.closest('.easy-widget-item').hasClass('easyel-pro-enable');
-
-        //                 if (isPro) {
-        //                     if (!response.data.is_pro_active) {
-        //                         $checkbox.prop('checked', false).prop('disabled', true);
-        //                     }
-        //                 } else {
-        //                     $checkbox.prop('checked', action === 'activate_all' ? true : false);
-        //                     $checkbox.prop('disabled', false);
-        //                 }
-        //             });
-
-        //             // Show success message
-        //             EasyElementsAdmin.showBulkMessage(response.data.message, 'success');
-        //             EasyElementsAdmin.showNotification(response.data.message, 'success');
-                    
-        //             // Update status spans
-        //             $('.toggle-status').text(easyElementsData.strings.updated).removeClass('error').addClass('success');
-        //             setTimeout(function() {
-        //                 $('.toggle-status').fadeOut();
-        //             }, 3000);
-        //         } else {
-        //             EasyElementsAdmin.showBulkMessage('Error: ' + response.data.message, 'error');
-        //             EasyElementsAdmin.showNotification('Bulk action failed', 'error');
-        //         }
-        //     })
-        //     .fail(function() {
-        //         EasyElementsAdmin.showBulkMessage('An error occurred while processing the bulk action.', 'error');
-        //         EasyElementsAdmin.showNotification('Network error occurred', 'error');
-        //     })
-        //     .always(function() {
-        //         btn.prop('disabled', false).text(originalText);
-        //     });
-        // },
 
         performBulkAction: function(action) {
             var currentTab = $('.easyel-nav-tab-active').data('tab');
@@ -330,108 +278,6 @@
             });
         },
 
-        // Initialize all extensions
-        // initAllExtensions: function() {
-        //     var checkbox = $('#easyel_enable_js_animation');
-        //     if (checkbox.length === 0) return;
-            
-        //     // Create notification span
-        //     var notification = $('<span class="js-animation-status"></span>');
-        //     notification.css({
-        //         'marginLeft': '10px',
-        //         'fontWeight': 'bold',
-        //         'display': 'none'
-        //     });
-        //     checkbox.closest('td').append(notification);
-            
-        //     checkbox.on('change', function() {
-        //         var checkbox = $(this);
-        //         var value = checkbox.is(':checked') ? '1' : '0';
-                
-        //         // Show saving status
-        //         notification.text(easyElementsData.strings.saving).css('color', '#2196F3').show();
-                
-        //         $.post(ajaxurl, {
-        //             action: 'easyel_save_js_animation',
-        //             value: value,
-        //             nonce: easyElementsData.js_animation_nonce
-        //         })
-        //         .done(function(response) {
-        //             if (response.success) {
-        //                 notification.text(easyElementsData.strings.saved).css('color', '#4CAF50');
-        //                 EasyElementsAdmin.showNotification('JS Animation setting saved', 'success');
-        //                 setTimeout(function() {
-        //                     notification.fadeOut();
-        //                 }, 2000);
-        //             } else {
-        //                 notification.text(easyElementsData.strings.error).css('color', '#f44336');
-        //                 checkbox.prop('checked', !checkbox.is(':checked')); // Revert checkbox
-        //                 EasyElementsAdmin.showNotification('Failed to save JS Animation setting', 'error');
-        //                 setTimeout(function() {
-        //                     notification.fadeOut();
-        //                 }, 3000);
-        //             }
-        //         })
-        //         .fail(function() {
-        //             notification.text(easyElementsData.strings.error).css('color', '#f44336');
-        //             checkbox.prop('checked', !checkbox.is(':checked')); // Revert checkbox
-        //             EasyElementsAdmin.showNotification('Network error occurred', 'error');
-        //             setTimeout(function() {
-        //                 notification.fadeOut();
-        //             }, 3000);
-        //         });
-        //     });
-
-        //     // Cursor toggle
-        //     var cursorCheckbox = $('#easyel_enable_cursor');
-        //     if (cursorCheckbox.length) {
-        //         var cursorNotification = $('<span class="cursor-status"></span>');
-        //         cursorNotification.css({
-        //             'marginLeft': '10px',
-        //             'fontWeight': 'bold',
-        //             'display': 'none'
-        //         });
-        //         cursorCheckbox.closest('td').append(cursorNotification);
-
-        //         cursorCheckbox.on('change', function() {
-        //             var el = $(this);
-        //             var value = el.is(':checked') ? '1' : '0';
-
-        //             cursorNotification.text(easyElementsData.strings.saving).css('color', '#2196F3').show();
-
-        //             $.post(ajaxurl, {
-        //                 action: 'easyel_save_cursor',
-        //                 value: value,
-        //                 nonce: easyElementsData.nonce
-        //             })
-        //             .done(function(response) {
-        //                 if (response.success) {
-        //                     cursorNotification.text(easyElementsData.strings.saved).css('color', '#4CAF50');
-        //                     EasyElementsAdmin.showNotification('Cursor setting saved', 'success');
-        //                     setTimeout(function() {
-        //                         cursorNotification.fadeOut();
-        //                     }, 2000);
-        //                 } else {
-        //                     cursorNotification.text(easyElementsData.strings.error).css('color', '#f44336');
-        //                     el.prop('checked', !el.is(':checked'));
-        //                     EasyElementsAdmin.showNotification('Failed to save Cursor setting', 'error');
-        //                     setTimeout(function() {
-        //                         cursorNotification.fadeOut();
-        //                     }, 3000);
-        //                 }
-        //             })
-        //             .fail(function() {
-        //                 cursorNotification.text(easyElementsData.strings.error).css('color', '#f44336');
-        //                 el.prop('checked', !el.is(':checked'));
-        //                 EasyElementsAdmin.showNotification('Network error occurred', 'error');
-        //                 setTimeout(function() {
-        //                     cursorNotification.fadeOut();
-        //                 }, 3000);
-        //             });
-        //         });
-        //     }
-        // },
-
         // Initialize notifications system
         initNotifications: function() {
             // Create notification container if it doesn't exist
@@ -482,32 +328,34 @@
             // --------- Admin Menu Submenu Click Handle ---------
             $('#toplevel_page_easy-elements-dashboard ul.wp-submenu a').on('click', function (e) {
                 const href = $(this).attr('href');
+                const isDashboardPage = window.location.href.includes('page=easy-elements-dashboard');
 
-                if (href.includes('easy-elements-dashboard')) {
+                if (isDashboardPage && href.includes('#')) {
                     e.preventDefault();
 
                     let tab = 'overview';
                     if (href.includes('#widget')) tab = 'widget';
                     if (href.includes('#extensions')) tab = 'extensions';
-                    if (href.includes('#advsettings')) tab = 'advsettings';
 
-                    window.location.hash = tab;
                     activateTab(tab);
+                    history.replaceState(null, null, '#'+tab);
                 }
+               
             });
 
-            var hash = window.location.hash.substring(1);
+            // --------- Initial Load ---------
+            let hash = window.location.hash.substring(1);
             if (hash) {
                 activateTab(hash);
             } else {
-                activateTab('overview'); 
+                activateTab('overview');
             }
 
             $('.easyel-nav-tab').click(function (e) {
                 e.preventDefault();
-                var tab = $(this).data('tab');
+                let tab = $(this).data('tab');
                 activateTab(tab);
-                history.replaceState(null, null, '#'+tab); 
+                history.replaceState(null, null, '#'+tab);
             });
 
             // --------- Tab Active Function ---------
@@ -516,11 +364,9 @@
                 $('.easyel-nav-tab').removeClass('easyel-nav-tab-active');
                 $('.easyel-nav-tab[data-tab="' + tab + '"]').addClass('easyel-nav-tab-active');
 
-                // Panels show/hide
                 $('.easyel-tab-panel').hide();
                 $('#tab-' + tab).show();
 
-                // Admin submenu active state sync
                 $('#toplevel_page_easy-elements-dashboard ul.wp-submenu li').removeClass('current');
                 $('#toplevel_page_easy-elements-dashboard ul.wp-submenu a[href*="#' + tab + '"]').parent().addClass('current');
             }
@@ -537,7 +383,6 @@
                 $(".easy-widget-item,.easyel-extension-item").each(function() {
                     var $widget = $(this);
 
-                 
                     if (filter === "easyel_all") {
                         $widget.show();
                     } 
