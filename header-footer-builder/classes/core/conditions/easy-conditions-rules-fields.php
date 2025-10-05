@@ -107,11 +107,11 @@ class EASY_EHF_Target_Rules_Fields {
 			'_builtin' => true,
 		);
 
-		$post_types = easy_get_post_types( $args, 'objects' );
+		$post_types = get_post_types( $args, 'objects' );
 		unset( $post_types['attachment'] );
 
 		$args['_builtin'] = false;
-		$custom_post_type = easy_get_post_types( $args, 'objects' );
+		$custom_post_type = get_post_types( $args, 'objects' );
 
 		$post_types = apply_filters( 'astra_location_rule_post_types', array_merge( $post_types, $custom_post_type ) );
 
@@ -312,7 +312,7 @@ class EASY_EHF_Target_Rules_Fields {
 
 		$output     = 'names'; // names or objects, note names is the default.
 		$operator   = 'and'; // also supports 'or'.
-		$post_types = easy_get_post_types( $args, $output, $operator );
+		$post_types = get_post_types( $args, $output, $operator );
 
 		unset( $post_types['elementor-hf'] ); //Exclude EHF templates.
 
@@ -525,7 +525,7 @@ class EASY_EHF_Target_Rules_Fields {
 
 		/* WP Template Format */
 		$output .= '<script type="text/html" id="tmpl-astra-target-rule-' . $rule_type . '-condition">';
-		$output .= '<div class="astra-target-rule-condition ast-target-rule-{{data.id}}" data-rule="{{data.id}}" >';
+		$output .= '<div class="easyel-target-rule-condition ast-target-rule-{{data.id}}" data-rule="{{data.id}}" >';
 		$output .= '<span class="target_rule-condition-delete dashicons dashicons-dismiss"></span>';
 		/* Condition Selection */
 		$output .= '<div class="target_rule-condition-wrap" >';
@@ -542,7 +542,7 @@ class EASY_EHF_Target_Rules_Fields {
 		$output .= '</select>';
 		$output .= '</div>';
 
-		$output .= '</div> <!-- astra-target-rule-condition -->';
+		$output .= '</div> <!-- easyel-target-rule-condition -->';
 
 		/* Specific page selection */
 		$output .= '<div class="target_rule-specific-page-wrap" style="display:none">';
@@ -553,10 +553,10 @@ class EASY_EHF_Target_Rules_Fields {
 		$output .= '</script>';
 
 		/* Wrapper Start */
-		$output .= '<div class="ast-target-rule-wrapper ast-target-rule-' . $rule_type . '-on-wrap" data-type="' . $rule_type . '">';
+		$output .= '<div class="easyel-target-rule-wrapper ast-target-rule-' . $rule_type . '-on-wrap" data-type="' . $rule_type . '">';
 		// $output .= '<input type="hidden" class="form-control ast-input ast-target_rule-input" name="' . esc_attr( $input_name ) . '" value=' . $value . ' />';
-		$output .= '<div class="ast-target-rule-selector-wrapper ast-target-rule-' . $rule_type . '-on">';
-		$output .= self::generate_target_rule_selector( $rule_type, $selection_options, $input_name, $saved_values, $add_rule_label );
+		$output .= '<div class="easyel-target-rule-selector-wrapper ast-target-rule-' . $rule_type . '-on">';
+		$output .= self::easy_generate_target_rule_selector( $rule_type, $selection_options, $input_name, $saved_values, $add_rule_label );
 		$output .= '</div>';
 
 		/* Wrapper end */
@@ -619,7 +619,7 @@ class EASY_EHF_Target_Rules_Fields {
 	 *
 	 * @return HTML Markup for for the location settings.
 	 */
-	public static function generate_target_rule_selector( $type, $selection_options, $input_name, $saved_values, $add_rule_label ) {
+	public static function easy_generate_target_rule_selector( $type, $selection_options, $input_name, $saved_values, $add_rule_label ) {
 		$output = '<div class="target_rule-builder-wrap">';
 
 		if ( ! is_array( $saved_values ) || ( is_array( $saved_values ) && empty( $saved_values ) ) ) {
@@ -631,7 +631,7 @@ class EASY_EHF_Target_Rules_Fields {
 		$index = 0;
 
 		foreach ( $saved_values['rule'] as $index => $data ) {
-			$output .= '<div class="astra-target-rule-condition ast-target-rule-' . $index . '" data-rule="' . $index . '" >';
+			$output .= '<div class="easyel-target-rule-condition ast-target-rule-' . $index . '" data-rule="' . $index . '" >';
 			/* Condition Selection */
 			$output .= '<span class="target_rule-condition-delete dashicons dashicons-dismiss"></span>';
 			$output .= '<div class="target_rule-condition-wrap" >';
@@ -700,7 +700,7 @@ class EASY_EHF_Target_Rules_Fields {
 		$output .= '</div>';
 
 		/* Add new rule */
-		$output .= '<div class="target_rule-add-rule-wrap">';
+		$output .= '<div class="easyel_target_rule-add-rule-wrap">';
 		$output .= '<a href="#" class="button" data-rule-id="' . absint( $index ) . '" data-rule-type="' . $type . '">' . $add_rule_label . '</a>';
 		$output .= '</div>';
 
@@ -934,8 +934,8 @@ class EASY_EHF_Target_Rules_Fields {
 		$selection_options = self::$user_selection;
 
 		/* WP Template Format */
-		$output         .= '<script type="text/html" id="tmpl-astra-user-role-condition">';
-			$output     .= '<div class="astra-user-role-condition ast-user-role-{{data.id}}" data-rule="{{data.id}}" >';
+		$output         .= '<script type="text/html" id="tmpl-easyel-user-role-condition">';
+			$output     .= '<div class="easyel-user-role-condition ast-user-role-{{data.id}}" data-rule="{{data.id}}" >';
 				$output .= '<span class="user_role-condition-delete dashicons dashicons-dismiss"></span>';
 				/* Condition Selection */
 				$output     .= '<div class="user_role-condition-wrap" >';
@@ -951,7 +951,7 @@ class EASY_EHF_Target_Rules_Fields {
 		}
 					$output .= '</select>';
 				$output     .= '</div>';
-			$output         .= '</div> <!-- astra-user-role-condition -->';
+			$output         .= '</div> <!-- easyel-user-role-condition -->';
 		$output             .= '</script>';
 
 		if ( ! is_array( $saved_values ) || ( is_array( $saved_values ) && empty( $saved_values ) ) ) {
@@ -965,7 +965,7 @@ class EASY_EHF_Target_Rules_Fields {
 			$output     .= '<div class="ast-user-role-selector-wrapper ast-user-role-display-on">';
 				$output .= '<div class="user_role-builder-wrap">';
 		foreach ( $saved_values as $index => $data ) {
-			$output     .= '<div class="astra-user-role-condition ast-user-role-' . $index . '" data-rule="' . $index . '" >';
+			$output     .= '<div class="easyel-user-role-condition ast-user-role-' . $index . '" data-rule="' . $index . '" >';
 				$output .= '<span class="user_role-condition-delete dashicons dashicons-dismiss"></span>';
 				/* Condition Selection */
 				$output     .= '<div class="user_role-condition-wrap" >';
@@ -981,7 +981,7 @@ class EASY_EHF_Target_Rules_Fields {
 			}
 					$output .= '</select>';
 				$output     .= '</div>';
-					$output .= '</div> <!-- astra-user-role-condition -->';
+					$output .= '</div> <!-- easyel-user-role-condition -->';
 		}
 				$output .= '</div>';
 				/* Add new rule */

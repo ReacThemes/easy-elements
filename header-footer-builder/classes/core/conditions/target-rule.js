@@ -38,7 +38,7 @@
 		var old_value = rule_input.val();
 		var new_value = [];
 		
-		wrapper.find('.astra-target-rule-condition').each(function(i) {
+		wrapper.find('.easyel-target-rule-condition').each(function(i) {
 			
 			var $this 			= $(this);
 			var temp_obj 		= {};
@@ -66,8 +66,8 @@
 
 	var update_close_button = function(wrapper) {
 
-		type 		= wrapper.closest('.ast-target-rule-wrapper').attr('data-type');
-		rules 		= wrapper.find('.astra-target-rule-condition');
+		type 		= wrapper.closest('.easyel-target-rule-wrapper').attr('data-type');
+		rules 		= wrapper.find('.easyel-target-rule-condition');
 		show_close	= false;
 
 		if ( 'display' == type ) {
@@ -93,7 +93,7 @@
 		
 		var exclude_field_wrap = exclude_on.closest('tr');
 		var add_exclude_block  = display_on.find('.target_rule-add-exclusion-rule');
-		var exclude_conditions = exclude_on.find('.astra-target-rule-condition');
+		var exclude_conditions = exclude_on.find('.easyel-target-rule-condition');
 		
 		if ( true == force_hide ) {
 			exclude_field_wrap.addClass( 'ast-hidden' );
@@ -116,7 +116,7 @@
 
 	$(document).ready(function($) {
 
-		jQuery( '.astra-target-rule-condition' ).each( function() {
+		jQuery( '.easyel-target-rule-condition' ).each( function() {
 			var $this 			= $( this ),
 				condition 		= $this.find('select.target_rule-condition'),
 				condition_val 	= condition.val(),
@@ -132,45 +132,45 @@
 			init_target_rule_select2( el );
 		});
 
-		jQuery('.ast-target-rule-selector-wrapper').each(function() {
+		jQuery('.easyel-target-rule-selector-wrapper').each(function() {
 			update_close_button( jQuery(this) );
 		})
 
 		/* Show hide exclusion button */
 		update_exclusion_button();
 
-		jQuery( document ).on( 'change', '.astra-target-rule-condition select.target_rule-condition' , function( e ) {
+		jQuery( document ).on( 'change', '.easyel-target-rule-condition select.target_rule-condition' , function( e ) {
 			
 			var $this 		= jQuery(this),
 				this_val 	= $this.val(),
-				field_wrap 	= $this.closest('.ast-target-rule-wrapper');
+				field_wrap 	= $this.closest('.easyel-target-rule-wrapper');
 
 			if( 'specifics' == this_val ) {
-				$this.closest( '.astra-target-rule-condition' ).next( '.target_rule-specific-page-wrap' ).slideDown( 300 );
+				$this.closest( '.easyel-target-rule-condition' ).next( '.target_rule-specific-page-wrap' ).slideDown( 300 );
 			} else {
-				$this.closest( '.astra-target-rule-condition' ).next( '.target_rule-specific-page-wrap' ).slideUp( 300 );
+				$this.closest( '.easyel-target-rule-condition' ).next( '.target_rule-specific-page-wrap' ).slideUp( 300 );
 			}
 
 			update_target_rule_input( field_wrap );
 		} );
 
-		jQuery( '.ast-target-rule-selector-wrapper' ).on( 'change', '.target-rule-select2', function(e) {
+		jQuery( '.easyel-target-rule-selector-wrapper' ).on( 'change', '.target-rule-select2', function(e) {
 			var $this 		= jQuery( this ),
-				field_wrap 	= $this.closest('.ast-target-rule-wrapper');
+				field_wrap 	= $this.closest('.easyel-target-rule-wrapper');
 
 			update_target_rule_input( field_wrap );
 		});
 		
-		jQuery( '.ast-target-rule-selector-wrapper' ).on( 'click', '.target_rule-add-rule-wrap a', function(e) {
+		jQuery( '.easyel-target-rule-selector-wrapper' ).on( 'click', '.easyel_target_rule-add-rule-wrap a', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			var $this 	= jQuery( this ),
 				id 		= $this.attr( 'data-rule-id' ),
 				new_id 	= parseInt(id) + 1,
 				type 	= $this.attr( 'data-rule-type' ),
-				rule_wrap = $this.closest('.ast-target-rule-selector-wrapper').find('.target_rule-builder-wrap'),
+				rule_wrap = $this.closest('.easyel-target-rule-selector-wrapper').find('.target_rule-builder-wrap'),
 				template  = wp.template( 'astra-target-rule-' + type + '-condition' ),
-				field_wrap 		= $this.closest('.ast-target-rule-wrapper');
+				field_wrap 		= $this.closest('.easyel-target-rule-wrapper');
 
 			rule_wrap.append( template( { id : new_id, type : type } ) );
 			
@@ -181,10 +181,10 @@
 			update_close_button( field_wrap );
 		});
 
-		jQuery( '.ast-target-rule-selector-wrapper' ).on( 'click', '.target_rule-condition-delete', function(e) {
+		jQuery( '.easyel-target-rule-selector-wrapper' ).on( 'click', '.target_rule-condition-delete', function(e) {
 			var $this 			= jQuery( this ),
-				rule_condition 	= $this.closest('.astra-target-rule-condition'),
-				field_wrap 		= $this.closest('.ast-target-rule-wrapper');
+				rule_condition 	= $this.closest('.easyel-target-rule-condition'),
+				field_wrap 		= $this.closest('.easyel-target-rule-wrapper');
 				cnt 			= 0,
 				data_type 		= field_wrap.attr( 'data-type' ),
 				optionVal 		= $this.siblings('.target_rule-condition-wrap').children('.target_rule-condition').val();
@@ -199,17 +199,17 @@
 					update_exclusion_button( false, true );
 
 				}else{
-					$this.parent('.astra-target-rule-condition').next('.target_rule-specific-page-wrap').remove();
+					$this.parent('.easyel-target-rule-condition').next('.target_rule-specific-page-wrap').remove();
 					rule_condition.remove();
 				}
 
 			} else {
 
-				$this.parent('.astra-target-rule-condition').next('.target_rule-specific-page-wrap').remove();
+				$this.parent('.easyel-target-rule-condition').next('.target_rule-specific-page-wrap').remove();
 				rule_condition.remove();
 			}
 
-			field_wrap.find('.astra-target-rule-condition').each(function(i) {
+			field_wrap.find('.easyel-target-rule-condition').each(function(i) {
 				var condition       = jQuery( this ),
 					old_rule_id     = condition.attr('data-rule'),
 					select_location = condition.find('.target_rule-condition'),
@@ -225,13 +225,13 @@
 				cnt = i;
 			});
 
-			field_wrap.find('.target_rule-add-rule-wrap a').attr( 'data-rule-id', cnt )
+			field_wrap.find('.easyel_target_rule-add-rule-wrap a').attr( 'data-rule-id', cnt )
 
 			update_close_button( field_wrap );
 			update_target_rule_input( field_wrap );
 		});
 		
-		jQuery( '.ast-target-rule-selector-wrapper' ).on( 'click', '.target_rule-add-exclusion-rule a', function(e) {
+		jQuery( '.easyel-target-rule-selector-wrapper' ).on( 'click', '.target_rule-add-exclusion-rule a', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			update_exclusion_button( true );

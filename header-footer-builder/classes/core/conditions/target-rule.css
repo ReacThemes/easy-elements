@@ -9,27 +9,27 @@
     background: #ecebeb;
     margin-bottom: 0;
 }
-.ast-target-rule-wrapper  .select2-container {
+.easyel-target-rule-wrapper  .select2-container {
     display: inline-block;
     position: relative;
     vertical-align: middle;
     width: 100% !important;
 }
 
-.ast-target-rule-wrapper .select2-container--default.select2-container--focus .select2-selection--multiple,
-.ast-target-rule-wrapper .select2-container--default .select2-selection--multiple {
+.easyel-target-rule-wrapper .select2-container--default.select2-container--focus .select2-selection--multiple,
+.easyel-target-rule-wrapper .select2-container--default .select2-selection--multiple {
     border: 1px solid #ddd;
     margin-top: 10px;
 }
 
-.ast-target-rule-wrapper .select2-container .select2-search--inline,
-.ast-target-rule-wrapper .select2-container--default .select2-search--inline .select2-search__field {
+.easyel-target-rule-wrapper .select2-container .select2-search--inline,
+.easyel-target-rule-wrapper .select2-container--default .select2-search--inline .select2-search__field {
     width: 100% !important;
 }
 
 /* Target Rule field */
-.astra-target-rule-condition,
-.astra-user-role-condition {
+.easyel-target-rule-condition,
+.easyel-user-role-condition {
     position: relative;
     margin-top: 10px;
 }
@@ -40,7 +40,7 @@
 }
 
 .user_role-add-rule-wrap,
-.target_rule-add-rule-wrap,
+.easyel_target_rule-add-rule-wrap,
 .target_rule-add-exclusion-rule,
 .user_role-add-rule-wrap {
     margin-top: 15px;
@@ -71,7 +71,7 @@
     color: #d54e21;
 }
 
-.target_rule-add-rule-wrap {
+.easyel_target_rule-add-rule-wrap {
     display: inline-block;
 }
 

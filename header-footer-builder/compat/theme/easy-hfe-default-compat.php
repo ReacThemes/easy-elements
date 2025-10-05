@@ -56,7 +56,7 @@ class EE_HFE_Default_Compat {
 	 * @return void
 	 */
 	public function override_header() {
-		require EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/hfe-header.php';
+		require EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/easy-header.php';
 		$templates   = [];
 		$templates[] = 'header.php';
 		// Avoid running wp_head hooks again.
@@ -74,7 +74,7 @@ class EE_HFE_Default_Compat {
 	 * @return void
 	 */
 	public function override_footer() {
-		require EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/hfe-footer.php';
+		require EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/easy-footer.php';
 		$templates   = [];
 		$templates[] = 'footer.php';
 		// Avoid running wp_footer hooks again.
