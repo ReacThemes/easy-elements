@@ -42,6 +42,10 @@ input.hfe-large-text{
 }
 .easy-options-row-ehf-content select {
     width: 95%;
+    height: 45px;
+    border-radius: 6px;
+    background: #ffffff;
+    border: 2px solid #efecec;
 }
 .hfe_radio_options {
     display: inline-block;
@@ -66,10 +70,10 @@ li#toplevel_page_Settings-page,
 .hfe-selected-template-type-custom .easy-shortcode-ehf {
     display: table-row;
 }
-.hfe-selected-template-type-custom .bsf-target-rules-row,
+.hfe-selected-template-type-custom .easy-target-rules-row,
 .hfe-selected-template-type-custom .enable-for-canvas,
 .easy-shortcode-ehf,
-.hfe-selected-template-type-none .bsf-target-rules-row,
+.hfe-selected-template-type-none .easy-target-rules-row,
 .hfe-selected-template-type-none .easy-shortcode-ehf,
 .hfe-selected-template-type-none .enable-for-canvas,
 .hfe-guide-content .form-table th {

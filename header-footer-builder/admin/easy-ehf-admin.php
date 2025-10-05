@@ -311,13 +311,13 @@ class Easy_EHF_Admin {
 		$exclude_locations = get_post_meta( get_the_id(), 'ehf_target_exclude_locations', true );
 		$users             = get_post_meta( get_the_id(), 'ehf_target_user_roles', true );
 		?>
-		<tr class="bsf-target-rules-row easy-options-row-ehf">
-			<td class="bsf-target-rules-row-heading easy-options-row-ehf-heading">
+		<tr class="easy-target-rules-row easy-options-row-ehf">
+			<td class="easy-target-rules-row-heading easy-options-row-ehf-heading">
 				<label><?php esc_html_e( 'Visible On', 'easy-elements' ); ?></label>
-				<i class="bsf-target-rules-heading-help dashicons dashicons-editor-help"
+				<i class="easy-target-rules-heading-help dashicons dashicons-editor-help"
 					title="<?php echo esc_attr__( 'Choose the pages or areas where this template should show.', 'easy-elements' ); ?>"></i>
 			</td>
-			<td class="bsf-target-rules-row-content easy-options-row-ehf-content">
+			<td class="easy-target-rules-row-content easy-options-row-ehf-content">
 				<?php
 				EASY_EHF_Target_Rules_Fields::target_rule_settings_field(
 					'bsf-target-rules-location',
@@ -326,20 +326,20 @@ class Easy_EHF_Admin {
 						'value'          => '[{"type":"basic-global","specific":null}]',
 						'tags'           => 'site,enable,target,pages',
 						'rule_type'      => 'display',
-						'add_rule_label' => __( 'Add Display Condition', 'easy-elements' ),
+						'add_rule_label' => __( 'Add Rule', 'easy-elements' ),
 					],
 					$include_locations
 				);
 				?>
 			</td>
 		</tr>
-		<tr class="bsf-target-rules-row easy-options-row-ehf">
-			<td class="bsf-target-rules-row-heading easy-options-row-ehf-heading">
+		<tr class="easy-target-rules-row easy-options-row-ehf">
+			<td class="easy-target-rules-row-heading easy-options-row-ehf-heading">
 				<label><?php esc_html_e( 'Do Not Show On', 'easy-elements' ); ?></label>
-				<i class="bsf-target-rules-heading-help dashicons dashicons-editor-help"
+				<i class="easy-target-rules-heading-help dashicons dashicons-editor-help"
 					title="<?php echo esc_attr__( 'Select the pages or sections where this template should NOT appear.', 'easy-elements' ); ?>"></i>
 			</td>
-			<td class="bsf-target-rules-row-content easy-options-row-ehf-content">
+			<td class="easy-target-rules-row-content easy-options-row-ehf-content">
 				<?php
 				EASY_EHF_Target_Rules_Fields::target_rule_settings_field(
 					'bsf-target-rules-exclusion',
@@ -347,7 +347,7 @@ class Easy_EHF_Admin {
 						'title'          => __( 'Exclude On', 'easy-elements' ),
 						'value'          => '[]',
 						'tags'           => 'site,enable,target,pages',
-						'add_rule_label' => __( 'Add Exclusion Condition', 'easy-elements' ),
+						'add_rule_label' => __( 'Add Exclude Rule', 'easy-elements' ),
 						'rule_type'      => 'exclude',
 					],
 					$exclude_locations
