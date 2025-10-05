@@ -93,7 +93,7 @@ function easyel_before_content_container_hfe() {
     }
     echo '<div class="easyel-content-container">';
 }
-add_action( 'hfe_header', 'easyel_before_content_container_hfe', 20 );
+add_action( 'easy_header', 'easyel_before_content_container_hfe', 20 );
 
 /**
  * Close container before HFE Footer
@@ -105,7 +105,7 @@ function easyel_after_content_container_hfe() {
     }
     echo '</div>';
 }
-add_action( 'hfe_footer', 'easyel_after_content_container_hfe', 5 );
+add_action( 'easy_footer', 'easyel_after_content_container_hfe', 5 );
 
 add_action( 'plugins_loaded', function() {
    Easy_Header_Footer_Elementor::instance();

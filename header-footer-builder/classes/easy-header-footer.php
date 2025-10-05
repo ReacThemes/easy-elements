@@ -93,11 +93,11 @@ class Easy_Header_Footer_Elementor {
 	 * Adds classes to the body tag conditionally.
 	 */
 	public function easy_body_class( $classes ) {
-		if ( ee_hfe_header_enabled() ) {
+		if ( ee_easy_header_enabled() ) {
 			$classes[] = 'ehf-header';
 		}
 
-		if ( ee_hfe_footer_enabled() ) {
+		if ( ee_easy_footer_enabled() ) {
 			$classes[] = 'ehf-footer';
 		}
 
@@ -195,8 +195,8 @@ class Easy_Header_Footer_Elementor {
 			$elementor->frontend->enqueue_styles();
 		}
 
-		self::force_enqueue_css( get_ee_hfe_header_id() );
-		self::force_enqueue_css( get_ee_hfe_footer_id() );
+		self::force_enqueue_css( get_ee_easy_header_id() );
+		self::force_enqueue_css( get_ee_easy_footer_id() );
 		self::force_enqueue_css( ee_hfe_get_before_footer_id() );
 		self::force_enqueue_css( hfe_get_before_header_id() );
 	}
@@ -205,8 +205,8 @@ class Easy_Header_Footer_Elementor {
 	 * Enqueue all Elementor header/footer CSS early in head.
 	 */
 	public function easy_header_footer_css_early() {
-		self::force_enqueue_css( get_ee_hfe_header_id() );
-		self::force_enqueue_css( get_ee_hfe_footer_id() );
+		self::force_enqueue_css( get_ee_easy_header_id() );
+		self::force_enqueue_css( get_ee_easy_footer_id() );
 		self::force_enqueue_css( ee_hfe_get_before_footer_id() );
 		self::force_enqueue_css( hfe_get_before_header_id() );
 	}
@@ -215,7 +215,7 @@ class Easy_Header_Footer_Elementor {
 	 * Get the header content
 	 */
 	public static function get_header_content() {
-		$header_id = get_ee_hfe_header_id();
+		$header_id = get_ee_easy_header_id();
 
 		if ( function_exists( 'icl_object_id' ) ) {
 			$header_id = icl_object_id( $header_id, 'elementor_library', true, ( defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : null ) );
@@ -231,7 +231,7 @@ class Easy_Header_Footer_Elementor {
 	 * Get the footer content
 	 */
 	public static function get_footer_content() {
-		$footer_id = get_ee_hfe_footer_id();
+		$footer_id = get_ee_easy_footer_id();
 
 		if ( function_exists( 'icl_object_id' ) ) {
 			$footer_id = icl_object_id( $footer_id, 'elementor_library', true, ( defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : null ) );

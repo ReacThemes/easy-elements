@@ -428,7 +428,7 @@ class Easy_EHF_Admin {
 		$template_type = get_post_meta( $post->ID, 'ehf_template_type', true );
 
 		if ( '' !== $template_type ) {
-			$templates = EE_Header_Footer_Elementor::get_template_id( $template_type );
+			$templates = Easy_Header_Footer_Elementor::get_template_id( $template_type );
 
 			// Check if more than one template is selected for current template type.
 			if ( is_array( $templates ) && isset( $templates[1] ) && $post->ID != $templates[0] ) {
@@ -478,8 +478,8 @@ class Easy_EHF_Admin {
 	 * @return array Modified body classes.
 	 */
 	public function easy_fixed_header_body_class( $classes ) {
-		if ( class_exists( 'EE_Header_Footer_Elementor' ) ) {
-			$header_id = EE_Header_Footer_Elementor::get_settings( 'type_header', '' );
+		if ( class_exists( 'Easy_Header_Footer_Elementor' ) ) {
+			$header_id = Easy_Header_Footer_Elementor::get_settings( 'type_header', '' );
 			if ( $header_id && '1' === get_post_meta( $header_id, '_easyel_fixed_header', true ) ) {
 				$classes[] = 'easyel-fixed-header';
 			}

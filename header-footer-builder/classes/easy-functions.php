@@ -8,7 +8,7 @@
  * @since 1.0.0
  */
 
-function ee_hfe_header_enabled() {
+function ee_easy_header_enabled() {
 	$header_id = Easy_Header_Footer_Elementor::get_settings( 'type_header', '' );
 	$status    = false;
 
@@ -16,7 +16,7 @@ function ee_hfe_header_enabled() {
 		$status = true;
 	}
 
-	return apply_filters( 'ee_hfe_header_enabled', $status );
+	return apply_filters( 'ee_easy_header_enabled', $status );
 }
 
 /**
@@ -25,7 +25,7 @@ function ee_hfe_header_enabled() {
  * @since 1.0.0
  * @return bool True if footer is enabled, false otherwise.
  */
-function ee_hfe_footer_enabled() {
+function ee_easy_footer_enabled() {
 	$footer_id = Easy_Header_Footer_Elementor::get_settings( 'type_footer', '' );
 	$status    = false;
 
@@ -33,7 +33,7 @@ function ee_hfe_footer_enabled() {
 		$status = true;
 	}
 
-	return apply_filters( 'ee_hfe_footer_enabled', $status );
+	return apply_filters( 'ee_easy_footer_enabled', $status );
 }
 
 /**
@@ -42,14 +42,14 @@ function ee_hfe_footer_enabled() {
  * @since 1.0.0
  * @return string|false Header ID if set, otherwise false.
  */
-function get_ee_hfe_header_id() {
+function get_ee_easy_header_id() {
 	$header_id = Easy_Header_Footer_Elementor::get_settings( 'type_header', '' );
 
 	if ( '' === $header_id ) {
 		$header_id = false;
 	}
 
-	return apply_filters( 'get_ee_hfe_header_id', $header_id );
+	return apply_filters( 'get_ee_easy_header_id', $header_id );
 }
 
 /**
@@ -58,14 +58,14 @@ function get_ee_hfe_header_id() {
  * @since 1.0.0
  * @return string|false Footer ID if set, otherwise false.
  */
-function get_ee_hfe_footer_id() {
+function get_ee_easy_footer_id() {
 	$footer_id = Easy_Header_Footer_Elementor::get_settings( 'type_footer', '' );
 
 	if ( '' === $footer_id ) {
 		$footer_id = false;
 	}
 
-	return apply_filters( 'get_ee_hfe_footer_id', $footer_id );
+	return apply_filters( 'get_ee_easy_footer_id', $footer_id );
 }
 
 /**

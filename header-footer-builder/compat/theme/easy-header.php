@@ -24,6 +24,6 @@
 <body <?php body_class(); ?>>
 <?php do_action( 'wp_body_open' ); ?>
 <div id="page" class="eel-hfeed eel-site">    
-<?php if( !is_404() ) { do_action( 'hfe_header' ); } ?>
+<?php if( !is_404() ) { do_action( 'easy_header' ); } ?>
 
 

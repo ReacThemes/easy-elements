@@ -23,27 +23,27 @@ class Global_Theme_Compatibility {
 	 * Run all the Actions / Filters.
 	 */
 	public function hooks() {
-		if ( ee_hfe_header_enabled() ) {
+		if ( ee_easy_header_enabled() ) {
 			// Replace header.php.
 			add_action( 'get_header', [ $this, 'option_override_header' ] );
 
-			add_action( 'wp_body_open', [ 'EE_Header_Footer_Elementor', 'get_header_content' ] );
-			add_action( 'hfe_fallback_header', [ 'EE_Header_Footer_Elementor', 'get_header_content' ] );
+			add_action( 'wp_body_open', [ 'Easy_Header_Footer_Elementor', 'get_header_content' ] );
+			add_action( 'hfe_fallback_header', [ 'Easy_Header_Footer_Elementor', 'get_header_content' ] );
 		}
 
-		if ( ee_hfe_header_enabled() && hfe_is_before_header_enabled() ) {
-			add_action( 'hfe_header_before', [ 'EE_Header_Footer_Elementor', 'get_before_header_content' ], 20 );
+		if ( ee_easy_header_enabled() && hfe_is_before_header_enabled() ) {
+			add_action( 'easy_header_before', [ 'Easy_Header_Footer_Elementor', 'get_before_header_content' ], 20 );
 		}
 
 		if ( ee_hfe_is_before_footer_enabled() ) {
-			add_action( 'wp_footer', [ 'EE_Header_Footer_Elementor', 'get_before_footer_content' ], 20 );
+			add_action( 'wp_footer', [ 'Easy_Header_Footer_Elementor', 'get_before_footer_content' ], 20 );
 		}
 
-		if ( ee_hfe_footer_enabled() ) {
-			add_action( 'wp_footer', [ 'EE_Header_Footer_Elementor', 'get_footer_content' ], 50 );
+		if ( ee_easy_footer_enabled() ) {
+			add_action( 'wp_footer', [ 'Easy_Header_Footer_Elementor', 'get_footer_content' ], 50 );
 		}
 
-		if ( ee_hfe_header_enabled() || ee_hfe_footer_enabled() ) {
+		if ( ee_easy_header_enabled() || ee_easy_footer_enabled() ) {
 			add_action( 'wp_enqueue_scripts', [ $this, 'force_fullwidth' ] );
 		}
 	}
@@ -63,13 +63,13 @@ class Global_Theme_Compatibility {
 			left: 50%;
 		}';
 
-		if ( true === ee_hfe_header_enabled() ) {
+		if ( true === ee_easy_header_enabled() ) {
 			$css .= 'header#masthead {
 				display: none;
 			}';
 		}
 
-		if ( true === ee_hfe_footer_enabled() ) {
+		if ( true === ee_easy_footer_enabled() ) {
 			$css .= 'footer#colophon {
 				display: none;
 			}';

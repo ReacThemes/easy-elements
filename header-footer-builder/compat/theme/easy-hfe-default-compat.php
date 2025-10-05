@@ -14,37 +14,37 @@ class EE_HFE_Default_Compat {
 	 *  Initiator
 	 */
 	public function __construct() {
-		add_action( 'wp', [ $this, 'hooks' ] );
+		add_action( 'wp', [ $this, 'init_wp_hooks' ] );
 	}
 
 	/**
 	 * Run all the Actions / Filters.
 	 */
-	public function hooks() {
-		if ( ee_hfe_header_enabled() ) {
+	public function init_wp_hooks() {
+		if ( ee_easy_header_enabled() ) {
 			// Replace header.php template.
-			add_action( 'get_header', [ $this, 'override_header' ] );
+			add_action( 'get_header', [ $this, 'easy_override_header' ] );
 
 			// Display HFE's header in the replaced header.
-			add_action( 'hfe_header', 'ee_hfe_render_header' );
+			add_action( 'easy_header', 'ee_hfe_render_header' );
 		}
 
-		if ( ee_hfe_header_enabled() && hfe_is_before_header_enabled() ) {
-			add_action( 'hfe_header_before', [ 'EE_Header_Footer_Elementor', 'get_before_header_content' ], 20 );
+		if ( ee_easy_header_enabled() && hfe_is_before_header_enabled() ) {
+			add_action( 'easy_header_before', [ 'Easy_Header_Footer_Elementor', 'get_before_header_content' ], 20 );
 		}
 
-		if ( ee_hfe_footer_enabled() || ee_hfe_is_before_footer_enabled() ) {
+		if ( ee_easy_footer_enabled() || ee_hfe_is_before_footer_enabled() ) {
 			// Replace footer.php template.
-			add_action( 'get_footer', [ $this, 'override_footer' ] );
+			add_action( 'get_footer', [ $this, 'easy_override_footer' ] );
 		}
 
-		if ( ee_hfe_footer_enabled() ) {
+		if ( ee_easy_footer_enabled() ) {
 			// Display HFE's footer in the replaced header.
-			add_action( 'hfe_footer', 'ee_hfe_render_footer' );
+			add_action( 'easy_footer', 'ee_hfe_render_footer' );
 		}
 
 		if ( ee_hfe_is_before_footer_enabled() ) {
-			add_action( 'hfe_footer_before', [ 'EE_Header_Footer_Elementor', 'get_before_footer_content' ] );
+			add_action( 'easy_footer_before', [ 'Easy_Header_Footer_Elementor', 'get_before_footer_content' ] );
 		}
 	}
 
@@ -55,7 +55,7 @@ class EE_HFE_Default_Compat {
 	 *
 	 * @return void
 	 */
-	public function override_header() {
+	public function easy_override_header() {
 		require EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/easy-header.php';
 		$templates   = [];
 		$templates[] = 'header.php';
@@ -73,7 +73,7 @@ class EE_HFE_Default_Compat {
 	 *
 	 * @return void
 	 */
-	public function override_footer() {
+	public function easy_override_footer() {
 		require EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/easy-footer.php';
 		$templates   = [];
 		$templates[] = 'footer.php';
