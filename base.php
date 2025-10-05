@@ -69,10 +69,14 @@ final class Easyel_Elements_Elementor_Extension {
 			'title' => esc_html__( 'Easy Header Footer Elements', 'easy-elements' ),
 			'icon'  => 'fa fa-header',
 		] );
+		$elements_manager->add_category( 'easyelements_category_form', [
+			'title' => esc_html__( 'Easy Elements Form', 'easy-elements' ),
+			'icon'  => 'fa fa-plug',
+		] );
 		$elements_manager->add_category( 'easyelements_category_pro', [
 			'title' => esc_html__( 'Easy Elements Pro', 'easy-elements-pro' ),
 			'icon'  => 'fa fa-plug',
-		] );
+		] );		
 	}
 
 	public function init_widgets() {
@@ -103,6 +107,7 @@ final class Easyel_Elements_Elementor_Extension {
 			'easy_offcanvas'  				=> [ 'class' => '\Easyel_Offcanvas_Widget',    			'file' => __DIR__ . '/widgets/offcanvas/offcanvas.php' ,'tab' => 'widget'],
 			'easy_scroll_to_top'  			=> [ 'class' => '\Easyel_Scroll_To_Top_Widget',    			'file' => __DIR__ . '/widgets/scroll-to-top/scroll.php' ,'tab' => 'widget'],
 			'easy_table'  					=> [ 'class' => '\Easyel_Table_Elementor_Widget',    				'file' => __DIR__ . '/widgets/table/table-normal.php','tab' => 'widget' ],
+			'easy_cf7'  					=> [ 'class' => '\easyel__CF7_Widget',    				'file' => __DIR__ . '/widgets/cf7/contact-cf7.php','tab' => 'widget' ],
 		];
 
 	    foreach ( $widgets as $key => $data ) {

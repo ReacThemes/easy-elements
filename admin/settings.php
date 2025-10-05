@@ -52,7 +52,7 @@ class Easyel_Elements {
             'manage_options',
             'easy-elements-dashboard',
             array( $this, 'easyel_elements_settings_callback' ),
-            'dashicons-layout',
+            'easyel-layout',
             59
         );
 
@@ -275,16 +275,14 @@ class Easyel_Elements {
             <img src="<?php echo plugin_dir_url( __DIR__ ).'admin/img/easy-logo.png'; ?>" alt="logo">
         </div>
         <div class="wrap easyel-plugin-settings-wrapper">
-
             <div class="easyel-nav-tab-item">
-                <div class="easyel-nav-tab-wrapper">
-                    <a href="#overview" class="easyel-nav-tab easyel-nav-tab-active" data-tab="overview"><i class="ee-home"></i> <?php esc_html_e ('Overview','easy-elements'); ?></a>
-                    <a href="#widget" class="easyel-nav-tab" data-tab="widget"><i class="ee-widgets"></i><?php esc_html_e('All Widgets','easy-elements'); ?></a>
-                    <a href="#extensions" class="easyel-nav-tab" data-tab="extensions"><i class="ee-extension"></i><?php esc_html_e('All Extensions','easy-elements'); ?></a>
+                <div class="easyel-nav-tab-wrapper easyel-border-radius-20">
+                    <a href="#overview" class="easyel-nav-tab easyel-nav-tab-active" data-tab="overview"><i class="easyelIcon-home"></i> <?php esc_html_e ('Overview','easy-elements'); ?></a>
+                    <a href="#widget" class="easyel-nav-tab" data-tab="widget"><i class="easyelIcon-widgets"></i><?php esc_html_e('All Widgets','easy-elements'); ?></a>
+                    <a href="#extensions" class="easyel-nav-tab" data-tab="extensions"><i class="easyelIcon-extension"></i><?php esc_html_e('All Extensions','easy-elements'); ?></a>
                     <div class="easyel-tab-pro-link">
                         <a href="#" class="easyel-nav-tab">
-                             <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17 22H7C6.59 22 6.25 21.66 6.25 21.25C6.25 20.84 6.59 20.5 7 20.5H17C17.41 20.5 17.75 20.84 17.75 21.25C17.75 21.66 17.41 22 17 22Z"/><path d="M20.3502 5.51906L16.3502 8.37906C15.8202 8.75906 15.0602 8.52906 14.8302 7.91906L12.9402 2.87906C12.6202 2.00906 11.3902 2.00906 11.0702 2.87906L9.17022 7.90906C8.94022 8.52906 8.19022 8.75906 7.66022 8.36906L3.66022 5.50906C2.86022 4.94906 1.80022 5.73906 2.13022 6.66906L6.29022 18.3191C6.43022 18.7191 6.81022 18.9791 7.23022 18.9791H16.7602C17.1802 18.9791 17.5602 18.7091 17.7002 18.3191L21.8602 6.66906C22.2002 5.73906 21.1402 4.94906 20.3502 5.51906ZM14.5002 14.7491H9.50022C9.09022 14.7491 8.75022 14.4091 8.75022 13.9991C8.75022 13.5891 9.09022 13.2491 9.50022 13.2491H14.5002C14.9102 13.2491 15.2502 13.5891 15.2502 13.9991C15.2502 14.4091 14.9102 14.7491 14.5002 14.7491Z" />
-                            </svg>
+                            <i class="easyelIcon-crown"></i>
                             <?php esc_html_e('Go Premium','easy-elements'); ?>
                         </a>
                     </div>
@@ -297,25 +295,28 @@ class Easyel_Elements {
             <div id="easyel-tab-content">
                 <?php foreach ( $easyel_tabs as $tab_slug => $tab_label ) : ?>
                     <div id="tab-<?php echo esc_attr($tab_slug); ?>" 
-                        class="easyel-tab-panel <?php echo esc_attr($tab_slug); ?>" 
+                        class="easyel-tab-panel easyel-border-radius-20 <?php echo esc_attr($tab_slug); ?>" 
                         style="<?php echo $tab_slug === 'overview' ? '' : 'display:none;'; ?>">
 
                         <?php 
                         if ( $tab_slug === 'widget' ) : ?>
-                            <div class="eel-addon-search">
-                                
-                                <div class="easyel-widget-search-enable">
-                                    <?php if ( $tab_slug === 'widget' ) { ?>
-                                    <input type="text" id="element-search" placeholder="<?php esc_attr_e('Search widgets...', 'easy-elements'); ?>">
-                                    <?php } ?>
-                                    <button type="button" id="activate-all-btn" class="button button-secondary"><?php esc_html_e('Activate All', 'easy-elements'); ?></button>
-                                    <button type="button" id="deactivate-all-btn" class="button button-secondary"><?php esc_html_e('Deactivate All', 'easy-elements'); ?></button>
-                                </div>
-                                
+                            <div class="easyel-addon-search easyel-dflex easyel-justify-between">
                                 <div class="easyel-widget-filter">
-                                    <button type="button" id="easyel_all" class="easyel-action-btn button button-secondary" data-filter="easyel_all"><?php esc_html_e('All', 'easy-elements'); ?></button>
-                                    <button type="button" id="easyel_free" class="easyel-action-btn button button-secondary" data-filter="easyel_free"><?php esc_html_e('Free', 'easy-elements'); ?></button>
-                                    <button type="button" id="easyel_pro" class="easyel-action-btn button button-secondary" data-filter="easyel_pro"><?php esc_html_e('Pro', 'easy-elements'); ?></button>
+                                    <h1 class="easyel-dashboard-heading"><?php esc_html_e('Widgets','easy-elements');?></h1>
+                                    <div class="easyel-widget-filter-button">
+                                        <button type="button" id="easyel_all" class="easyel-action-btn active" data-filter="easyel_all"><?php esc_html_e('All', 'easy-elements'); ?></button>
+                                        <button type="button" id="easyel_free" class="easyel-action-btn" data-filter="easyel_free"><?php esc_html_e('Free', 'easy-elements'); ?></button>
+                                        <button type="button" id="easyel_pro" class="easyel-action-btn" data-filter="easyel_pro"><?php esc_html_e('Pro', 'easy-elements'); ?></button>
+                                    </div>
+                                </div>
+                                <div class="easyel-widget-search-enable">
+                                    <div class="easyel-widget-activeDeactivate-button">
+                                        <button type="button" id="activate-all-btn"><?php esc_html_e('Activate All', 'easy-elements'); ?></button>
+                                        <button type="button" id="deactivate-all-btn"><?php esc_html_e('Deactivate All', 'easy-elements'); ?></button>
+                                    </div>
+                                    <?php if ( $tab_slug === 'widget' ) { ?>
+                                        <input type="text" id="element-search" placeholder="<?php esc_attr_e('Search widgets...', 'easy-elements'); ?>">
+                                    <?php } ?>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -386,7 +387,7 @@ class Easyel_Elements {
         $widgets = [
            
             'heading' => [
-                'icon'        => 'dashicons-editor-textcolor',
+                'icon'        => 'easyelIcon-heading',
                 'title'       => 'Easy Heading',
                 'description' => 'Add customizable headings with style options.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -394,7 +395,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'clients_logo' => [
-                'icon'        => 'dashicons-groups',
+                'icon'        => 'easyelIcon-clients-logo-grid',
                 'title'       => 'Easy Clients Logo Grid',
                 'description' => 'Showcase client logos in a neat grid layout.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -402,7 +403,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'clients_logo_slider' => [
-                'icon'        => 'dashicons-format-gallery',
+                'icon'        => 'easyelIcon-clients-logo-slider',
                 'title'       => 'Easy Clients Logo Slider',
                 'description' => 'Display client logos in a slider format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -410,7 +411,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'tab' => [
-                'icon'        => 'dashicons-editor-insertmore',
+                'icon'        => 'easyelIcon-tab',
                 'title'       => 'Easy Tab',
                 'description' => 'Add simple tab content.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -418,7 +419,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'tab_advance' => [
-                'icon'        => 'dashicons-editor-insertmore',
+                'icon'        => 'easyelIcon-tab',
                 'title'       => 'Easy Advanced Tab',
                 'description' => 'Create advanced tab content.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -426,7 +427,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'testimonials' => [
-                'icon'        => 'dashicons-format-quote',
+                'icon'        => 'easyelIcon-testimonials-grid',
                 'title'       => 'Easy Testimonials Grid',
                 'description' => 'Show testimonials in a grid format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -434,7 +435,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'testimonials_slider' => [
-                'icon'        => 'dashicons-format-gallery',
+                'icon'        => 'easyelIcon-testimonials-slider',
                 'title'       => 'Easy Testimonials Slider',
                 'description' => 'Display testimonials in a slider format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -442,7 +443,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'image_carousel' => [
-                'icon'        => 'dashicons-format-gallery',
+                'icon'        => 'easyelIcon-image-carousel',
                 'title'       => 'Image Carousel',
                 'description' => 'Create an image slider with multiple images.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -450,7 +451,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'icon_box' => [
-                'icon'        => 'dashicons-smiley',
+                'icon'        => 'easyelIcon-iconbox',
                 'title'       => 'Easy Icon Box',
                 'description' => 'Display content with an icon.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -458,7 +459,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'process_grid' => [
-                'icon'        => 'dashicons-screenoptions',
+                'icon'        => 'easyelIcon-process-grid',
                 'title'       => 'Easy Process Grid',
                 'description' => 'Show process steps in a grid format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -466,7 +467,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'process_slider' => [
-                'icon'        => 'dashicons-controls-repeat',
+                'icon'        => 'easyelIcon-process-slider',
                 'title'       => 'Easy Process Slider',
                 'description' => 'Show process steps in a slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -474,7 +475,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'gallery_filter' => [
-                'icon'        => 'dashicons-controls-repeat',
+                'icon'        => 'easyelIcon-controls-repeat',
                 'title'       => 'Gallery Filter ',
                 'description' => 'Gallery fiter widget enable.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -482,7 +483,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'team_grid' => [
-                'icon'        => 'dashicons-groups',
+                'icon'        => 'easyelIcon-team-grid',
                 'title'       => 'Easy Team Grid',
                 'description' => 'Display team members in a grid format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -490,7 +491,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'team_slider' => [
-                'icon'        => 'dashicons-controls-play',
+                'icon'        => 'easyelIcon-team-slider',
                 'title'       => 'Easy Team Slider',
                 'description' => 'Showcase team members in a slider format.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -498,7 +499,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'contact_box' => [
-                'icon'        => 'dashicons-phone',
+                'icon'        => 'easyelIcon-contact-box',
                 'title'       => 'Easy Contact Box',
                 'description' => 'Easy Contact.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -506,7 +507,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],        
             'icon_box_slider' => [
-                'icon'        => 'dashicons-format-gallery',
+                'icon'        => 'easyelIcon-icon-box-slider',
                 'title'       => 'Easy Icon Box Slider',
                 'description' => 'Easy Icon Box Slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -514,7 +515,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],  
             'timeline_slider' => [
-                'icon'        => 'dashicons-admin-post',    
+                'icon'        => 'easyelIcon-timeline-slider',    
                 'title'       => 'Easy Timeline Slider',
                 'description' => 'Easy Timeline Slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -522,7 +523,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],      
             'faq' => [
-                'icon'        => 'dashicons-editor-help',
+                'icon'        => 'easyelIcon-faq',
                 'title'       => 'Easy FAQ',
                 'description' => 'Easy FAQ.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -530,7 +531,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],       
             'blog_grid' => [
-                'icon'        => 'dashicons-format-gallery',
+                'icon'        => 'easyelIcon-post-grid',
                 'title'       => 'Easy Post Grid',
                 'description' => 'Easy Post.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -538,15 +539,23 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],        
             'post_slider' => [
-                'icon'        => 'dashicons-format-gallery',
+                'icon'        => 'easyelIcon-post-slider',
                 'title'       => 'Easy Post Slider',
                 'description' => 'Easy Post Slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
                 'tab' => 'widget',
-            ],        
+            ],  
+            'easy_cf7' => [
+                'icon'        => 'easyelIcon-format-image',
+                'title'       => 'Contact Form 7',
+                'description' => 'Contact form 7.',
+                'demo_url'    => 'https://easyelements.reactheme.com/',
+                'is_pro'      => false,
+                'tab' => 'widget',
+            ],      
             'video' => [
-                'icon'        => 'dashicons-format-video',
+                'icon'        => 'easyelIcon-video',
                 'title'       => 'Easy Video',
                 'description' => 'Easy Video.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -554,7 +563,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'pricing_table' => [
-                'icon'        => 'dashicons-editor-table',
+                'icon'        => 'easyelIcon-pricing-table',
                 'title'       => 'Easy Pricing Table',
                 'description' => 'Easy Pricing Table.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -562,7 +571,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],        
             'pricing_list' => [
-                'icon'        => 'dashicons-editor-table',
+                'icon'        => 'easyelIcon-pricing-list',
                 'title'       => 'Easy Pricing List',
                 'description' => 'Easy Pricing List.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -570,7 +579,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],        
             'service_list' => [
-                'icon'        => 'dashicons-editor-table',
+                'icon'        => 'easyelIcon-service-list',
                 'title'       => 'Easy Service List',
                 'description' => 'Easy Service List.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -578,7 +587,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'process_list' => [
-                'icon'        => 'dashicons-editor-table',
+                'icon'        => 'easyelIcon-process-list',
                 'title'       => 'Easy Process List',
                 'description' => 'Easy Process List.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -586,7 +595,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'marquee_logo' => [
-                'icon'        => 'dashicons-format-gallery',
+                'icon'        => 'easyelIcon-marquee-logo',
                 'title'       => 'Easy Marquee Logo',
                 'description' => 'Easy Marquee Logo.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -594,7 +603,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'button' => [
-                'icon'        => 'dashicons-controls-buoy',
+                'icon'        => 'easyelIcon-button',
                 'title'       => 'Easy Button',
                 'description' => 'Easy Button.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -603,7 +612,7 @@ class Easyel_Elements {
             ],        
            
             'social_share' => [
-                'icon'        => 'dashicons-share',
+                'icon'        => 'easyelIcon-social-share',
                 'title'       => 'Easy Social Share',
                 'description' => 'Easy Social Share.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -611,7 +620,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'social_icon' => [
-                'icon'        => 'dashicons-share',
+                'icon'        => 'easyelIcon-social-icon',
                 'title'       => 'Easy Social Icon',
                 'description' => 'Easy Social Icon.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -620,7 +629,7 @@ class Easyel_Elements {
             ],
            
             'breadcrumb' => [
-                'icon'        => 'dashicons-admin-post',
+                'icon'        => 'easyelIcon-breadcumb',
                 'title'       => 'Easy Breadcrumb',
                 'description' => 'Easy Breadcrumb.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -628,7 +637,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'easy_slider' => [
-                'icon'        => 'dashicons-format-gallery',
+                'icon'        => 'easyelIcon-slider',
                 'title'       => 'Easy Slider',
                 'description' => 'Easy Slider.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -636,7 +645,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'image_accordion' => [
-                'icon'        => 'dashicons-format-gallery',
+                'icon'        => 'easyelIcon-image-accordion',
                 'title'       => 'Easy Image Accordion',
                 'description' => 'Easy Image Accordion',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -644,7 +653,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'domain_search' => [
-                'icon'        => 'dashicons-admin-post',    
+                'icon'        => 'easyelIcon-domain-search',    
                 'title'       => 'Easy Domain Search',
                 'description' => 'Easy Domain Search.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -652,7 +661,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'featured_project' => [
-                'icon'        => 'dashicons-admin-post',    
+                'icon'        => 'easyelIcon-custom-projects',    
                 'title'       => 'Easy Custom Projects',
                 'description' => 'Easy Custom Projects.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -660,7 +669,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'advance_button' => [
-                'icon'        => 'dashicons-admin-post',    
+                'icon'        => 'easyelIcon-button',    
                 'title'       => 'Easy Advance Button',
                 'description' => 'Easy Advance Button.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -668,7 +677,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'hr_image_scroll' => [
-                'icon'        => 'dashicons-admin-post',    
+                'icon'        => 'easyelIcon-image-horizontal-scroll',    
                 'title'       => 'Easy Image Horizontal Scroll',
                 'description' => 'Easy Image Horizontal Scroll.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -677,7 +686,7 @@ class Easyel_Elements {
             ], 
 
             'easy_offcanvas' => [
-                'icon'        => 'dashicons-admin-post',    
+                'icon'        => 'easyelIcon-canvas',    
                 'title'       => 'Easy Offcanvas',
                 'description' => 'Easy Offcanvas.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -686,7 +695,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'site_logo' => [
-                'icon'        => 'dashicons-format-image',
+                'icon'        => 'easyelIcon-site-logo',
                 'title'       => 'Easy Site Logo',
                 'description' => 'Display your website logo easily with this widget.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -695,7 +704,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'search' => [
-                'icon'        => 'dashicons-search',
+                'icon'        => 'easyelIcon-search',
                 'title'       => 'Easy Search',
                 'description' => 'Easy Search All Content.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -704,7 +713,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'navigation_menu' => [
-                'icon'        => 'dashicons-search',
+                'icon'        => 'easyelIcon-search',
                 'title'       => 'Easy Navigation Menu',
                 'description' => 'Easy Navigation Menu.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -713,7 +722,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'page_title' => [
-                'icon'        => 'dashicons-admin-page',
+                'icon'        => 'easyelIcon-page-title',
                 'title'       => 'Easy Page Title',
                 'description' => 'Easy Page Title.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -722,9 +731,9 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
 
-
+            
             'post_tags' => [
-                'icon'        => 'dashicons-admin-post',    
+                'icon'        => 'easyelIcon-post-tag',    
                 'title'       => 'Easy Current Post Tags',
                 'description' => 'Easy Current Post Tags.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -733,7 +742,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'post_author' => [
-                'icon'        => 'dashicons-admin-post',    
+                'icon'        => 'easyelIcon-author',    
                 'title'       => 'Easy Current Post Author',
                 'description' => 'Easy Current Post Author.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -742,7 +751,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'post_title' => [
-                'icon'        => 'dashicons-admin-post',
+                'icon'        => 'easyelIcon-post-title',
                 'title'       => 'Easy Post Title',
                 'description' => 'Easy Post Title.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -751,7 +760,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'post_content' => [
-                'icon'        => 'dashicons-admin-post',
+                'icon'        => 'easyelIcon-post-content',
                 'title'       => 'Easy Post Content',
                 'description' => 'Easy Post Content.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -760,7 +769,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],        
             'excerpt' => [
-                'icon'        => 'dashicons-admin-post',
+                'icon'        => 'easyelIcon-post-excerpt',
                 'title'       => 'Easy Post Excerpt',
                 'description' => 'Easy Post Excerpt.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -769,7 +778,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],  
             'related_post' => [
-                'icon'        => 'dashicons-admin-post',
+                'icon'        => 'easyelIcon-related-post',
                 'title'       => 'Easy Related Post',
                 'description' => 'Easy Related Post.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -778,7 +787,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ], 
             'post_pagination' => [
-                'icon'        => 'dashicons-admin-post',
+                'icon'        => 'easyelIcon-pagination',
                 'title'       => 'Easy Post Pagination',
                 'description' => 'Easy Post Pagination.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -787,7 +796,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'post_meta' => [
-                'icon'        => 'dashicons-admin-post',
+                'icon'        => 'easyelIcon-meta',
                 'title'       => 'Easy Post Meta',
                 'description' => 'Easy Post Meta.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -796,7 +805,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'post_comments' => [
-                'icon'        => 'dashicons-admin-comments',
+                'icon'        => 'easyelIcon-comments',
                 'title'       => 'Easy Post Comments',
                 'description' => 'Easy Post Comments.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -805,7 +814,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'featured_image' => [
-                'icon'        => 'dashicons-format-image',
+                'icon'        => 'easyelIcon-image-carousel',
                 'title'       => 'Easy Featured Image',
                 'description' => 'Easy Featured Image.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -814,7 +823,7 @@ class Easyel_Elements {
                 'tab' => 'widget',
             ],
             'easy_scroll_to_top' => [
-                'icon'        => 'dashicons-format-image',
+                'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Scroll To Top',
                 'description' => 'Easy Scroll To Top.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -822,15 +831,14 @@ class Easyel_Elements {
                 'group'       => 'Theme Builder Widget'
             ], 
             'easy_table' => [
-                'icon'        => 'dashicons-format-image',
+                'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Table',
                 'description' => 'Easy Table.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
             ],
             'easytypewriter' => [
-                'icon'        => 'dashicons-format-image',
+                'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Typewriter',
                 'description' => 'Animated typewriter text effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -838,7 +846,7 @@ class Easyel_Elements {
                 'group'       => 'Animations'
             ],
             'animated_title' => [
-                'icon'        => 'dashicons-format-image',
+                'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Animated Title',
                 'description' => 'Animated title text effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -846,7 +854,7 @@ class Easyel_Elements {
                 'group'       => 'Animations'
             ],
             'animated_heading' => [
-                'icon'        => 'dashicons-format-image',
+                'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Animated Heading',
                 'description' => 'Animated heading text effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
@@ -854,13 +862,13 @@ class Easyel_Elements {
                 'group'       => 'Animations'
             ],
             'easytext_animation' => [
-                'icon'        => 'dashicons-format-image',
+                'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Text Animation',
                 'description' => 'Animated text animation effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
                 'group'       => 'Animations'
-            ],
+            ],                       
         ];
 
         return apply_filters( 'easyel_available_widgets', $widgets );

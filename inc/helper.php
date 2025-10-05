@@ -35,6 +35,29 @@ if ( ! function_exists( 'easyel_handle_sideload_svg' ) ) {
     add_filter( 'wp_handle_sideload_prefilter', 'easyel_handle_sideload_svg' );
 }
 
+if ( ! function_exists( 'easyel_get_cf7_forms' ) ) {
+    /**
+     * Get a list of all CF7 forms
+     *
+     * @return array
+     */
+    function easyel_get_cf7_forms() {
+        $forms = get_posts( [
+            'post_type'      => 'wpcf7_contact_form',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+        ] );
+
+        if ( ! empty( $forms ) ) {
+            return wp_list_pluck( $forms, 'post_title', 'ID' );
+        }
+        return [];
+    }
+}
+
+
 // Domain Search Code
 add_action('template_redirect', function(){
     // phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -126,6 +149,14 @@ function easyel_get_extension_fields() {
         ],
         'enable_image_3d_effect' => [
             'label'   => __('Image 3D Effect', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'GSAP Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+
+        'enable_image_hover_effect' => [
+            'label'   => __('Image Hover Effect', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
             'group' => 'GSAP Extensions',

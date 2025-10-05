@@ -1,0 +1,76 @@
+/* Label style */
+.wpcf7 label {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+/* Input and textarea */
+.wpcf7-form-control {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Focus effect */
+.wpcf7-form-control:focus {
+    border-color: #0073e6;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,115,230,0.15);
+}
+
+/* Textarea */
+.wpcf7 textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Submit button */
+.wpcf7 input[type="submit"] {
+    background: #0073e6;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.wpcf7 input[type="submit"]:hover {
+    background: #005bb5;
+}
+
+/* Error & success message */
+.wpcf7-not-valid-tip {
+    color: #e63946;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.wpcf7-response-output {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.wpcf7-mail-sent-ok {
+    background: #d1fae5;
+    border: 1px solid #10b981;
+    color: #065f46;
+}
+
+.wpcf7-validation-errors {
+    background: #fef2f2;
+    border: 1px solid #f87171;
+    color: #7f1d1d;
+}
