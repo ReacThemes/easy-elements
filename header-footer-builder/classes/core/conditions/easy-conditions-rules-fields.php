@@ -1,5 +1,5 @@
 <?php
-namespace HFE\Lib;
+namespace EASY_EHF\Lib;
 
 /**
  * Meta Boxes setup
@@ -1279,18 +1279,6 @@ class RSHF_Target_Rules_Fields {
 		$already_set_rule = array();
 
 		$location = isset( $option['location'] ) ? $option['location'] : '';
-
-		// $all_headers = $wpdb->get_results(
-		// 	$wpdb->prepare(
-		// 		"SELECT p.ID, p.post_title, pm.meta_value FROM {$wpdb->postmeta} as pm
-		// 	INNER JOIN {$wpdb->posts} as p ON pm.post_id = p.ID
-		// 	WHERE pm.meta_key = %s
-		// 	AND p.post_type = %s
-		// 	AND p.post_status = 'publish'",
-		// 		$location,
-		// 		$post_type
-		// 	)
-		// );
 
 		$cache_key = 'easyel_all_headers_' . md5( $location . $post_type );
 		$all_headers = wp_cache_get( $cache_key );

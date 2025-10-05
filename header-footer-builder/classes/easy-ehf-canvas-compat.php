@@ -1,28 +1,26 @@
 <?php
 /**
- * EE_HFE_Elementor_Canvas_Compat setup
+ * Elementor Canvas Integration
+ *
+ * Handles custom header/footer output on Elementor Canvas templates.
  */
-
-/**
- * theme compatibility.
- */
-class EE_HFE_Elementor_Canvas_Compat {
+class EASY_EHF_Canvas_Compat {
 
 	/**
-	 * Instance of EE_HFE_Elementor_Canvas_Compat.
-	 *
-	 * @var EE_HFE_Elementor_Canvas_Compat
-	 */
+     * Singleton instance.
+     *
+     * @var EASY_EHF_Canvas_Compat
+     */
 	private static $instance;
 
 	/**
-	 *  Initiator
-	 */
+     * Initiate singleton
+     */
 	public static function instance() {
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new EE_HFE_Elementor_Canvas_Compat();
+			self::$instance = new EASY_EHF_Canvas_Compat();
 
-			add_action( 'wp', [ self::$instance, 'hooks' ] );
+			add_action( 'wp', [ self::$instance, 'init_hooks' ] );
 		}
 
 		return self::$instance;
@@ -31,33 +29,35 @@ class EE_HFE_Elementor_Canvas_Compat {
 	/**
 	 * Run all the Actions / Filters.
 	 */
-	public function hooks() {
+	public function init_hooks() {
+
+		// Header
 		if ( ee_hfe_header_enabled() ) {
 
 			// Action `elementor/page_templates/canvas/before_content` is introduced in Elementor Version 1.4.1.
 			if ( version_compare( ELEMENTOR_VERSION, '1.4.1', '>=' ) ) {
-				add_action( 'elementor/page_templates/canvas/before_content', [ $this, 'render_header' ] );
+				add_action( 'elementor/page_templates/canvas/before_content', [ $this, 'output_header' ] );
 			} else {
-				add_action( 'wp_head', [ $this, 'render_header' ] );
+				add_action( 'wp_head', [ $this, 'output_header' ] );
 			}
 		}
 
+		// Footer
 		if ( ee_hfe_footer_enabled() ) {
 
 			// Action `elementor/page_templates/canvas/after_content` is introduced in Elementor Version 1.9.0.
 			if ( version_compare( ELEMENTOR_VERSION, '1.9.0', '>=' ) ) {
-				add_action( 'elementor/page_templates/canvas/after_content', [ $this, 'render_footer' ] );
+				add_action( 'elementor/page_templates/canvas/after_content', [ $this, 'output_footer' ] );
 			} else {
-				add_action( 'wp_footer', [ $this, 'render_footer' ] );
+				add_action( 'wp_footer', [ $this, 'output_footer' ] );
 			}
 		}
 
+		// Optional before-footer element
 		if ( ee_hfe_is_before_footer_enabled() ) {
 
-			// check if current page template is Elemenntor Canvas.
 			if ( 'elementor_canvas' == get_page_template_slug() ) {
 				$override_cannvas_template = get_post_meta( ee_hfe_get_before_footer_id(), 'display-on-canvas-template', true );
-
 				if ( '1' == $override_cannvas_template ) {
 					add_action( 'elementor/page_templates/canvas/after_content', 'ee_hfe_render_before_footer', 9 );
 				}
@@ -65,13 +65,11 @@ class EE_HFE_Elementor_Canvas_Compat {
 		}
 	}
 
-	/**
-	 * Render the header if display template on elementor canvas is enabled
-	 * and current template is Elementor Canvas
-	 */
-	public function render_header() {
+	 /**
+     * Output header for Elementor Canvas
+     */
+	public function output_header() {
 
-		// bail if current page template is not Elemenntor Canvas.
 		if ( 'elementor_canvas' !== get_page_template_slug() ) {
 			return;
 		}
@@ -84,12 +82,10 @@ class EE_HFE_Elementor_Canvas_Compat {
 	}
 
 	/**
-	 * Render the footer if display template on elementor canvas is enabled
-	 * and current template is Elementor Canvas
-	 */
-	public function render_footer() {
+     * Output footer for Elementor Canvas
+     */
+    public function output_footer() {
 
-		// bail if current page template is not Elemenntor Canvas.
 		if ( 'elementor_canvas' !== get_page_template_slug() ) {
 			return;
 		}
@@ -103,4 +99,5 @@ class EE_HFE_Elementor_Canvas_Compat {
 
 }
 
-EE_HFE_Elementor_Canvas_Compat::instance();
+// Instantiate
+EASY_EHF_Canvas_Compat::instance();

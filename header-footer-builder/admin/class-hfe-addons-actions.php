@@ -101,7 +101,7 @@ if ( ! class_exists( 'HFE_Addons_Actions' ) ) {
 		 * @since 1.6.0
 		 */
 		public function get_api_domain() {
-			return apply_filters( 'hfe_api_domain', 'https://rstheme.com/' );
+			return apply_filters( 'hfe_api_domain', 'https://reactheme.com/' );
 		}
 
 		/**

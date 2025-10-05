@@ -1,7 +1,7 @@
 <?php
-use HFE\Lib\RSHF_Target_Rules_Fields;
+use EASY_EHF\Lib\RSHF_Target_Rules_Fields;
 
-class EE_Header_Footer_Elementor {
+class Easy_Header_Footer_Elementor {
 	/**
 	 * Current theme template
 	 *
@@ -17,27 +17,28 @@ class EE_Header_Footer_Elementor {
 	/**
 	 * Instance of EE_HFE_Admin
 	 *
-	 * @var EE_Header_Footer_Elementor
+	 * @var Easy_Header_Footer_Elementor
 	 */
-	private static $_instance = null;
+	private static $instance = null;
 
 	/**
-	 * Instance of EE_Header_Footer_Elementor
+	 * Instance of Easy_Header_Footer_Elementor
 	 *
-	 * @return EE_Header_Footer_Elementor Instance of EE_Header_Footer_Elementor
+	 * @return Easy_Header_Footer_Elementor Instance of Easy_Header_Footer_Elementor
 	 */
 	public static function instance() {
-		if ( ! isset( self::$_instance ) ) {
-			self::$_instance = new self();
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
 	/**
 	 * Constructor
 	 */
 	function __construct() {
+
 		$this->template = get_template();
 
 		$is_elementor_callable = ( defined( 'ELEMENTOR_VERSION' ) && is_callable( 'Elementor\Plugin::instance' ) ) ? true : false;
@@ -51,44 +52,47 @@ class EE_Header_Footer_Elementor {
 		if ( $is_elementor_callable ) {
 			self::$elementor_instance = Elementor\Plugin::instance();
 
-			$this->includes();
+			$this->file_includes();
 
-			add_filter( 'hfe_settings_tabs', [ $this, 'setup_unsupported_theme' ] );
-			add_action( 'init', [ $this, 'setup_fallback_support' ] );
+			add_filter( 'easy_settings_tabs', [ $this, 'easy_unsupported_theme' ] );
+			add_action( 'init', [ $this, 'easy_fallback_support' ] );
 
-			add_filter( 'body_class', [ $this, 'body_class' ] );
-			add_action( 'switch_theme', [ $this, 'reset_unsupported_theme_notice' ] );
+			add_filter( 'easy_body_class', [ $this, 'easy_body_class' ] );
+			add_action( 'switch_theme', [ $this, 'easy_reset_unsupported_theme_notice' ] );
 
-			add_shortcode( 'hfe_template', [ $this, 'render_template' ] );
-			add_shortcode( 'easyhfe_template', [ $this, 'render_template' ] );
+			add_shortcode( 'hfe_template', [ $this, 'easy_render_template' ] );
+			add_shortcode( 'easyhfe_template', [ $this, 'easy_render_template' ] );
 
 			// Ensure Elementor header/footer CSS is always loaded early in head
-			add_action( 'wp_head', [ $this, 'enqueue_header_footer_css_early' ], 1 );
+			add_action( 'wp_head', [ $this, 'easy_header_footer_css_early' ], 1 );
+
+			add_action("wp_enqueue_scripts", array( $this, "easyel_enqueue_scripts" ) );
 		}
 	}
 
 	/**
 	 * Reset the Unsupported theme notice after a theme is switched.
 	 */
-	public function reset_unsupported_theme_notice() {
+	public function easy_reset_unsupported_theme_notice() {
 		delete_user_meta( get_current_user_id(), 'unsupported-theme' );
 	}
+
 
 	/**
 	 * Loads the globally required files for the plugin.
 	 */
-	public function includes() {
-		require_once RTSHFE_DIR . 'admin/class-rtshfe-admin.php';
-		require_once RTSHFE_DIR . 'admin/class-rtshfe-settings.php';	
-		require_once RTSHFE_DIR . 'inc/easy-functions.php';
-		require_once RTSHFE_DIR . 'inc/class-hfe-elementor-canvas-compat.php';
-		require_once RTSHFE_DIR . 'inc/lib/target-rule/class-easy-target-rules-fields.php';
+	public function file_includes() {
+		
+		require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/admin/easy-ehf-admin.php';
+		require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/classes/easy-functions.php';
+		require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/classes/easy-ehf-canvas-compat.php';
+		require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/classes/core/conditions/easy-conditions-rules-fields.php';
 	}
 
 	/**
 	 * Adds classes to the body tag conditionally.
 	 */
-	public function body_class( $classes ) {
+	public function easy_body_class( $classes ) {
 		if ( ee_hfe_header_enabled() ) {
 			$classes[] = 'ehf-header';
 		}
@@ -103,29 +107,29 @@ class EE_Header_Footer_Elementor {
 	/**
 	 * Display Unsupported theme notice if the current theme does not add support.
 	 */
-	public function setup_unsupported_theme( $hfe_settings_tabs = [] ) {
+	public function easy_unsupported_theme( $easy_settings_tabs = [] ) {
 		if ( ! current_theme_supports( 'easy-elements' ) ) {
-			$hfe_settings_tabs['hfe_settings'] = [
+			$easy_settings_tabs['hfe_settings'] = [
 				'name' => __( 'Theme Support', 'easy-elements' ),
 				'url'  => admin_url( 'themes.php?page=hfe-settings' ),
 			];
 		}
-		return $hfe_settings_tabs;
+		return $easy_settings_tabs;
 	}
 
 	/**
 	 * Add support for theme if the current theme does not add support.
 	 */
-	public function setup_fallback_support() {
+	public function easy_fallback_support() {
 		if ( ! current_theme_supports( 'easy-elements' ) ) {
 			$hfe_compatibility_option = get_option( 'hfe_compatibility_option', '1' );
 
 			if ( '1' === $hfe_compatibility_option ) {
 				if ( ! class_exists( 'EE_HFE_Default_Compat' ) ) {
-					require_once RTSHFE_DIR . 'themes/default/class-hfe-default-compat.php';
+					require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/easy-hfe-default-compat.php';
 				}
 			} elseif ( '2' === $hfe_compatibility_option ) {
-				require RTSHFE_DIR . 'themes/default/class-global-theme-compatibility.php';
+				require EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/easy-global-theme-compatibility.php';
 			}
 		}
 	}
@@ -184,8 +188,7 @@ class EE_Header_Footer_Elementor {
 	/**
 	 * Enqueue scripts for the plugin.
 	 */
-	public function enqueue_scripts() {
-		wp_enqueue_style( 'hfe-style', RTSHFE_URL . 'assets/css/header-footer-elementor.css', [], RTSHFE_VER );
+	public function easyel_enqueue_scripts() {
 
 		if ( class_exists( '\Elementor\Plugin' ) ) {
 			$elementor = \Elementor\Plugin::instance();
@@ -201,7 +204,7 @@ class EE_Header_Footer_Elementor {
 	/**
 	 * Enqueue all Elementor header/footer CSS early in head.
 	 */
-	public function enqueue_header_footer_css_early() {
+	public function easy_header_footer_css_early() {
 		self::force_enqueue_css( get_ee_hfe_header_id() );
 		self::force_enqueue_css( get_ee_hfe_footer_id() );
 		self::force_enqueue_css( ee_hfe_get_before_footer_id() );
@@ -283,7 +286,7 @@ class EE_Header_Footer_Elementor {
 	/**
 	 * Callback to shortcode.
 	 */
-	public function render_template( $atts ) {
+	public function easy_render_template( $atts ) {
 		$atts = shortcode_atts(
 			[
 				'id' => '',

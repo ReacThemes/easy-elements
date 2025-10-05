@@ -1,5 +1,5 @@
 <?php
-use HFE\Lib\RSHF_Target_Rules_Fields;
+use EASY_EHF\Lib\RSHF_Target_Rules_Fields;
 
 defined( 'ABSPATH' ) or exit;
 
@@ -45,8 +45,8 @@ class EE_HFE_Admin {
 	 * @access public
 	 */
 	public static function EE_HFE_Admin_enqueue_scripts( $hook ) {
-        $css_file_url = RTSHFE_ASSETS_ADMIN . 'admin/assets/css/ehf-admin.css';
-        $css_file_path = RTSHFE_DIR . 'admin/assets/css/ehf-admin.css';
+        $css_file_url = EASYELEMENTS_ASSETS_ADMIN . 'header-footer-builder/admin/assets/css/ehf-admin.css';
+        $css_file_path = EASYELEMENTS_DIR_PATH . 'header-footer-builder/admin/assets/css/ehf-admin.css';
         $version = file_exists($css_file_path) ? filemtime($css_file_path) : null;        
         wp_enqueue_style('easy-hfe-admin-styles', $css_file_url, array(), $version );
 	}
@@ -68,7 +68,7 @@ class EE_HFE_Admin {
 		if ( is_admin() ) {
 			add_action( 'manage_ee-elementor-hf_posts_custom_column', [ $this, 'column_content' ], 10, 2 );
 			add_filter( 'manage_ee-elementor-hf_posts_columns', [ $this, 'column_headings' ] );
-			require_once RTSHFE_DIR . 'admin/class-hfe-addons-actions.php';
+			require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/admin/class-hfe-addons-actions.php';
 		}
 
 		//add_action( 'admin_init', array( $this, 'rshfe_page_init' ) );
@@ -82,9 +82,9 @@ class EE_HFE_Admin {
  */
 public function EE_HFE_Admin_scripts() {
     // Absolute path to the CSS file
-    $css_file = RTSHFE_PATH . 'admin/assets/css/ehf-admin.css';
+    $css_file = EASYELEMENTS_PATH . 'header-footer-builder/admin/assets/css/ehf-admin.css';
     // URL to the CSS file
-    $css_url  = RTSHFE_ASSETS_ADMIN . 'admin/assets/css/ehf-admin.css';
+    $css_url  = EASYELEMENTS_ASSETS_ADMIN . 'header-footer-builder/admin/assets/css/ehf-admin.css';
     // Generate version from file modified time to avoid cache issues
     $version = file_exists( $css_file ) ? filemtime( $css_file ) : '1.0.0';
 
@@ -109,7 +109,7 @@ public function EE_HFE_Admin_scripts() {
 	public function column_headings( $columns ) {
 		unset( $columns['date'] );
 
-		$columns['elementor_hf_display_rules'] = __( 'Display Rules', 'easy-elements' );
+		$columns['elementor_hf_display_rules'] = __( 'Display Condition', 'easy-elements' );
 		$columns['date']                       = __( 'Date', 'easy-elements' );
 
 		return $columns;
@@ -241,7 +241,7 @@ public function EE_HFE_Admin_scripts() {
 			__( 'Easy Header & Footer Builder Options', 'easy-elements' ),
 			[
 				$this,
-				'efh_metabox_render',
+				'easy_metabox_render',
 			],
 			'ee-elementor-hf',
 			'normal',
@@ -254,7 +254,7 @@ public function EE_HFE_Admin_scripts() {
 	 *
 	 * @param  POST $post Currennt post object which is being displayed.
 	 */
-	function efh_metabox_render( $post ) {
+	function easy_metabox_render( $post ) {
 		$values            = get_post_custom( $post->ID );
 		$template_type     = isset( $values['ehf_template_type'] ) ? esc_attr( $values['ehf_template_type'][0] ) : '';
 		$display_on_canvas = isset( $values['display-on-canvas-template'] ) ? true : false;
@@ -268,7 +268,7 @@ public function EE_HFE_Admin_scripts() {
 			<tbody>
 				<tr class="hfe-options-row type-of-template">
 					<td class="hfe-options-row-heading">
-						<label for="ehf_template_type"><?php esc_html_e( 'Type of Template', 'easy-elements' ); ?></label>
+						<label for="ehf_template_type"><?php esc_html_e( 'Template Types', 'easy-elements' ); ?></label>
 					</td>
 					<td class="hfe-options-row-content">
 						<select name="ehf_template_type" id="ehf_template_type">
@@ -337,20 +337,20 @@ public function EE_HFE_Admin_scripts() {
 		?>
 		<tr class="bsf-target-rules-row hfe-options-row">
 			<td class="bsf-target-rules-row-heading hfe-options-row-heading">
-				<label><?php esc_html_e( 'Display On', 'easy-elements' ); ?></label>
+				<label><?php esc_html_e( 'Visible On', 'easy-elements' ); ?></label>
 				<i class="bsf-target-rules-heading-help dashicons dashicons-editor-help"
-					title="<?php echo esc_attr__( 'Add locations for where this template should appear.', 'easy-elements' ); ?>"></i>
+					title="<?php echo esc_attr__( 'Choose the pages or areas where this template should show.', 'easy-elements' ); ?>"></i>
 			</td>
 			<td class="bsf-target-rules-row-content hfe-options-row-content">
 				<?php
 				RSHF_Target_Rules_Fields::target_rule_settings_field(
 					'bsf-target-rules-location',
 					[
-						'title'          => __( 'Display Rules', 'easy-elements' ),
+						'title'          => __( 'Display Condition', 'easy-elements' ),
 						'value'          => '[{"type":"basic-global","specific":null}]',
 						'tags'           => 'site,enable,target,pages',
 						'rule_type'      => 'display',
-						'add_rule_label' => __( 'Add Display Rule', 'easy-elements' ),
+						'add_rule_label' => __( 'Add Display Condition', 'easy-elements' ),
 					],
 					$include_locations
 				);
@@ -359,9 +359,9 @@ public function EE_HFE_Admin_scripts() {
 		</tr>
 		<tr class="bsf-target-rules-row hfe-options-row">
 			<td class="bsf-target-rules-row-heading hfe-options-row-heading">
-				<label><?php esc_html_e( 'Do Not Display On', 'easy-elements' ); ?></label>
+				<label><?php esc_html_e( 'Do Not Show On', 'easy-elements' ); ?></label>
 				<i class="bsf-target-rules-heading-help dashicons dashicons-editor-help"
-					title="<?php echo esc_attr__( 'Add locations for where this template should not appear.', 'easy-elements' ); ?>"></i>
+					title="<?php echo esc_attr__( 'Select the pages or sections where this template should NOT appear.', 'easy-elements' ); ?>"></i>
 			</td>
 			<td class="bsf-target-rules-row-content hfe-options-row-content">
 				<?php
@@ -371,30 +371,10 @@ public function EE_HFE_Admin_scripts() {
 						'title'          => __( 'Exclude On', 'easy-elements' ),
 						'value'          => '[]',
 						'tags'           => 'site,enable,target,pages',
-						'add_rule_label' => __( 'Add Exclusion Rule', 'easy-elements' ),
+						'add_rule_label' => __( 'Add Exclusion Condition', 'easy-elements' ),
 						'rule_type'      => 'exclude',
 					],
 					$exclude_locations
-				);
-				?>
-			</td>
-		</tr>
-		<tr class="bsf-target-rules-row hfe-options-row">
-			<td class="bsf-target-rules-row-heading hfe-options-row-heading">
-				<label><?php esc_html_e( 'User Roles', 'easy-elements' ); ?></label>
-				<i class="bsf-target-rules-heading-help dashicons dashicons-editor-help" title="<?php echo esc_attr__( 'Display custom template based on user role.', 'easy-elements' ); ?>"></i>
-			</td>
-			<td class="bsf-target-rules-row-content hfe-options-row-content">
-				<?php
-				RSHF_Target_Rules_Fields::target_user_role_settings_field(
-					'bsf-target-rules-users',
-					[
-						'title'          => __( 'Users', 'easy-elements' ),
-						'value'          => '[]',
-						'tags'           => 'site,enable,target,pages',
-						'add_rule_label' => __( 'Add User Rule', 'easy-elements' ),
-					],
-					$users
 				);
 				?>
 			</td>
@@ -416,7 +396,6 @@ public function EE_HFE_Admin_scripts() {
 			return;
 		}
 
-		// if our nonce isn't there, or we can't verify it, bail.
 		if ( ! isset( $_POST['ehf_meta_nounce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash ( $_POST['ehf_meta_nounce'] ) ), 'ehf_meta_nounce' ) ) {
 			return;
 		}
@@ -429,13 +408,6 @@ public function EE_HFE_Admin_scripts() {
 		$target_locations = RSHF_Target_Rules_Fields::get_format_rule_value( $_POST, 'bsf-target-rules-location' );
 		$target_exclusion = RSHF_Target_Rules_Fields::get_format_rule_value( $_POST, 'bsf-target-rules-exclusion' );
 		$target_users     = [];
-
-		if ( isset( $_POST['bsf-target-rules-users'] ) ) {
-			$target_users = map_deep( wp_unslash( $_POST['bsf-target-rules-users'] ), 'sanitize_text_field' );
-		} else {
-			$target_users = [];
-		}
-
 
 		update_post_meta( $post_id, 'ehf_target_include_locations', $target_locations );
 		update_post_meta( $post_id, 'ehf_target_exclude_locations', $target_exclusion );

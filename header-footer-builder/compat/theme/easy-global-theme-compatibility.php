@@ -5,7 +5,7 @@
  * @package header-footer-elementor
  */
 
-namespace HFE\Themes;
+namespace EASY_EHF\Themes;
 
 /**
  * Global theme compatibility.
@@ -97,4 +97,5 @@ class Global_Theme_Compatibility {
 		}
 	}
 }
+
 new Global_Theme_Compatibility();

@@ -3,7 +3,7 @@
  * EE_HFE_Default_Compat setup
  */
 
-namespace HFE\Themes;
+namespace EASY_EHF\Themes;
 
 /**
  * theme compatibility.
@@ -56,7 +56,7 @@ class EE_HFE_Default_Compat {
 	 * @return void
 	 */
 	public function override_header() {
-		require RTSHFE_DIR . 'themes/default/hfe-header.php';
+		require EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/hfe-header.php';
 		$templates   = [];
 		$templates[] = 'header.php';
 		// Avoid running wp_head hooks again.
@@ -74,7 +74,7 @@ class EE_HFE_Default_Compat {
 	 * @return void
 	 */
 	public function override_footer() {
-		require RTSHFE_DIR . 'themes/default/hfe-footer.php';
+		require EASYELEMENTS_DIR_PATH . 'header-footer-builder/compat/theme/hfe-footer.php';
 		$templates   = [];
 		$templates[] = 'footer.php';
 		// Avoid running wp_footer hooks again.
