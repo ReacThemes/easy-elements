@@ -1,4 +1,4 @@
-span.hfe-shortcode-col-wrap > input {
+span.easy-shortcode-ehf-col-wrap > input {
     background: inherit;
     color: inherit;
     font-size: 12px;
@@ -10,28 +10,28 @@ span.hfe-shortcode-col-wrap > input {
 input.hfe-large-text{
     width: 99%;
 }
-.hfe-options-row-heading {
+.easy-options-row-ehf-heading {
     border-right: 1px solid #E1E1E1;
     padding: 15px;
     width: 45%;
     vertical-align: middle;
 }
-.hfe-options-row td {
+.easy-options-row-ehf td {
     padding-left: 12px;
     padding-right: 12px;
     border-bottom: 1px solid #f0f0f0;
     zoom: 1;
     vertical-align: middle;
 }
-.hfe-options-table .hfe-options-row-content {
+.easy-options-table-ehf .easy-options-row-ehf-content {
     padding: 15px 10px;
     position: relative;
     width: 55%;
 }
-.hfe-options-table.widefat {
+.easy-options-table-ehf.widefat {
 	border-width: 0;
 }
-.hfe-options-row-heading label {
+.easy-options-row-ehf-heading label {
     display: inline-block;
     font-size: 13px;
     line-height: 1.4em;
@@ -40,7 +40,7 @@ input.hfe-large-text{
     margin: 0 0 3px;
     color: #333;
 }
-.hfe-options-row-content select {
+.easy-options-row-ehf-content select {
     width: 95%;
 }
 .hfe_radio_options {
@@ -63,14 +63,14 @@ li#toplevel_page_Settings-page,
     padding: 9px 0 4px 0;
     line-height: 1.3;
 }
-.hfe-selected-template-type-custom .hfe-shortcode {
+.hfe-selected-template-type-custom .easy-shortcode-ehf {
     display: table-row;
 }
 .hfe-selected-template-type-custom .bsf-target-rules-row,
 .hfe-selected-template-type-custom .enable-for-canvas,
-.hfe-shortcode,
+.easy-shortcode-ehf,
 .hfe-selected-template-type-none .bsf-target-rules-row,
-.hfe-selected-template-type-none .hfe-shortcode,
+.hfe-selected-template-type-none .easy-shortcode-ehf,
 .hfe-selected-template-type-none .enable-for-canvas,
 .hfe-guide-content .form-table th {
     display: none;

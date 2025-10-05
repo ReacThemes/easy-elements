@@ -240,13 +240,13 @@ class Easy_EHF_Admin {
 		// We'll use this nonce field later on when saving.
 		wp_nonce_field( 'ehf_meta_nounce', 'ehf_meta_nounce' );
 		?>
-		<table class="hfe-options-table widefat">
+		<table class="easy-options-table-ehf widefat">
 			<tbody>
-				<tr class="hfe-options-row type-of-template">
-					<td class="hfe-options-row-heading">
+				<tr class="easy-options-row-ehf type-of-template">
+					<td class="easy-options-row-ehf-heading">
 						<label for="ehf_template_type"><?php esc_html_e( 'Template Types', 'easy-elements' ); ?></label>
 					</td>
-					<td class="hfe-options-row-content">
+					<td class="easy-options-row-ehf-content">
 						<select name="ehf_template_type" id="ehf_template_type">
 							<option value="" <?php selected( $template_type, '' ); ?>><?php esc_html_e( 'Select Option', 'easy-elements' ); ?></option>
 							<option value="type_header" <?php selected( $template_type, 'type_header' ); ?>><?php esc_html_e( 'Header', 'easy-elements' ); ?></option>
@@ -256,40 +256,40 @@ class Easy_EHF_Admin {
 				</tr>
 
 				<?php $this->easy_rules_tab(); ?>
-				<tr class="hfe-options-row hfe-shortcode">
-					<td class="hfe-options-row-heading">
+				<tr class="easy-options-row-ehf easy-shortcode-ehf">
+					<td class="easy-options-row-ehf-heading">
 						<label for="ehf_template_type"><?php esc_html_e( 'Shortcode', 'easy-elements' ); ?></label>
-						<i class="hfe-options-row-heading-help dashicons dashicons-editor-help" title="<?php esc_html_e( 'Copy this shortcode and paste it into your post, page, or text widget content.', 'easy-elements' ); ?>">
+						<i class="easy-options-row-ehf-heading-help dashicons dashicons-editor-help" title="<?php esc_html_e( 'Copy this shortcode and paste it into your post, page, or text widget content.', 'easy-elements' ); ?>">
 						</i>
 					</td>
-					<td class="hfe-options-row-content">
-						<span class="hfe-shortcode-col-wrap">
+					<td class="easy-options-row-ehf-content">
+						<span class="easy-shortcode-ehf-col-wrap">
 							<input type="text" onfocus="this.select();" readonly="readonly" value="[easyhfe_template id='<?php echo esc_attr( $post->ID ); ?>']" class="hfe-large-text code">
 						</span>
 					</td>
 				</tr>
 
-				<tr class="hfe-options-row fixed-header">
-					<td class="hfe-options-row-heading">
+				<tr class="easy-options-row-ehf fixed-header">
+					<td class="easy-options-row-ehf-heading">
 						<label for="easyel_fixed_header"><?php esc_html_e( 'Enable Transparent Header', 'easy-elements' ); ?></label>
 						<div>
 						<?php esc_html_e( 'Enable this option to make the header transparent. Turn this on if you want your header to appear clear/see-through at the top of the page.', 'easy-elements' ); ?>
 						</div>
 					</td>
-					<td class="hfe-options-row-content">
+					<td class="easy-options-row-ehf-content">
 						<input type="checkbox" id="easyel_fixed_header" name="easyel_fixed_header" value="1" <?php checked( $fixed_header, '1' ); ?> />
 						<em><?php esc_html_e( 'Keep this header fixed at the top of the page.', 'easy-elements' ); ?></em>
 					</td>
 				</tr>
 
-				<tr class="hfe-options-row enable-for-canvas">
-					<td class="hfe-options-row-heading">
+				<tr class="easy-options-row-ehf enable-for-canvas">
+					<td class="easy-options-row-ehf-heading">
 						<label for="display-on-canvas-template">
 							<?php esc_html_e( 'Enable Layout for Elementor Canvas Template?', 'easy-elements' ); ?>
 						</label>
-						<i class="hfe-options-row-heading-help dashicons dashicons-editor-help" title="<?php esc_html_e( 'Enabling this option will display this layout on pages using Elementor Canvas Template.', 'easy-elements' ); ?>"></i>
+						<i class="easy-options-row-ehf-heading-help dashicons dashicons-editor-help" title="<?php esc_html_e( 'Enabling this option will display this layout on pages using Elementor Canvas Template.', 'easy-elements' ); ?>"></i>
 					</td>
-					<td class="hfe-options-row-content">
+					<td class="easy-options-row-ehf-content">
 						<input type="checkbox" id="display-on-canvas-template" name="display-on-canvas-template" value="1" <?php checked( $display_on_canvas, true ); ?> />
 					</td>
 				</tr>				
@@ -311,13 +311,13 @@ class Easy_EHF_Admin {
 		$exclude_locations = get_post_meta( get_the_id(), 'ehf_target_exclude_locations', true );
 		$users             = get_post_meta( get_the_id(), 'ehf_target_user_roles', true );
 		?>
-		<tr class="bsf-target-rules-row hfe-options-row">
-			<td class="bsf-target-rules-row-heading hfe-options-row-heading">
+		<tr class="bsf-target-rules-row easy-options-row-ehf">
+			<td class="bsf-target-rules-row-heading easy-options-row-ehf-heading">
 				<label><?php esc_html_e( 'Visible On', 'easy-elements' ); ?></label>
 				<i class="bsf-target-rules-heading-help dashicons dashicons-editor-help"
 					title="<?php echo esc_attr__( 'Choose the pages or areas where this template should show.', 'easy-elements' ); ?>"></i>
 			</td>
-			<td class="bsf-target-rules-row-content hfe-options-row-content">
+			<td class="bsf-target-rules-row-content easy-options-row-ehf-content">
 				<?php
 				EASY_EHF_Target_Rules_Fields::target_rule_settings_field(
 					'bsf-target-rules-location',
@@ -333,13 +333,13 @@ class Easy_EHF_Admin {
 				?>
 			</td>
 		</tr>
-		<tr class="bsf-target-rules-row hfe-options-row">
-			<td class="bsf-target-rules-row-heading hfe-options-row-heading">
+		<tr class="bsf-target-rules-row easy-options-row-ehf">
+			<td class="bsf-target-rules-row-heading easy-options-row-ehf-heading">
 				<label><?php esc_html_e( 'Do Not Show On', 'easy-elements' ); ?></label>
 				<i class="bsf-target-rules-heading-help dashicons dashicons-editor-help"
 					title="<?php echo esc_attr__( 'Select the pages or sections where this template should NOT appear.', 'easy-elements' ); ?>"></i>
 			</td>
-			<td class="bsf-target-rules-row-content hfe-options-row-content">
+			<td class="bsf-target-rules-row-content easy-options-row-ehf-content">
 				<?php
 				EASY_EHF_Target_Rules_Fields::target_rule_settings_field(
 					'bsf-target-rules-exclusion',
@@ -541,7 +541,7 @@ class Easy_EHF_Admin {
 			case 'shortcode':
 				ob_start();
 				?>
-				<span class="hfe-shortcode-col-wrap">
+				<span class="easy-shortcode-ehf-col-wrap">
 					<input type="text" onfocus="this.select();" readonly="readonly" value="[easyhfe_template id='<?php echo esc_attr( $post_id ); ?>']" class="hfe-large-text code">
 				</span>
 

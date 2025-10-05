@@ -20,7 +20,7 @@
 
 			var ehf_hide_shortcode_field = function() {
 				var selected = $('#ehf_template_type').val() || 'none';
-				$( '.hfe-options-table' ).removeClass().addClass( 'hfe-options-table widefat hfe-selected-template-type-' + selected );
+				$( '.easy-options-table-ehf' ).removeClass().addClass( 'easy-options-table-ehf widefat hfe-selected-template-type-' + selected );
 			}
 
 			var $document = $( document );
