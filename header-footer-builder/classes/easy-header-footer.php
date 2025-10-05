@@ -1,5 +1,5 @@
 <?php
-use EASY_EHF\Lib\RSHF_Target_Rules_Fields;
+use EASY_EHF\Lib\EASY_EHF_Target_Rules_Fields;
 
 class Easy_Header_Footer_Elementor {
 	/**
@@ -82,7 +82,7 @@ class Easy_Header_Footer_Elementor {
 	 * Loads the globally required files for the plugin.
 	 */
 	public function file_includes() {
-		
+
 		require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/admin/easy-ehf-admin.php';
 		require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/classes/easy-functions.php';
 		require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/classes/easy-ehf-canvas-compat.php';
@@ -272,7 +272,7 @@ class Easy_Header_Footer_Elementor {
 			'users'     => 'ehf_target_user_roles',
 		];
 
-		$hfe_templates = RSHF_Target_Rules_Fields::get_instance()->get_posts_by_conditions( 'ee-elementor-hf', $option );
+		$hfe_templates = EASY_EHF_Target_Rules_Fields::get_instance()->get_posts_by_conditions( 'ee-elementor-hf', $option );
 
 		foreach ( $hfe_templates as $template ) {
 			if ( get_post_meta( absint( $template['id'] ), 'ehf_template_type', true ) === $type ) {

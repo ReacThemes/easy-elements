@@ -4,7 +4,7 @@ namespace EASY_EHF\Lib;
 /**
  * Meta Boxes setup
  */
-class RSHF_Target_Rules_Fields {
+class EASY_EHF_Target_Rules_Fields {
 	/**
 	 * Instance
 	 *
@@ -82,8 +82,8 @@ class RSHF_Target_Rules_Fields {
 		define( 'EASYEL_AST_TARGET_RULE_VER', '1.0.0' );
 		define( 'EASYEL_AST_TARGET_RULE_DIR', plugin_dir_path( __FILE__ ) );
 
-		add_action( 'admin_action_edit', array( $this, 'initialize_options' ) );
-		add_action( 'wp_ajax_hfe_get_posts_by_query', array( $this, 'hfe_get_posts_by_query' ) );
+		add_action( 'admin_action_edit', array( $this, 'get_initialize' ) );
+		add_action( 'wp_ajax_easy_get_posts_by_query', array( $this, 'easy_get_posts_by_query' ) );
 	}
 
 	/**
@@ -91,9 +91,9 @@ class RSHF_Target_Rules_Fields {
 	 *
 	 * @return void
 	 */
-	public function initialize_options() {
-		self::$user_selection     = self::get_user_selections();
-		self::$location_selection = self::get_location_selections();
+	public function get_initialize() {
+		self::$user_selection     = self::easy_get_user_selections();
+		self::$location_selection = self::easy_get_location_selections();
 	}
 
 	/**
@@ -101,17 +101,17 @@ class RSHF_Target_Rules_Fields {
 	 *
 	 * @return array
 	 */
-	public static function get_location_selections() {
+	public static function easy_get_location_selections() {
 		$args = array(
 			'public'   => true,
 			'_builtin' => true,
 		);
 
-		$post_types = get_post_types( $args, 'objects' );
+		$post_types = easy_get_post_types( $args, 'objects' );
 		unset( $post_types['attachment'] );
 
 		$args['_builtin'] = false;
-		$custom_post_type = get_post_types( $args, 'objects' );
+		$custom_post_type = easy_get_post_types( $args, 'objects' );
 
 		$post_types = apply_filters( 'astra_location_rule_post_types', array_merge( $post_types, $custom_post_type ) );
 
@@ -199,7 +199,7 @@ class RSHF_Target_Rules_Fields {
 	 *
 	 * @return array
 	 */
-	public static function get_user_selections() {
+	public static function easy_get_user_selections() {
 		$selection_options = array(
 			'basic'    => array(
 				'label' => __( 'Basic', 'easy-elements' ),
@@ -237,9 +237,9 @@ class RSHF_Target_Rules_Fields {
 	 * @param string $key Location option key.
 	 * @return string
 	 */
-	public static function get_location_by_key( $key ) {
+	public static function easy_get_location_by_key( $key ) {
 		if ( ! isset( self::$location_selection ) || empty( self::$location_selection ) ) {
-			self::$location_selection = self::get_location_selections();
+			self::$location_selection = self::easy_get_location_selections();
 		}
 		$location_selection = self::$location_selection;
 
@@ -276,9 +276,9 @@ class RSHF_Target_Rules_Fields {
 	 * @param string $key User option key.
 	 * @return string
 	 */
-	public static function get_user_by_key( $key ) {
+	public static function easy_get_user_by_key( $key ) {
 		if ( ! isset( self::$user_selection ) || empty( self::$user_selection ) ) {
-			self::$user_selection = self::get_user_selections();
+			self::$user_selection = self::easy_get_user_selections();
 		}
 		$user_selection = self::$user_selection;
 
@@ -296,7 +296,7 @@ class RSHF_Target_Rules_Fields {
 	 *
 	 * @since  1.0.0
 	 */
-	function hfe_get_posts_by_query() {
+	function easy_get_posts_by_query() {
 
 		check_ajax_referer( 'hfe-get-posts-by-query', 'nonce' );
 
@@ -312,7 +312,7 @@ class RSHF_Target_Rules_Fields {
 
 		$output     = 'names'; // names or objects, note names is the default.
 		$operator   = 'and'; // also supports 'or'.
-		$post_types = get_post_types( $args, $output, $operator );
+		$post_types = easy_get_post_types( $args, $output, $operator );
 
 		unset( $post_types['elementor-hf'] ); //Exclude EHF templates.
 
@@ -322,7 +322,7 @@ class RSHF_Target_Rules_Fields {
 		foreach ( $post_types as $key => $post_type ) {
 			$data = array();
 
-			add_filter( 'posts_search', array( $this, 'search_only_titles' ), 10, 2 );
+			add_filter( 'posts_search', array( $this, 'easy_search_only_titles' ), 10, 2 );
 
 			$query = new \WP_Query(
 				array(
@@ -407,14 +407,14 @@ class RSHF_Target_Rules_Fields {
 
 	/**
 	 * Return search results only by post title.
-	 * This is only run from hfe_get_posts_by_query()
+	 * This is only run from easy_get_posts_by_query()
 	 *
 	 * @param  (string)   $search   Search SQL for WHERE clause.
 	 * @param  (WP_Query) $wp_query The current WP_Query object.
 	 *
 	 * @return (string) The Modified Search SQL for WHERE clause.
 	 */
-	function search_only_titles( $search, $wp_query ) {
+	function easy_search_only_titles( $search, $wp_query ) {
 		if ( ! empty( $search ) && ! empty( $wp_query->query_vars['search_terms'] ) ) {
 			global $wpdb;
 
@@ -441,7 +441,7 @@ class RSHF_Target_Rules_Fields {
 	 * Function Name: admin_styles.
 	 * Function Description: admin_styles.
 	 */
-	public function admin_styles() {
+	public function easy_admin_styles() {
 		wp_enqueue_script( 'astra-select2', EASYEL_AST_TARGET_RULE_URI . 'select2.js', array( 'jquery' ), EASYEL_AST_TARGET_RULE_VER, true );
 
 		$wp_lang  = get_locale();
@@ -473,10 +473,10 @@ class RSHF_Target_Rules_Fields {
 
 		wp_enqueue_script( 'astra-user-role' );
 
-		wp_register_style( 'astra-select2', EASYEL_AST_TARGET_RULE_URI . 'select2.css', '', EASYEL_AST_TARGET_RULE_VER );
-		wp_enqueue_style( 'astra-select2' );
-		wp_register_style( 'astra-target-rule', EASYEL_AST_TARGET_RULE_URI . 'target-rule.css', '', EASYEL_AST_TARGET_RULE_VER );
-		wp_enqueue_style( 'astra-target-rule' );
+		wp_enqueue_style( 'astra-select2', EASYEL_AST_TARGET_RULE_URI . 'select2.css', '', EASYEL_AST_TARGET_RULE_VER );
+		
+		wp_enqueue_style( 'astra-target-rule', EASYEL_AST_TARGET_RULE_URI . 'target-rule.css', '', EASYEL_AST_TARGET_RULE_VER );
+
 
 		/**
 		 * Registered localize vars
@@ -497,6 +497,7 @@ class RSHF_Target_Rules_Fields {
 			'search'        => __( 'Search pages / post / categories', 'easy-elements' ),
 			'ajax_nonce'    => wp_create_nonce( 'hfe-get-posts-by-query' ),
 		);
+		
 		wp_localize_script( 'astra-select2', 'astRules', $localize_vars );
 	}
 
@@ -518,7 +519,7 @@ class RSHF_Target_Rules_Fields {
 		$output         = '';
 
 		if ( isset( self::$location_selection ) || empty( self::$location_selection ) ) {
-			self::$location_selection = self::get_location_selections();
+			self::$location_selection = self::easy_get_location_selections();
 		}
 		$selection_options = self::$location_selection;
 
@@ -928,7 +929,7 @@ class RSHF_Target_Rules_Fields {
 		$output         = '';
 
 		if ( ! isset( self::$user_selection ) || empty( self::$user_selection ) ) {
-			self::$user_selection = self::get_user_selections();
+			self::$user_selection = self::easy_get_user_selections();
 		}
 		$selection_options = self::$user_selection;
 
@@ -1491,4 +1492,4 @@ class RSHF_Target_Rules_Fields {
 /**
  * Kicking this off by calling 'get_instance()' method
  */
-RSHF_Target_Rules_Fields::get_instance();
+EASY_EHF_Target_Rules_Fields::get_instance();

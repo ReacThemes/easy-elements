@@ -1,50 +1,43 @@
 <?php
-use EASY_EHF\Lib\RSHF_Target_Rules_Fields;
+use EASY_EHF\Lib\EASY_EHF_Target_Rules_Fields;
 
 defined( 'ABSPATH' ) or exit;
 
 /**
- * EE_HFE_Admin setup
+ * Easy_EHF_Admin setup
  *
  * @since 1.0.0
  */
-class EE_HFE_Admin {
+class Easy_EHF_Admin {
 
 	/**
-	 * Instance of EE_HFE_Admin
+	 * Holds the singleton instance of Easy_EHF_Admin.
+	 *
+	 * @var Easy_EHF_Admin|null
 	 */
-	private static $_instance = null;
+	private static $instance = null;
 
 	/**
-	 * Instance of EE_HFE_Admin
+	 * Returns the singleton instance of Easy_EHF_Admin.
+	 *
+	 * @return Easy_EHF_Admin
 	 */
 	public static function instance() {
-		if ( ! isset( self::$_instance ) ) {
-			self::$_instance = new self();
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
-		add_action( 'elementor/init', __CLASS__ . '::load_admin', 0 );
+		add_action( 'elementor/init', [ self::class, 'easy_load_admin' ], 0 );
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
-	/**
-	 * Load the icons style in editor.
-	 *
-	 * @since 1.3.0
-	 */
-	public static function load_admin() {
-		add_action( 'elementor/editor/after_enqueue_styles', __CLASS__ . '::EE_HFE_Admin_enqueue_scripts' );
+	public static function easy_load_admin() {
+		add_action( 'elementor/editor/after_enqueue_styles', [ self::class, 'easy_admin_enqueue_scripts' ] );
 	}
 
-	/**
-	 * Enqueue admin scripts
-	 *
-	 * @since 1.3.0
-	 * @param string $hook Current page hook.
-	 * @access public
-	 */
-	public static function EE_HFE_Admin_enqueue_scripts( $hook ) {
+	/** Enqueue admin styles after Elementor editor loads. */
+	public static function easy_admin_enqueue_scripts( $hook ) {
         $css_file_url = EASYELEMENTS_ASSETS_ADMIN . 'header-footer-builder/admin/assets/css/ehf-admin.css';
         $css_file_path = EASYELEMENTS_DIR_PATH . 'header-footer-builder/admin/assets/css/ehf-admin.css';
         $version = file_exists($css_file_path) ? filemtime($css_file_path) : null;        
@@ -55,49 +48,45 @@ class EE_HFE_Admin {
 	 * Constructor
 	 */
 	private function __construct() {
-		add_action( 'init', [ $this, 'header_footer_posttype' ] );	
-		add_action( 'admin_enqueue_scripts', array( $this, 'EE_HFE_Admin_scripts' ) );
+		add_action( 'init', [ $this, 'easy_ehf_posttype' ] );	
+		add_action( 'admin_enqueue_scripts', array( $this, 'easy_ehf_admin_scripts' ) );
 		add_action( 'add_meta_boxes', [ $this, 'ehf_register_metabox' ] );
 		add_action( 'save_post', [ $this, 'ehf_save_meta' ] );
-		add_action( 'admin_notices', [ $this, 'location_notice' ] );
-		add_action( 'template_redirect', [ $this, 'block_template_frontend' ] );
-		add_filter( 'single_template', [ $this, 'load_canvas_template' ] );
-		add_filter( 'manage_ee-elementor-hf_posts_columns', [ $this, 'set_shortcode_columns' ] );
-		add_action( 'manage_ee-elementor-hf_posts_custom_column', [ $this, 'render_shortcode_column' ], 10, 2 );
+		add_action( 'admin_notices', [ $this, 'easy_location_notice' ] );
+		add_action( 'template_redirect', [ $this, 'easy_template_frontend' ] );
+		add_filter( 'single_template', [ $this, 'easy_load_canvas_template' ] );
+		add_filter( 'manage_ee-elementor-hf_posts_columns', [ $this, 'easy_shortcode_columns' ] );
+		add_action( 'manage_ee-elementor-hf_posts_custom_column', [ $this, 'easy_rnd_shortcode_column' ], 10, 2 );
 
 		if ( is_admin() ) {
-			add_action( 'manage_ee-elementor-hf_posts_custom_column', [ $this, 'column_content' ], 10, 2 );
-			add_filter( 'manage_ee-elementor-hf_posts_columns', [ $this, 'column_headings' ] );
-			require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/admin/class-hfe-addons-actions.php';
+			add_action( 'manage_ee-elementor-hf_posts_custom_column', [ $this, 'easy_content_content' ], 10, 2 );
+			add_filter( 'manage_ee-elementor-hf_posts_columns', [ $this, 'easy_col_headings' ] );
+			require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/admin/easy-ehf-addons-actions.php';
 		}
 
-		//add_action( 'admin_init', array( $this, 'rshfe_page_init' ) );
 	}
 
 	/**
-	 * Admin Style
+	 * Enqueue admin styles for Easy Elements Header Footer
 	 */
-	/**
- * Enqueue admin styles for Easy Elements Header Footer
- */
-public function EE_HFE_Admin_scripts() {
-    // Absolute path to the CSS file
-    $css_file = EASYELEMENTS_PATH . 'header-footer-builder/admin/assets/css/ehf-admin.css';
-    // URL to the CSS file
-    $css_url  = EASYELEMENTS_ASSETS_ADMIN . 'header-footer-builder/admin/assets/css/ehf-admin.css';
-    // Generate version from file modified time to avoid cache issues
-    $version = file_exists( $css_file ) ? filemtime( $css_file ) : '1.0.0';
+	public function easy_ehf_admin_scripts() {
+		// Absolute path to the CSS file
+		$css_file = EASYELEMENTS_PATH . 'header-footer-builder/admin/assets/css/ehf-admin.css';
+		// URL to the CSS file
+		$css_url  = EASYELEMENTS_ASSETS_ADMIN . 'header-footer-builder/admin/assets/css/ehf-admin.css';
+		// Generate version from file modified time to avoid cache issues
+		$version = file_exists( $css_file ) ? filemtime( $css_file ) : '1.0.0';
 
-    // Register and enqueue the style
-    wp_register_style(
-        'easy-hfe-admin-styles', // Handle
-        $css_url,                // File URL
-        array(),                 // Dependencies
-        $version                 // Version for cache busting
-    );
+		// Register and enqueue the style
+		wp_register_style(
+			'easy-hfe-admin-styles', 
+			$css_url,               
+			array(),                
+			$version
+		);
 
-    wp_enqueue_style( 'easy-hfe-admin-styles' );
-}
+		wp_enqueue_style( 'easy-hfe-admin-styles' );
+	}
 
 
 	/**
@@ -106,7 +95,7 @@ public function EE_HFE_Admin_scripts() {
 	 * @param array $columns Array of columns.
 	 * @return array
 	 */
-	public function column_headings( $columns ) {
+	public function easy_col_headings( $columns ) {
 		unset( $columns['date'] );
 
 		$columns['elementor_hf_display_rules'] = __( 'Display Condition', 'easy-elements' );
@@ -122,7 +111,7 @@ public function EE_HFE_Admin_scripts() {
 	 * @param int   $post_id Post id.
 	 * @return void
 	 */
-	public function column_content( $column, $post_id ) {
+	public function easy_content_content( $column, $post_id ) {
 
 		if ( 'elementor_hf_display_rules' == $column ) {
 
@@ -130,7 +119,7 @@ public function EE_HFE_Admin_scripts() {
 			if ( ! empty( $locations ) ) {
 				echo '<div class="ast-advanced-headers-location-wrap" style="margin-bottom: 5px;">';
 				echo '<strong>Display: </strong>';
-				$this->column_display_location_rules( $locations );
+				$this->easy_display_location_rules( $locations );
 				echo '</div>';
 			}
 
@@ -138,7 +127,7 @@ public function EE_HFE_Admin_scripts() {
 			if ( ! empty( $locations ) ) {
 				echo '<div class="ast-advanced-headers-exclusion-wrap" style="margin-bottom: 5px;">';
 				echo '<strong>Exclusion: </strong>';
-				$this->column_display_location_rules( $locations );
+				$this->easy_display_location_rules( $locations );
 				echo '</div>';
 			}
 
@@ -147,7 +136,7 @@ public function EE_HFE_Admin_scripts() {
 				if ( isset( $users[0] ) && ! empty( $users[0] ) ) {
 					$user_label = [];
 					foreach ( $users as $user ) {
-						$user_label[] = esc_html( RSHF_Target_Rules_Fields::get_user_by_key( $user ) );
+						$user_label[] = esc_html( EASY_EHF_Target_Rules_Fields::easy_get_user_by_key( $user ) );
 					}
 					echo '<div class="ast-advanced-headers-users-wrap">';
 					echo '<strong>Users: </strong>';
@@ -164,7 +153,7 @@ public function EE_HFE_Admin_scripts() {
 	 * @param array $locations Array of locations.
 	 * @return void
 	 */
-	public function column_display_location_rules( $locations ) {
+	public function easy_display_location_rules( $locations ) {
 
 		$location_label = [];
 		$index          = array_search( 'specifics', $locations['rule'] );
@@ -174,12 +163,12 @@ public function EE_HFE_Admin_scripts() {
 
 		if ( isset( $locations['rule'] ) && is_array( $locations['rule'] ) ) {
 			foreach ( $locations['rule'] as $location ) {
-				$location_label[] = esc_html( RSHF_Target_Rules_Fields::get_location_by_key( $location ) );
+				$location_label[] = esc_html( EASY_EHF_Target_Rules_Fields::easy_get_location_by_key( $location ) );
 			}
 		}
 		if ( isset( $locations['specific'] ) && is_array( $locations['specific'] ) ) {
 			foreach ( $locations['specific'] as $location ) {
-				$location_label[] = esc_html( RSHF_Target_Rules_Fields::get_location_by_key( $location ) );
+				$location_label[] = esc_html( EASY_EHF_Target_Rules_Fields::easy_get_location_by_key( $location ) );
 			}
 		}
 
@@ -187,10 +176,8 @@ public function EE_HFE_Admin_scripts() {
 	}
 
 
-	/**
-	 * Register Post type for Elementor Header & Footer Builder templates
-	 */
-	public function header_footer_posttype() {
+	/** Register custom post type for HFE templates. */
+	public function easy_ehf_posttype() {
 		$labels = [
 			'name'               => __( 'Easy Header & Footer', 'easy-elements' ),
 			'singular_name'      => __( 'Easy Header & Footer', 'easy-elements' ),
@@ -222,15 +209,8 @@ public function EE_HFE_Admin_scripts() {
 		];
 		register_post_type( 'ee-elementor-hf', $args );
 
-		add_filter( 'body_class', [ $this, 'add_fixed_header_body_class' ] );
+		add_filter( 'body_class', [ $this, 'easy_fixed_header_body_class' ] );
 	}
-
-	/**
-	 * Register the admin menu
-	 *
-	 * @since  1.0.0
-	 */
-	
 
 	/**
 	 * Register meta box(es).
@@ -249,11 +229,7 @@ public function EE_HFE_Admin_scripts() {
 		);
 	}
 
-	/**
-	 * Render Meta field.
-	 *
-	 * @param  POST $post Currennt post object which is being displayed.
-	 */
+	/** Render meta field for the given post. */
 	function easy_metabox_render( $post ) {
 		$values            = get_post_custom( $post->ID );
 		$template_type     = isset( $values['ehf_template_type'] ) ? esc_attr( $values['ehf_template_type'][0] ) : '';
@@ -279,7 +255,7 @@ public function EE_HFE_Admin_scripts() {
 					</td>
 				</tr>
 
-				<?php $this->display_rules_tab(); ?>
+				<?php $this->easy_rules_tab(); ?>
 				<tr class="hfe-options-row hfe-shortcode">
 					<td class="hfe-options-row-heading">
 						<label for="ehf_template_type"><?php esc_html_e( 'Shortcode', 'easy-elements' ); ?></label>
@@ -323,13 +299,13 @@ public function EE_HFE_Admin_scripts() {
 	}
 
 	/**
-	 * Markup for Display Rules Tabs.
+	 * Display for Rules Tabs.
 	 *
 	 * @since  1.0.0
 	 */
-	public function display_rules_tab() {
+	public function easy_rules_tab() {
 		// Load Target Rule assets.
-		RSHF_Target_Rules_Fields::get_instance()->admin_styles();
+		EASY_EHF_Target_Rules_Fields::get_instance()->easy_admin_styles();
 
 		$include_locations = get_post_meta( get_the_id(), 'ehf_target_include_locations', true );
 		$exclude_locations = get_post_meta( get_the_id(), 'ehf_target_exclude_locations', true );
@@ -343,7 +319,7 @@ public function EE_HFE_Admin_scripts() {
 			</td>
 			<td class="bsf-target-rules-row-content hfe-options-row-content">
 				<?php
-				RSHF_Target_Rules_Fields::target_rule_settings_field(
+				EASY_EHF_Target_Rules_Fields::target_rule_settings_field(
 					'bsf-target-rules-location',
 					[
 						'title'          => __( 'Display Condition', 'easy-elements' ),
@@ -365,7 +341,7 @@ public function EE_HFE_Admin_scripts() {
 			</td>
 			<td class="bsf-target-rules-row-content hfe-options-row-content">
 				<?php
-				RSHF_Target_Rules_Fields::target_rule_settings_field(
+				EASY_EHF_Target_Rules_Fields::target_rule_settings_field(
 					'bsf-target-rules-exclusion',
 					[
 						'title'          => __( 'Exclude On', 'easy-elements' ),
@@ -383,11 +359,11 @@ public function EE_HFE_Admin_scripts() {
 	}
 
 	/**
-	 * Save meta field.
+	 * Save meta settings for Elementor Header/Footer template.
 	 *
-	 * @param  POST $post_id Currennt post object which is being displayed.
+	 * Handles target locations, template type, canvas display, and fixed header option.
 	 *
-	 * @return Void
+	 * @param int $post_id Post ID being saved.
 	 */
 	public function ehf_save_meta( $post_id ) {
 
@@ -405,8 +381,8 @@ public function EE_HFE_Admin_scripts() {
 			return;
 		}
 
-		$target_locations = RSHF_Target_Rules_Fields::get_format_rule_value( $_POST, 'bsf-target-rules-location' );
-		$target_exclusion = RSHF_Target_Rules_Fields::get_format_rule_value( $_POST, 'bsf-target-rules-exclusion' );
+		$target_locations = EASY_EHF_Target_Rules_Fields::get_format_rule_value( $_POST, 'bsf-target-rules-location' );
+		$target_exclusion = EASY_EHF_Target_Rules_Fields::get_format_rule_value( $_POST, 'bsf-target-rules-exclusion' );
 		$target_users     = [];
 
 		update_post_meta( $post_id, 'ehf_target_include_locations', $target_locations );
@@ -441,7 +417,7 @@ public function EE_HFE_Admin_scripts() {
 	 *
 	 * @since 1.0.0
 	 */
-	public function location_notice() {
+	public function easy_location_notice() {
 		global $pagenow;
 		global $post;
 
@@ -457,9 +433,9 @@ public function EE_HFE_Admin_scripts() {
 			// Check if more than one template is selected for current template type.
 			if ( is_array( $templates ) && isset( $templates[1] ) && $post->ID != $templates[0] ) {
 				$post_title        = '<strong>' . esc_html( get_the_title( $templates[0] ) ) . '</strong>';
-				$template_location = '<strong>' . esc_html( $this->template_location( $template_type ) ) . '</strong>';
+				$easy_template_location = '<strong>' . esc_html( $this->easy_template_location( $template_type ) ) . '</strong>';
 				/* Translators: Post title, Template Location */
-				$message = sprintf( __( 'Template %1$s is already assigned to the location %2$s', 'easy-elements' ), $post_title, $template_location );
+				$message = sprintf( __( 'Template %1$s is already assigned to the location %2$s', 'easy-elements' ), $post_title, $easy_template_location );
 
 				echo '<div class="error"><p>';
 				echo wp_kses_post( $message );
@@ -477,25 +453,31 @@ public function EE_HFE_Admin_scripts() {
 	 *
 	 * @return String $template_type Template type name.
 	 */
-	public function template_location( $template_type ) {
+	public function easy_template_location( $template_type ) {
 		$template_type = ucfirst( str_replace( 'type_', '', $template_type ) );
 
 		return $template_type;
 	}
 
 	/**
-	 * Don't display the elementor Elementor Header & Footer Builder templates on the frontend for non edit_posts capable users.
+	 * Redirect non-admin users away from single Elementor Header/Footer templates.
 	 *
-	 * @since  1.0.0
+	 * @return void
 	 */
-	public function block_template_frontend() {
+	public function easy_template_frontend() {
 		if ( is_singular( 'ee-elementor-hf' ) && ! current_user_can( 'edit_posts' ) ) {
 			wp_redirect( site_url(), 301 );
 			die;
 		}
 	}
 
-	public function add_fixed_header_body_class( $classes ) {
+	/**
+	 * Add body class for fixed Elementor header if enabled.
+	 *
+	 * @param array $classes Current body classes.
+	 * @return array Modified body classes.
+	 */
+	public function easy_fixed_header_body_class( $classes ) {
 		if ( class_exists( 'EE_Header_Footer_Elementor' ) ) {
 			$header_id = EE_Header_Footer_Elementor::get_settings( 'type_header', '' );
 			if ( $header_id && '1' === get_post_meta( $header_id, '_easyel_fixed_header', true ) ) {
@@ -506,13 +488,15 @@ public function EE_HFE_Admin_scripts() {
 	}
 
 	/**
-	 * Single template function which will choose our template
+	 * Load Elementor Canvas template for Header/Footer custom post type.
 	 *
-	 * @since  1.0.1
+	 * Overrides the single template for 'ee-elementor-hf' posts to use
+	 * Elementor's canvas template.
 	 *
-	 * @param  String $single_template Single template.
+	 * @param string $single_template Current single template path.
+	 * @return string Template path to use.
 	 */
-	function load_canvas_template( $single_template ) {
+	function easy_load_canvas_template( $single_template ) {
 		global $post;
 
 		if ( 'ee-elementor-hf' == $post->post_type ) {
@@ -533,7 +517,7 @@ public function EE_HFE_Admin_scripts() {
 	 *
 	 * @param array $columns template list columns.
 	 */
-	function set_shortcode_columns( $columns ) {
+	function easy_shortcode_columns( $columns ) {
 		$date_column = $columns['date'];
 
 		unset( $columns['date'] );
@@ -545,12 +529,14 @@ public function EE_HFE_Admin_scripts() {
 	}
 
 	/**
-	 * Display shortcode in template list column.
+	 * Render shortcode column in admin list table.
 	 *
-	 * @param array $column template list column.
-	 * @param int   $post_id post id.
+	 * Displays a readonly input with the shortcode for the given post ID.
+	 *
+	 * @param string $column  Column name being rendered.
+	 * @param int    $post_id Current post ID.
 	 */
-	function render_shortcode_column( $column, $post_id ) {
+	function easy_rnd_shortcode_column( $column, $post_id ) {
 		switch ( $column ) {
 			case 'shortcode':
 				ob_start();
@@ -567,4 +553,4 @@ public function EE_HFE_Admin_scripts() {
 	}
 }
 
-EE_HFE_Admin::instance();
+Easy_EHF_Admin::instance();

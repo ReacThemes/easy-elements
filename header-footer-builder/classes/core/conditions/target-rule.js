@@ -15,7 +15,7 @@
 			      	return {
 			        	q: params.term, // search term
 				        page: params.page,
-						action: 'hfe_get_posts_by_query',
+						action: 'easy_get_posts_by_query',
 						nonce: astRules.ajax_nonce
 			    	};
 				},
