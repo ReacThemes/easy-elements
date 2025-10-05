@@ -20,11 +20,7 @@
 			    	};
 				},
 				processResults: function (data) {
-					// console.log(data);
-					// console.log("inside");
-		            // parse the results into the format expected by Select2.
-		            // since we are using custom formatting functions we do not need to
-		            // alter the remote JSON data
+					
 
 		            return {
 		                results: data
