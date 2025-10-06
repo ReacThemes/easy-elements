@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class Easyel_Elements_Elementor_Extension {
 
-	const VERSION = '1.0.0';
+	const VERSION = EASYELEMENTS_VER;
 
 	private static $_instance = null;
 
@@ -18,6 +18,7 @@ final class Easyel_Elements_Elementor_Extension {
 
 	public function __construct() {
 		add_action( 'init', [ $this, 'init' ] );
+
 	}
 
 
@@ -31,16 +32,21 @@ final class Easyel_Elements_Elementor_Extension {
 		// Assets
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_styles' ] );	
+
 	}
 
 	public function enqueue_frontend_assets() {
 		$dir = plugin_dir_url( __FILE__ );
+
 		if ( is_admin() ) return;
 		wp_enqueue_style( 'swiper', ELEMENTOR_ASSETS_URL . 'lib/swiper/css/swiper-bundle.min.css', [], '8.0.7' );
-		wp_enqueue_style( 'eel-elements-plugins', $dir . 'assets/css/plugins.css', [], '1.0.0' );		
+		wp_enqueue_style( 'easy-hfe-elementor', EASYELEMENTS_ASSETS_URL . 'header-footer/css/easy-hfe-elementor.css', [], self::VERSION  );
+
+		
+		wp_enqueue_style( 'eel-elements-plugins', $dir . 'assets/css/plugins.css', [], self::VERSION );		
 		wp_enqueue_script( 'swiper', ELEMENTOR_ASSETS_URL . 'lib/swiper/swiper-bundle.min.js', [ 'jquery' ], '8.0.7', true );
 		wp_enqueue_script( 'eel-plugins', $dir . 'assets/js/plugins.js', [ 'jquery' ], '2.2.1', true );
-		wp_enqueue_script( 'eel-custom-js', $dir . 'assets/js/custom.js', [ 'jquery' ], '1.0.0', true );		
+		wp_enqueue_script( 'eel-custom-js', $dir . 'assets/js/custom.js', [ 'jquery' ], self::VERSION, true );		
 	}
 
 

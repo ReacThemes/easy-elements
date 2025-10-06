@@ -19,10 +19,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Define constants
+define( 'EASYELEMENTS_VER', '1.0.0' );
 define( 'EASYELEMENTS_FILE', __FILE__ );
 define( 'EASYELEMENTS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'EASYELEMENTS_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'EASYELEMENTS_ASSETS_URL', EASYELEMENTS_DIR_URL . 'assets/' );
+
+define( 'EASYELEMENTS_URL', plugins_url( '/', __FILE__ ) );
+define( 'EASYELEMENTS_PATH', plugin_basename( __FILE__ ) );
+define( 'EASYELEMENTS_DOMAIN', trailingslashit( 'https://reacthemes.com' ) );
+define( 'EASYELEMENTS_URL_ADMIN', plugin_dir_url( __FILE__ ) );
+define( 'EASYELEMENTS_ASSETS_ADMIN', trailingslashit( EASYELEMENTS_URL_ADMIN ) );
 
 
 $includes = [
@@ -39,12 +46,13 @@ $includes = [
         'templates/theme-builder/easyel-builder-frontend.php',
     ],
     'addons' => [
-        'easy-header-footer-elementor/easy-header-footer-elementor.php',
+        'header-footer-builder/classes/easy-header-footer.php',
     ],
     'cpt' => [
         'templates/theme-builder/easy-theme-builder-post-type.php',
     ],
 ];
+
 
 function easyelements_include_file( $file ) {
 
@@ -85,7 +93,7 @@ function easyel_before_content_container_hfe() {
     }
     echo '<div class="easyel-content-container">';
 }
-add_action( 'hfe_header', 'easyel_before_content_container_hfe', 20 );
+add_action( 'easy_header', 'easyel_before_content_container_hfe', 20 );
 
 /**
  * Close container before HFE Footer
@@ -97,4 +105,10 @@ function easyel_after_content_container_hfe() {
     }
     echo '</div>';
 }
-add_action( 'hfe_footer', 'easyel_after_content_container_hfe', 5 );
+add_action( 'easy_footer', 'easyel_after_content_container_hfe', 5 );
+
+add_action( 'plugins_loaded', function() {
+   Easy_Header_Footer_Elementor::instance();
+});
+
+

@@ -69,8 +69,6 @@ class Easyel_Theme_Builder_Front {
             $template_type = get_post_meta( $tmpl->ID, 'easyel_template_type', true );
             $conditions    = get_post_meta($tmpl->ID, 'easyel_conditions', true );
 
-            error_log( "json". print_r( $conditions, true ) );
-
             // safe decode
             $conditions = safe_json_decode($conditions);
 
