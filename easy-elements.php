@@ -111,4 +111,3 @@ add_action( 'plugins_loaded', function() {
    Easy_Header_Footer_Elementor::instance();
 });
 
-

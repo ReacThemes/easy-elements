@@ -49,6 +49,7 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
         if ( ! wp_script_is( $handle, 'registered' ) && file_exists( $js_path ) ) {
             wp_register_script( $handle, plugins_url( 'js/simple-gallery.js', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $js_path ) : '1.0.0' );
         }
+
         return [ $handle ];
     }
 
@@ -69,6 +70,25 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Add Images', 'easy-elements' ),
                 'type' => Controls_Manager::GALLERY,
                 'default' => [],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'columns',
+            [
+                'label' => esc_html__( 'Columns', 'easy-elements' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => '4',
+                'options' => [
+                    '1' => esc_html__( '1 Column', 'easy-elements' ),
+                    '2' => esc_html__( '2 Columns', 'easy-elements' ),
+                    '3' => esc_html__( '3 Columns', 'easy-elements' ),
+                    '4' => esc_html__( '4 Columns', 'easy-elements' ),
+                    '5' => esc_html__( '5 Columns', 'easy-elements' ),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel-gallery-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+                ],
             ]
         );
 
@@ -137,58 +157,12 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-
-        // Layout Options
-        $this->start_controls_section(
-            'section_layout',
-            [
-                'label' => esc_html__( 'Layout Settings', 'easy-elements' ),
-                'tab' => Controls_Manager::TAB_CONTENT,
-            ]
-        );
-
-        $this->add_responsive_control(
-            'columns',
-            [
-                'label' => esc_html__( 'Columns', 'easy-elements' ),
-                'type' => Controls_Manager::SELECT,
-                'default' => '3',
-                'options' => [
-                    '1' => esc_html__( '1 Column', 'easy-elements' ),
-                    '2' => esc_html__( '2 Columns', 'easy-elements' ),
-                    '3' => esc_html__( '3 Columns', 'easy-elements' ),
-                    '4' => esc_html__( '4 Columns', 'easy-elements' ),
-                    '5' => esc_html__( '5 Columns', 'easy-elements' ),
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .eel-gallery-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'image_gap',
-            [
-                'label' => esc_html__( 'Image Gap', 'easy-elements' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%' ],
-                'range' => [
-                    'px' => [ 'min' => 0, 'max' => 100 ],
-                ],
-                'default' => [ 'size' => 10 ],
-                'selectors' => [
-                    '{{WRAPPER}} .eel-gallery-grid' => 'gap: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->end_controls_section();
     }
 
     protected function render() {
         $settings = $this->get_settings_for_display();
         $images = $settings['gallery_images'];
-
+        
         if ( empty( $images ) ) {
             echo '<p>' . esc_html__( 'Please select images to display the gallery.', 'easy-elements' ) . '</p>';
             return;
@@ -227,13 +201,13 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
 
             echo '<div class="eel-gallery-item">';
 
-            if ( $popup_enabled ) {
-                echo '<a href="' . esc_url( $full_image ) . '" class="eel-popup-link" data-index="' . esc_attr( $index ) . '">';
-            } else {
-                echo '<a href="' . esc_url( $image['url'] ) . '" target="_blank" rel="noopener">';
-            }
+			if ( $popup_enabled ) {
+				echo '<a href="' . esc_url( $full_image ) . '" class="eel-popup-link" data-index="' . esc_attr( $index ) . '" data-elementor-open-lightbox="no">';
+			} else {
+				echo '<a href="' . esc_url( $image['url'] ) . '" target="_blank" rel="noopener" data-elementor-open-lightbox="no">';
+			}
 
-            echo '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( get_post_meta( $image['id'], '_wp_attachment_image_alt', true ) ) . '">';
+			echo '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( get_post_meta( $image['id'], '_wp_attachment_image_alt', true ) ) . '" data-elementor-open-lightbox="no">';
             echo '</a>';
 
             if ( ! empty( $caption ) ) {

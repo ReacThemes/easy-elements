@@ -36,11 +36,6 @@ class Easyel_Social_Icon_Widget extends \Elementor\Widget_Base {
 		$handle = 'eel-social-icon';
 		$css_path = plugin_dir_path( __FILE__ ) . 'css/social.css';
 		
-		if ( get_option( 'easyel_elements_minify_css', '0' ) === '1' && class_exists( 'Easyel_Elements_CSS_Loader_Helper' ) ) {
-			Easyel_Elements_CSS_Loader_Helper::easyel_elements_load_minified_inline_css( $handle, $css_path );
-			return [ $handle ];
-		}
-		
 		if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
 			wp_register_style( $handle, plugins_url( 'css/social.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : '1.0.0' );
         }
@@ -62,7 +57,7 @@ class Easyel_Social_Icon_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget title
 	 */
 	public function get_title() {
-		return __( 'Easy Social Icon', 'easy-elements' );
+		return __( 'Social Icon', 'easy-elements' );
 	}
 
 	/**
@@ -427,97 +422,77 @@ class Easyel_Social_Icon_Widget extends \Elementor\Widget_Base {
 	 * Generates the HTML markup for the social icons
 	 */
 	protected function render() {
-		$settings = $this->get_settings_for_display();
-		
-		// Return early if no social links are configured
-		if ( empty( $settings['social_links'] ) ) {
-			return;
-		}
+    $settings = $this->get_settings_for_display();
+    
+    if ( empty( $settings['social_links'] ) ) {
+        return;
+    }
 
-		$color_mode = $settings['color_mode'] ?? 'custom';
+    $color_mode = $settings['color_mode'] ?? 'custom';
 
-		?>
-		<div class="eel-social-share">
-			<div class="eel-social-buttons">
-				<?php foreach ( $settings['social_links'] as $index => $link ) : ?>
-					<?php
-					// Extract link data with fallbacks
-					$link_title = $link['link_title'] ?? '';
-					$link_url   = $link['link_url'] ?? [];
-					$icon       = $link['icon'] ?? [];
-					
-					// Process URL settings
-					$url         = $link_url['url'] ?? '#';
-					$is_external = $link_url['is_external'] ?? false;
-					$nofollow    = $link_url['nofollow'] ?? false;
-					
-					// Set target and rel attributes
-					$target = $is_external ? '_blank' : '_self';
-					$rel    = '';
-					
-					if ( $is_external && $nofollow ) {
-						$rel = 'nofollow noopener';
-					} elseif ( $is_external ) {
-						$rel = 'noopener';
-					} elseif ( $nofollow ) {
-						$rel = 'nofollow';
-					}
+    echo '<div class="eel-social-share"><div class="eel-social-buttons">';
 
-					// Prepare inline styles for custom colors
-					$inline_styles = '';
-					$unique_class  = '';
-					
-					if ( $color_mode === 'custom' ) {
-						$bg_color        = $link['background_color'] ?? '#1877F2';
-						$icon_color      = $link['icon_color'] ?? '#ffffff';
-						$hover_bg_color  = $link['hover_background_color'] ?? '#166fe5';
-						$hover_icon_color = $link['hover_icon_color'] ?? '#ffffff';
-						
-						$inline_styles = sprintf(
-							'background-color: %s; color: %s;',
-							esc_attr( $bg_color ),
-							esc_attr( $icon_color )
-						);
-						
-						$unique_class = 'eel-social-custom-' . $index;
-					}
-					?>					
-					<a href="<?php echo esc_url( $url ); ?>"
-						class="eel-social-button<?php echo ! empty( $unique_class ) ? ' ' . esc_attr( $unique_class ) : ''; ?>"
-						target="<?php echo esc_attr( $target ); ?>"
-						<?php if ( ! empty( $rel ) ) : ?>
-							rel="<?php echo esc_attr( $rel ); ?>"
-						<?php endif; ?>
-						title="<?php echo esc_attr( $link_title ); ?>"
-						<?php if ( ! empty( $inline_styles ) ) : ?>
-							style="<?php echo esc_attr( $inline_styles ); ?>"
-						<?php endif; ?>>
-							<?php \Elementor\Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] ); ?>
-					</a>
-				<?php endforeach; ?>
-			</div>
-		</div>
-		
+    foreach ( $settings['social_links'] as $index => $link ) {
+        $link_title = $link['link_title'] ?? '';
+        $link_url   = $link['link_url']['url'] ?? '#';
+        $is_external = $link['link_url']['is_external'] ?? false;
+        $nofollow    = $link['link_url']['nofollow'] ?? false;
 
-		<?php if ( $color_mode === 'custom' ) : ?>
-			<style>
-				<?php foreach ( $settings['social_links'] as $index => $link ) : ?>
-					<?php
-					$hover_bg_color   = isset( $link['hover_background_color'] ) ? sanitize_hex_color( $link['hover_background_color'] ) : '#166fe5';
-					$hover_icon_color = isset( $link['hover_icon_color'] ) ? sanitize_hex_color( $link['hover_icon_color'] ) : '#ffffff';
-					?>
-					.eel-social-custom-<?php echo (int) $index; ?>:hover {
-						background-color: <?php echo esc_attr( $hover_bg_color ); ?> !important;
-						color: <?php echo esc_attr( $hover_icon_color ); ?> !important;
-					}
-					.eel-social-custom-<?php echo (int) $index; ?>:hover i,
-					.eel-social-custom-<?php echo (int) $index; ?>:hover svg {
-						color: <?php echo esc_attr( $hover_icon_color ); ?> !important;
-						fill: <?php echo esc_attr( $hover_icon_color ); ?> !important;
-					}
-				<?php endforeach; ?>
-			</style>
-		<?php endif; ?>
-		<?php
-	}
+        $target = $is_external ? '_blank' : '_self';
+        $rel = '';
+        if ( $is_external && $nofollow ) $rel = 'nofollow noopener';
+        elseif ( $is_external ) $rel = 'noopener';
+        elseif ( $nofollow ) $rel = 'nofollow';
+
+        $unique_class = 'eel-social-custom-' . $index;
+        $inline_style = '';
+        $hover_bg = '#166fe5';
+        $hover_icon = '#ffffff';
+        $bg_color = '#1877F2';
+        $icon_color = '#ffffff';
+
+        if ( $color_mode === 'custom' ) {
+            $bg_color = $link['background_color'] ?? $bg_color;
+            $icon_color = $link['icon_color'] ?? $icon_color;
+            $hover_bg = $link['hover_background_color'] ?? $hover_bg;
+            $hover_icon = $link['hover_icon_color'] ?? $hover_icon;
+
+            $inline_style = sprintf(
+                'background-color: %s; color: %s;',
+                esc_attr($bg_color),
+                esc_attr($icon_color)
+            );
+        }
+
+        echo '<a href="' . esc_url($link_url) . '" class="eel-social-button ' . esc_attr($unique_class) . '"';
+        echo ' target="' . esc_attr($target) . '"';
+        if ( $rel ) echo ' rel="' . esc_attr($rel) . '"';
+        echo ' title="' . esc_attr($link_title) . '"';
+        if ( $inline_style ) echo ' style="' . esc_attr($inline_style) . '"';
+        echo '>';
+
+        \Elementor\Icons_Manager::render_icon( $link['icon'], [
+            'aria-hidden' => 'true',
+            'style' => 'color:' . esc_attr($icon_color) . '; fill:' . esc_attr($icon_color) . ';',
+        ]);
+
+        echo '</a>';
+
+        // Add hover styles dynamically
+        if ( $color_mode === 'custom' ) {
+            echo '<style>
+                .' . esc_attr($unique_class) . ':hover {
+                    background-color: ' . esc_attr($hover_bg) . ' !important;
+                }
+                .' . esc_attr($unique_class) . ':hover i,
+                .' . esc_attr($unique_class) . ':hover svg {
+                    color: ' . esc_attr($hover_icon) . ' !important;
+                    fill: ' . esc_attr($hover_icon) . ' !important;
+                }
+            </style>';
+        }
+    }
+
+    echo '</div></div>';
+}
 }
