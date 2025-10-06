@@ -926,7 +926,17 @@ class Easyel_Elements {
                 'docx_url'    => 'https://wpeasyelements.com/docs/text-animation/',
                 'is_pro'      => false,
                 'group'       => 'Animations'
-            ],                       
+            ], 
+            
+            'easy_gallery' => [
+                'icon'        => 'easyelIcon-marquee-logo',
+                'title'       => 'Simple Gallery',
+                'description' => 'Gallery',
+                'demo_url'    => 'https://wpeasyelements.com/simple-gallery/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/simple-gallery/',
+                'is_pro'      => false,
+                'tab' => 'widget',
+            ],
         ];
 
         return apply_filters( 'easyel_available_widgets', $widgets );

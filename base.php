@@ -114,6 +114,7 @@ final class Easyel_Elements_Elementor_Extension {
 			'easy_scroll_to_top'  			=> [ 'class' => '\Easyel_Scroll_To_Top_Widget',    			'file' => __DIR__ . '/widgets/scroll-to-top/scroll.php' ,'tab' => 'widget'],
 			'easy_table'  					=> [ 'class' => '\Easyel_Table_Elementor_Widget',    				'file' => __DIR__ . '/widgets/table/table-normal.php','tab' => 'widget' ],
 			'easy_cf7'  					=> [ 'class' => '\easyel__CF7_Widget',    				'file' => __DIR__ . '/widgets/cf7/contact-cf7.php','tab' => 'widget' ],
+			'easy_gallery'  					=> [ 'class' => '\Easyel__Gallery_Widget',    				'file' => __DIR__ . '/widgets/gallery/gallery.php','tab' => 'widget' ],
 		];
 
 	    foreach ( $widgets as $key => $data ) {
