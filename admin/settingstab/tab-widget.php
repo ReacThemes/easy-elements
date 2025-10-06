@@ -44,7 +44,7 @@ foreach ( $available_elements as $key => $widget ) {
                                     <i class="easyelIcon-monitor"></i>
                                     <?php esc_html_e('Demo', 'easy-elements'); ?>
                                 </a>
-                                <a href="<?php echo esc_url($widget['demo_url']); ?>" target="_blank" rel="noopener noreferrer">
+                                <a href="<?php echo esc_url($widget['docx_url']); ?>" target="_blank" rel="noopener noreferrer">
                                     <i class="easyelIcon-document"></i>
                                     <?php esc_html_e('Doc', 'easy-elements'); ?>
                                 </a>

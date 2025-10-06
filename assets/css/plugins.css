@@ -1990,3 +1990,33 @@ html,
 body{
     overflow-x: hidden;
 }
+
+.eel-hover-cursor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background-color: #fff;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: center;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+.eel-hover-cursor.eel-hover-cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1rem;
+    height: 1rem;
+    background-color: black;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+}

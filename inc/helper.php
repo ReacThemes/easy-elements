@@ -113,16 +113,16 @@ function easyel_get_extension_fields() {
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
         'enable_cursor_move_effect' => [
-            'label'   => __('Cursor Move Effect', 'easy-elements'),
+            'label'   => __('Parallax Mouse Move Effect', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
             'group' => 'GSAP Extensions',
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
         'enable_parallax_image' => [
-            'label'   => __('Parallax  Image', 'easy-elements'),
+            'label'   => __('Parallax Image', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
-            'is_pro'  => true,
+            'is_pro'  => false,
             'group' => 'GSAP Extensions',
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
@@ -162,7 +162,7 @@ function easyel_get_extension_fields() {
             'group' => 'GSAP Extensions',
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
-
+        
         'enable_wrapper_link' => [
             'label'   => __('Enable Wrapper Link', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
