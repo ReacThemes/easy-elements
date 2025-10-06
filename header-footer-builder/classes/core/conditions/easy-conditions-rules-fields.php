@@ -442,27 +442,27 @@ class EASY_EHF_Target_Rules_Fields {
 	 * Function Description: admin_styles.
 	 */
 	public function easy_admin_styles() {
-		wp_enqueue_script( 'astra-select2', EASYEL_AST_TARGET_RULE_URI . 'select2.js', array( 'jquery' ), EASYEL_AST_TARGET_RULE_VER, true );
+		wp_enqueue_script( 'easy-select2', EASYEL_AST_TARGET_RULE_URI . 'select2.js', array( 'jquery' ), EASYEL_AST_TARGET_RULE_VER, true );
 
 		$wp_lang  = get_locale();
 		$ast_lang = '';
 
 		wp_register_script(
-			'astra-target-rule',
-			EASYEL_AST_TARGET_RULE_URI . 'target-rule.js',
+			'easy-target-rule',
+			EASYEL_AST_TARGET_RULE_URI . 'easy-condition-rule.js',
 			array(
 				'jquery',
-				'astra-select2',
+				'easy-select2',
 				'wp-util',
 			),
 			EASYEL_AST_TARGET_RULE_VER,
 			true
 		);
 
-		wp_enqueue_script( 'astra-target-rule' );
+		wp_enqueue_script( 'easy-target-rule' );
 
 		wp_register_script(
-			'astra-user-role',
+			'easy-user-role',
 			EASYEL_AST_TARGET_RULE_URI . 'user-role.js',
 			array(
 				'jquery',
@@ -471,11 +471,11 @@ class EASY_EHF_Target_Rules_Fields {
 			true
 		);
 
-		wp_enqueue_script( 'astra-user-role' );
+		wp_enqueue_script( 'easy-user-role' );
 
-		wp_enqueue_style( 'astra-select2', EASYEL_AST_TARGET_RULE_URI . 'select2.css', '', EASYEL_AST_TARGET_RULE_VER );
+		wp_enqueue_style( 'easy-select2', EASYEL_AST_TARGET_RULE_URI . 'select2.css', '', EASYEL_AST_TARGET_RULE_VER );
 		
-		wp_enqueue_style( 'astra-target-rule', EASYEL_AST_TARGET_RULE_URI . 'target-rule.css', '', EASYEL_AST_TARGET_RULE_VER );
+		wp_enqueue_style( 'easy-target-rule', EASYEL_AST_TARGET_RULE_URI . 'easy-condition-rule.css', '', EASYEL_AST_TARGET_RULE_VER );
 
 
 		/**
@@ -498,7 +498,7 @@ class EASY_EHF_Target_Rules_Fields {
 			'ajax_nonce'    => wp_create_nonce( 'hfe-get-posts-by-query' ),
 		);
 		
-		wp_localize_script( 'astra-select2', 'astRules', $localize_vars );
+		wp_localize_script( 'easy-select2', 'easyRule', $localize_vars );
 	}
 
 	/**
@@ -523,11 +523,11 @@ class EASY_EHF_Target_Rules_Fields {
 		}
 		$selection_options = self::$location_selection;
 
-		/* WP Template Format */
-		$output .= '<script type="text/html" id="tmpl-astra-target-rule-' . $rule_type . '-condition">';
+		
+		$output .= '<script type="text/html" id="tmpl-easy-target-rule-' . $rule_type . '-condition">';
 		$output .= '<div class="easyel-target-rule-condition ast-target-rule-{{data.id}}" data-rule="{{data.id}}" >';
 		$output .= '<span class="target_rule-condition-delete dashicons dashicons-dismiss"></span>';
-		/* Condition Selection */
+		
 		$output .= '<div class="target_rule-condition-wrap" >';
 		$output .= '<select name="' . esc_attr( $input_name ) . '[rule][{{data.id}}]" class="target_rule-condition form-control ast-input">';
 		$output .= '<option value="">' . __( 'Select', 'easy-elements' ) . '</option>';
@@ -554,7 +554,7 @@ class EASY_EHF_Target_Rules_Fields {
 
 		/* Wrapper Start */
 		$output .= '<div class="easyel-target-rule-wrapper ast-target-rule-' . $rule_type . '-on-wrap" data-type="' . $rule_type . '">';
-		// $output .= '<input type="hidden" class="form-control ast-input ast-target_rule-input" name="' . esc_attr( $input_name ) . '" value=' . $value . ' />';
+		
 		$output .= '<div class="easyel-target-rule-selector-wrapper ast-target-rule-' . $rule_type . '-on">';
 		$output .= self::easy_generate_target_rule_selector( $rule_type, $selection_options, $input_name, $saved_values, $add_rule_label );
 		$output .= '</div>';

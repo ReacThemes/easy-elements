@@ -61,7 +61,6 @@ class Easy_EHF_Admin {
 		if ( is_admin() ) {
 			add_action( 'manage_ee-elementor-hf_posts_custom_column', [ $this, 'easy_content_content' ], 10, 2 );
 			add_filter( 'manage_ee-elementor-hf_posts_columns', [ $this, 'easy_col_headings' ] );
-			require_once EASYELEMENTS_DIR_PATH . 'header-footer-builder/admin/easy-ehf-addons-actions.php';
 		}
 
 	}
@@ -277,20 +276,29 @@ class Easy_EHF_Admin {
 						</div>
 					</td>
 					<td class="easy-options-row-ehf-content">
-						<input type="checkbox" id="easyel_fixed_header" name="easyel_fixed_header" value="1" <?php checked( $fixed_header, '1' ); ?> />
+						<label class="easyel-toggle">
+							<input type="checkbox" id="easyel_fixed_header" name="easyel_fixed_header" value="1" <?php checked( $fixed_header, '1' ); ?> />
+							<span class="easyel-slider"></span>
+						</label>
 						<em><?php esc_html_e( 'Keep this header fixed at the top of the page.', 'easy-elements' ); ?></em>
 					</td>
+
 				</tr>
 
 				<tr class="easy-options-row-ehf enable-for-canvas">
 					<td class="easy-options-row-ehf-heading">
 						<label for="display-on-canvas-template">
-							<?php esc_html_e( 'Enable Layout for Elementor Canvas Template?', 'easy-elements' ); ?>
+							<?php esc_html_e( 'Activate Layout for Canvas Template', 'easy-elements' ); ?>
 						</label>
-						<i class="easy-options-row-ehf-heading-help dashicons dashicons-editor-help" title="<?php esc_html_e( 'Enabling this option will display this layout on pages using Elementor Canvas Template.', 'easy-elements' ); ?>"></i>
+						<p>Use this layout on Canvas template pages.</p>
+						</i>
+
 					</td>
 					<td class="easy-options-row-ehf-content">
-						<input type="checkbox" id="display-on-canvas-template" name="display-on-canvas-template" value="1" <?php checked( $display_on_canvas, true ); ?> />
+						<label class="easyel-toggle">
+							<input type="checkbox" id="display-on-canvas-template" name="display-on-canvas-template" value="1" <?php checked( $display_on_canvas, true ); ?> />
+						<span class="easyel-slider"></span>
+						</label>
 					</td>
 				</tr>				
 			</tbody>
@@ -314,8 +322,7 @@ class Easy_EHF_Admin {
 		<tr class="easy-target-rules-row easy-options-row-ehf">
 			<td class="easy-target-rules-row-heading easy-options-row-ehf-heading">
 				<label><?php esc_html_e( 'Visible On', 'easy-elements' ); ?></label>
-				<i class="easy-target-rules-heading-help dashicons dashicons-editor-help"
-					title="<?php echo esc_attr__( 'Choose the pages or areas where this template should show.', 'easy-elements' ); ?>"></i>
+				<p>Choose the pages or areas where this template should show</p>
 			</td>
 			<td class="easy-target-rules-row-content easy-options-row-ehf-content">
 				<?php
@@ -336,8 +343,7 @@ class Easy_EHF_Admin {
 		<tr class="easy-target-rules-row easy-options-row-ehf">
 			<td class="easy-target-rules-row-heading easy-options-row-ehf-heading">
 				<label><?php esc_html_e( 'Do Not Show On', 'easy-elements' ); ?></label>
-				<i class="easy-target-rules-heading-help dashicons dashicons-editor-help"
-					title="<?php echo esc_attr__( 'Select the pages or sections where this template should NOT appear.', 'easy-elements' ); ?>"></i>
+				<p>Select the pages or sections where this template should NOT appear.</p>
 			</td>
 			<td class="easy-target-rules-row-content easy-options-row-ehf-content">
 				<?php

@@ -4,7 +4,7 @@
 		
 		$(selector).astselect2({
 
-			placeholder: astRules.search,
+			placeholder: easyRule.search,
 
 			ajax: {
 			    url: ajaxurl,
@@ -16,7 +16,7 @@
 			        	q: params.term, // search term
 				        page: params.page,
 						action: 'easy_get_posts_by_query',
-						nonce: astRules.ajax_nonce
+						nonce: easyRule.ajax_nonce
 			    	};
 				},
 				processResults: function (data) {
@@ -29,7 +29,7 @@
 			    cache: true
 			},
 			minimumInputLength: 2,
-			language: astRules.ast_lang
+			language: easyRule.ast_lang
 		});
 	};
 
@@ -169,7 +169,7 @@
 				new_id 	= parseInt(id) + 1,
 				type 	= $this.attr( 'data-rule-type' ),
 				rule_wrap = $this.closest('.easyel-target-rule-selector-wrapper').find('.target_rule-builder-wrap'),
-				template  = wp.template( 'astra-target-rule-' + type + '-condition' ),
+				template  = wp.template( 'easy-target-rule-' + type + '-condition' ),
 				field_wrap 		= $this.closest('.easyel-target-rule-wrapper');
 
 			rule_wrap.append( template( { id : new_id, type : type } ) );

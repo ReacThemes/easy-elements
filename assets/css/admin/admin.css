@@ -298,9 +298,7 @@ h1,h2 { color: #0073aa; }
     font-style: italic;
 }
 
-/*****************************/
- /* Easy Elements Tab CSS */
-/****************************/
+/* easy elements tab css */
 .easyel-overview-header{
     padding: 24px 30px;
     background: var(--easy-white-color);
@@ -313,7 +311,8 @@ h1,h2 { color: #0073aa; }
 }
 /* Left Side */
 .easyel-nav-tab-item{
-    width: 20%;
+    max-width: 340px;
+    width: 100%;
 }
 .easyel-nav-tab-wrapper{
     position: sticky;
@@ -368,11 +367,11 @@ h1,h2 { color: #0073aa; }
 }
 /* Right Side  */
 #easyel-tab-content{
-    width: 80%;
+    width: calc(100% - 340px);
 }
 
 /************************/
-/* Start Overview Tab  */
+/* Start Overview Area  */
 /***********************/
 .easyel-overview-area{
     margin: 0;
@@ -392,7 +391,7 @@ h1,h2 { color: #0073aa; }
     z-index: 2;
 }
 .easyel-overview-area .easyel-banner-content .title{
-    margin: 40px 0 70px;
+    margin-top: 40px;
     font-size: 56px;
     line-height: 1em;
 }
@@ -401,8 +400,8 @@ h1,h2 { color: #0073aa; }
     font-weight: 700;
 }
 .easyel-overview-area .easyel-banner-rating{
-    flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
+    margin-top: 70px;
 }
 .easyel-overview-area .easyel-rating-content{
     gap: 20px;
@@ -461,9 +460,6 @@ h1,h2 { color: #0073aa; }
     background: #F9FAFD;
     padding: 50px;
 }
-.easyel-overview-area .easyel-docx-image-area img{
-    max-width: 100%;
-}
 .easyel-overview-area .easyel-docx-content{
     max-width: 490px;
     width: 100%;
@@ -485,6 +481,7 @@ h1,h2 { color: #0073aa; }
     gap:28px;
 }
 .easyel-overview-area .easyel-video-item{
+    flex-basis: 33%;
     width: 33%;
 }
 .easyel-overview-area .easyel-video-img span{
@@ -521,7 +518,6 @@ h1,h2 { color: #0073aa; }
     font-size: 16px;
     font-weight: 600;
     margin: 20px 0 0 ;
-    text-align: center;
 }
 .easyel-overview-area .easyel-video-btn{
     text-align: center;
@@ -581,15 +577,14 @@ h1,h2 { color: #0073aa; }
 
 /* Start Faq Area  */
 .easyel-faq-area{
-    gap: 40px;
+    gap: 30px;
 }
-.easyel-faq-content-area,
-.easyel-faq-item-area{
-    width: 100%;
-}
-.easyel-faq-heading{
+.easyel-faq-content-area{
     max-width: 335px;
     width: 100%;
+}
+.easyel-faq-item-area{
+   width: calc(100% - 430px);
 }
 .easyel-faq-heading .easyel-title{
     font-size: 32px;
@@ -612,7 +607,7 @@ h1,h2 { color: #0073aa; }
 }
 .easyel-faq-item-heading span{
     display: inline-block;
-    width: 93%;
+    width: 95%;
 }
 .easyel-faq-item-heading:before {
     content: "↓"; 
@@ -636,7 +631,7 @@ h1,h2 { color: #0073aa; }
     padding-top: 12px;
     font-weight: 500;
     line-height: 1.5;
-    width: 90%;
+    width: 95%;
 }
 /* End Faq Area  */
 
@@ -670,6 +665,7 @@ h1,h2 { color: #0073aa; }
 }
 .easyel-support-item{
     padding: 28px;
+    width: 50%;
     position: relative;
 }
 .easyel-support-item-left{
@@ -710,11 +706,11 @@ h1,h2 { color: #0073aa; }
 /* End Support Area  */
 
 /****************************/
-    /* End Overview Tab  */
+    /* End Overview Area  */
 /****************************/
 
 /****************************/
-   /* Start Widget Tab  */
+   /* Start Widget Area  */
 /****************************/
 
 /* Widget top section style  */
@@ -887,11 +883,11 @@ h1,h2 { color: #0073aa; }
 }
 
 /****************************/
-    /* End Widget Tab  */
+    /* End Widget Area  */
 /****************************/
 
 /****************************/
-   /* Start Extention Tab  */
+   /* Start Extention Area  */
 /****************************/
 
 .easyel-toggle-switch-extension {
@@ -929,124 +925,33 @@ h1,h2 { color: #0073aa; }
     transform: translateX(20px);
 }
 /****************************/
-   /* End Extention Tab  */
+   /* End Extention Area  */
 /****************************/
 
 /****************************/
    /* Start Responsive Area  */
 /****************************/
 
-@media only screen and (max-width: 1400px) {
-   .easyel-nav-tab-item {
-        width: 25%;
-    }
-    .easyel-plugin-settings-wrapper{
-        gap: 20px;
-    }
-    .easyel-section-gap {
-        padding: 60px 10px;
-    }
-}
-@media only screen and (max-width: 1250px) {
-    .easyel-section-heading .easyel-title{
-        font-size: 30px;
-    }
-    .easyel-section-heading .easyel-desc{
-        font-size: 16px;
-    }
-    .easyel-nav-tab-item {
-        width: 30%;
-    }
-    .easyel-nav-tab{
-        font-size: 16px;
-    }
-    .easyel-requestFeature-section{
-        padding: 60px 16px;
-    }
-     /* Widget Tab  */
-    .easyel-widgets-grid, .easyel-extension-wrapper{
-        grid-template-columns: repeat(auto-fit, minmax(262px, 1fr));
+@media only screen and (max-width: 1680px) {
+    .easyel-faq-item-area {
+        width: calc(100% - 350px);
     }
 }
 @media only screen and (max-width: 1024px) {
-    .easyel-nav-tab-wrapper, 
-    .easyel-tab-panel{
-        padding: 20px 16px;
-    }
-    .easyel-nav-tab{
-        padding: 13px;
-        margin-bottom: 16px;
-    }
-    .easyel-overview-area .easyel-banner-content-area{
-        padding: 80px 16px 60px;
-    }
-    .easyel-docx-area,
-    .easyel-faq-area,
-    .easyel-support-area{
-        flex-direction: column;
-    }
-    .easyel-overview-area .easyel-docx-content,
-    .easyel-faq-heading{
-        max-width: 100%;
-    }
-    /* Widget Tab  */
-    .easyel-addon-search button{
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-    .easyel-widgets-grid, .easyel-extension-wrapper {
-        grid-template-columns: 1fr;
-    }
+
 }
 @media only screen and (max-width: 768px) {
-    .easyel-section-gap {
-        padding: 35px 5px;
-    }
-    .easyel-documentation-section{
-        padding-top: 60px;
-    }
-    .easyel-faq-section{
-        padding-bottom: 60px;
-    }
-    .easyel-plugin-settings-wrapper{
-        flex-direction: column;
-    }
-    .easyel-nav-tab-item,
-    #easyel-tab-content{
-        width: 100%;
-    }
-    .easyel-nav-tab-wrapper{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        height: 100%;
-    }
-    .easyel-nav-tab{
-        margin-bottom: 0px;
-    }
-    .easyel-tab-pro-link{
-        position: inherit;
-        width: 100%;
-        margin-top: 20px;
-    }
-    .easyel-overview-area .easyel-banner-content .title{
-        margin: 20px 0px 40px;
-    }
-}
-@media only screen and (max-width: 576px) {
-    .easyel-overview-area .easyel-banner-content .title{
-        font-size: 36px;
-    }
-    .easyel-video-items{
-        flex-direction: column;
-        gap: 35px;
-    }
-    .easyel-overview-area .easyel-video-item{
-        width: 100%;
+    /* .easyel-widgets-grid {
+        grid-template-columns: 1fr;
     }
     .easyel-addon-search {
         flex-direction: column;
-        gap: 20px;
+        align-items: stretch;
     }
+    .easyel-addon-search input[type="text"] {
+        max-width: none;
+    }
+    .easyel-widget-item {
+        padding: 15px;
+    } */
 }

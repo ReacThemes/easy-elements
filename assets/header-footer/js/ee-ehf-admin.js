@@ -20,7 +20,7 @@
 
 			var ehf_hide_shortcode_field = function() {
 				var selected = $('#ehf_template_type').val() || 'none';
-				$( '.easy-options-table-ehf' ).removeClass().addClass( 'easy-options-table-ehf widefat hfe-selected-template-type-' + selected );
+				$( '.easy-options-table-ehf' ).removeClass().addClass( 'easy-options-table-ehf widefat easy-selected-template-type-' + selected );
 			}
 
 			var $document = $( document );
@@ -34,17 +34,17 @@
 			// Templates page modal popup.
 			EE_HFEAdmin._display_modal();
 
-			$( '.hfe-subscribe-field' ).on( 'keyup', function( e ) {
-				$( '.hfe-subscribe-message' ).remove();
+			$( '.easy-subscribe-field' ).on( 'keyup', function( e ) {
+				$( '.easy-subscribe-message' ).remove();
 			});
 
-			$document.on( 'focusout change', '.hfe-subscribe-field', EE_HFEAdmin._validate_single_field );
-			$document.on( 'click input', '.hfe-subscribe-field', EE_HFEAdmin._animate_fields );
+			$document.on( 'focusout change', '.easy-subscribe-field', EE_HFEAdmin._validate_single_field );
+			$document.on( 'click input', '.easy-subscribe-field', EE_HFEAdmin._animate_fields );
 
-			$document.on( 'click', '.hfe-guide-content .submit-1', EE_HFEAdmin._step_one_subscribe );
-			$document.on( 'click', '.hfe-guide-content .submit-2', EE_HFEAdmin._step_two_subscribe );
+			$document.on( 'click', '.easy-guide-content .submit-1', EE_HFEAdmin._step_one_subscribe );
+			$document.on( 'click', '.easy-guide-content .submit-2', EE_HFEAdmin._step_two_subscribe );
 
-			$document.on('click', '.hfe-guide-content .button-subscription-skip', EE_HFEAdmin._close_modal );
+			$document.on('click', '.easy-guide-content .button-subscription-skip', EE_HFEAdmin._close_modal );
 
 			// About us - addons functionality.
 			if ( $( '.hfe-admin-addons' ).length ) {
@@ -66,7 +66,7 @@
 		_animate_fields: function ( event ) {
 			event.preventDefault();
 			event.stopPropagation();
-			var parentWrapper = $( this ).parents( '.hfe-input-container' );
+			var parentWrapper = $( this ).parents( '.easy-input-container' );
 			parentWrapper.addClass( 'subscription-anim' );
 		},
 
@@ -80,10 +80,10 @@
 
 			var field = $( target );
 			var fieldValue = field.val() || '';
-			var parentWrapper = field.parents( '.hfe-input-container' );
+			var parentWrapper = field.parents( '.easy-input-container' );
 			var fieldStatus = fieldValue.length ? true : false;
 
-			if ( ( field.hasClass( 'hfe-subscribe-email' ) && false === EE_HFEAdmin._is_valid_email( fieldValue ) )) {
+			if ( ( field.hasClass( 'easy-subscribe-email' ) && false === EE_HFEAdmin._is_valid_email( fieldValue ) )) {
 				fieldStatus = false;
 			}
 
@@ -92,7 +92,7 @@
 			} else {
 				parentWrapper.removeClass( 'subscription-success subscription-anim' ).addClass( 'subscription-error' );
 
-				if ( field.hasClass( 'hfe-subscribe-email' ) && fieldValue.length ) {
+				if ( field.hasClass( 'easy-subscribe-email' ) && fieldValue.length ) {
 					parentWrapper.addClass( 'subscription-anim' );
 				}
 			}
@@ -109,17 +109,17 @@
 
 			var form_one_wrapper = $( '.hfe-subscription-step-1' );
 
-			var first_name_field = form_one_wrapper.find( '.hfe-subscribe-field[name="hfe_subscribe_name"]' );
-			var email_field = form_one_wrapper.find( '.hfe-subscribe-field[name="hfe_subscribe_email"]' );
+			var first_name_field = form_one_wrapper.find( '.easy-subscribe-field[name="hfe_subscribe_name"]' );
+			var email_field = form_one_wrapper.find( '.easy-subscribe-field[name="hfe_subscribe_email"]' );
 
 			EE_HFEAdmin._validate_field( first_name_field );
 			EE_HFEAdmin._validate_field( email_field );
 
-			if ( form_one_wrapper.find( '.hfe-input-container' ).hasClass( 'subscription-error' )) {
+			if ( form_one_wrapper.find( '.easy-input-container' ).hasClass( 'subscription-error' )) {
 				return;
 			}
 
-			$( '.hfe-guide-content' ).addClass( 'hfe-subscription-step-2-active' ).removeClass( 'hfe-subscription-step-1-active' );
+			$( '.easy-guide-content' ).addClass( 'hfe-subscription-step-2-active' ).removeClass( 'hfe-subscription-step-1-active' );
 
 		},
 
@@ -134,12 +134,12 @@
 
 			var submit_button = $(this);
 
-			var is_modal = $( '.hfe-guide-modal-popup.hfe-show' );
+			var is_modal = $( '.hfe-guide-modal-popup.easy-show' );
 
-			var first_name_field = $('.hfe-subscribe-field[name="hfe_subscribe_name"]');
-			var email_field = $('.hfe-subscribe-field[name="hfe_subscribe_email"]');
-			var user_type_field = $('.hfe-subscribe-field[name="wp_user_type"]');
-			var build_for_field = $('.hfe-subscribe-field[name="build_website_for"]');
+			var first_name_field = $('.easy-subscribe-field[name="hfe_subscribe_name"]');
+			var email_field = $('.easy-subscribe-field[name="hfe_subscribe_email"]');
+			var user_type_field = $('.easy-subscribe-field[name="wp_user_type"]');
+			var build_for_field = $('.easy-subscribe-field[name="build_website_for"]');
 			var accept_field = $('.hfe_subscribe_accept[name="hfe_subscribe_accept"]');
 
 			var subscription_first_name = first_name_field.val() || '';
@@ -154,9 +154,9 @@
 			EE_HFEAdmin._validate_field( user_type_field );
 			EE_HFEAdmin._validate_field( build_for_field );
 
-			$( '.hfe-subscribe-message' ).remove();
+			$( '.easy-subscribe-message' ).remove();
 
-			if ( $( '.hfe-input-container' ).hasClass( 'subscription-error' )) {
+			if ( $( '.easy-input-container' ).hasClass( 'subscription-error' )) {
 				return;
 			}
 
@@ -189,23 +189,23 @@
 				beforeSend: function() {
 					console.groupCollapsed( 'Email Subscription' );
 
-					button_text.append( '<span class="dashicons dashicons-update hfe-loader"></span>' );
+					button_text.append( '<span class="dashicons dashicons-update easy-loader"></span>' );
 
 				},
 			})
 			.done( function ( response ) {
 
-				$( '.hfe-loader.dashicons-update' ).remove();
+				$( '.easy-loader.dashicons-update' ).remove();
 
 				submit_button.removeClass( 'submitting' ).addClass('submitted');
 
 				if( response.success === true ) {
 					$('.hfe-admin-about-section form').trigger( "reset" );
-					$( '.hfe-input-container' ).removeClass( 'subscription-success subscription-anim' );
+					$( '.easy-input-container' ).removeClass( 'subscription-success subscription-anim' );
 
-					submit_button.after( '<span class="hfe-subscribe-message success">' + EE_HFE_Admin_data.subscribe_success + '</span>' );
+					submit_button.after( '<span class="easy-subscribe-message success">' + EE_HFE_Admin_data.subscribe_success + '</span>' );
 				} else {
-					submit_button.after( '<span class="hfe-subscribe-message error">' + EE_HFE_Admin_data.subscribe_error + '</span>' );
+					submit_button.after( '<span class="easy-subscribe-message error">' + EE_HFE_Admin_data.subscribe_error + '</span>' );
 				}
 				
 				if( is_modal.length ) {
@@ -243,10 +243,10 @@
 			if( 'dismissed' !== display_allow[0] ) {
 				// Display Modal Popup on click of Add new button.
 				hf_new_post.on( 'click', function(e) {
-					if( modal_wrapper.length && ! modal_wrapper.hasClass( 'hfe-show' ) ) {
+					if( modal_wrapper.length && ! modal_wrapper.hasClass( 'easy-show' ) ) {
 						e.preventDefault();
 						e.stopPropagation();
-						modal_wrapper.addClass( 'hfe-show' );
+						modal_wrapper.addClass( 'easy-show' );
 					}
 				});
 			}
@@ -269,8 +269,8 @@
 				},
 			});
 		
-			if( modal_wrapper.hasClass( 'hfe-show' ) ) {
-				modal_wrapper.removeClass( 'hfe-show' );
+			if( modal_wrapper.hasClass( 'easy-show' ) ) {
+				modal_wrapper.removeClass( 'easy-show' );
 			}
 
 			window.location = new_page_link;
@@ -301,7 +301,7 @@
 			}
 	
 			$button.prop( 'disabled', true ).addClass( 'loading' );
-			$button.html( '<span class="dashicons dashicons-update hfe-loader"></span>' );
+			$button.html( '<span class="dashicons dashicons-update easy-loader"></span>' );
 	
 			if ( $button.hasClass( 'status-active' ) ) {
 	
