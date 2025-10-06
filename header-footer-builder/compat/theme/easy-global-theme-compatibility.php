@@ -1,31 +1,37 @@
 <?php
 /**
- * Support all themes.
+ * Theme Compatibility Class.
  *
- * @package header-footer-elementor
+ * Handles compatibility between Easy Header Footer plugin
+ * and WordPress themes by overriding header and footer templates
+ * and injecting custom Elementor-based templates when enabled.
+ *
+ * @package Easy_Header_Footer
  */
-
 namespace EASY_EHF\Themes;
 
 /**
- * Global theme compatibility.
+ * Class EASY_EHF_Theme_Compatibility
+ *
+ * Provides hooks and compatibility logic for replacing
+ * WordPress theme headers and footers with custom Elementor templates.
  */
 class EASY_EHF_Theme_Compatibility {
 
-	/**
-	 *  Initiator
-	 */
+	
 	public function __construct() {
 		add_action( 'wp', [ $this, 'init_wp_hooks' ] );
 	}
 
 	/**
-	 * Run all the Actions / Filters.
+	 * Constructor.
+	 *
+	 * Initializes the class and hooks into WordPress.
 	 */
 	public function init_wp_hooks() {
 		if ( ee_easy_header_enabled() ) {
 			// Replace header.php.
-			add_action( 'get_header', [ $this, 'option_override_header' ] );
+			add_action( 'get_header', [ $this, 'easyop_override_header' ] );
 
 			add_action( 'wp_body_open', [ 'Easy_Header_Footer_Elementor', 'get_header_content' ] );
 			add_action( 'hfe_fallback_header', [ 'Easy_Header_Footer_Elementor', 'get_header_content' ] );
@@ -44,17 +50,28 @@ class EASY_EHF_Theme_Compatibility {
 		}
 
 		if ( ee_easy_header_enabled() || ee_easy_footer_enabled() ) {
-			add_action( 'wp_enqueue_scripts', [ $this, 'force_fullwidth' ] );
+			add_action( 'wp_enqueue_scripts', [ $this, 'easy_force_fullwidth' ] );
 		}
 	}
 
 	/**
-	 * Full width css apply
+	 * Force full-width layout for custom headers/footers.
 	 *
-	 * @since 1.0.0
+	 * Injects inline CSS styles to make the custom templates stretch
+	 * across the full viewport width and hide the default theme header/footer.
+	 *
 	 * @return void
 	 */
-	public function force_fullwidth() {
+	public function easy_force_fullwidth() {
+
+		$handle = 'easy-ehf-style';
+		
+		if ( ! wp_style_is( $handle, 'registered' ) ) {
+			wp_register_style( $handle, false ); 
+		}
+
+		// Enqueue the style so inline CSS attaches properly.
+		wp_enqueue_style( $handle );
 		$css = '
 		.force-stretched-header {
 			width: 100vw;
@@ -75,17 +92,18 @@ class EASY_EHF_Theme_Compatibility {
 			}';
 		}
 
-		wp_add_inline_style( 'hfe-style', $css );
+		wp_add_inline_style( 'easy-ehf-style', $css );
 	}
 
 	/**
-	 * Function overriding the header in the wp_body_open way.
+	 * Override the default theme header template.
 	 *
-	 * @since 1.0.0
+	 * Loads the default `header.php` file and triggers fallback
+	 * header content rendering if `wp_body_open` was not called.
 	 *
 	 * @return void
 	 */
-	public function option_override_header() {
+	public function easyop_override_header() {
 		$templates   = [];
 		$templates[] = 'header.php';
 		locate_template( $templates, true );
