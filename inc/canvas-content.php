@@ -47,7 +47,7 @@ if ( ! class_exists( __NAMESPACE__ . '\EasyelOffcanvas_PostType' ) ) {
                 'supports'           => [ 'title', 'editor' ],
                 'exclude_from_search'=> true,
                 'publicly_queryable' => true,
-                'show_in_rest'       => true, // ✅ Gutenberg + REST API
+                'show_in_rest'       => true, 
             ] );
         }
 

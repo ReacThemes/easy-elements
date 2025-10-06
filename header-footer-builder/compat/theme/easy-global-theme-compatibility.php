@@ -10,19 +10,19 @@ namespace EASY_EHF\Themes;
 /**
  * Global theme compatibility.
  */
-class Global_Theme_Compatibility {
+class EASY_EHF_Theme_Compatibility {
 
 	/**
 	 *  Initiator
 	 */
 	public function __construct() {
-		add_action( 'wp', [ $this, 'hooks' ] );
+		add_action( 'wp', [ $this, 'init_wp_hooks' ] );
 	}
 
 	/**
 	 * Run all the Actions / Filters.
 	 */
-	public function hooks() {
+	public function init_wp_hooks() {
 		if ( ee_easy_header_enabled() ) {
 			// Replace header.php.
 			add_action( 'get_header', [ $this, 'option_override_header' ] );
@@ -49,9 +49,9 @@ class Global_Theme_Compatibility {
 	}
 
 	/**
-	 * Force full width CSS for the header.
+	 * Full width css apply
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function force_fullwidth() {
@@ -81,7 +81,7 @@ class Global_Theme_Compatibility {
 	/**
 	 * Function overriding the header in the wp_body_open way.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -98,4 +98,4 @@ class Global_Theme_Compatibility {
 	}
 }
 
-new Global_Theme_Compatibility();
+new EASY_EHF_Theme_Compatibility();
