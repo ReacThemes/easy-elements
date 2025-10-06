@@ -26,19 +26,17 @@
                 </div>
             </div>
         </div>
-        <img src="<?php echo plugin_dir_url(__DIR__).'img/overview/banner-shape-3.png'; ?>" class="easyel-position-ab easyel-top-0 easyel-end-0  easyel-shape-3" alt="logo">
         <img src="<?php echo plugin_dir_url(__DIR__).'img/overview/banner-shape-1.svg'; ?>" class="easyel-position-ab easyel-top-0 easyel-start-0 easyel-shape-1" alt="logo">
         <img src="<?php echo plugin_dir_url(__DIR__).'img/overview/banner-shape-2.svg'; ?>" class="easyel-position-ab easyel-top-0 easyel-start-0  easyel-shape-2" alt="logo">
+        <img src="<?php echo plugin_dir_url(__DIR__).'img/overview/banner-shape-3.png'; ?>" class="easyel-position-ab easyel-top-0 easyel-end-0  easyel-shape-3" alt="logo">
     </div>
     <!-- End Banner Area  -->
 
     <!-- Start Documentation Area  -->
     <div class="easyel-documentation-section easyel-section-gap">
         <div class="easyel-docx-area easyel-dflex easyel-align-center">
-            <div class="easyel-docx-image-area">
-                <div class="easyel-docx-image easyel-border-radius-20">
-                    <img src="<?php echo plugin_dir_url(__DIR__).'img/overview/docx.png'; ?>" alt="document-image">
-                </div>
+            <div class="easyel-docx-image-area easyel-border-radius-20">
+                <img src="<?php echo plugin_dir_url(__DIR__).'img/overview/docx.png'; ?>" alt="document-image">
             </div>
             <div class="easyel-docx-content-area">
                 <div class="easyel-docx-content easyel-section-heading">
@@ -123,42 +121,42 @@
                 <div class="easyel-faq-items">
                     <div class="easyel-faq-item active">
                         <button class="easyel-faq-item-heading">
-                            <span> <?php esc_html_e( 'How long does it take to ship my order?', 'easy-elements')?></span>					
+                            <span>How long does it take to ship my order?	</span>					
                         </button>
                         <div class="easyel-faq-item-content">
-                            <?php esc_html_e( 'Orders are usually shipped within 1-2 business days after placing the order.', 'easy-elements')?>				
+                            Orders are usually shipped within 1-2 business days after placing the order.					
                         </div>
                     </div>
                     <div class="easyel-faq-item ">
                         <button class="easyel-faq-item-heading">
-                           <span><?php esc_html_e( 'What payment methods do you accept?', 'easy-elements')?></span>				
+                           <span>What payment methods do you accept?		</span>				
                         </button>
                         <div class="easyel-faq-item-content">
-                            <?php esc_html_e( 'Orders are usually shipped within 1-2 business days after placing the order.Orders are usually shipped within 1-2 business days after placing the order.', 'easy-elements')?>
+                            Orders are usually shipped within 1-2 business days after placing the order.Orders are usually shipped within 1-2 business days after placing the order.					
                         </div>
                     </div>
                     <div class="easyel-faq-item ">
                         <button class="easyel-faq-item-heading">
-                          <span> <?php esc_html_e( 'What shipping options do you have?', 'easy-elements')?></span>					
+                          <span> What shipping options do you have?	</span>					
                         </button>
                         <div class="easyel-faq-item-content">
-                            <?php esc_html_e( 'Orders are usually shipped within 1-2 business days after placing the order.Orders are usually shipped within 1-2 business days after placing the order.', 'easy-elements')?>				
+                            Orders are usually shipped within 1-2 business days after placing the order.Orders are usually shipped within 1-2 business days after placing the order.					
                         </div>
                     </div>
                     <div class="easyel-faq-item ">
                         <button class="easyel-faq-item-heading">
-                           <span> <?php esc_html_e( 'How do I make changes to an existing order?', 'easy-elements')?></span>					
+                           <span>How do I make changes to an existing order?	</span>					
                         </button>
                         <div class="easyel-faq-item-content">
-                            <?php esc_html_e( 'Orders are usually shipped within 1-2 business days after placing the order.Orders are usually shipped within 1-2 business days after placing the order.', 'easy-elements')?>					
+                            Orders are usually shipped within 1-2 business days after placing the order.Orders are usually shipped within 1-2 business days after placing the order.					
                         </div>
                     </div>
                     <div class="easyel-faq-item ">
                         <button class="easyel-faq-item-heading">
-                           <span> <?php esc_html_e( 'When will my order arrive?', 'easy-elements')?>	</span>					
+                           <span>When will my order arrive?	</span>					
                         </button>
                         <div class="easyel-faq-item-content">
-                            <?php esc_html_e( 'Orders are usually shipped within 1-2 business days after placing the order.Orders are usually shipped within 1-2 business days after placing the order.', 'easy-elements')?>				
+                            Orders are usually shipped within 1-2 business days after placing the order.Orders are usually shipped within 1-2 business days after placing the order.					
                         </div>
                     </div>
 				</div>

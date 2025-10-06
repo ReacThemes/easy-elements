@@ -94,7 +94,7 @@ class Easy_Header_Footer_Elementor {
 	 */
 	public function easy_body_class( $classes ) {
 		if ( ee_easy_header_enabled() ) {
-			$classes[] = 'ehf-header';
+			$classes[] = 'easy-header';
 		}
 
 		if ( ee_easy_footer_enabled() ) {
