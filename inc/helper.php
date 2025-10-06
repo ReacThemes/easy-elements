@@ -78,14 +78,14 @@ add_action('template_redirect', function(){
 function easyel_get_extension_fields() {
     $fields = [
         'enable_js_animation' => [
-            'label'   => __('Enable Easy Animation', 'easy-elements'),
+            'label'   => __('Enable Animation', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
             'group' => 'GSAP Extensions',
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
         'enable_cursor' => [
-            'label'   => __('Enable Easy Cursor', 'easy-elements'),
+            'label'   => __('Enable Cursor', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
             'group' => 'GSAP Extensions',
@@ -113,7 +113,7 @@ function easyel_get_extension_fields() {
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
         'enable_cursor_move_effect' => [
-            'label'   => __('Parallax Mouse Move Effect', 'easy-elements'),
+            'label'   => __('Mouse Move Effect', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
             'group' => 'GSAP Extensions',
@@ -127,14 +127,14 @@ function easyel_get_extension_fields() {
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
         'enable_horizontal_scroll_trigger' => [
-            'label'   => __('Horizontal ScrollTrigger', 'easy-elements'),
+            'label'   => __('Image Horizontal Scroller', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
             'group' => 'GSAP Extensions',
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
         'enable_vertical_scroll_trigger' => [
-            'label'   => __('Vertical ScrollTrigger', 'easy-elements'),
+            'label'   => __('Image ScrollTrigger', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
             'group' => 'GSAP Extensions',

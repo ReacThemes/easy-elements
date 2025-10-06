@@ -388,7 +388,7 @@ class Easyel_Elements {
            
             'heading' => [
                 'icon'        => 'easyelIcon-heading',
-                'title'       => 'Easy Heading',
+                'title'       => 'Heading',
                 'description' => 'Add customizable headings with style options.',
                 'demo_url'    => 'https://wpeasyelements.com/heading/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/heading/',
@@ -397,7 +397,7 @@ class Easyel_Elements {
             ],
             'clients_logo' => [
                 'icon'        => 'easyelIcon-clients-logo-grid',
-                'title'       => 'Easy Clients Logo Grid',
+                'title'       => 'Clients Logo Grid',
                 'description' => 'Showcase client logos in a neat grid layout.',
                 'demo_url'    => 'https://wpeasyelements.com/clients-logo-grid/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/clients-logo-grid/',
@@ -406,7 +406,7 @@ class Easyel_Elements {
             ],
             'clients_logo_slider' => [
                 'icon'        => 'easyelIcon-clients-logo-slider',
-                'title'       => 'Easy Clients Logo Slider',
+                'title'       => 'Clients Logo Slider',
                 'description' => 'Display client logos in a slider format.',
                 'demo_url'    => 'https://wpeasyelements.com/clients-logo-slider/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/clients-logo-slider/',
@@ -415,7 +415,7 @@ class Easyel_Elements {
             ],
             'tab' => [
                 'icon'        => 'easyelIcon-tab',
-                'title'       => 'Easy Tab',
+                'title'       => 'Tab',
                 'description' => 'Add simple tab content.',
                 'demo_url'    => 'https://wpeasyelements.com/tab/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/tab/',
@@ -424,7 +424,7 @@ class Easyel_Elements {
             ],
             'tab_advance' => [
                 'icon'        => 'easyelIcon-tab',
-                'title'       => 'Easy Advanced Tab',
+                'title'       => 'Advanced Tab',
                 'description' => 'Create advanced tab content.',
                 'demo_url'    => 'https://wpeasyelements.com/advanced-tab/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/advanced-tab/',
@@ -433,7 +433,7 @@ class Easyel_Elements {
             ],
             'testimonials' => [
                 'icon'        => 'easyelIcon-testimonials-grid',
-                'title'       => 'Easy Testimonials Grid',
+                'title'       => 'Testimonials Grid',
                 'description' => 'Show testimonials in a grid format.',
                 'demo_url'    => 'https://wpeasyelements.com/testimonials-grid/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/testimonials-grid/',
@@ -442,7 +442,7 @@ class Easyel_Elements {
             ],
             'testimonials_slider' => [
                 'icon'        => 'easyelIcon-testimonials-slider',
-                'title'       => 'Easy Testimonials Slider',
+                'title'       => 'Testimonials Slider',
                 'description' => 'Display testimonials in a slider format.',
                 'demo_url'    => 'https://wpeasyelements.com/testimonials-slider/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/testimonials-slider/',
@@ -460,7 +460,7 @@ class Easyel_Elements {
             ],
             'icon_box' => [
                 'icon'        => 'easyelIcon-iconbox',
-                'title'       => 'Easy Icon Box',
+                'title'       => 'Icon Box',
                 'description' => 'Display content with an icon.',
                 'demo_url'    => 'https://wpeasyelements.com/icon-box/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/icon-box/',
@@ -469,7 +469,7 @@ class Easyel_Elements {
             ],
             'process_grid' => [
                 'icon'        => 'easyelIcon-process-grid',
-                'title'       => 'Easy Process Grid',
+                'title'       => 'Process Grid',
                 'description' => 'Show process steps in a grid format.',
                 'demo_url'    => 'https://wpeasyelements.com/process-grid/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/process-grid/',
@@ -478,7 +478,7 @@ class Easyel_Elements {
             ],
             'process_slider' => [
                 'icon'        => 'easyelIcon-process-slider',
-                'title'       => 'Easy Process Slider',
+                'title'       => 'Process Slider',
                 'description' => 'Show process steps in a slider.',
                 'demo_url'    => 'https://wpeasyelements.com/process-slider/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/process-slider/',
@@ -496,7 +496,7 @@ class Easyel_Elements {
             ],
             'team_grid' => [
                 'icon'        => 'easyelIcon-team-grid',
-                'title'       => 'Easy Team Grid',
+                'title'       => 'Team Grid',
                 'description' => 'Display team members in a grid format.',
                 'demo_url'    => 'https://wpeasyelements.com/team-grid/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/team-grid/',
@@ -505,7 +505,7 @@ class Easyel_Elements {
             ],
             'team_slider' => [
                 'icon'        => 'easyelIcon-team-slider',
-                'title'       => 'Easy Team Slider',
+                'title'       => 'Team Slider',
                 'description' => 'Showcase team members in a slider format.',
                 'demo_url'    => 'https://wpeasyelements.com/team-slider/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/team-slider/',
@@ -514,8 +514,8 @@ class Easyel_Elements {
             ],
             'contact_box' => [
                 'icon'        => 'easyelIcon-contact-box',
-                'title'       => 'Easy Contact Box',
-                'description' => 'Easy Contact.',
+                'title'       => 'Contact Box',
+                'description' => 'Contact Box',
                 'demo_url'    => 'https://wpeasyelements.com/contact-box/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/contact-box/',
                 'is_pro'      => false,
@@ -523,8 +523,8 @@ class Easyel_Elements {
             ],        
             'icon_box_slider' => [
                 'icon'        => 'easyelIcon-icon-box-slider',
-                'title'       => 'Easy Icon Box Slider',
-                'description' => 'Easy Icon Box Slider.',
+                'title'       => 'Icon Box Slider',
+                'description' => 'Icon Box Slider.',
                 'demo_url'    => 'https://wpeasyelements.com/icon-box-slider/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/icon-box-slider/',
                 'is_pro'      => true,
@@ -532,8 +532,8 @@ class Easyel_Elements {
             ],  
             'timeline_slider' => [
                 'icon'        => 'easyelIcon-timeline-slider',    
-                'title'       => 'Easy Timeline Slider',
-                'description' => 'Easy Timeline Slider.',
+                'title'       => 'Timeline Slider',
+                'description' => 'Timeline Slider.',
                 'demo_url'    => 'https://wpeasyelements.com/timeline-slider/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/timeline-slider/',
                 'is_pro'      => true,
@@ -541,8 +541,8 @@ class Easyel_Elements {
             ],      
             'faq' => [
                 'icon'        => 'easyelIcon-faq',
-                'title'       => 'Easy FAQ',
-                'description' => 'Easy FAQ.',
+                'title'       => 'FAQ',
+                'description' => 'FAQ.',
                 'demo_url'    => 'https://wpeasyelements.com/faq/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/faq/',
                 'is_pro'      => false,
@@ -550,8 +550,8 @@ class Easyel_Elements {
             ],       
             'blog_grid' => [
                 'icon'        => 'easyelIcon-post-grid',
-                'title'       => 'Easy Post Grid',
-                'description' => 'Easy Post.',
+                'title'       => 'Post Grid',
+                'description' => 'Post.',
                 'demo_url'    => 'https://wpeasyelements.com/post-grid/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/post-grid/',
                 'is_pro'      => false,
@@ -559,8 +559,8 @@ class Easyel_Elements {
             ],        
             'post_slider' => [
                 'icon'        => 'easyelIcon-post-slider',
-                'title'       => 'Easy Post Slider',
-                'description' => 'Easy Post Slider.',
+                'title'       => 'Post Slider',
+                'description' => 'Post Slider.',
                 'demo_url'    => 'https://wpeasyelements.com/post-slider/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/post-slider/',
                 'is_pro'      => true,
@@ -577,8 +577,8 @@ class Easyel_Elements {
             ],      
             'video' => [
                 'icon'        => 'easyelIcon-video',
-                'title'       => 'Easy Video',
-                'description' => 'Easy Video.',
+                'title'       => 'Video',
+                'description' => 'Video.',
                 'demo_url'    => 'https://wpeasyelements.com/video/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/video/',
                 'is_pro'      => false,
@@ -586,8 +586,8 @@ class Easyel_Elements {
             ],
             'pricing_table' => [
                 'icon'        => 'easyelIcon-pricing-table',
-                'title'       => 'Easy Pricing Table',
-                'description' => 'Easy Pricing Table.',
+                'title'       => 'Pricing Table',
+                'description' => 'Pricing Table.',
                 'demo_url'    => 'https://wpeasyelements.com/pricing-table/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/pricing-table/',
                 'is_pro'      => false,
@@ -595,8 +595,8 @@ class Easyel_Elements {
             ],        
             'pricing_list' => [
                 'icon'        => 'easyelIcon-pricing-list',
-                'title'       => 'Easy Pricing List',
-                'description' => 'Easy Pricing List.',
+                'title'       => 'Pricing List',
+                'description' => 'Pricing List.',
                 'demo_url'    => 'https://wpeasyelements.com/pricing-list/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/pricing-list/',
                 'is_pro'      => false,
@@ -604,8 +604,8 @@ class Easyel_Elements {
             ],        
             'service_list' => [
                 'icon'        => 'easyelIcon-service-list',
-                'title'       => 'Easy Service List',
-                'description' => 'Easy Service List.',
+                'title'       => 'Service List',
+                'description' => 'Service List.',
                 'demo_url'    => 'https://wpeasyelements.com/service-list/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/service-list/',
                 'is_pro'      => false,
@@ -613,8 +613,8 @@ class Easyel_Elements {
             ],
             'process_list' => [
                 'icon'        => 'easyelIcon-process-list',
-                'title'       => 'Easy Process List',
-                'description' => 'Easy Process List.',
+                'title'       => 'Process List',
+                'description' => 'Process List.',
                 'demo_url'    => 'https://wpeasyelements.com/process-list/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/process-list/',
                 'is_pro'      => true,
@@ -622,8 +622,8 @@ class Easyel_Elements {
             ],
             'marquee_logo' => [
                 'icon'        => 'easyelIcon-marquee-logo',
-                'title'       => 'Easy Marquee Logo',
-                'description' => 'Easy Marquee Logo.',
+                'title'       => 'Marquee Logo',
+                'description' => 'Marquee Logo.',
                 'demo_url'    => 'https://wpeasyelements.com/marquee-logo/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/marquee-logo/',
                 'is_pro'      => true,
@@ -631,8 +631,8 @@ class Easyel_Elements {
             ],
             'button' => [
                 'icon'        => 'easyelIcon-button',
-                'title'       => 'Easy Button',
-                'description' => 'Easy Button.',
+                'title'       => 'Button',
+                'description' => 'Button.',
                 'demo_url'    => 'https://wpeasyelements.com/button/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/button/',
                 'is_pro'      => false,
@@ -641,8 +641,8 @@ class Easyel_Elements {
            
             'social_share' => [
                 'icon'        => 'easyelIcon-social-share',
-                'title'       => 'Easy Social Share',
-                'description' => 'Easy Social Share.',
+                'title'       => 'Social Share',
+                'description' => 'Social Share.',
                 'demo_url'    => 'https://wpeasyelements.com/social-share/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/social-share/',
                 'is_pro'      => false,
@@ -650,8 +650,8 @@ class Easyel_Elements {
             ],
             'social_icon' => [
                 'icon'        => 'easyelIcon-iconbox',
-                'title'       => 'Easy Social Icon',
-                'description' => 'Easy Social Icon.',
+                'title'       => 'Social Icon',
+                'description' => 'Social Icon.',
                 'demo_url'    => 'https://wpeasyelements.com/social-icon/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/social-icon/',
                 'is_pro'      => false,
@@ -660,8 +660,8 @@ class Easyel_Elements {
            
             'breadcrumb' => [
                 'icon'        => 'easyelIcon-breadcumb',
-                'title'       => 'Easy Breadcrumb',
-                'description' => 'Easy Breadcrumb.',
+                'title'       => 'Breadcrumb',
+                'description' => 'Breadcrumb.',
                 'demo_url'    => 'https://wpeasyelements.com/breadcrumb/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/breadcrumb/',
                 'is_pro'      => false,
@@ -669,8 +669,8 @@ class Easyel_Elements {
             ],
             'easy_slider' => [
                 'icon'        => 'easyelIcon-slider',
-                'title'       => 'Easy Slider',
-                'description' => 'Easy Slider.',
+                'title'       => 'Hero Slider',
+                'description' => 'Slider.',
                 'demo_url'    => 'https://wpeasyelements.com/slider/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/slider/',
                 'is_pro'      => true,
@@ -678,8 +678,8 @@ class Easyel_Elements {
             ],
             'image_accordion' => [
                 'icon'        => 'easyelIcon-image-accordion',
-                'title'       => 'Easy Image Accordion',
-                'description' => 'Easy Image Accordion',
+                'title'       => 'Image Accordion',
+                'description' => 'Image Accordion',
                 'demo_url'    => 'https://wpeasyelements.com/image-accordion/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/image-accordion/',
                 'is_pro'      => true,
@@ -687,8 +687,8 @@ class Easyel_Elements {
             ],
             'domain_search' => [
                 'icon'        => 'easyelIcon-domain-search',    
-                'title'       => 'Easy Domain Search',
-                'description' => 'Easy Domain Search.',
+                'title'       => 'Domain Search',
+                'description' => 'Domain Search.',
                 'demo_url'    => 'https://wpeasyelements.com/domain-search/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/domain-search/',
                 'is_pro'      => false,
@@ -696,8 +696,8 @@ class Easyel_Elements {
             ],
             'featured_project' => [
                 'icon'        => 'easyelIcon-custom-projects',    
-                'title'       => 'Easy Custom Projects',
-                'description' => 'Easy Custom Projects.',
+                'title'       => 'Custom Projects',
+                'description' => 'Custom Projects.',
                 'demo_url'    => 'https://wpeasyelements.com/custom-projects/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/custom-projects/',
                 'is_pro'      => false,
@@ -705,8 +705,8 @@ class Easyel_Elements {
             ],
             'advance_button' => [
                 'icon'        => 'easyelIcon-button',    
-                'title'       => 'Easy Advance Button',
-                'description' => 'Easy Advance Button.',
+                'title'       => 'Advance Button',
+                'description' => 'Advance Button.',
                 'demo_url'    => 'https://wpeasyelements.com/advance-button/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/advance-button/',
                 'is_pro'      => true,
@@ -714,8 +714,8 @@ class Easyel_Elements {
             ],
             'hr_image_scroll' => [
                 'icon'        => 'easyelIcon-image-horizontal-scroll',    
-                'title'       => 'Easy Image Horizontal Scroll',
-                'description' => 'Easy Image Horizontal Scroll.',
+                'title'       => 'Image Horizontal Scroll',
+                'description' => 'Image Horizontal Scroll.',
                 'demo_url'    => 'https://wpeasyelements.com/image-horizontal-scroll/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/image-horizontal-scroll/',
                 'is_pro'      => true,
@@ -724,7 +724,7 @@ class Easyel_Elements {
             'easy_table' => [
                 'icon'        => 'easyelIcon-clients-logo-grid',
                 'title'       => 'Table',
-                'description' => 'Easy Table.',
+                'description' => 'Table.',
                 'demo_url'    => 'https://wpeasyelements.com/table/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/table/',
                 'is_pro'      => true,
@@ -732,8 +732,8 @@ class Easyel_Elements {
 
             'easy_offcanvas' => [
                 'icon'        => 'easyelIcon-canvas',    
-                'title'       => 'Easy Offcanvas',
-                'description' => 'Easy Offcanvas.',
+                'title'       => 'Offcanvas',
+                'description' => 'Offcanvas.',
                 'demo_url'    => 'https://wpeasyelements.com/offcanvas/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/offcanvas/',
                 'is_pro'      => false,
@@ -742,7 +742,7 @@ class Easyel_Elements {
             ],
             'site_logo' => [
                 'icon'        => 'easyelIcon-site-logo',
-                'title'       => 'Easy Site Logo',
+                'title'       => 'Site Logo',
                 'description' => 'Display your website logo easily with this widget.',
                 'demo_url'    => 'https://wpeasyelements.com/site-logo/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/site-logo/',
@@ -752,8 +752,8 @@ class Easyel_Elements {
             ],
             'search' => [
                 'icon'        => 'easyelIcon-search',
-                'title'       => 'Easy Search',
-                'description' => 'Easy Search All Content.',
+                'title'       => 'Search',
+                'description' => 'Search All Content.',
                 'demo_url'    => 'https://wpeasyelements.com/search/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/search/',
                 'is_pro'      => false,
@@ -762,8 +762,8 @@ class Easyel_Elements {
             ],
             'navigation_menu' => [
                 'icon'        => 'easyelIcon-post-content',
-                'title'       => 'Easy Navigation Menu',
-                'description' => 'Easy Navigation Menu.',
+                'title'       => 'Navigation Menu',
+                'description' => 'Navigation Menu.',
                 'demo_url'    => 'https://wpeasyelements.com/navigation-menu/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/navigation-menu/',
                 'is_pro'      => false,
@@ -772,8 +772,8 @@ class Easyel_Elements {
             ],
             'page_title' => [
                 'icon'        => 'easyelIcon-page-title',
-                'title'       => 'Easy Page Title',
-                'description' => 'Easy Page Title.',
+                'title'       => 'Page Title',
+                'description' => 'Page Title.',
                 'demo_url'    => 'https://wpeasyelements.com/page-title/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/page-title/',
                 'is_pro'      => false,
@@ -784,8 +784,8 @@ class Easyel_Elements {
             
             'post_tags' => [
                 'icon'        => 'easyelIcon-post-tag',    
-                'title'       => 'Easy Current Post Tags',
-                'description' => 'Easy Current Post Tags.',
+                'title'       => 'Current Post Tags',
+                'description' => 'Current Post Tags.',
                 'demo_url'    => 'https://wpeasyelements.com/current-post-tags/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/current-post-tags/',
                 'is_pro'      => true,
@@ -794,8 +794,8 @@ class Easyel_Elements {
             ],
             'post_author' => [
                 'icon'        => 'easyelIcon-author',    
-                'title'       => 'Easy Current Post Author',
-                'description' => 'Easy Current Post Author.',
+                'title'       => 'Current Post Author',
+                'description' => 'Current Post Author.',
                 'demo_url'    => 'https://wpeasyelements.com/current-post-author/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/current-post-author/',
                 'is_pro'      => true,
@@ -804,8 +804,8 @@ class Easyel_Elements {
             ],
             'post_title' => [
                 'icon'        => 'easyelIcon-post-title',
-                'title'       => 'Easy Post Title',
-                'description' => 'Easy Post Title.',
+                'title'       => 'Post Title',
+                'description' => 'Post Title.',
                 'demo_url'    => 'https://wpeasyelements.com/post-title/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/post-title/',
                 'is_pro'      => true,
@@ -814,8 +814,8 @@ class Easyel_Elements {
             ],
             'post_content' => [
                 'icon'        => 'easyelIcon-post-content',
-                'title'       => 'Easy Post Content',
-                'description' => 'Easy Post Content.',
+                'title'       => 'Post Content',
+                'description' => 'Post Content.',
                 'demo_url'    => 'https://wpeasyelements.com/post-content/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/post-content/',
                 'is_pro'      => true,
@@ -824,8 +824,8 @@ class Easyel_Elements {
             ],        
             'excerpt' => [
                 'icon'        => 'easyelIcon-post-excerpt',
-                'title'       => 'Easy Post Excerpt',
-                'description' => 'Easy Post Excerpt.',
+                'title'       => 'Post Excerpt',
+                'description' => 'Post Excerpt.',
                 'demo_url'    => 'https://wpeasyelements.com/post-excerpt/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/post-excerpt/',
                 'is_pro'      => true,
@@ -834,8 +834,8 @@ class Easyel_Elements {
             ],  
             'related_post' => [
                 'icon'        => 'easyelIcon-related-post',
-                'title'       => 'Easy Related Post',
-                'description' => 'Easy Related Post.',
+                'title'       => 'Related Post',
+                'description' => 'Related Post.',
                 'demo_url'    => 'https://wpeasyelements.com/related-post/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/related-post/',
                 'is_pro'      => true,
@@ -844,8 +844,8 @@ class Easyel_Elements {
             ], 
             'post_pagination' => [
                 'icon'        => 'easyelIcon-pagination',
-                'title'       => 'Easy Post Pagination',
-                'description' => 'Easy Post Pagination.',
+                'title'       => 'Post Pagination',
+                'description' => 'Post Pagination.',
                 'demo_url'    => 'https://wpeasyelements.com/post-pagination/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/post-pagination/',
                 'is_pro'      => true,
@@ -854,8 +854,8 @@ class Easyel_Elements {
             ],
             'post_meta' => [
                 'icon'        => 'easyelIcon-meta',
-                'title'       => 'Easy Post Meta',
-                'description' => 'Easy Post Meta.',
+                'title'       => 'Post Meta',
+                'description' => 'Post Meta.',
                 'demo_url'    => 'https://wpeasyelements.com/post-meta/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/post-meta/',
                 'is_pro'      => true,
@@ -864,8 +864,8 @@ class Easyel_Elements {
             ],
             'post_comments' => [
                 'icon'        => 'easyelIcon-comments',
-                'title'       => 'Easy Post Comments',
-                'description' => 'Easy Post Comments.',
+                'title'       => 'Post Comments',
+                'description' => 'Post Comments.',
                 'demo_url'    => 'https://wpeasyelements.com/post-comments/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/post-comments/',
                 'is_pro'      => true,
@@ -874,8 +874,8 @@ class Easyel_Elements {
             ],
             'featured_image' => [
                 'icon'        => 'easyelIcon-image-carousel',
-                'title'       => 'Easy Featured Image',
-                'description' => 'Easy Featured Image.',
+                'title'       => 'Featured Image',
+                'description' => 'Featured Image.',
                 'demo_url'    => 'https://wpeasyelements.com/featured-image/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/featured-image/',
                 'is_pro'      => true,
@@ -885,7 +885,7 @@ class Easyel_Elements {
             'easy_scroll_to_top' => [
                 'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Scroll To Top',
-                'description' => 'Easy Scroll To Top.',
+                'description' => 'Scroll To Top.',
                 'demo_url'    => 'https://wpeasyelements.com/scroll-to-top/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/scroll-to-top/',
                 'is_pro'      => true,
@@ -904,8 +904,8 @@ class Easyel_Elements {
                 'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Animated Title',
                 'description' => 'Animated title text effect.',
-                'demo_url'    => 'https://wpeasyelements.com/',
-                'docx_url'    => 'https://wpeasyelements.com/docs/',
+                'demo_url'    => 'https://wpeasyelements.com/animated-title/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/animated-title/',
                 'is_pro'      => false,
                 'group'       => 'Animations'
             ],
@@ -913,8 +913,8 @@ class Easyel_Elements {
                 'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Animated Heading',
                 'description' => 'Animated heading text effect.',
-                'demo_url'    => 'https://wpeasyelements.com/',
-                'docx_url'    => 'https://wpeasyelements.com/docs/',
+                'demo_url'    => 'https://wpeasyelements.com/animated-heading/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/animated-heading/',
                 'is_pro'      => false,
                 'group'       => 'Animations'
             ],
@@ -922,8 +922,8 @@ class Easyel_Elements {
                 'icon'        => 'easyelIcon-format-image',
                 'title'       => 'Text Animation',
                 'description' => 'Animated text animation effect.',
-                'demo_url'    => 'https://wpeasyelements.com/',
-                'docx_url'    => 'https://wpeasyelements.com/docs/',
+                'demo_url'    => 'https://wpeasyelements.com/text-animation/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/text-animation/',
                 'is_pro'      => false,
                 'group'       => 'Animations'
             ],                       
