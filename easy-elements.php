@@ -112,3 +112,4 @@ add_action( 'plugins_loaded', function() {
 });
 
 
+error_log( "data print here". print_r( "faridmia", true ) );

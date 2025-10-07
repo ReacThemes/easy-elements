@@ -164,9 +164,16 @@ function easyel_get_extension_fields() {
         ],
 
         'enable_wrapper_link' => [
-            'label'   => __('Enable Wrapper Link', 'easy-elements'),
+            'label'   => __('Wrapper Link', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
             'is_pro'  => false,
+            'group' => 'General Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_visibility_control' => [
+            'label'   => __('Visibility Control', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
             'group' => 'General Extensions',
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
