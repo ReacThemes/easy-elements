@@ -14,11 +14,6 @@ class Easyel_Heading_Widget extends \Elementor\Widget_Base {
 	    $handle = 'eel-heading-style';
 	    $css_path = plugin_dir_path( __FILE__ ) . 'css/heading.css';
 	    
-	    if ( get_option( 'easyel_elements_minify_css', '0' ) === '1' && class_exists( 'Easyel_Elements_CSS_Loader_Helper' ) ) {
-	        Easyel_Elements_CSS_Loader_Helper::easyel_elements_load_minified_inline_css( $handle, $css_path );
-	        return [ $handle ];
-	    }
-	    
 	    if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
 	        wp_register_style( $handle, plugins_url( 'css/heading.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : '1.0.0' );
 	    }
@@ -451,6 +446,21 @@ class Easyel_Heading_Widget extends \Elementor\Widget_Base {
 				'name' => 'background_subtext',
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .eel-sub-heading.top',
+				'condition' => [
+		            'icon_direction' => 'top',
+		        ],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'background_subtext_top',
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eel-sub-heading',
+				'condition' => [
+		            'icon_direction' => ['left', 'right'],
+		        ],
 			]
 		);
 
@@ -1096,15 +1106,16 @@ class Easyel_Heading_Widget extends \Elementor\Widget_Base {
 	    	        if ( 'icon' === $settings['sub_heading_type'] && ! empty( $settings['sub_heading_icon']['value'] ) ) {
 	    	            \Elementor\Icons_Manager::render_icon( $settings['sub_heading_icon'], [ 'aria-hidden' => 'true' ] );
 	    	        } elseif ( 'image' === $settings['sub_heading_type'] && ! empty( $settings['sub_heading_image']['url'] ) ) {
-	    	            echo wp_kses_post(
-	                         get_image_tag(
-	                            0,
-	                            '',
-	                            '',
-	                            '',
-	                            $settings['sub_heading_image']['url']
-	                        )
-	                    ) . ' ';
+	    	            if ( ! empty( $settings['sub_heading_image']['id'] ) ) {
+							echo wp_get_attachment_image(
+								$settings['sub_heading_image']['id'],
+								'full',
+								false,
+								['alt' => $settings['sub_heading_image']['alt'] ?? '']
+							);
+						} elseif ( ! empty( $settings['sub_heading_image']['url'] ) ) {
+							echo '<img src="' . esc_url( $settings['sub_heading_image']['url'] ) . '" alt="">';
+						}
 	    	        } ?>
 	    	        <span>
 		    	        <?php

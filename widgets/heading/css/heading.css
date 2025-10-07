@@ -31,6 +31,7 @@
 .eel-sub-heading img,
 .eel-sub-heading svg {
   height: 1em;
+  width: auto;
 }
 .eel-sub-heading.top {
   display: inline-block;
