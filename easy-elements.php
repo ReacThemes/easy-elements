@@ -110,4 +110,3 @@ add_action( 'easy_footer', 'easyel_after_content_container_hfe', 5 );
 add_action( 'plugins_loaded', function() {
    Easy_Header_Footer_Elementor::instance();
 });
-
