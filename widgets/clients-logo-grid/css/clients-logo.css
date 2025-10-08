@@ -11,6 +11,20 @@
 
 .e-e-clients-logo .grid-item .ee--logo-img {
   box-sizing: border-box;
+  width: 100%;
+  transition: all 0.5s ease;
+}
+.e-e-clients-logo .grid-item .ee--logo-img.normal_grayscale img {
+  filter: grayscale(1);
+}
+.e-e-clients-logo .grid-item .ee--logo-img.hover_grayscale:hover img {
+  filter: grayscale(1);
+}
+.e-e-clients-logo .grid-item .ee--logo-img.hover_to_default img {
+  filter: grayscale(100%);
+}
+.e-e-clients-logo .grid-item .ee--logo-img.hover_to_default img:hover {
+  filter: grayscale(0%);
 }
 
 .e-e-clients-logo .ee--logo-img {
@@ -22,4 +36,5 @@
   height: auto;
   display: block;
   margin: 0 auto;
+  transition: all 0.5s ease;
 }/*# sourceMappingURL=clients-logo.css.map */

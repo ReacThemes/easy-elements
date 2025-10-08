@@ -145,51 +145,290 @@ class Easyel_Clients_Logo__Widget extends \Elementor\Widget_Base {
                 ],
             ]
         );
+        $this->end_controls_section();
 
-
-        $this->add_responsive_control(
-            'item_padding',
+        // STYLE 
+        $this->start_controls_section(
+            'section_item_style',
             [
-                'label' => esc_html__( 'Space', 'easy-elements' ),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', 'em', '%' ],
-                'selectors' => [
-                    '{{WRAPPER}} .e-e-clients-logo .grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
+                'label' => __( 'Style', 'easy-elements' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
             ]
-        );
+         );
+            $this->add_responsive_control(
+                'item_width',
+                [
+                    'label' => esc_html__( 'Item Width', 'easy-elements' ),
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 1000,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img' => 'max-width: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );            
+            $this->add_responsive_control(
+                'item_height',
+                [
+                    'label' => esc_html__( 'Item Height', 'easy-elements' ),
+                    'type' => \Elementor\Controls_Manager::SLIDER,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 1000,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img' => 'height: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img .e-e-grid-img' => 'height: 100%;',
+                    ],
+                ]
+            );            
+            $this->add_responsive_control(
+                'item_padding',
+                [
+                    'label' => esc_html__( 'Space', 'easy-elements' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .e-e-clients-logo .grid-wrap .grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
 
-        $this->add_responsive_control(
-            'item_padding_inner',
-            [
-                'label' => esc_html__( 'Padding', 'easy-elements' ),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', 'em', '%' ],
-                'selectors' => [
-                    '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
+            $this->add_responsive_control(
+                'item_padding_inner',
+                [
+                    'label' => esc_html__( 'Padding', 'easy-elements' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
 
-        $this->add_group_control(
-            \Elementor\Group_Control_Border::get_type(),
-            [
-                'name' => 'item_border',
-                'selector' => '{{WRAPPER}} .ee--logo-img',
-            ]
-        );
+            $this->add_control(
+                'item__border_radius',
+                [
+                    'label' => esc_html__( 'Border Radius', 'easy-elements' ),
+                    'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
 
-        $this->add_control(
-            'item__border_radius',
-            [
-                'label' => esc_html__( 'Border Radius', 'easy-elements' ),
-                'type' => \Elementor\Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%' ],
-                'selectors' => [
-                    '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
+            // Item Normal and Hover Options
+            $this->start_controls_tabs( 'item_normal_hover_style' );
+
+                $this->start_controls_tab(
+                    'item_normal_style',
+                    [
+                        'label' => esc_html__( 'Normal', 'easy-elements' ),
+                    ]
+                 );
+                    $this->add_control(
+                        'item_bg',
+                        [
+                            'label' => esc_html__( 'Item Background', 'easy-elements' ),
+                            'type' => Controls_Manager::COLOR,
+                            'selectors' => [
+                                '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img' => 'background-color: {{VALUE}};',
+                            ],
+                        ]
+                    );
+                    $this->add_group_control(
+                        \Elementor\Group_Control_Border::get_type(),
+                        [
+                            'name' => 'item_border',
+                            'selector' => '{{WRAPPER}} .ee--logo-img',
+                        ]
+                    );
+                    $this->add_group_control(
+                        \Elementor\Group_Control_Box_Shadow::get_type(),
+                        [
+                            'name' => 'item_box_shadow',
+                            'selector' => '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img',
+                        ]
+                    );
+                    $this->add_control(
+                        'item_opacity',
+                        [
+                            'label' => esc_html__( 'Opacity', 'easy-elements' ),
+                            'type' => \Elementor\Controls_Manager::SLIDER,
+                            'range' => [
+                                'px' => [
+                                    'min' => 0.1,
+                                    'max' => 1,
+                                    'step' => .1,
+                                ],
+                            ],
+                            'selectors' => [
+                                '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img img' => 'opacity: {{SIZE}};',
+                            ],
+                        ]
+                    );
+                    $this->add_control(
+                        'item_transform_scale',
+                        [
+                            'label' => esc_html__( 'Transform Scale', 'easy-elements' ),
+                            'type' => \Elementor\Controls_Manager::SLIDER,
+                            'range' => [
+                                'px' => [
+                                    'min' => 0.1,
+                                    'max' => 2,
+                                    'step' => .1,
+                                ],
+                            ],
+                            'selectors' => [
+                                '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img img' => 'transform: scale({{SIZE}});',
+                            ],
+                        ]
+                    );
+                    $this->add_control(
+                        'image_grayscale',
+                        [
+                            'label' => esc_html__( 'Image Grayscale', 'easy-elements' ),
+                            'type' => Controls_Manager::SWITCHER,
+                            'label_on' => esc_html__( 'Yes', 'easy-elements' ),
+                            'label_off' => esc_html__( 'No', 'easy-elements' ),
+                            'return_value' => 'yes',
+                        ]
+                    );
+                    $this->add_control(
+                        'image_grayscale_option',
+                        [
+                            'label' => __('Grayscale', 'easy-elements'),
+                            'type' => \Elementor\Controls_Manager::SELECT,
+                            'default' => 'normal_grayscale',
+                            'options' => [
+                                'normal_grayscale'  => __('Default Grayscale', 'easy-elements'),
+                                'hover_grayscale'   => __('Hover Grayscale', 'easy-elements'),
+                                'hover_to_default'   => __('Hover to Default Image', 'easy-elements'),
+                            ],                
+                            'condition' => [
+                                'image_grayscale' => 'yes',
+                            ],
+                        ]
+                    );
+                    $this->add_group_control(
+                        \Elementor\Group_Control_Css_Filter::get_type(),
+                        [
+                            'name' => 'item_css_filters',
+                            'selector' => '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img img',
+                            'condition' => [
+                                'image_grayscale!' => 'yes',
+                            ],
+                        ]
+                    );
+
+
+                $this->end_controls_tab();
+
+                // Hover Styele 
+                $this->start_controls_tab(
+                    'item_hover_style',
+                    [
+                        'label' => esc_html__( 'Hover', 'easy-elements' ),
+                    ]
+                 );
+                    $this->add_control(
+                        'item_hover_bg',
+                        [
+                            'label' => esc_html__( 'Item Hover BG', 'easy-elements' ),
+                            'type' => Controls_Manager::COLOR,
+                            'selectors' => [
+                                '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img:hover' => 'background-color: {{VALUE}};',
+                            ],
+                        ]
+                    );
+                    $this->add_group_control(
+                        \Elementor\Group_Control_Border::get_type(),
+                        [
+                            'name' => 'item_hover_border',
+                            'selector' => '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img:hover',
+                        ]
+                    );
+                    $this->add_group_control(
+                        \Elementor\Group_Control_Box_Shadow::get_type(),
+                        [
+                            'name' => 'item_hover_box_shadow',
+                            'selector' => '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img:hover',
+                        ]
+                    );
+                    $this->add_control(
+                        'item_hover_opacity',
+                        [
+                            'label' => esc_html__( 'Opacity', 'easy-elements' ),
+                            'type' => \Elementor\Controls_Manager::SLIDER,
+                            'range' => [
+                                'px' => [
+                                    'min' => 0.1,
+                                    'max' => 1,
+                                    'step' => .1,
+                                ],
+                            ],
+                            'selectors' => [
+                                '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img:hover img' => 'opacity: {{SIZE}};',
+                            ],
+                        ]
+                    );
+                    $this->add_control(
+                        'item_hover_transform_scale',
+                        [
+                            'label' => esc_html__( 'Transform Scale', 'easy-elements' ),
+                            'type' => \Elementor\Controls_Manager::SLIDER,
+                            'range' => [
+                                'px' => [
+                                    'min' => 0.1,
+                                    'max' => 2,
+                                    'step' => .1,
+                                ],
+                            ],
+                            'selectors' => [
+                                '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img:hover img' => 'transform: scale({{SIZE}});',
+                            ],
+                        ]
+                    );
+                    $this->add_group_control(
+                        \Elementor\Group_Control_Css_Filter::get_type(),
+                        [
+                            'name' => 'item_hover_css_filters',
+                            'selector' => '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img:hover img',
+                            'condition' => [
+                                'image_grayscale!' => 'yes',
+                            ],
+                        ]
+                    );
+                    $this->add_control(
+                        'item_hover_transition',
+                        [
+                            'label' => esc_html__( 'Transition', 'easy-elements' ),
+                            'type' => \Elementor\Controls_Manager::SLIDER,
+                            'range' => [
+                                'px' => [
+                                    'min' => 0.1,
+                                    'max' => 5,
+                                    'step' => .1,
+                                ],
+                            ],
+                            'selectors' => [
+                                '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img, {{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img .e-e-grid-img' => 'transition: all {{SIZE}}s ease;',
+                            ],
+                        ]
+                    );
+
+                $this->end_controls_tab();
+
+            $this->end_controls_tabs();
 
         $this->end_controls_section();
     }
@@ -215,9 +454,11 @@ class Easyel_Clients_Logo__Widget extends \Elementor\Widget_Base {
                     $target   = ! empty( $item['link']['is_external'] ) ? '_blank' : '';
                     $nofollow = ! empty( $item['link']['nofollow'] ) ? 'nofollow' : '';
                     $fetchpriority = $settings['fetchpriority'] ?? '';
+
+                    $image_grayscale = !empty( $settings['image_grayscale_option'] ) ? $settings['image_grayscale_option'] : '';
                     ?>
                     <div class="grid-item">
-                        <div class="ee--logo-img">
+                        <div class="ee--logo-img <?php echo esc_attr($image_grayscale)?>">
                             <?php if ( $link ) : ?>
                                 <a href="<?php echo esc_url( $link ); ?>"
                                    <?php if ( $target ) : ?>target="<?php echo esc_attr( $target ); ?>"<?php endif; ?>

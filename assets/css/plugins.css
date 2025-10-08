@@ -1990,3 +1990,22 @@ html,
 body{
     overflow-x: hidden;
 }
+
+.eel-cursor-hover {
+    position: fixed;
+    top: 0; left: 0;
+    line-height: 100%;
+    width: 120px;
+    height: 120px;
+    display: grid;
+    place-items: center;
+    color: #121212;
+    text-align: center;
+    white-space: nowrap;
+    pointer-events: none;
+    border-radius: 100%;
+    background: #fff;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, opacity 0.1s;
+}

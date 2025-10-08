@@ -306,10 +306,7 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
                 ],
             ]
         );
-
-
-
-
+        
         $this->add_control(
             'show_pagination',
             [

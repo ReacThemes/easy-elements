@@ -1,26 +1,76 @@
+/* === Gallery Grid === */
 .eel-gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
+/* === Gallery Item === */
 .eel-gallery-item {
     position: relative;
     overflow: hidden;
     border-radius: 8px;
 }
 
+.eel-gallery-item a {
+    overflow: hidden;
+    display: block;
+}
+
+/* === Image === */
 .eel-gallery-item img {
     width: 100%;
     height: auto;
     display: block;
     transition: transform 0.4s ease;
+    object-fit: cover;
 }
 
 .eel-gallery-item:hover img {
     transform: scale(1.05);
 }
 
+/* === Hover Overlay === */
+.eel-hover-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.eel-gallery-item:hover .eel-hover-content {
+    opacity: 1;
+}
+
+/* === Hover Text === */
+.eel-hover-text span {
+    color: #fff;
+    font-size: 18px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+}
+
+/* === Hover Icon === */
+.eel-hover-icon i,
+.eel-hover-icon svg {
+    color: #fff;
+    font-size: 36px;
+    transition: transform 0.3s ease;
+}
+
+.eel-hover-icon:hover i,
+.eel-hover-icon:hover svg {
+    transform: scale(1.2);
+}
+.eel-gallery-image-wrap{
+    position: relative;
+    overflow: hidden;
+}
+/* === Caption === */
 .eel-gallery-caption {
     position: absolute;
     bottom: 0;
@@ -30,55 +80,41 @@
     text-align: center;
     padding: 8px;
     font-size: 14px;
-    transition: opacity 0.3s;
-}
-
-.eel-gallery-item:hover .eel-gallery-caption {
     opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
 
-.eel-gallery-grid {
-    display: grid;
-    gap: 10px;
-}
-.eel-gallery-item img {
-    width: 100%;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-.eel-gallery-item img:hover {
-    transform: scale(1.03);
-}
-.eel-gallery-caption {
-    text-align: center;
-    margin-top: 5px;
-    font-size: 14px;
-}
+/* === Lightbox === */
 .eel-lightbox {
     display: none;
     position: fixed;
     z-index: 9999;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0,0,0,0.9);
     justify-content: center;
     align-items: center;
     place-items: center;
 }
+
 .eel-lightbox img {
     max-width: 90%;
     max-height: 80%;
     border-radius: 10px;
 }
+
 .eel-lightbox .eel-close {
     position: absolute;
-    top: 15px; right: 25px;
+    top: 15px;
+    right: 25px;
     font-size: 35px;
     color: white;
     cursor: pointer;
 }
+
 .eel-lightbox button {
     background: none;
     border: none;
@@ -89,5 +125,6 @@
     transform: translateY(-50%);
     cursor: pointer;
 }
+
 .eel-prev { left: 40px; }
 .eel-next { right: 40px; }

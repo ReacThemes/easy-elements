@@ -85,7 +85,7 @@ function easyel_get_extension_fields() {
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
         'enable_cursor' => [
-            'label'   => __('Enable Easy Cursor', 'easy-elements'),
+            'label'   => __('Enable Magic Cursor', 'easy-elements'),
             'icon'        => 'dashicons-format-gallery',
             'is_pro'  => true,
             'group' => 'GSAP Extensions',

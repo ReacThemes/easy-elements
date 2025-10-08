@@ -879,6 +879,16 @@ class Easyel_Elements {
                 'is_pro'      => false,
                 'tab' => 'widget',
             ],
+
+            'image_gallery_filter' => [
+                'icon'        => 'easyelIcon-marquee-logo',
+                'title'       => 'filterable Gallery',
+                'description' => 'filterable Gallery',
+                'demo_url'    => 'https://wpeasyelements.com/simple-gallery/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/simple-gallery/',
+                'is_pro'      => true,
+                'tab' => 'widget',
+            ],
         ];
 
         return apply_filters( 'easyel_available_widgets', $widgets );
