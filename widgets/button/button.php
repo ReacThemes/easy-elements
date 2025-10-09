@@ -42,154 +42,154 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 	            'label' => esc_html__('Button Settings', 'easy-elements'),
 	            'tab' => Controls_Manager::TAB_CONTENT,
 	        ]
-	    );
+	     );
 
-	    $this->add_control(
-	        'button_text',
-	        [
-	            'label' => esc_html__('Button Text', 'easy-elements'),
-	            'type' => Controls_Manager::TEXTAREA,
-				'label_block' => true,
-	            'default' => esc_html__('Click Here', 'easy-elements'),
-	            'placeholder' => esc_html__('Enter button text', 'easy-elements'),
-	        ]
-	    );
+			$this->add_control(
+				'button_text',
+				[
+					'label' => esc_html__('Button Text', 'easy-elements'),
+					'type' => Controls_Manager::TEXTAREA,
+					'label_block' => true,
+					'default' => esc_html__('Click Here', 'easy-elements'),
+					'placeholder' => esc_html__('Enter button text', 'easy-elements'),
+				]
+			);
 
-		$this->add_control(
-			'button_url',
-			[
-				'label' => esc_html__('Button URL', 'easy-elements'),
-				'type' => Controls_Manager::URL,
-				'default' => [
-					'url' => '#',
-					'is_external' => false,
-					'nofollow' => false,
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_type',
-			[
-				'label' => esc_html__('Button Type', 'easy-elements'),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'primary',
-				'options' => [
-					'primary' => esc_html__('Primary', 'easy-elements'),
-					'outline' => esc_html__('Outline', 'easy-elements'),
-					'icon_btn' => esc_html__('Icon', 'easy-elements'),
-				],
-			]
-		);
-
-		$this->add_control(
-			'button_icon',
-			[
-				'label' => esc_html__('Icon', 'easy-elements'),
-				'type' => Controls_Manager::ICONS,
-				'default' => [
-					'value' => '',
-					'library' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'icon_position',
-			[
-				'label' => esc_html__('Icon Position', 'easy-elements'),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'before',
-				'options' => [
-					'before' => esc_html__('Before Text', 'easy-elements'),
-					'after' => esc_html__('After Text', 'easy-elements'),
-				],
-				'condition' => [
-					'button_icon[value]!' => '',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'button_min_width',
-			[
-				'label' => esc_html__('Minimum Width', 'easy-elements'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => ['px'],
-				'range' => [
-					'px' => [
-						'min' => 100,
-						'max' => 1000,
+			$this->add_control(
+				'button_url',
+				[
+					'label' => esc_html__('Button URL', 'easy-elements'),
+					'type' => Controls_Manager::URL,
+					'default' => [
+						'url' => '#',
+						'is_external' => false,
+						'nofollow' => false,
 					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 150,
-				],
+				]
+			);
+
+			$this->add_control(
+				'button_type',
+				[
+					'label' => esc_html__('Button Type', 'easy-elements'),
+					'type' => Controls_Manager::SELECT,
+					'default' => 'primary',
+					'options' => [
+						'primary' => esc_html__('Primary', 'easy-elements'),
+						'outline' => esc_html__('Outline', 'easy-elements'),
+						'icon_btn' => esc_html__('Icon', 'easy-elements'),
+					],
+				]
+			);
+
+			$this->add_control(
+				'button_icon',
+				[
+					'label' => esc_html__('Icon', 'easy-elements'),
+					'type' => Controls_Manager::ICONS,
+					'default' => [
+						'value' => '',
+						'library' => '',
+					],
+				]
+			);
+
+			$this->add_control(
+				'icon_position',
+				[
+					'label' => esc_html__('Icon Position', 'easy-elements'),
+					'type' => Controls_Manager::SELECT,
+					'default' => 'before',
+					'options' => [
+						'before' => esc_html__('Before Text', 'easy-elements'),
+						'after' => esc_html__('After Text', 'easy-elements'),
+					],
+					'condition' => [
+						'button_icon[value]!' => '',
+					],
+				]
+			);
+
+			$this->add_responsive_control(
+				'button_min_width',
+				[
+					'label' => esc_html__('Minimum Width', 'easy-elements'),
+					'type' => Controls_Manager::SLIDER,
+					'size_units' => ['px'],
+					'range' => [
+						'px' => [
+							'min' => 100,
+							'max' => 1000,
+						],
+					],
+					'default' => [
+						'unit' => 'px',
+						'size' => 150,
+					],
+					'selectors' => [
+						'{{WRAPPER}} .eel-button' => 'min-width: {{SIZE}}{{UNIT}};',
+					],
+				]
+			);
+
+			$this->add_control(
+				'show_gradient',
+				[
+					'label' => esc_html__( 'Gradient Button', 'easy-elements' ),
+					'type' => Controls_Manager::SWITCHER,
+					'label_on' => esc_html__( 'Yes', 'easy-elements' ),
+					'label_off' => esc_html__( 'No', 'easy-elements' ),
+					'default' => '',
+				]
+			);
+
+			// First color
+			$this->add_control(
+				'easy_gradient_color_1',
+				[
+					'label'     => esc_html__( 'Gradient 1', 'easy-elements' ),
+					'type'      => \Elementor\Controls_Manager::COLOR,
+					'default'   => '#4750CC',
+					'condition' => [
+						'show_gradient' => 'yes',
+					],
+					'selectors' => [
+						'{{WRAPPER}} .eel-button-gradient' => '--eel-gradient-1: {{VALUE}};',
+					],
+				]
+			);
+
+			// Second color
+			$this->add_control(
+				'easy_gradient_color_2',
+				[
+				'label'     => esc_html__( 'Gradient 2', 'easy-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'default'   => '#EF5CE8',
+				'condition' => [
+					'show_gradient' => 'yes',
+					],
 				'selectors' => [
-					'{{WRAPPER}} .eel-button' => 'min-width: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+					'{{WRAPPER}} .eel-button-gradient' => '--eel-gradient-2: {{VALUE}};',
+					],
+				]
+			);
 
-		$this->add_control(
-            'show_gradient',
-            [
-                'label' => esc_html__( 'Gradient Button', 'easy-elements' ),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Yes', 'easy-elements' ),
-                'label_off' => esc_html__( 'No', 'easy-elements' ),
-                'default' => '',
-            ]
-        );
-
-		// First color
-		$this->add_control(
-		'easy_gradient_color_1',
-		[
-			'label'     => esc_html__( 'Gradient 1', 'easy-elements' ),
-			'type'      => \Elementor\Controls_Manager::COLOR,
-			'default'   => '#4750CC',
-			'condition' => [
-				'show_gradient' => 'yes',
-			],
-			'selectors' => [
-				'{{WRAPPER}} .eel-button-gradient' => '--eel-gradient-1: {{VALUE}};',
-			],
-		]
-		);
-
-		// Second color
-		$this->add_control(
-			'easy_gradient_color_2',
-			[
-			'label'     => esc_html__( 'Gradient 2', 'easy-elements' ),
-			'type'      => \Elementor\Controls_Manager::COLOR,
-			'default'   => '#EF5CE8',
-			'condition' => [
-				'show_gradient' => 'yes',
-				],
-			'selectors' => [
-				'{{WRAPPER}} .eel-button-gradient' => '--eel-gradient-2: {{VALUE}};',
-				],
-			]
-		);
-
-		// Third color
-		$this->add_control(
-			'easy_gradient_color_3',
-			[
-			'label'     => esc_html__( 'Gradient 3', 'easy-elements' ),
-			'type'      => \Elementor\Controls_Manager::COLOR,
-			'default'   => '#EFC7AE',
-			'condition' => [
-				'show_gradient' => 'yes',
-				],
-			'selectors' => [
-				'{{WRAPPER}} .eel-button-gradient' => '--eel-gradient-3: {{VALUE}};',
-				],
-			]
-		);
+			// Third color
+			$this->add_control(
+				'easy_gradient_color_3',
+				[
+				'label'     => esc_html__( 'Gradient 3', 'easy-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'default'   => '#EFC7AE',
+				'condition' => [
+					'show_gradient' => 'yes',
+					],
+				'selectors' => [
+					'{{WRAPPER}} .eel-button-gradient' => '--eel-gradient-3: {{VALUE}};',
+					],
+				]
+			);
 
 		$this->end_controls_section();
 
@@ -335,9 +335,9 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 				'selector' => '{{WRAPPER}} .eel-button:hover',
 			]
 		);
-
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
+
 		$this->end_controls_section();
 
 		// Icon Style Section
@@ -351,168 +351,236 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 				],
 			]
 		);
+			$this->start_controls_tabs('button_icon_styles');
+				$this->start_controls_tab(
+					'button_icon_normal',
+					[
+						'label' => esc_html__('Normal', 'easy-elements'),
+					]
+				 );
+					$this->add_control(
+						'icon_color',
+						[
+							'label' => esc_html__('Icon Color', 'easy-elements'),
+							'type' => Controls_Manager::COLOR,
+							'default' => '',
+							'selectors' => [
+								'{{WRAPPER}} .eel-button i' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button svg' => 'fill: {{VALUE}};',
+								'{{WRAPPER}} .eel-button svg path' => 'stroke: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .elementor-icon' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .elementor-icon svg' => 'fill: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .elementor-icon i' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-before' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-after' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-before svg' => 'fill: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-after svg' => 'fill: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-before i' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-after i' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .elementor-icon-wrapper' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .elementor-icon-wrapper svg' => 'fill: {{VALUE}};',
+							],
+						]
+					);
+					$this->add_control(
+						'icon_bg',
+						[
+							'label' => esc_html__('Icon Background', 'easy-elements'),
+							'type' => Controls_Manager::COLOR,
+							'default' => '',
+							'selectors' => [
+								'{{WRAPPER}} .eel-button .eel-button-icon-before, {{WRAPPER}} .eel-button .eel-button-icon-after' => 'background-color: {{VALUE}};',
+							],
+						]
+					);
+					$this->add_responsive_control(
+						'icon_size',
+						[
+							'label' => esc_html__('Icon Size', 'easy-elements'),
+							'type' => Controls_Manager::SLIDER,
+							'size_units' => ['px'],
+							'range' => [
+								'px' => [
+									'min' => 6,
+									'max' => 50,
+								],
+								'em' => [
+									'min' => 0.5,
+									'max' => 5,
+								],
+							],
+							'default' => [
+								'unit' => 'px',
+								'size' => 16,
+							],
+							'selectors' => [
+								'{{WRAPPER}} .eel-button i' => 'font-size: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button .elementor-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-before' => 'font-size: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-after' => 'font-size: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-before svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-after svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-before i' => 'font-size: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-after i' => 'font-size: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+							],
+						]
+					);
 
-		$this->add_control(
-			'icon_color',
-			[
-				'label' => esc_html__('Icon Color', 'easy-elements'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eel-button i' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button svg' => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .eel-button svg path' => 'stroke: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .elementor-icon' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .elementor-icon svg' => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .elementor-icon i' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-before' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-after' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-before svg' => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-after svg' => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-before i' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-after i' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .elementor-icon-wrapper' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .elementor-icon-wrapper svg' => 'fill: {{VALUE}};',
-				],
-			]
-		);
+					$this->add_responsive_control(
+						'icon_spacing',
+						[
+							'label' => esc_html__('Icon Spacing', 'easy-elements'),
+							'type' => Controls_Manager::SLIDER,
+							'size_units' => ['px'],
+							'range' => [
+								'px' => [
+									'min' => 0,
+									'max' => 50,
+								],
+								'em' => [
+									'min' => 0,
+									'max' => 5,
+								],
+							],
+							'default' => [
+								'unit' => 'px',
+								'size' => 8,
+							],
+							'selectors' => [
+								'{{WRAPPER}} .eel-button .eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button i.eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button i.eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button svg.eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
+								'{{WRAPPER}} .eel-button svg.eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
+							],
+						]
+					);
+					$this->add_responsive_control(
+						'icon_box_width',
+						[
+							'label' => esc_html__('Icon Width', 'easy-elements'),
+							'type' => Controls_Manager::SLIDER,
+							'selectors' => [
+								'{{WRAPPER}} .eel-button .eel-button-icon-before, {{WRAPPER}} .eel-button .eel-button-icon-after' => 'width: {{SIZE}}{{UNIT}};',
+							],
+						]
+					);
+					$this->add_responsive_control(
+						'icon_box_height',
+						[
+							'label' => esc_html__('Icon Height', 'easy-elements'),
+							'type' => Controls_Manager::SLIDER,
+							'selectors' => [
+								'{{WRAPPER}} .eel-button .eel-button-icon-before, {{WRAPPER}} .eel-button .eel-button-icon-after' => 'height: {{SIZE}}{{UNIT}};',
+							],
+						]
+					);
+					$this->add_responsive_control(
+						'icon_box_border_radius',
+						[
+							'label' => esc_html__('Border Radius', 'easy-elements'),
+							'type' => Controls_Manager::DIMENSIONS,
+							'size_units' => ['px','%'],
+							'selectors' => [
+								'{{WRAPPER}} .eel-button .eel-button-icon-before, 
+								{{WRAPPER}} .eel-button .eel-button-icon-after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+							],
+						]
+					);
+					$this->add_responsive_control(
+						'icon_rotation',
+						[
+							'label' => esc_html__('Default Icon Rotation', 'easy-elements'),
+							'type' => Controls_Manager::SLIDER,
+							'size_units' => ['deg'],
+							'range' => [
+								'deg' => [
+									'min' => -360,
+									'max' => 360,
+								],
+							],
+							'default' => [
+								'unit' => 'deg',
+								'size' => 0,
+							],
+							'selectors' => [
+								'{{WRAPPER}} .eel-button i' => 'transition: all 0.3s ease-in; transform: rotate({{SIZE}}{{UNIT}});',
+								'{{WRAPPER}} .eel-button svg' => 'transition: all 0.3s ease-in; transform: rotate({{SIZE}}{{UNIT}});',
+							],
+						]
+					);
+				$this->end_controls_tab();
 
-		$this->add_control(
-			'icon_hover_color',
-			[
-				'label' => esc_html__('Icon Hover Color', 'easy-elements'),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .eel-button:hover i' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button:hover svg' => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .eel-button:hover svg path' => 'stroke: {{VALUE}};',
-					'{{WRAPPER}} .eel-button:hover .elementor-icon' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button:hover .elementor-icon svg' => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .eel-button:hover .elementor-icon i' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button:hover .eel-button-icon-before' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button:hover .eel-button-icon-after' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button:hover .eel-button-icon-before svg' => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .eel-button:hover .eel-button-icon-after svg' => 'fill: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-before i' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-after i' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .elementor-icon-wrapper' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .eel-button .elementor-icon-wrapper svg' => 'fill: {{VALUE}};',
-				],
-			]
-		);
+				// Button Icon HOver Style
+				$this->start_controls_tab(
+					'button_icon_hover',
+					[
+						'label' => esc_html__('Hover', 'easy-elements'),
+					]
+				 );
+					$this->add_control(
+						'icon_hover_color',
+						[
+							'label' => esc_html__('Icon Hover Color', 'easy-elements'),
+							'type' => Controls_Manager::COLOR,
+							'default' => '',
+							'selectors' => [
+								'{{WRAPPER}} .eel-button:hover i' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button:hover svg' => 'fill: {{VALUE}};',
+								'{{WRAPPER}} .eel-button:hover svg path' => 'stroke: {{VALUE}};',
+								'{{WRAPPER}} .eel-button:hover .elementor-icon' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button:hover .elementor-icon svg' => 'fill: {{VALUE}};',
+								'{{WRAPPER}} .eel-button:hover .elementor-icon i' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button:hover .eel-button-icon-before' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button:hover .eel-button-icon-after' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button:hover .eel-button-icon-before svg' => 'fill: {{VALUE}};',
+								'{{WRAPPER}} .eel-button:hover .eel-button-icon-after svg' => 'fill: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-before i' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .eel-button-icon-after i' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .elementor-icon-wrapper' => 'color: {{VALUE}};',
+								'{{WRAPPER}} .eel-button .elementor-icon-wrapper svg' => 'fill: {{VALUE}};',
+							],
+						]
+					);
+					$this->add_control(
+						'icon_hover_bg',
+						[
+							'label' => esc_html__('Icon Hover Background', 'easy-elements'),
+							'type' => Controls_Manager::COLOR,
+							'default' => '',
+							'selectors' => [
+								'{{WRAPPER}} .eel-button:hover .eel-button-icon-before, {{WRAPPER}} .eel-button:hover .eel-button-icon-after' => 'background-color: {{VALUE}};',
+							],
+						]
+					);
+					$this->add_responsive_control(
+						'hover_icon_rotation',
+						[
+							'label' => esc_html__('Hover Icon Rotation', 'easy-elements'),
+							'type' => Controls_Manager::SLIDER,
+							'size_units' => ['deg'],
+							'range' => [
+								'deg' => [
+									'min' => -360,
+									'max' => 360,
+								],
+							],
+							'default' => [
+								'unit' => 'deg',
+								'size' => 0,
+							],
+							'selectors' => [
+								'{{WRAPPER}} .eel-button:hover i' => 'transform: rotate({{SIZE}}{{UNIT}});',
+								'{{WRAPPER}} .eel-button:hover svg' => 'transform: rotate({{SIZE}}{{UNIT}});',
+							],
+						]
+					);
+				$this->end_controls_tab();
 
-		$this->add_responsive_control(
-			'icon_size',
-			[
-				'label' => esc_html__('Icon Size', 'easy-elements'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => ['px'],
-				'range' => [
-					'px' => [
-						'min' => 6,
-						'max' => 50,
-					],
-					'em' => [
-						'min' => 0.5,
-						'max' => 5,
-					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 16,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eel-button i' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button .elementor-icon' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-before' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-after' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-before svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-after svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-before i' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-after i' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'icon_spacing',
-			[
-				'label' => esc_html__('Icon Spacing', 'easy-elements'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => ['px'],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 50,
-					],
-					'em' => [
-						'min' => 0,
-						'max' => 5,
-					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 8,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eel-button .eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button .eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button i.eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button i.eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button svg.eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .eel-button svg.eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'icon_rotation',
-			[
-				'label' => esc_html__('Default Icon Rotation', 'easy-elements'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => ['deg'],
-				'range' => [
-					'deg' => [
-						'min' => -360,
-						'max' => 360,
-					],
-				],
-				'default' => [
-					'unit' => 'deg',
-					'size' => 0,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eel-button i' => 'transition: all 0.3s ease-in; transform: rotate({{SIZE}}{{UNIT}});',
-					'{{WRAPPER}} .eel-button svg' => 'transition: all 0.3s ease-in; transform: rotate({{SIZE}}{{UNIT}});',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'hover_icon_rotation',
-			[
-				'label' => esc_html__('Hover Icon Rotation', 'easy-elements'),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => ['deg'],
-				'range' => [
-					'deg' => [
-						'min' => -360,
-						'max' => 360,
-					],
-				],
-				'default' => [
-					'unit' => 'deg',
-					'size' => 0,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .eel-button:hover i' => 'transform: rotate({{SIZE}}{{UNIT}});',
-					'{{WRAPPER}} .eel-button:hover svg' => 'transform: rotate({{SIZE}}{{UNIT}});',
-				],
-			]
-		);
+			$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}
