@@ -211,21 +211,6 @@ class Easyel_FAQ_Accordion_Widget extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'custom_css_section',
-			[ 'label' => esc_html__( 'Easy Custom CSS', 'easy-elements' ), 'tab' => Controls_Manager::TAB_CONTENT ]
-		);
-
-		$this->add_control( 'eel_custom_css_code', [
-			'label' => esc_html__( 'Write CSS Here', 'easy-elements' ),
-			'type' => Controls_Manager::CODE,
-			'language' => 'css',
-			'render_type' => 'template',
-			'description' => esc_html__( 'Use "selector" as a placeholder for this widget\'s wrapper.', 'easy-elements' ),
-		] );
-
-		$this->end_controls_section();
-
-		$this->start_controls_section(
 			'title_style_section',
 			[
 				'label' => esc_html__( 'Title', 'easy-elements' ),

@@ -1,66 +1,66 @@
 (function ($) {
     "use strict";
 
-    $(document).ready(function () {
-        const $gallery = $('.eel-gallery-grid.eel-popup-enabled');
+    // Elementor hook
+    const initEelGalleryPopup = function ($scope) {
+        const $gallery = $scope.find('.eel-gallery-grid.eel-popup-enabled');
         if (!$gallery.length) return;
 
         let currentIndex = 0;
-        const $lightbox = $('.eel-lightbox');
+        const $lightbox = $scope.find('.eel-lightbox');
         const $lightboxImg = $lightbox.find('.eel-lightbox-image');
         const $galleryLinks = $gallery.find('.eel-popup-link');
 
-        // Function to open lightbox with specific index
         function openLightbox(index) {
-            currentIndex = index; // ✅ Fix: Always set correct index first
+            currentIndex = index;
             const imgSrc = $galleryLinks.eq(currentIndex).attr('href');
             $lightboxImg.attr('src', imgSrc);
             $lightbox.fadeIn(300).css('display', 'grid');
         }
 
-        // Function to show next image
         function showNext() {
             currentIndex = (currentIndex + 1) % $galleryLinks.length;
             $lightboxImg.attr('src', $galleryLinks.eq(currentIndex).attr('href'));
         }
 
-        // Function to show previous image
         function showPrev() {
             currentIndex = (currentIndex - 1 + $galleryLinks.length) % $galleryLinks.length;
             $lightboxImg.attr('src', $galleryLinks.eq(currentIndex).attr('href'));
         }
 
-        // Open lightbox on image click
-        $galleryLinks.on('click', function (e) {
+        $galleryLinks.off('click').on('click', function (e) {
             e.preventDefault();
-            const index = $(this).data('index'); // ✅ Get data-index correctly
+            const index = $(this).data('index');
             openLightbox(index);
         });
 
-        // Navigation
-        $lightbox.find('.eel-next').on('click', showNext);
-        $lightbox.find('.eel-prev').on('click', showPrev);
-
-        // Close button
-        $lightbox.find('.eel-close').on('click', function () {
+        $lightbox.find('.eel-next').off('click').on('click', showNext);
+        $lightbox.find('.eel-prev').off('click').on('click', showPrev);
+        $lightbox.find('.eel-close').off('click').on('click', function () {
             $lightbox.fadeOut(200);
         });
 
-        // Close when clicking outside image
-        $lightbox.on('click', function (e) {
+        $lightbox.off('click').on('click', function (e) {
             if ($(e.target).is('.eel-lightbox, .eel-close')) {
                 $lightbox.fadeOut(200);
             }
         });
 
-        // Keyboard navigation
-        $(document).on('keydown', function (e) {
+        $(document).off('keydown.eelLightbox').on('keydown.eelLightbox', function (e) {
             if ($lightbox.is(':visible')) {
                 if (e.key === 'ArrowRight') showNext();
                 else if (e.key === 'ArrowLeft') showPrev();
                 else if (e.key === 'Escape') $lightbox.fadeOut(200);
             }
         });
+    };
+
+    // ✅ Works on both frontend and Elementor editor
+    $(window).on('elementor/frontend/init', function () {
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/eel-gallery.default',
+            initEelGalleryPopup
+        );
     });
 
 })(jQuery);

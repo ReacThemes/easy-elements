@@ -132,7 +132,7 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'enable_popup',
             [
-                'label' => esc_html__( 'Enable Popup', 'easy-elements' ),
+                'label' => esc_html__( 'Enable Lightbox', 'easy-elements' ),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => esc_html__( 'Yes', 'easy-elements' ),
                 'label_off' => esc_html__( 'No', 'easy-elements' ),
@@ -153,6 +153,270 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
                     'date'       => esc_html__( 'Date', 'easy-elements' ),
                     'rand'       => esc_html__( 'Random', 'easy-elements' ),
                 ],
+            ]
+        );
+
+        $this->add_control(
+            'hover_style',
+            [
+                'label' => esc_html__( 'On Hover', 'easy-elements' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'default',
+                'options' => [
+                    'default' => esc_html__( 'Default', 'easy-elements' ),
+                    'icon'      => esc_html__( 'Icon', 'easy-elements' ),
+                    'text'         => esc_html__( 'Text', 'easy-elements' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'hover_text',
+            [
+                'label' => esc_html__( 'Hover Text', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( 'View', 'easy-elements' ),
+                'placeholder' => esc_html__( 'Enter hover text', 'easy-elements' ),
+                'condition' => [
+                    'hover_style' => 'text',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'hover_icon',
+            [
+                'label' => esc_html__( 'Hover Icon', 'easy-elements' ),
+                'type'  => \Elementor\Controls_Manager::ICONS,
+                'default' => [
+                    'value' => 'fas fa-plus',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => [
+                    'hover_style' => 'icon',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+			'section_image_style',
+			[
+				'label' => esc_html__('Images', 'easy-elements'),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+        $this->add_responsive_control(
+            'image_gap',
+            [
+                'label' => esc_html__( 'Gap', 'easy-elements' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'range' => [
+                    'px' => [ 'min' => 0, 'max' => 100 ],
+                ],
+                'default' => [ 'size' => 10 ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel-gallery-grid' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_height',
+            [
+                'label' => esc_html__( 'Height', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'range' => [
+                    'px' => [ 'min' => 50, 'max' => 1000, 'step' => 1 ],
+                    '%'  => [ 'min' => 10, 'max' => 100, 'step' => 1 ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel-gallery-item img' => 'height: {{SIZE}}{{UNIT}}; object-fit: cover; width: 100%;',
+                ],
+            ]
+        );
+
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'image_border',
+                'label' => esc_html__( 'Border', 'easy-elements' ),
+                'selector' => '{{WRAPPER}} .eel-gallery-item img',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'easy-elements' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel-gallery-item img, {{WRAPPER}} .eel-gallery-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'image_border_padding',
+            [
+                'label' => esc_html__( 'Padding', 'easy-elements' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel-gallery-item img' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'section_caption_style',
+            [
+                'label' => esc_html__('Caption', 'easy-elements'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'show_caption' => 'yes',
+                ],
+            ]
+        );
+
+        // Caption Color
+        $this->add_control(
+            'caption_color',
+            [
+                'label' => esc_html__('Color', 'easy-elements'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-gallery-caption' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Caption Background Color
+        $this->add_control(
+            'caption_bg_color',
+            [
+                'label' => esc_html__('Background Color', 'easy-elements'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-gallery-caption' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Caption Typography
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'caption_typography',
+                'label' => esc_html__('Typography', 'easy-elements'),
+                'selector' => '{{WRAPPER}} .eel-gallery-caption',
+            ]
+        );
+
+        $this->end_controls_section();
+
+
+        $this->start_controls_section(
+            'section_hover_overlay_style',
+            [
+                'label' => esc_html__('Hover Overlay', 'easy-elements'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'hover_style!' => 'default',
+                ],
+            ]
+        );
+        $this->add_control(
+            'hover_overlay_color',
+            [
+                'label' => esc_html__( 'Hover Overlay Color', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => 'rgba(0,0,0,0.6)',
+                'selectors' => [
+                    '{{WRAPPER}} .eel-hover-content' => 'background-color: {{VALUE}};',
+                ],                
+            ]
+        );
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'section_hover_icon_style',
+            [
+                'label' => esc_html__('Hover Icon', 'easy-elements'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'hover_style' => 'icon',
+                ],
+            ]
+        );
+        $this->add_control(
+            'hover_icon_size',
+            [
+                'label' => esc_html__( 'Icon Size', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [ 'min' => 10, 'max' => 100 ],
+                ],
+                'default' => [ 'size' => 16 ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel-hover-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eel-hover-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'hover_icon_color',
+            [
+                'label' => esc_html__( 'Icon Color', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '{{WRAPPER}} .eel-hover-icon i, {{WRAPPER}} .eel-hover-icon svg, {{WRAPPER}} .eel-hover-icon svg path' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'section_hover_text_style',
+            [
+                'label' => esc_html__('Hover Text', 'easy-elements'),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'hover_style' => 'text',
+                ],
+            ]
+        );
+
+        // Color
+        $this->add_control(
+            'hover_text_color',
+            [
+                'label' => esc_html__('Color', 'easy-elements'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-hover-text span' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Typography
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'hover_text_color_typography',
+                'label' => esc_html__('Typography', 'easy-elements'),
+                'selector' => '{{WRAPPER}} .eel-hover-text span',
             ]
         );
 
@@ -187,11 +451,11 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
         echo '<div class="eel-gallery-grid ' . esc_attr( $popup_class ) . '">';
 
         foreach ( $images as $index => $image ) {
-            $image_url  = Group_Control_Image_Size::get_attachment_image_src( $image['id'], 'thumbnail', $settings ) ?: $image['url'];
+            $image_url  = \Elementor\Group_Control_Image_Size::get_attachment_image_src( $image['id'], 'thumbnail', $settings ) ?: $image['url'];
             $full_image = wp_get_attachment_image_url( $image['id'], 'full' );
             $caption    = '';
 
-            if ( $settings['show_caption'] === 'yes' ) {
+            if ( isset($settings['show_caption']) && $settings['show_caption'] === 'yes' ) {
                 if ( $settings['caption_source'] === 'media' ) {
                     $caption = wp_get_attachment_caption( $image['id'] );
                 } elseif ( $settings['caption_source'] === 'title' ) {
@@ -201,24 +465,41 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
 
             echo '<div class="eel-gallery-item">';
 
-			if ( $popup_enabled ) {
-				echo '<a href="' . esc_url( $full_image ) . '" class="eel-popup-link" data-index="' . esc_attr( $index ) . '" data-elementor-open-lightbox="no">';
-			} else {
-				echo '<a href="' . esc_url( $image['url'] ) . '" target="_blank" rel="noopener" data-elementor-open-lightbox="no">';
-			}
+            if ( $popup_enabled ) {
+                echo '<a href="' . esc_url( $full_image ) . '" class="eel-popup-link" data-index="' . esc_attr( $index ) . '" data-elementor-open-lightbox="no">';
+            } else {
+                echo '<a href="' . esc_url( $image['url'] ) . '" target="_blank" rel="noopener" data-elementor-open-lightbox="no">';
+            }
 
-			echo '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( get_post_meta( $image['id'], '_wp_attachment_image_alt', true ) ) . '" data-elementor-open-lightbox="no">';
+            // === Image ===
+            echo '<div class="eel-gallery-image-wrap">';
+            echo '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( get_post_meta( $image['id'], '_wp_attachment_image_alt', true ) ) . '" data-elementor-open-lightbox="no">';
+
+            // === Hover Content ===
+            if ( $settings['hover_style'] === 'text' && ! empty( $settings['hover_text'] ) ) {
+                echo '<div class="eel-hover-content eel-hover-text">';
+                echo '<span>' . esc_html( $settings['hover_text'] ) . '</span>';
+                echo '</div>';
+            } elseif ( $settings['hover_style'] === 'icon' && ! empty( $settings['hover_icon']['value'] ) ) {
+                echo '<div class="eel-hover-content eel-hover-icon">';
+                \Elementor\Icons_Manager::render_icon( $settings['hover_icon'], [ 'aria-hidden' => 'true' ] );
+                echo '</div>';
+            }
+
+            echo '</div>'; // .eel-gallery-image-wrap
             echo '</a>';
 
+            // === Caption ===
             if ( ! empty( $caption ) ) {
                 echo '<div class="eel-gallery-caption">' . esc_html( $caption ) . '</div>';
             }
 
-            echo '</div>';
+            echo '</div>'; // .eel-gallery-item
         }
 
-        echo '</div>';
+        echo '</div>'; // .eel-gallery-grid
 
+        // === Lightbox ===
         if ( $popup_enabled ) :
             ?>
             <div class="eel-lightbox">
@@ -231,4 +512,5 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
         endif;
     }
 
-}
+
+} ?>

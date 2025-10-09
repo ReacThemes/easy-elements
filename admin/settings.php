@@ -52,7 +52,7 @@ class Easyel_Elements {
             'manage_options',
             'easy-elements-dashboard',
             array( $this, 'easyel_elements_settings_callback' ),
-            'easyel-layout',
+            'dashicons-layout',
             59
         );
 
@@ -877,6 +877,16 @@ class Easyel_Elements {
                 'demo_url'    => 'https://wpeasyelements.com/simple-gallery/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/simple-gallery/',
                 'is_pro'      => false,
+                'tab' => 'widget',
+            ],
+
+            'image_gallery_filter' => [
+                'icon'        => 'easyelIcon-marquee-logo',
+                'title'       => 'filterable Gallery',
+                'description' => 'filterable Gallery',
+                'demo_url'    => 'https://wpeasyelements.com/simple-gallery/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/simple-gallery/',
+                'is_pro'      => true,
                 'tab' => 'widget',
             ],
         ];
