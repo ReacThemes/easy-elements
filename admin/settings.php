@@ -889,6 +889,16 @@ class Easyel_Elements {
                 'is_pro'      => true,
                 'tab' => 'widget',
             ],
+
+            'portfolio_pro' => [
+                'icon'        => 'easyelIcon-marquee-logo',
+                'title'       => 'Portfolio',
+                'description' => 'Portfolio',
+                'demo_url'    => 'https://wpeasyelements.com/portfolio/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/portfolio/',
+                'is_pro'      => true,
+                'tab' => 'widget',
+            ],
         ];
 
         return apply_filters( 'easyel_available_widgets', $widgets );

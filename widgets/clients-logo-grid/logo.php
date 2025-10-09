@@ -13,7 +13,7 @@ class Easyel_Clients_Logo__Widget extends \Elementor\Widget_Base {
         $css_path = plugin_dir_path( __FILE__ ) . 'css/clients-logo.css';
         
         if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
-            wp_register_style( $handle, plugins_url( 'css/clients-logo.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : '1.0.0' );
+            wp_register_style( $handle, plugins_url( 'css/clients-logo.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : time() );
         }
         return [ $handle ];
     }
@@ -68,6 +68,9 @@ class Easyel_Clients_Logo__Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__('Link', 'easy-elements'),
                 'type' => Controls_Manager::URL,
                 'placeholder' => 'https://example.com',
+                'dynamic'     => [
+                    'active' => true,
+                ],
             ]
         );
 

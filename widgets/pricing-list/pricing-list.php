@@ -13,16 +13,14 @@ class Easyel_Pricing_Table_List_Widget extends \Elementor\Widget_Base {
 	public function get_style_depends() {
 		$handle = 'eel-pricing-list-style';
 		$css_path = plugin_dir_path( __FILE__ ) . 'css/pricing-list.css';
-		
-		if ( get_option( 'easyel_elements_minify_css', '0' ) === '1' && class_exists( 'Easyel_Elements_CSS_Loader_Helper' ) ) {
-			Easyel_Elements_CSS_Loader_Helper::easyel_elements_load_minified_inline_css( $handle, $css_path );
+		if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
+			wp_register_style( $handle, plugins_url( 'css/pricing-list.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : time()
+			);
+		}
+		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() || ! is_admin() ) {
 			return [ $handle ];
 		}
-		
-		if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
-			wp_register_style( $handle, plugins_url( 'css/pricing-list.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : '1.0.0' );
-		}	
-		return [ $handle ];
+		return [];
 	}
 
 	public function get_name() {
@@ -30,7 +28,7 @@ class Easyel_Pricing_Table_List_Widget extends \Elementor\Widget_Base {
 	}
 
 	public function get_title() {
-		return __( 'Easy Pricing List', 'easy-elements' );
+		return __( 'Pricing List', 'easy-elements' );
 	}
 
 	public function get_icon() {

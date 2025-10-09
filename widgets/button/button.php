@@ -13,7 +13,7 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 	    $css_path = plugin_dir_path( __FILE__ ) . 'css/button.css';
 	    
 	    if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
-	        wp_register_style( $handle, plugins_url( 'css/button.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : '1.0.0' );
+	        wp_register_style( $handle, plugins_url( 'css/button.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : time() );
 	    }
 	    return [ $handle ];
 	}
@@ -52,6 +52,9 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 					'label_block' => true,
 					'default' => esc_html__('Click Here', 'easy-elements'),
 					'placeholder' => esc_html__('Enter button text', 'easy-elements'),
+					'dynamic'     => [
+						'active' => true,
+					],
 				]
 			);
 
@@ -64,6 +67,9 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 						'url' => '#',
 						'is_external' => false,
 						'nofollow' => false,
+					],
+					'dynamic'     => [
+						'active' => true,
 					],
 				]
 			);
@@ -106,6 +112,36 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 					],
 					'condition' => [
 						'button_icon[value]!' => '',
+					],
+				]
+			);
+			$this->add_responsive_control(
+				'icon_spacing',
+				[
+					'label' => esc_html__('Icon Spacing', 'easy-elements'),
+					'type' => Controls_Manager::SLIDER,
+					'size_units' => ['px'],
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 50,
+						],
+						'em' => [
+							'min' => 0,
+							'max' => 5,
+						],
+					],
+					'default' => [
+						'unit' => 'px',
+						'size' => 8,
+					],
+					'selectors' => [
+						'{{WRAPPER}} .eel-button .eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .eel-button .eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: 0;',
+						'{{WRAPPER}} .eel-button i.eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .eel-button i.eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: 0;',
+						'{{WRAPPER}} .eel-button svg.eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .eel-button svg.eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: 0;',
 					],
 				]
 			);
@@ -361,7 +397,7 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 					$this->add_control(
 						'icon_color',
 						[
-							'label' => esc_html__('Icon Color', 'easy-elements'),
+							'label' => esc_html__('Color', 'easy-elements'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '',
 							'selectors' => [
@@ -385,7 +421,7 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 					$this->add_control(
 						'icon_bg',
 						[
-							'label' => esc_html__('Icon Background', 'easy-elements'),
+							'label' => esc_html__('Background', 'easy-elements'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '',
 							'selectors' => [
@@ -396,7 +432,7 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 					$this->add_responsive_control(
 						'icon_size',
 						[
-							'label' => esc_html__('Icon Size', 'easy-elements'),
+							'label' => esc_html__('Size', 'easy-elements'),
 							'type' => Controls_Manager::SLIDER,
 							'size_units' => ['px'],
 							'range' => [
@@ -427,41 +463,11 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 							],
 						]
 					);
-
-					$this->add_responsive_control(
-						'icon_spacing',
-						[
-							'label' => esc_html__('Icon Spacing', 'easy-elements'),
-							'type' => Controls_Manager::SLIDER,
-							'size_units' => ['px'],
-							'range' => [
-								'px' => [
-									'min' => 0,
-									'max' => 50,
-								],
-								'em' => [
-									'min' => 0,
-									'max' => 5,
-								],
-							],
-							'default' => [
-								'unit' => 'px',
-								'size' => 8,
-							],
-							'selectors' => [
-								'{{WRAPPER}} .eel-button .eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
-								'{{WRAPPER}} .eel-button .eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
-								'{{WRAPPER}} .eel-button i.eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
-								'{{WRAPPER}} .eel-button i.eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
-								'{{WRAPPER}} .eel-button svg.eel-button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
-								'{{WRAPPER}} .eel-button svg.eel-button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
-							],
-						]
-					);
+					
 					$this->add_responsive_control(
 						'icon_box_width',
 						[
-							'label' => esc_html__('Icon Width', 'easy-elements'),
+							'label' => esc_html__('Width', 'easy-elements'),
 							'type' => Controls_Manager::SLIDER,
 							'selectors' => [
 								'{{WRAPPER}} .eel-button .eel-button-icon-before, {{WRAPPER}} .eel-button .eel-button-icon-after' => 'width: {{SIZE}}{{UNIT}};',
@@ -471,7 +477,7 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 					$this->add_responsive_control(
 						'icon_box_height',
 						[
-							'label' => esc_html__('Icon Height', 'easy-elements'),
+							'label' => esc_html__('Height', 'easy-elements'),
 							'type' => Controls_Manager::SLIDER,
 							'selectors' => [
 								'{{WRAPPER}} .eel-button .eel-button-icon-before, {{WRAPPER}} .eel-button .eel-button-icon-after' => 'height: {{SIZE}}{{UNIT}};',
@@ -524,7 +530,7 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 					$this->add_control(
 						'icon_hover_color',
 						[
-							'label' => esc_html__('Icon Hover Color', 'easy-elements'),
+							'label' => esc_html__('Color', 'easy-elements'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '',
 							'selectors' => [
@@ -548,7 +554,7 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 					$this->add_control(
 						'icon_hover_bg',
 						[
-							'label' => esc_html__('Icon Hover Background', 'easy-elements'),
+							'label' => esc_html__('Background', 'easy-elements'),
 							'type' => Controls_Manager::COLOR,
 							'default' => '',
 							'selectors' => [
@@ -559,7 +565,7 @@ class Easyel_Button_Widget extends \Elementor\Widget_Base {
 					$this->add_responsive_control(
 						'hover_icon_rotation',
 						[
-							'label' => esc_html__('Hover Icon Rotation', 'easy-elements'),
+							'label' => esc_html__('Rotation', 'easy-elements'),
 							'type' => Controls_Manager::SLIDER,
 							'size_units' => ['deg'],
 							'range' => [
