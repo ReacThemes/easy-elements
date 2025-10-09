@@ -21,7 +21,6 @@ final class Easyel_Elements_Elementor_Extension {
 
 	}
 
-
 	public function init() {
 		// Safety checks
 
@@ -32,6 +31,9 @@ final class Easyel_Elements_Elementor_Extension {
 		// Assets
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_styles' ] );	
+
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_easyel_gsap_scripts'], 99 );
+		add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'enqueue_easyel_gsap_scripts'], 99 );
 
 	}
 
@@ -68,6 +70,46 @@ final class Easyel_Elements_Elementor_Extension {
 
 	public function enqueue_editor_scripts() {
 		wp_enqueue_style( 'eel-elements-editor', plugin_dir_url( __FILE__ ) . 'assets/css/editor.css', [], self::VERSION );
+	}
+
+	function enqueue_easyel_gsap_scripts() {
+
+		if ( ! did_action( 'elementor/loaded' ) ) return;
+
+		//$checked = get_option('easyel_enable_js_animation', 0);
+		//if ( $checked != 1 ) return;
+
+		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+
+		$scripts = [
+			'gsap' => "assets/js/gsap/gsap{$suffix}.js",
+			'scrolltrigger' => "assets/js/gsap/ScrollTrigger{$suffix}.js",
+			'splittext' => "assets/js/gsap/SplitText{$suffix}.js",
+			'eel-easyel-animation' => "assets/js/gsap/easyel-animation.js",
+		];
+
+		foreach($scripts as $handle => $path){
+			$deps = [];
+			if($handle === 'scrolltrigger' || $handle === 'splittext') $deps = ['gsap'];
+			if($handle === 'eel-easyel-animation') $deps = ['gsap','scrolltrigger','splittext'];
+
+			wp_enqueue_script(
+				$handle,
+				EASYELEMENTS_DIR_URL . $path,
+				$deps,
+				self::VERSION,
+				true
+			);
+		}
+
+		// Fixed defer
+		add_filter('script_loader_tag', function($tag, $handle){
+			$defer_scripts = ['gsap','scrolltrigger','splittext','eel-easyel-animation'];
+			if(in_array($handle, $defer_scripts)){
+				return str_replace(' src', ' defer src', $tag);
+			}
+			return $tag;
+		}, 10, 2);
 	}
 
 
