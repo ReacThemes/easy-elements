@@ -36,7 +36,8 @@ $includes = [
     'helpers' => [
         'inc/helper.php',
         'inc/canvas-content.php',
-		'inc/extension/class-wrapper-link.php'
+		'inc/extension/class-wrapper-link.php',
+		'inc/animation-control.php',
     ],
     'admin' => [
         'admin/settings.php',
