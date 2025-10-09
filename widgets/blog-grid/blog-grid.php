@@ -873,6 +873,7 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eel--read-more a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eel--read-more a svg, {{WRAPPER}} .eel--read-more a svg path' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -955,6 +956,7 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .eel--read-more a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .eel--read-more a:hover svg, {{WRAPPER}} .eel--read-more a:hover svg path' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -983,6 +985,27 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
         $this->end_controls_tabs();
 
         $this->add_responsive_control(
+            'icon__size',
+            [
+                'label' => esc_html__( 'Icon Size', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => -50,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel--read-more svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eel--read-more i' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'show_read_more' => 'yes',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
             'btn_icon_offset',
             [
                 'label' => esc_html__( 'Icon Offset (Vertical)', 'easy-elements' ),
@@ -995,7 +1018,7 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eel--read-more-icon.after' => 'top: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eel--read-more-icon.after, {{WRAPPER}} .eel--read-more svg' => 'top: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'show_read_more' => 'yes',
@@ -1016,7 +1039,7 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .eel--read-more-icon.after' => 'left: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eel--read-more-icon.after, {{WRAPPER}} .eel--read-more svg' => 'left: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'show_read_more' => 'yes',
@@ -1278,6 +1301,13 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'title_border',
+                'selector' => '{{WRAPPER}} .ee--blog-title',
+            ]
+        );
 
         $this->add_responsive_control(
             'title_margin',
@@ -1287,6 +1317,18 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
                 'size_units' => [ 'px', 'em', '%' ],
                 'selectors'  => [
                     '{{WRAPPER}} .ee--blog-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'title_padding',
+            [
+                'label'      => __( 'Padding', 'easy-elements' ),
+                'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .ee--blog-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -1630,17 +1672,21 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
 
             if ( $settings['show_pagination'] === 'yes' ) {
                 $big = 999999999;
-                echo '<nav class="eel-blog-pagination">';
-                echo wp_kses_post( paginate_links( [
-                    'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-                    'format' => '?paged=%#%',
-                    'current' => $paged,
-                    'total' => $query->max_num_pages,
+                $pagination = paginate_links( [
+                    'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                    'format'    => '?paged=%#%',
+                    'current'   => $paged,
+                    'total'     => $query->max_num_pages,
                     'prev_text' => '&laquo;',
                     'next_text' => '&raquo;',
-                    'type' => 'list',
-                ] ) );
-                echo '</nav>';
+                    'type'      => 'list',
+                ] );
+
+                if ( $pagination ) { // only output if not null
+                    echo '<nav class="eel-blog-pagination">';
+                    echo wp_kses_post( $pagination );
+                    echo '</nav>';
+                }
             }
 
             wp_reset_postdata();
@@ -1649,4 +1695,4 @@ class Easyel_Blog_Grid__Widget extends \Elementor\Widget_Base {
             echo '<p>' . esc_html__( 'No posts found.', 'easy-elements' ) . '</p>';
         endif;
     }
-}?>
+} ?>

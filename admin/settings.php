@@ -52,7 +52,7 @@ class Easyel_Elements {
             'manage_options',
             'easy-elements-dashboard',
             array( $this, 'easyel_elements_settings_callback' ),
-            'easyel-layout',
+            'dashicons-layout',
             59
         );
 

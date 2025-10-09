@@ -8,29 +8,59 @@
     padding: 15px;
 }
 .e-e-clients-logo .grid-item .ee--logo-img{
+    position: relative;
     box-sizing: border-box;
+    display: inline-block;
+    max-width: 100%; 
     width: 100%;
+    overflow: hidden;
     transition: all .5s ease;
+}
+.e-e-clients-logo .e-e-grid-img {
+    display: block;
+    margin: 0 auto;
+    height: auto;
+    transition: all .5s ease;
+}
+
+// Client Logo Grid and Slider 
+.e-e-clients-logo .ee--logo-img {
     &.normal_grayscale img{
         filter: grayscale(1);
     }
     &.hover_grayscale:hover img{
         filter: grayscale(1);
     }
-    &.hover_to_default img{
-      filter: grayscale(100%);
-      &:hover{
+    &.hover_to_default{
+      img{
+        filter: grayscale(100%);
+      }
+      &:hover img{
         filter: grayscale(0%);
       }
     }
 }
-.e-e-clients-logo .ee--logo-img {
-    text-align: center;
-}
-.e-e-clients-logo .e-e-grid-img {
-    max-width: 100%;
-    height: auto;
+
+/* On hover swap effect*/
+.ee--logo-img-normal,
+.ee--logo-img-hover {
     display: block;
-    margin: 0 auto;
-    transition: all .5s ease;
+    transition: transform 0.5s ease !important;
+}
+
+.ee--logo-img-normal {
+    transform: translateY(0);
+}
+.ee--logo-img-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
+}
+.ee--logo-img:hover .ee--logo-img-normal {
+    transform: translateY(-100%);
+}
+.ee--logo-img:hover .ee--logo-img-hover {
+    transform: translateY(0);
 }

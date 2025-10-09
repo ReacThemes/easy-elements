@@ -11,11 +11,6 @@ class Easyel_Icon_Box__Widget extends \Elementor\Widget_Base {
         $handle = 'eel-icon-box-style';
         $css_path = plugin_dir_path( __FILE__ ) . 'css/icon-box.css';
         
-        if ( get_option( 'easyel_elements_minify_css', '0' ) === '1' && class_exists( 'Easyel_Elements_CSS_Loader_Helper' ) ) {
-            Easyel_Elements_CSS_Loader_Helper::easyel_elements_load_minified_inline_css( $handle, $css_path );
-            return [ $handle ];
-        }
-        
         if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
             wp_register_style( $handle, plugins_url( 'css/icon-box.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : '1.0.0' );
         }
@@ -27,7 +22,7 @@ class Easyel_Icon_Box__Widget extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return esc_html__( 'Easy Icon Box', 'easy-elements' );
+        return esc_html__( 'Icon Box', 'easy-elements' );
     }
 
     public function get_icon() {
@@ -792,6 +787,23 @@ class Easyel_Icon_Box__Widget extends \Elementor\Widget_Base {
                     '{{WRAPPER}} .ee--icon-box .eel-read-more-text:hover' => 'color: {{VALUE}};',
                     '{{WRAPPER}} .eel-read-more-text:hover svg' => 'fill: {{VALUE}};',  
                     '{{WRAPPER}} .eel-read-more-text:hover svg path' => 'fill: {{VALUE}};',                   
+                ],
+                'condition' => [
+                    'show_read_more' => 'yes',
+                    'read_more_type' => ['read_text','read_icon_to_text'],
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'read_more_text_color_item_hover',
+            [
+                'label' => esc_html__('Text Hover Color For Item', 'easy-elements'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .elementor-widget-container:hover .eel-read-more-text' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .elementor-widget-container:hover .eel-read-more-text svg' => 'fill: {{VALUE}};',  
+                    '{{WRAPPER}} .elementor-widget-container:hover .eel-read-more-text svg path' => 'fill: {{VALUE}};',                   
                 ],
                 'condition' => [
                     'show_read_more' => 'yes',

@@ -92,7 +92,7 @@ class Easyel_Clients_Logo__Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'image_size_width',
             [
                 'label' => esc_html__('Image Size', 'easy-elements'),
@@ -143,6 +143,16 @@ class Easyel_Clients_Logo__Widget extends \Elementor\Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .e-e-clients-logo .grid-item' => 'width: calc(100% / {{VALUE}});',
                 ],
+            ]
+        );
+        $this->add_control(
+            'image_hover_swap_effect',
+            [
+                'label' => esc_html__( 'Image Hover Swap Effect', 'easy-elements' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'easy-elements' ),
+                'label_off' => esc_html__( 'No', 'easy-elements' ),
+                'return_value' => 'yes',
             ]
         );
         $this->end_controls_section();
@@ -288,6 +298,9 @@ class Easyel_Clients_Logo__Widget extends \Elementor\Widget_Base {
                                     'step' => .1,
                                 ],
                             ],
+                            'condition' => [
+                                'image_hover_swap_effect!' => 'yes',
+                            ],
                             'selectors' => [
                                 '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img img' => 'transform: scale({{SIZE}});',
                             ],
@@ -393,6 +406,9 @@ class Easyel_Clients_Logo__Widget extends \Elementor\Widget_Base {
                                     'step' => .1,
                                 ],
                             ],
+                            'condition' => [
+                                'image_hover_swap_effect!' => 'yes',
+                            ],
                             'selectors' => [
                                 '{{WRAPPER}} .e-e-clients-logo .grid-item .ee--logo-img:hover img' => 'transform: scale({{SIZE}});',
                             ],
@@ -466,15 +482,34 @@ class Easyel_Clients_Logo__Widget extends \Elementor\Widget_Base {
                             <?php endif; ?>   
 
                             <?php if ( $image_data ) : ?>
-                                <img class="e-e-grid-img"
-                                src="<?php echo esc_url( $image_data[0] ); ?>"
-                                width="<?php echo esc_attr( $image_data[1] ); ?>"
-                                height="<?php echo esc_attr( $image_data[2] ); ?>"
-                                alt="<?php echo esc_attr( $alt ); ?>"
-                                title="<?php echo esc_attr( $title ); ?>"
-                                loading="lazy"
-                                decoding="async" fetchpriority="<?php echo esc_attr( $fetchpriority ); ?>">
-                            <?php endif; ?>                          
+                                <?php if ( $settings['image_hover_swap_effect'] == 'yes' ){ ?>
+                                    <img class="e-e-grid-img ee--logo-img-hover"
+                                    src="<?php echo esc_url( $image_data[0] ); ?>"
+                                    width="<?php echo esc_attr( $image_data[1] ); ?>"
+                                    height="<?php echo esc_attr( $image_data[2] ); ?>"
+                                    alt="<?php echo esc_attr( $alt ); ?>"
+                                    title="<?php echo esc_attr( $title ); ?>"
+                                    loading="lazy"
+                                    decoding="async" fetchpriority="<?php echo esc_attr( $fetchpriority ); ?>">
+                                    <img class="e-e-grid-img ee--logo-img-normal"
+                                    src="<?php echo esc_url( $image_data[0] ); ?>"
+                                    width="<?php echo esc_attr( $image_data[1] ); ?>"
+                                    height="<?php echo esc_attr( $image_data[2] ); ?>"
+                                    alt="<?php echo esc_attr( $alt ); ?>"
+                                    title="<?php echo esc_attr( $title ); ?>"
+                                    loading="lazy"
+                                    decoding="async" fetchpriority="<?php echo esc_attr( $fetchpriority ); ?>">
+                                   
+                                <?php } else{ ?>  
+                                    <img class="e-e-grid-img"
+                                    src="<?php echo esc_url( $image_data[0] ); ?>"
+                                    width="<?php echo esc_attr( $image_data[1] ); ?>"
+                                    height="<?php echo esc_attr( $image_data[2] ); ?>"
+                                    alt="<?php echo esc_attr( $alt ); ?>"
+                                    title="<?php echo esc_attr( $title ); ?>"
+                                    loading="lazy"
+                                    decoding="async" fetchpriority="<?php echo esc_attr( $fetchpriority ); ?>">
+                            <?php } endif; ?>                          
 
                             <?php if ( $link ) : ?>
                                 </a>
