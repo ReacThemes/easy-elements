@@ -12,11 +12,6 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
 	    $handle = 'eel-testimonials-style';
 	    $css_path = plugin_dir_path( __FILE__ ) . 'css/testimonials.css';
 	    
-	    if ( get_option( 'easyel_elements_minify_css', '0' ) === '1' && class_exists( 'Easyel_Elements_CSS_Loader_Helper' ) ) {
-	        Easyel_Elements_CSS_Loader_Helper::easyel_elements_load_minified_inline_css( $handle, $css_path );
-	        return [ $handle ];
-	    }
-	    
 	    if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
 	        wp_register_style( $handle, plugins_url( 'css/testimonials.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : '1.0.0' );
 	    }
@@ -26,17 +21,6 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
     public function get_script_depends() {
 		$handle = 'eel-testimonial-script';
 		$js_path = plugin_dir_path( __FILE__ ) . 'js/testimonial.js';
-		
-		        // Check if minification is enabled and helper class exists
-        if ( get_option( 'easyel_elements_minify_js', '0' ) === '1' && class_exists( 'Easyel_Elements_JS_Loader_Helper' ) ) {
-            try {
-                Easyel_Elements_JS_Loader_Helper::easyel_elements_load_minified_inline_js( $handle, $js_path );
-                return [ $handle ];
-            } catch ( Exception $e ) {
-                // Fallback to normal loading if minification fails
-               
-            }
-        }
 		
 		if ( ! wp_script_is( $handle, 'registered' ) && file_exists( $js_path ) ) {
 			wp_register_script( $handle, plugins_url( 'js/testimonial.js', __FILE__ ), [ 'jquery' ], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $js_path ) : '1.0.0', true );
@@ -49,7 +33,7 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return esc_html__( 'Easy Testimonials Grid', 'easy-elements' );
+        return esc_html__( 'Testimonials Grid', 'easy-elements' );
     }
 
     public function get_icon() {

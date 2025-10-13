@@ -450,6 +450,15 @@ class Easyel_Elements {
                 'is_pro'      => true,
                 'tab' => 'widget',
             ],
+            'image_reveal' => [
+                'icon'        => 'easyelIcon-marquee-logo',
+                'title'       => 'Reveal Image',
+                'description' => 'reveal Image Here',
+                'demo_url'    => 'https://wpeasyelements.com/portfolio/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/portfolio/',
+                'is_pro'      => true,
+                'tab' => 'widget',
+            ],
             'icon_box' => [
                 'icon'        => 'easyelIcon-iconbox',
                 'title'       => 'Easy Icon Box',

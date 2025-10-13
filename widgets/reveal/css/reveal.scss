@@ -1,0 +1,89 @@
+.eel-reveal-img-main {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+/* Left */
+.eel-reveal-img-main.el-reveal-animate {
+  animation: moveright 1s ease forwards;
+}
+
+@keyframes moveright {
+  from {
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Right */
+.eel-reveal-img-main.eel-reveal-direction-right.el-reveal-animate {
+  animation-name: revealFromRight;
+}
+@keyframes revealFromRight {
+  from { 
+    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Top */
+.eel-reveal-img-main.eel-reveal-direction-top.el-reveal-animate {
+  animation-name: revealFromTop;
+}
+@keyframes revealFromTop {
+  from { 
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bottom */
+.eel-reveal-img-main.eel-reveal-direction-bottom.el-reveal-animate {
+  animation-name: revealFromBottom;
+}
+@keyframes revealFromBottom {
+  from { 
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eel-reveal-img-main {
+  img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+  }
+  &.eel-reveal-center img {
+    margin: auto;
+  }
+   &.eel-reveal-right img {
+    margin-left: auto;
+  }
+}
+.eel-reveal-img-main {
+    overflow: hidden;
+}

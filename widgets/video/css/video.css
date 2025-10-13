@@ -81,6 +81,18 @@
      object-fit: cover;
 }
 
+.eel-vicon-hide-show .eel-video-popup-btn {
+  opacity: 0;
+  visibility: hidden;
+  transition: all ease-in-out 0.4s;
+  transform: scale(1.2);
+}
+.eel-vicon-hide-show:hover .eel-video-popup-btn {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
 .eel-glow-active .eel-icon-wrap {
   border-radius: 100%;
   box-sizing: border-box;

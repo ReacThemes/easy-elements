@@ -11,7 +11,9 @@
 (function($) {
 	'use strict';
         $('.has-jarallax-img > .elementor-widget-container img').wrap('<div class="jarallax jarallax-container"></div>');
+        $('.has-jarallax-img > img').wrap('<div class="jarallax jarallax-container"></div>');
         $('.has-jarallax-img > .elementor-widget-container img').addClass('jarallax-img');
+        $('.has-jarallax-img > img').addClass('jarallax-img');
         $(".jarallax").jarallax();
 
 })(jQuery);

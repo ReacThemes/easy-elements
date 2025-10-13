@@ -74,6 +74,21 @@
 	object-fit: cover;
 }
 
+// icon default show hover hide
+.eel-vicon-hide-show {
+	.eel-video-popup-btn {
+		opacity: 0;
+		visibility: hidden;
+		transition: all ease-in-out .4s;
+		transform: scale(1.2);
+	}
+	&:hover .eel-video-popup-btn {
+		opacity: 1;
+		visibility: visible;
+		transform: scale(1);
+	}
+}
+
 .eel-glow-active .eel-icon-wrap{
 	border-radius: 100%;
 	box-sizing: border-box;
