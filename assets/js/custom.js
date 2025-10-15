@@ -168,9 +168,40 @@
         observer.observe(document.body, { childList: true, subtree: true });
     });
 
-    $(window).on('elementor/frontend/init', function () {
-        elementorFrontend.hooks.addAction('frontend/element_ready/global', initBackPostSlider);
-        elementorFrontend.hooks.addAction('frontend/element_ready/global', addWidgetTypeToBody);
-    });
+	 //  image reveal animatioln 
+	function initReveal() {
+		const revealElements = document.querySelectorAll(".eel-img-reveal-wrap");
+
+		const revealAnimate = (el) => {
+			const target = el.querySelector(".eel-reveal-img-main");
+			if(target) target.classList.add("el-reveal-animate");
+		};
+
+		// Elementor editor detect
+		const isEditor = window.elementorFrontend && elementorFrontend.isEditMode && elementorFrontend.isEditMode();
+
+		if(isEditor){
+			// Editor preview: immediate trigger
+			revealElements.forEach(el => revealAnimate(el));
+		} else {
+			// Frontend: scroll-triggered
+			const observer = new IntersectionObserver((entries, obs) => {
+					entries.forEach(entry => {
+						if(entry.isIntersecting){
+							revealAnimate(entry.target);
+							obs.unobserve(entry.target);
+						}
+					});
+			}, { threshold: 0.3 });
+
+			revealElements.forEach(el => observer.observe(el));
+		}
+	}
+
+   $(window).on('elementor/frontend/init', function () {
+      elementorFrontend.hooks.addAction('frontend/element_ready/global', initBackPostSlider);
+      elementorFrontend.hooks.addAction('frontend/element_ready/global', addWidgetTypeToBody);
+		elementorFrontend.hooks.addAction('frontend/element_ready/global', initReveal);
+   });
 	
 })(jQuery);

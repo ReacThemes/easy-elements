@@ -38,6 +38,7 @@ $includes = [
         'inc/canvas-content.php',
 		'inc/extension/class-wrapper-link.php',
 		'inc/animation-control.php',
+        'inc/jaralax-control.php',
     ],
     'admin' => [
         'admin/settings.php',

@@ -14,11 +14,6 @@ class Easyel_Video_Popup_Widget extends \Elementor\Widget_Base {
 		$handle = 'eel-video-popup-style'; 
 		$css_path = plugin_dir_path( __FILE__ ) . 'css/video.css';
 		
-		if ( get_option( 'easyel_elements_minify_css', '0' ) === '1' && class_exists( 'Easyel_Elements_CSS_Loader_Helper' ) ) {
-			Easyel_Elements_CSS_Loader_Helper::easyel_elements_load_minified_inline_css( $handle, $css_path );
-			return [ $handle ];
-		}
-		
 		if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
 			wp_register_style( $handle, plugins_url( 'css/video.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : '1.0.0' );
 		}	
@@ -30,7 +25,7 @@ class Easyel_Video_Popup_Widget extends \Elementor\Widget_Base {
 	}
 
 	public function get_title() {
-		return __( 'Easy Video Popup', 'easy-elements' );
+		return __( 'Video Popup', 'easy-elements' );
 	}
 
 	public function get_icon() {
@@ -273,6 +268,21 @@ class Easyel_Video_Popup_Widget extends \Elementor\Widget_Base {
 		    ]
 		);
 
+		$this->add_control(
+		    'popup_icon_hover_show',
+		    [
+		        'label' => __( 'Default Hide & Hover Show', 'easy-elements' ),
+		        'type' => \Elementor\Controls_Manager::SWITCHER,
+		        'label_on' => __( 'Yes', 'easy-elements' ),
+		        'label_off' => __( 'No', 'easy-elements' ),
+		        'return_value' => 'yes',
+		        'default' => 'no',
+		        'condition' => [
+		            'display_type' => 'popup',
+						'popup_icon_show' => 'yes'
+		        ],
+		    ]
+		);
 
 		$this->add_control(
 			'popup_trigger_icon',
@@ -462,6 +472,47 @@ class Easyel_Video_Popup_Widget extends \Elementor\Widget_Base {
 		    ]
 		);
 
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'wrap_background',
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .eel-video-popup-wrapper',
+				'condition' => [
+					'display_type' => 'popup',	            
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+		    'wrap_radius',
+		    [
+		        'label' => __( 'Border Radius', 'easy-elements' ),
+		        'type' => \Elementor\Controls_Manager::DIMENSIONS,
+		        'size_units' => [ 'px', '%' ],
+		        'selectors' => [
+		            '{{WRAPPER}} .eel-video-popup-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		        ],
+		        'condition' => [
+		            'display_type' => 'popup',
+		        ],
+		    ]
+		);
+
+		$this->add_responsive_control(
+		    'wrap_padding',
+		    [
+		        'label' => __( 'Padding', 'easy-elements' ),
+		        'type' => \Elementor\Controls_Manager::DIMENSIONS,
+		        'size_units' => [ 'px', '%' ],
+		        'selectors' => [
+		            '{{WRAPPER}} .eel-video-popup-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		        ],
+		        'condition' => [
+		            'display_type' => 'popup',
+		        ],
+		    ]
+		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -542,7 +593,9 @@ class Easyel_Video_Popup_Widget extends \Elementor\Widget_Base {
 	    $video_id = uniqid('eel_video_');
 	    $circle_glow = ! empty( $settings['circle_glow'] ) && $settings['circle_glow'] === 'yes' ? 'eel-glow-active' : '';
 
-	    echo '<div class="eel-video-popup-wrapper">';
+		 $icon_hide_h_show = ( isset( $settings['popup_icon_hover_show'] ) && $settings['popup_icon_hover_show'] === 'yes' ) ? 'eel-vicon-hide-show' : '';
+
+	    echo '<div class="eel-video-popup-wrapper ' . esc_attr( $icon_hide_h_show ?? '' ) . '">';
 
 	    if ( $display_type === 'normal' ) {
 	        if ( $embed_type === 'self_hosted' && !empty( $settings['self_hosted_video']['url'] ) ) {
