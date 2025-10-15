@@ -94,12 +94,8 @@ class Easyel_Theme_Builder_Front {
         return false;
     }
 
-
-
-
     public function check_conditions( $type, $conditions ) {
        
-
         if ( class_exists('Easy_Elements_Pro') ) {
             return EasyEL_Free_Pro_Unlock::instance()->check_conditions_pro( $type, $conditions );
         }

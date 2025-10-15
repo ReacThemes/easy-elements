@@ -35,15 +35,34 @@ final class EasyEl_Wrapper_Link {
             return;
         }
 
-        add_action( 'elementor/element/common/_section_style/after_section_end', [ $this, 'easyel_add_wrapper_controls' ], 10, 2 );
-        add_action( 'elementor/frontend/widget/before_render', [ $this, 'easyel_maybe_open_wrapper' ] );
-        add_action( 'elementor/frontend/widget/after_render', [ $this, 'easyel_maybe_close_wrapper' ] );
+        add_action('elementor/element/common/_section_style/after_section_end', [ $this, 'easy_wrapper_link_register_section'] );
+		add_action('elementor/element/section/section_advanced/after_section_end', [ $this, 'easy_wrapper_link_register_section'] );
+
+        add_action('elementor/element/common/easyel_wrapper_link_section/before_section_end', [ $this, 'easyel_add_wrapper_controls'], 10, 2 );
+ 		add_action('elementor/element/section/easyel_wrapper_link_section/before_section_end', [ $this, 'easyel_add_wrapper_controls'], 10, 2 );
+
+        add_action('elementor/element/container/section_layout/after_section_end', [ $this, 'easy_wrapper_link_register_section'] );
+
+        add_action('elementor/element/container/easyel_wrapper_link_section/before_section_end', [ $this, 'easyel_add_wrapper_controls'], 10, 2 );
+
+        $render_hooks = [
+            'elementor/frontend/widget/before_render'   => 'easyel_maybe_open_wrapper',
+            'elementor/frontend/widget/after_render'    => 'easyel_maybe_close_wrapper',
+            'elementor/frontend/section/before_render'  => 'easyel_maybe_open_wrapper',
+            'elementor/frontend/section/after_render'   => 'easyel_maybe_close_wrapper',
+            'elementor/frontend/column/before_render'   => 'easyel_maybe_open_wrapper',
+            'elementor/frontend/column/after_render'    => 'easyel_maybe_close_wrapper',
+            'elementor/frontend/container/before_render'=> 'easyel_maybe_open_wrapper',
+            'elementor/frontend/container/after_render' => 'easyel_maybe_close_wrapper',
+        ];
+
+        foreach ( $render_hooks as $hook => $method ) {
+            add_action( $hook, [ $this, $method ] );
+        }
+
     }
 
-    public function easyel_add_wrapper_controls( $element, $section_id ) {
-        if ( ! $element instanceof \Elementor\Widget_Base ) {
-            return;
-        }
+    public function easy_wrapper_link_register_section( $element ) {
 
         $element->start_controls_section(
             'easyel_wrapper_link_section',
@@ -52,35 +71,14 @@ final class EasyEl_Wrapper_Link {
                 'tab'   => \Elementor\Controls_Manager::TAB_ADVANCED,
             ]
         );
+       
+		$element->end_controls_section();
+	}
 
-        $element->add_control(
-            'easyel_wrapper_link',
-            [
-                'label'        => __( 'Enable Wrapper Link', 'elementor-wrapper-link' ),
-                'type'         => \Elementor\Controls_Manager::SWITCHER,
-                'return_value' => 'yes',
-            ]
-        );
+    public function easyel_add_wrapper_controls( $element, $section_id ) {
 
-        $element->add_control(
-            'easyel_wrapper_link_url',
-            [
-                'label'       => __( 'Link', 'elementor-wrapper-link' ),
-                'type'        => \Elementor\Controls_Manager::URL,
-                'placeholder' => __( 'https://your-link.com', 'elementor-wrapper-link' ),
-                'default'     => [
-                    'url'         => '',
-                    'is_external' => false,
-                    'nofollow'    => false,
-                ],
-                'show_external' => true,
-                'condition'   => [
-                    'easyel_wrapper_link' => 'yes',
-                ],
-            ]
-        );
-
-        $element->end_controls_section();
+        require_once EASYELEMENTS_DIR_PATH . 'inc/extension/wrapper-link/controls/wrapper-link-controls.php';
+		Easy_Wrapper_Link_Controls::register_controls( $element );
     }
 
     public function easyel_enqueue_styles() {

@@ -177,6 +177,20 @@ function easyel_get_extension_fields() {
             'group' => 'General Extensions',
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
+        'enable_dynamic_content' => [
+            'label'   => __('Dynamic Content', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'General Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_live_copy_paste' => [
+            'label'   => __('Live Copy Paste', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'General Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
         
     ];
 
