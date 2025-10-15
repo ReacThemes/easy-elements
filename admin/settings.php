@@ -837,7 +837,8 @@ class Easyel_Elements {
                 'description' => 'Easy Scroll To Top.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ], 
             'easy_table' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -845,6 +846,7 @@ class Easyel_Elements {
                 'description' => 'Easy Table.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'easytypewriter' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -852,7 +854,8 @@ class Easyel_Elements {
                 'description' => 'Animated typewriter text effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Animations'
+                'group'       => 'Animations',
+                'tab' => 'widget',
             ],
             'animated_title' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -860,7 +863,8 @@ class Easyel_Elements {
                 'description' => 'Animated title text effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Animations'
+                'group'       => 'Animations',
+                'tab' => 'widget',
             ],
             'animated_heading' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -868,7 +872,8 @@ class Easyel_Elements {
                 'description' => 'Animated heading text effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Animations'
+                'group'       => 'Animations',
+                'tab' => 'widget',
             ],
             'easytext_animation' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -876,7 +881,8 @@ class Easyel_Elements {
                 'description' => 'Animated text animation effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Animations'
+                'group'       => 'Animations',
+                'tab' => 'widget',
             ], 
             
             'easy_gallery' => [

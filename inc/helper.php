@@ -198,6 +198,10 @@ function easyel_get_extension_fields() {
 }
 
 add_action('deactivated_plugin', function($plugin) {
+
+    if ($plugin !== 'easy-elements-pro/easy-elements-pro.php') {
+        return; 
+    }
    
     if ($plugin === 'easy-elements-pro/easy-elements-pro.php') {
          $available_elements = Easyel_Elements::get_instance()->easyel_elements_get_available_widgets();
