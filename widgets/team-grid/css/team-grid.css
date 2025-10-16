@@ -1,41 +1,95 @@
 .eel-team-wraps .grid-item {
   box-sizing: border-box;
 }
-.eel-team-wraps .grid-item .eel-name {
-  margin: 0 0 5px;
-}
-
-.eel-team-wraps .eel-team-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-.ee--team-img {
+.eel-team-wraps .grid-item .ee--team-img {
   position: relative;
   overflow: hidden;
   border-radius: 16px;
 }
-.ee--team-img .eel-name-deg-wrap {
+.eel-team-wraps .grid-item .ee--team-img a {
+  color: currentColor;
+}
+.eel-team-wraps .grid-item .ee--team-img .eel-team-img-area {
+  position: relative;
+}
+.eel-team-wraps .grid-item .ee--team-img .eel-team-img-area .eel-team-img-box {
+  overflow: hidden;
+  border-radius: 16px;
+  margin: 0 auto;
+}
+.eel-team-wraps .grid-item .ee--team-img .eel-team-img-area .eel-team-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  transition: all 0.5s ease;
+  z-index: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.eel-team-wraps .grid-item .ee--team-img .eel-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: background 0.3s, opacity 0.3s;
+  z-index: 1;
+}
+.eel-team-wraps .grid-item .ee--team-img .eel-name-deg-wrap {
   background: #fff;
+  padding: 26px 24px 24px 24px;
+  border-radius: 8px;
+  text-align: center;
+}
+.eel-team-wraps .grid-item .ee--team-img .eel-name-deg-wrap.inside {
   position: absolute;
   bottom: 24px;
   left: 24px;
   right: 24px;
-  padding: 26px 24px 24px 24px;
-  border-radius: 8px;
-  text-align: center;
   z-index: 2;
 }
-.ee--team-img img {
-  transition: all 0.5s ease;
+.eel-team-wraps .grid-item .ee--team-img .eel-name-deg-wrap .eel-name {
+  margin: 0 0 5px;
 }
-.ee--team-img:hover img {
+.eel-team-wraps .grid-item .ee--team-img:hover img {
   transform: scale(1.1);
 }
-.ee--team-img a {
-  color: currentColor;
+.eel-team-wraps .grid-item .eel-team-social {
+  margin-top: 20px;
+}
+.eel-team-wraps .grid-item .eel-team-social ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0;
+}
+.eel-team-wraps .grid-item .eel-team-social ul li a {
+  color: #C2B4FF;
+  transition: all 0.5s ease;
+}
+.eel-team-wraps .grid-item .eel-team-social ul li a svg {
+  fill: currentColor;
+  height: 1em;
+}
+.eel-team-wraps .grid-item .eel-team-social ul li a:hover {
+  color: #5933FF;
+}
+.eel-team-wraps .grid-item .eel-team-social.t_left, .eel-team-wraps .grid-item .eel-team-social.t_right {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.eel-team-wraps .grid-item .eel-team-social.t_left ul, .eel-team-wraps .grid-item .eel-team-social.t_right ul {
+  flex-direction: column;
+}
+.eel-team-wraps .grid-item .eel-team-social.t_left ul li a, .eel-team-wraps .grid-item .eel-team-social.t_right ul li a {
+  background: #5933FF;
+  color: #fff;
 }
 
 .eel-popup-modal {
@@ -102,21 +156,4 @@
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-}
-
-.eel-image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  border-radius: inherit;
-  transition: background 0.3s, opacity 0.3s;
-  z-index: 1;
-}
-
-.ee--team-img img {
-  position: relative;
-  z-index: 0;
 }/*# sourceMappingURL=team-grid.css.map */

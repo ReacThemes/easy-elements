@@ -153,6 +153,7 @@
 
 
 .e-e-title {
+    &.e-e-gradient-title div,
     &.e-e-gradient-title {
         background: linear-gradient(68.75deg, #B0FF96 9.78%, #FFF1B5 92.67%);
         -webkit-background-clip: text;
@@ -163,3 +164,21 @@
     }
 }
 
+.e-e-title.eel-text-reveal{
+    overflow: hidden;
+    display: inline-block;
+    .char {
+        transform: translateY(115px);
+        transition: transform .5s;
+        overflow: hidden;
+    }
+}
+.eel-lines-bottom-v2{
+    overflow: hidden;
+}
+
+.eel-text-bouncev2 {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+}

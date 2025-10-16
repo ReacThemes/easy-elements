@@ -21,11 +21,6 @@ class Easyel_Navigation_Menu_Widget extends \Elementor\Widget_Base {
 		$handle = 'eel-navigation-menu-style';
 		$css_path = plugin_dir_path( __FILE__ ) . 'css/navigation-menu.css';
 		
-		if ( get_option( 'easyel_elements_minify_css', '0' ) === '1' && class_exists( 'Easyel_Elements_CSS_Loader_Helper' ) ) {
-			Easyel_Elements_CSS_Loader_Helper::easyel_elements_load_minified_inline_css( $handle, $css_path );
-			return [ $handle ];
-		}
-		
 		if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
 			wp_register_style( $handle, plugins_url( 'css/navigation-menu.css', __FILE__ ), [], filemtime( $css_path ) );
 		}
@@ -35,15 +30,6 @@ class Easyel_Navigation_Menu_Widget extends \Elementor\Widget_Base {
 	public function get_script_depends() {
 		$handle = 'eel-navigation-menu-script';
 		$js_path = plugin_dir_path( __FILE__ ) . 'js/navigation-menu.js';
-		
-		        // Check if minification is enabled and helper class exists
-        if ( get_option( 'easyel_elements_minify_js', '0' ) === '1' && class_exists( 'Easyel_Elements_JS_Loader_Helper' ) ) {
-            try {
-                Easyel_Elements_JS_Loader_Helper::easyel_elements_load_minified_inline_js( $handle, $js_path );
-                return [ $handle ];
-            } catch ( Exception $e ) {
-            }
-        }
 	
 		if ( ! wp_script_is( $handle, 'registered' ) && file_exists( $js_path ) ) {
 			wp_register_script( $handle, plugins_url( 'js/navigation-menu.js', __FILE__ ), [ 'jquery' ], filemtime( $js_path ), true );
@@ -265,6 +251,21 @@ class Easyel_Navigation_Menu_Widget extends \Elementor\Widget_Base {
 				'label_off'    => __( 'No', 'easy-elements' ),
 				'frontend_available' => true,
 				'default'      => 'no',
+			]
+		);
+
+		$this->add_control(
+			'fixed_top_sticky',
+			[
+				'label'        => __( 'Fixed Top Sticky', 'easy-elements' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'easy-elements' ),
+				'label_off'    => __( 'No', 'easy-elements' ),
+				'frontend_available' => true,
+				'default'      => 'no',
+				'condition' => [
+					'enable_sticky_header' => 'yes',
+				],
 			]
 		);
 
@@ -1852,7 +1853,17 @@ class Easyel_Navigation_Menu_Widget extends \Elementor\Widget_Base {
 			$this->add_render_attribute( 'eel-main-menu', 'class', $settings['layout'] );
 
 			$this->add_render_attribute( 'eel-main-menu', 'data-layout', $settings['layout'] );
-
+			if ( 'yes' === $settings['fixed_top_sticky'] ) {
+				$this->add_render_attribute( 'eel-main-menu', 'class', 'eel-fixed-top-sticky' );			
+				echo '<script>
+					document.addEventListener("DOMContentLoaded", function() {
+						const header = document.querySelector("header");
+						if(header){
+							header.classList.add("eel-fixed-top-sticky");
+						}
+					});
+				</script>';
+			}
 			if ( 'cta' === $settings['menu_last_item'] ) {
 
 				$this->add_render_attribute( 'eel-main-menu', 'data-last-item', $settings['menu_last_item'] );

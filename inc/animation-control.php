@@ -2,7 +2,6 @@
 
 add_action( 'elementor/element/eel-heading/content_section/before_section_end', function( $element, $args ) {
 
-
     $animation_options = [
         'default'      => 'Default',
         'split-text'   => 'Split Text (Letter)',

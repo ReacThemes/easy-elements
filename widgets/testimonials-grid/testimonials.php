@@ -13,8 +13,11 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
 	    $css_path = plugin_dir_path( __FILE__ ) . 'css/testimonials.css';
 	    
 	    if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
-	        wp_register_style( $handle, plugins_url( 'css/testimonials.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : '1.0.0' );
+	        wp_register_style( $handle, plugins_url( 'css/testimonials.css', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $css_path ) : time() );
 	    }
+        if ( \Elementor\Plugin::$instance->editor->is_edit_mode() || ! is_admin() ) {
+			return [ $handle ];
+		}
 	    return [ $handle ];
 	}
 
@@ -23,7 +26,7 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
 		$js_path = plugin_dir_path( __FILE__ ) . 'js/testimonial.js';
 		
 		if ( ! wp_script_is( $handle, 'registered' ) && file_exists( $js_path ) ) {
-			wp_register_script( $handle, plugins_url( 'js/testimonial.js', __FILE__ ), [ 'jquery' ], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $js_path ) : '1.0.0', true );
+			wp_register_script( $handle, plugins_url( 'js/testimonial.js', __FILE__ ), [ 'jquery' ], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $js_path ) : time(), true );
 		}
 		return [ $handle ];
 	}
@@ -101,6 +104,7 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
                  'condition' => [
                     'testimonials_skin' => ['skin3'],
                 ],
+                'description' => __('<strong> This button will work after 6 items </strong>', 'easy-elements'),
             ]
         );
 
@@ -112,33 +116,7 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
                 'default' => esc_html__( 'View all reviews', 'easy-elements' ),
                 'label_block' => true,
                 'condition' => [
-                    'show_loadmore' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'load_more_typography',
-                'label' => esc_html__( 'Typography', 'easy-elements' ),
-                'selector' => '{{WRAPPER}} .eel-testimonial-more-btn',
-                'condition' => [
-                    'show_loadmore' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'loadmore_padding',
-            [
-                'label' => esc_html__( 'Padding', 'easy-elements' ),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', 'em', '%' ],
-                'selectors' => [
-                    '{{WRAPPER}} .eel-testimonial-more-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'condition' => [
+                    'testimonials_skin' => 'skin3',
                     'show_loadmore' => 'yes',
                 ],
             ]
@@ -199,16 +177,17 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
        $repeater->add_control(
            'quote_icon',
            [
-               'label'       => esc_html__( 'Icon', 'easy-elements' ),
+               'label'       => esc_html__( 'Quote Icon', 'easy-elements' ),
                'type'        => \Elementor\Controls_Manager::ICONS,
                'label_block' => true,
                'default'     => [
                    'value'   => 'fas fa-quote-right',
                    'library' => 'fa-solid',
                ],
+               'separator' => 'after',
+               'description' => __('<strong> Only Default skin supported </strong>', 'easy-elements'),
            ]
         );
-
         $repeater->add_control(
             'rating',
             [
@@ -222,16 +201,17 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
                     '5' => '★★★★★',
                 ],
                 'default' => '5',
+                'separator' => 'after',
+                'description' => __('<strong> [skin1, skin2, skin4 ] skins type not supported  </strong>', 'easy-elements'),
             ]
         );
-
-
         $repeater->add_control(
             'logo_company',
             [
-                'label' => esc_html__('Company Logo', 'easy-elements'),
+                'label' => esc_html__('Logo', 'easy-elements'),
                 'type' => Controls_Manager::MEDIA,
                 'default' => [ '' ],
+                'description' => __('<strong> Default skin not supported </strong>', 'easy-elements'),
             ]
         );
 
@@ -303,14 +283,13 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .e-e-testimonial .grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
-                'condition' => [ 'testimonials_skin!' => 'default' ],
             ]
         );
 
         $this->add_responsive_control(
             'logo_height',
             [
-                'label' => esc_html__( 'Company Logo Height', 'easy-elements' ),
+                'label' => esc_html__( 'Logo Height', 'easy-elements' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em', '%' ],
                 'range' => [
@@ -330,6 +309,7 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .ee--tstml-inner-wrap.skin1 .eel-company-logo img, {{WRAPPER}} .eel-company-logo img' => 'height: {{SIZE}}{{UNIT}}; width:auto;',
                 ],
+                'condition' => [ 'testimonials_skin!' => 'default' ],
             ]
         );
 
@@ -341,7 +321,38 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
                 'label_on' => esc_html__( 'Show', 'easy-elements' ),
                 'label_off' => esc_html__( 'Hide', 'easy-elements' ),
                 'return_value' => 'yes',
-                'default' => '',
+                'default' => 'yes',
+                'condition' => [ 
+                    'testimonials_skin!' => ['skin1','skin2','skin4'],
+                ],
+            ]
+        );
+        $this->add_control(
+            'rating_color',
+            [
+                'label' => esc_html__( 'Rating Color', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-rating' => 'color: {{VALUE}};',
+                ],
+                'condition' => [ 
+                    'testimonials_skin!' => ['skin1','skin2','skin4'],
+                    'show_rating' => 'yes',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'rating_size',
+            [
+                'label' => esc_html__( 'Rating Size', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-rating' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [ 
+                    'testimonials_skin!' => ['skin1','skin2','skin4'],
+                    'show_rating' => 'yes',
+                ],
             ]
         );
 
@@ -562,6 +573,9 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__( 'Author Image Settings', 'easy-elements' ),
                 'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'show_image' => 'yes',
+                ],                
             ]
         );
 
@@ -583,6 +597,161 @@ class Easyel_Testimonials__Widget extends \Elementor\Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .eel-author-wrap .eel-picture img' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important; object-fit: cover;',
+                    '{{WRAPPER}} .eel-picture img' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important; object-fit: cover;',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'author_image_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'easy-elements' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel-author-wrap .eel-picture img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .eel-picture img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();  
+        $this->start_controls_section(
+            'quote_icon_styles',
+            [
+                'label' => esc_html__( 'Icon', 'easy-elements' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'quote_icon!' => '',
+                ],
+            ]
+        ); 
+        
+        $this->add_control(
+            'quote_icon_color',
+            [
+                'label' => esc_html__( 'Color', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-quote svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .eel-quote svg path' => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
+         $this->add_responsive_control(
+            'quote_icon_size',
+            [
+                'label'      => esc_html__( 'Size', 'easy-elements' ),
+                'type'       => \Elementor\Controls_Manager::SLIDER,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-quote svg' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->end_controls_section();
+
+        // Style 3 View All Button      
+        $this->start_controls_section(
+            'style3_view_all_button',
+            [
+                'label' => esc_html__( 'View All Button', 'easy-elements' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'testimonials_skin' => 'skin3',
+                    'show_loadmore' => 'yes',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'load_more_typography',
+                'label' => esc_html__( 'Typography', 'easy-elements' ),
+                'selector' => '{{WRAPPER}} .eel-testimonial-more-btn',
+            ]
+        );
+        $this->add_control(
+            'load_more_color',
+            [
+                'label' => esc_html__( 'Color', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-testimonial-more-btn' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'load_more_bg',
+                'label' => esc_html__('Background', 'easy-elements'),
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eel-testimonial-more-btn',
+            ]
+        );
+        $this->add_responsive_control(
+            'loadmore_padding',
+            [
+                'label' => esc_html__( 'Padding', 'easy-elements' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel-testimonial-more-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'loadmore_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'easy-elements' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .eel-testimonial-more-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'load_more_border',
+                'label' => __('Border', 'easy-elements'),
+                'selector' => '{{WRAPPER}} .eel-testimonial-more-btn',
+            ]
+        );
+        $this->add_control(
+			'load_more_hover_bg_heading',
+			[
+				'label' => esc_html__( 'Hover Style', 'easy-elements' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+        $this->add_control(
+            'load_more_hover_color',
+            [
+                'label' => esc_html__( 'Hover Color', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-testimonial-more-btn:hover' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'load_more_hover_bg',
+                'label' => esc_html__('Hover Background', 'easy-elements'),
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .eel-testimonial-more-btn:hover',
+            ]
+        );
+        $this->add_control(
+            'load_more_hover_border_color',
+            [
+                'label' => esc_html__( 'Hover Border Color', 'easy-elements' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .eel-testimonial-more-btn:hover' => 'border-color: {{VALUE}}',
                 ],
             ]
         );

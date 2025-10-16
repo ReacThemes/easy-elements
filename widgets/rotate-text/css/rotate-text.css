@@ -1,0 +1,60 @@
+/* --- Rotating Circle Text --- */
+.rts_rotate_text {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  will-change: transform;
+  background: var(--e-global-color-primary);
+  /* --- Icon Center --- */
+}
+.rts_rotate_text .rts__icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rts_rotate_text .rts__icon svg,
+.rts_rotate_text .rts__icon i {
+  width: 35px;
+  height: 35px;
+  color: #fff;
+  fill: currentColor;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.rts_rotate_text .rts__icon svg path {
+  fill: #fff;
+}
+.rts_rotate_text text {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  fill: #fff;
+}
+.rts_rotate_text .spinner {
+  width: 100%;
+  height: 100%;
+  animation: spinText 12s linear infinite;
+  transform-origin: center;
+}
+.rts_rotate_text:hover .rts__icon svg {
+  transform: scale(1.1);
+  color: #fff;
+}
+.rts_rotate_text svg {
+  pointer-events: none;
+}
+
+@keyframes spinText {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=rotate-text.css.map */

@@ -1,46 +1,101 @@
 .eel-team-wraps .grid-item {    
     box-sizing: border-box;
-    .eel-name{
-        margin: 0 0 5px;
-    }
-}
-
-.eel-team-wraps .eel-team-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    
-}
-
-.ee--team-img{
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    .eel-name-deg-wrap{
-        background: #fff;
-        position: absolute;
-        bottom: 24px;
-        left: 24px;
-        right: 24px;
-        padding: 26px 24px 24px 24px;    
-        border-radius: 8px; 
-        text-align: center;
-        z-index: 2; 
-    }
-    img{
-        transition: all .5s ease;
-    }
-    &:hover{
-        img{
-            transform: scale(1.1);
+    .ee--team-img {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        a{
+            color: currentColor;
+        }
+        .eel-team-img-area{
+            position: relative;
+            .eel-team-img-box{
+                overflow: hidden;
+                border-radius: 16px;
+                margin: 0 auto;
+            }
+            .eel-team-img{
+                width: 100%;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+                position: relative;
+                transition: all .5s ease;
+                z-index: 0;
+                object-fit: cover;
+            }
+        }
+        .eel-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            border-radius: inherit;
+            transition: background 0.3s, opacity 0.3s;
+            z-index: 1;
+        }
+        .eel-name-deg-wrap{
+            background: #fff;
+            padding: 26px 24px 24px 24px;    
+            border-radius: 8px; 
+            text-align: center;
+            &.inside{
+                position: absolute;
+                bottom: 24px;
+                left: 24px;
+                right: 24px;
+                z-index: 2; 
+            }
+            .eel-name{
+                margin: 0 0 5px;
+            }
+        }        
+        &:hover{
+            img{
+                transform: scale(1.1);
+            }
         }
     }
-    a{
-        color: currentColor;
+    .eel-team-social{
+        margin-top: 20px;
+         ul{
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 0;
+            li a{
+                color: #C2B4FF;
+                transition: all .5s ease;
+                svg{
+                    fill: currentColor;
+                    height: 1em;
+                }
+                &:hover{
+                    color: #5933FF;
+                }
+            }
+        }
+        &.t_left,
+        &.t_right{
+            position: absolute;
+            top: 0;
+            left: 0;
+            ul{
+                flex-direction: column;
+                li a{
+                    background: #5933FF;
+                    color: #fff;
+                }
+            }
+        }
     }
 }
 
+
+// Team Popup CSS 
 .eel-popup-modal {
     display: none;
     position: fixed;
@@ -93,20 +148,4 @@
     color: #888;
     margin-bottom: 6px;
     user-select: none;
-}
-
-.eel-image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    border-radius: inherit;
-    transition: background 0.3s, opacity 0.3s;
-    z-index: 1;
-}
-.ee--team-img img {
-    position: relative;
-    z-index: 0;
 }

@@ -11,16 +11,31 @@
 
 		header.addClass("eel-sticky-header-on");
 
-		function updatePaddingAndMargin() {
+		function updatePaddingAndMargin(scrollDirection, scroll) {
 			var headerHeight = header.outerHeight();
 			var topbarHeight = topbar.length ? topbar.outerHeight() : 0;
+			var isTopSticky = header.hasClass('eel-fixed-top-sticky');
 
+			// page padding-top
 			if (!isFixedHeader) {
 				page.css('padding-top', headerHeight + 'px');
 			} else {
 				page.css('padding-top', '');
 			}
 
+			// fixed-top-sticky
+			if (isTopSticky) {
+				if (scroll <= 0) {
+					header.css('margin-top', '0px');
+				} else if (scrollDirection === 'down') {
+					header.css('margin-top', `-${topbarHeight}px`);
+				} else if (scrollDirection === 'up') {
+					header.css('margin-top', `-${topbarHeight}px`);
+				}
+				return;
+			}
+
+			//  sticky behavior
 			if (header.hasClass('eel-up-scroll')) {
 				header.css('margin-top', `-${topbarHeight}px`);
 			} else {
@@ -29,35 +44,41 @@
 		}
 
 		let lastScroll = 0;
-		const stickyScrollThreshold = 50; 
+		const stickyScrollThreshold = 50;
 
 		function sticky_header() {
 			let scroll = $(window).scrollTop();
+			let isTopSticky = header.hasClass('eel-fixed-top-sticky');
+			let scrollDirection = scroll > lastScroll ? 'down' : 'up';
+
+			if (isTopSticky) {
+				header.addClass('eel-sticky-header');
+				updatePaddingAndMargin(scrollDirection, scroll);
+				lastScroll = scroll;
+				return;
+			}
 
 			if (scroll > stickyScrollThreshold) {
 				header.addClass('eel-sticky-header');
 				if (scroll > lastScroll) {
-					// স্ক্রল ডাউন → হেডার হাইড
 					header.removeClass('eel-up-scroll').addClass('eel-down-scroll');
 				} else {
-					// স্ক্রল আপ → হেডার শো
 					header.removeClass('eel-down-scroll').addClass('eel-up-scroll');
 				}
 			} else {
-				// একেবারে টপ এ গেলে
 				header.removeClass('eel-sticky-header eel-up-scroll eel-down-scroll');
 			}
-			lastScroll = scroll;
 
-			updatePaddingAndMargin();
+			updatePaddingAndMargin(scrollDirection, scroll);
+			lastScroll = scroll;
 		}
 
-		$(document).ready(function () {
-			updatePaddingAndMargin();
+		$(document).ready(function() {
+			updatePaddingAndMargin('up', 0);
 			sticky_header();
 		});
 
-		$(window).on('scroll resize', function () {
+		$(window).on('scroll resize', function() {
 			sticky_header();
 		});
 	}

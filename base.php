@@ -76,22 +76,20 @@ final class Easyel_Elements_Elementor_Extension {
 
 		if ( ! did_action( 'elementor/loaded' ) ) return;
 
-		//$checked = get_option('easyel_enable_js_animation', 0);
-		//if ( $checked != 1 ) return;
-
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
 		$scripts = [
 			'gsap' => "assets/js/gsap/gsap{$suffix}.js",
 			'scrolltrigger' => "assets/js/gsap/ScrollTrigger{$suffix}.js",
 			'splittext' => "assets/js/gsap/SplitText{$suffix}.js",
+			'splittype' => "assets/js/gsap/splittype{$suffix}.js",
 			'eel-easyel-animation' => "assets/js/gsap/easyel-animation.js",
 		];
 
 		foreach($scripts as $handle => $path){
 			$deps = [];
 			if($handle === 'scrolltrigger' || $handle === 'splittext') $deps = ['gsap'];
-			if($handle === 'eel-easyel-animation') $deps = ['gsap','scrolltrigger','splittext'];
+			if($handle === 'eel-easyel-animation') $deps = ['gsap','scrolltrigger','splittext', 'splittype'];
 
 			wp_enqueue_script(
 				$handle,
@@ -167,6 +165,7 @@ final class Easyel_Elements_Elementor_Extension {
 			'easy_cf7'  					=> [ 'class' => '\easyel__CF7_Widget',    				'file' => __DIR__ . '/widgets/cf7/contact-cf7.php','tab' => 'widget' ],
 			'easy_gallery'  				=> [ 'class' => '\Easyel__Gallery_Widget',    				'file' => __DIR__ . '/widgets/gallery/gallery.php','tab' => 'widget' ],
 			'image_reveal'  				=> [ 'class' => '\Easyel_Image_Reveal__Widget',    		'file' => __DIR__ . '/widgets/reveal/reveal.php','tab' => 'widget' ],
+			'rotate_text'  				=> [ 'class' => '\Easyel_Rotate_Text__Widget',    		'file' => __DIR__ . '/widgets/rotate-text/rotate-text.php','tab' => 'widget' ],
 		];
 
 	    foreach ( $widgets as $key => $data ) {

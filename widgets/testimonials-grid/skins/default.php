@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <em class="eel-designation"><?php echo esc_html( $item['designation'] ); ?></em>
             <?php endif; ?>
 
-            <?php if ( ! empty( $item['rating'] ) ) : ?>
+            <?php if ( ! empty( $item['rating'] ) && $settings['show_rating'] === 'yes' ) : ?>
                 <div class="eel-rating" aria-label="Rating: <?php echo intval( $item['rating'] ); ?> out of 5">
                     <?php
                     $rating = intval( $item['rating'] );

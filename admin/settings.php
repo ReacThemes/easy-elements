@@ -459,6 +459,15 @@ class Easyel_Elements {
                 'is_pro'      => true,
                 'tab' => 'widget',
             ],
+            'rotate_text' => [
+                'icon'        => 'easyelIcon-heading',
+                'title'       => 'Rotate Text',
+                'description' => 'rotate text here',
+                'demo_url'    => 'https://wpeasyelements.com/portfolio/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/portfolio/',
+                'is_pro'      => true,
+                'tab'         => 'widget',
+            ],
             'icon_box' => [
                 'icon'        => 'easyelIcon-iconbox',
                 'title'       => 'Easy Icon Box',
@@ -905,6 +914,16 @@ class Easyel_Elements {
                 'description' => 'Portfolio',
                 'demo_url'    => 'https://wpeasyelements.com/portfolio/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/portfolio/',
+                'is_pro'      => true,
+                'tab' => 'widget',
+            ],
+
+            'animated_title' => [
+                'icon'        => 'easyelIcon-heading',
+                'title'       => 'Animated Title',
+                'description' => 'Animated Title',
+                'demo_url'    => 'https://wpeasyelements.com/animated-title/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/animated-title/',
                 'is_pro'      => true,
                 'tab' => 'widget',
             ],

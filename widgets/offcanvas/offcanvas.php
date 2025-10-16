@@ -14,11 +14,6 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 		$handle   = 'eel-offcanvas-style'; 
 		$css_path = plugin_dir_path( __FILE__ ) . 'css/offcanvas.css';
 
-		if ( get_option( 'easyel_elements_minify_css', '0' ) === '1' && class_exists( 'Easyel_Elements_CSS_Loader_Helper' ) ) {
-			Easyel_Elements_CSS_Loader_Helper::easyel_elements_load_minified_inline_css( $handle, $css_path );
-			return [ $handle ];
-		}
-
 		if ( ! wp_style_is( $handle, 'registered' ) && file_exists( $css_path ) ) {
 			wp_register_style(
 				$handle,
@@ -33,15 +28,6 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 	public function get_script_depends() {
 		$handle = 'eel-offcanvas-script';
 		$js_path = plugin_dir_path( __FILE__ ) . 'js/offcanvas.js';
-		
-		        // Check if minification is enabled and helper class exists
-        if ( get_option( 'easyel_elements_minify_js', '0' ) === '1' && class_exists( 'Easyel_Elements_JS_Loader_Helper' ) ) {
-            try {
-                Easyel_Elements_JS_Loader_Helper::easyel_elements_load_minified_inline_js( $handle, $js_path );
-                return [ $handle ];
-            } catch ( Exception $e ) {
-            }
-        }
 	
 		if ( ! wp_script_is( $handle, 'registered' ) && file_exists( $js_path ) ) {
 			wp_register_script( $handle, plugins_url( 'js/offcanvas.js', __FILE__ ), [ 'jquery' ], filemtime( $js_path ), true );
@@ -54,7 +40,7 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 	}
 
 	public function get_title() {
-		return __( 'Easy Offcanvas', 'easy-elements' );
+		return __( 'Offcanvas', 'easy-elements' );
 	}
 
 	public function get_icon() {
@@ -70,6 +56,19 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 			'section_offcanvas',
 			[
 				'label' => __( 'Offcanvas Settings', 'easy-elements' ),
+			]
+		);
+
+		$this->add_control(
+			'offcanvas_layout',
+			[
+				'label'   => __( 'Offcanvas Layout', 'easy-elements' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'classic',
+				'options' => [
+					'classic'  => __( 'Classic', 'easy-elements' ),
+					'modern' => __( 'Modern', 'easy-elements' ),
+				],
 			]
 		);
 
@@ -104,6 +103,9 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 					'eel-offcanvas-left'  => __( 'Left', 'easy-elements' ),
 					'eel-offcanvas-right' => __( 'Right', 'easy-elements' ),
 				],
+				'condition' => [
+					'offcanvas_layout' => 'classic',
+				],
 			]
 		);
 
@@ -129,6 +131,9 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 				],
 				'selectors'    => [
 					'.eel-offcanvas' => 'width: {{SIZE}}{{UNIT}} !important;',
+				],
+				'condition' => [
+					'offcanvas_layout' => 'classic',
 				],
 			]
 		);
@@ -175,7 +180,7 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 			'style_section',
 			[
 				'label' => esc_html__( 'Style', 'easy-elements' ),
-				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		 );
 			$this->add_control(
@@ -214,24 +219,58 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 			$this->add_control(
 				'offcanvas_opener_icon_color',
 				[
-					'label' => esc_html__( 'Icon Color', 'easy-elements' ),
+					'label' => esc_html__( 'Hamburger Color', 'easy-elements' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
 					'selectors' => [
 						'{{WRAPPER}} .eel-offcanvas-toggle-text svg' => 'fill: {{VALUE}};',
 						'{{WRAPPER}} .eel-offcanvas-toggle-text i' => 'color: {{VALUE}};',
+						'{{WRAPPER}} .eel-icon-menu' => 'border-bottom-color: {{VALUE}};',
+					],
+					'condition' => [
+						'offcanvas_layout' => 'classic',
+					],
+				]
+			);
+			$this->add_control(
+				'offcanvas_opener_icon_humburger_color',
+				[
+					'label' => esc_html__( 'Hamburger Color', 'easy-elements' ),
+					'type' => \Elementor\Controls_Manager::COLOR,
+					'selectors' => [
+						'{{WRAPPER}} .eel-modern-close-toggle span, {{WRAPPER}} .modern.eel-offcanvas-wrapper label span' => 'background: {{VALUE}};',
 
+					],
+					'condition' => [
+						'offcanvas_layout' => 'modern',
 					],
 				]
 			);
 			$this->add_responsive_control(
 				'offcanvas_opener_icon_size',
 				[
-					'label'        => __( 'Icon Size', 'easy-elements' ),
+					'label'        => __( 'Hamburger Size', 'easy-elements' ),
 					'type'         => \Elementor\Controls_Manager::SLIDER,
 					'size_units'   => [ 'px', '%' ],
 					'selectors'    => [
 						'{{WRAPPER}} .eel-offcanvas-toggle-text svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
 						'{{WRAPPER}} .eel-offcanvas-toggle-text i' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					],
+					'condition' => [
+						'offcanvas_layout' => 'classic',
+					],
+				]
+			);
+			$this->add_responsive_control(
+				'offcanvas_opener_icon_size_morden',
+				[
+					'label'        => __( 'Hamburger Size', 'easy-elements' ),
+					'type'         => \Elementor\Controls_Manager::SLIDER,
+					'size_units'   => [ 'px', '%' ],
+					'selectors'    => [
+						'{{WRAPPER}} .modern.eel-offcanvas-wrapper label' => 'width: {{SIZE}}{{UNIT}};',
+					],
+					'condition' => [
+						'offcanvas_layout' => 'modern',
 					],
 				]
 			);
@@ -243,6 +282,7 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 					'separator' => 'after',
 				]
 		 	);
+
 			$this->add_control(
 				'offcanvas_closing_icon_color',
 				[
@@ -251,8 +291,26 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 					'selectors' => [
 						'.eel-offcanvas-close' => 'color: {{VALUE}} !important;',
 					],
+					'condition' => [
+						'offcanvas_layout' => 'classic',
+					],
 				]
 			);
+
+			$this->add_control(
+				'offcanvas_closing_icon_morden_color',
+				[
+					'label' => esc_html__( 'Icon Color', 'easy-elements' ),
+					'type' => \Elementor\Controls_Manager::COLOR,
+					'selectors' => [
+						'.eel-modern-close-toggle span, .modern.eel-offcanvas-wrapper label span' => 'background: {{VALUE}} !important;',
+					],
+					'condition' => [
+						'offcanvas_layout' => 'modern',
+					],
+				]
+			);
+
 			$this->add_responsive_control(
 				'offcanvas_closing_icon_size',
 				[
@@ -261,6 +319,9 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 					'size_units'   => [ 'px', '%' ],
 					'selectors'    => [
 						'.eel-offcanvas-close' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					],
+					'condition' => [
+						'offcanvas_layout' => 'classic',
 					],
 				]
 			);
@@ -320,27 +381,41 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 		$unique_id = 'eel-offcanvas-' . $this->get_id();
 		?>
 		
-		<div class="eel-offcanvas-wrapper">
+		<div class="eel-offcanvas-wrapper <?php echo esc_attr ($settings['offcanvas_layout']); ?>">
 			<div class="eel-offcanvas-toggle">
 				<span class="eel-offcanvas-toggle-text">
 					<?php if( !empty($btn_text) ):?> 
 						<em class="eel-icon-text"><?php echo esc_html( $btn_text ); ?></em>
 					<?php endif; ?>
 					<?php 
+					if ( ! empty($settings['offcanvas_layout'] == 'classic') ) {					
 						if ( ! empty( $settings['btn_icon']['value'] ) ) {
 							\Elementor\Icons_Manager::render_icon( $settings['btn_icon'], [ 'aria-hidden' => 'true' ] );
 						} else {
-							?><i class="unicon-menu"></i><?php
+							?>
+							<div class="eel-icon-menu-wrap">
+								<em class="eel-icon-menu"></em>
+								<em class="eel-icon-menu"></em>
+							</div>
+							<?php
 						}
+					} else {
 					?>
+					<label>						
+						<span></span>
+						<span></span>
+						<span></span>
+					</label>
+					<?php } ?>
 				</span>
 			</div>			
 			<?php
 			if ( ! \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
 			add_action( 'wp_footer', function() use ($settings, $unique_id) { ?>
-				<div id="<?php echo esc_attr($unique_id); ?>" class="eel-offcanvas <?php echo esc_attr($settings['position_offcanvas']); ?>">
+				<div id="<?php echo esc_attr($unique_id); ?>" class="eel-offcanvas <?php echo esc_attr($settings['position_offcanvas']); ?> <?php echo esc_attr ($settings['offcanvas_layout']); ?>">
 					<div class="eel-offcanvas-overlay"></div>
 					<div class="eel-offcanvas-panel">
+						<?php if( $settings['offcanvas_layout'] == 'classic' ){ ?>
 						<span class="eel-offcanvas-close eel-offcanvas-toggle">
 							<?php
 								if ( ! empty( $settings['close_icon']['value'] ) ) {
@@ -351,6 +426,15 @@ class Easyel_Offcanvas_Widget extends Widget_Base {
 								}
 							?>
 						</span>
+						<?php } else { ?>
+						<span class="eel-offcanvas-close eel-offcanvas-toggle eel-modern-close">
+							<label class="eel-modern-close-toggle">						
+								<span></span>
+								<span></span>
+								<span></span>
+							</label>
+						</span>
+						<?php } ?>
 						<div class="eel-offcanvas-content">
 							<?php
 							if ( ! empty( $settings['content_template'] ) ) {

@@ -42,6 +42,222 @@
                     }
                     break;
 
+
+                case 'text-reveal':
+                    if(typeof SplitType !== "undefined"){
+                        target.addClass('eel-text-reveal');
+                        const revealText = new SplitType(target[0], { types: 'chars' });
+                        gsap.to(revealText.chars, {
+                            y: 0,
+                            opacity: 1,
+                            stagger: 0.05,
+                            delay: 0.1,
+                            duration: .1,
+                            scrollTrigger: {
+                                trigger: $wrap[0],
+                                start: "top 80%",
+                            }
+                        });
+                    }
+                    break;
+                
+                    
+                case 'split-lines-leftv2':
+                    if(typeof SplitText !== "undefined"){
+                        document.fonts.ready.then(()=>{
+                            const element = target[0];
+                            if (element.animation) {
+                                element.animation.progress(1).kill();
+                                element.split.revert();
+                            }
+
+                            element.split = new SplitText(element, {
+                                type: "lines,words,chars",
+                                linesClass: "split-line",
+                            });
+                            gsap.set(element, { perspective: 400 });
+
+                            gsap.set(element.split.chars, {
+                                opacity: 0,
+                                x: "50",
+                            });
+
+                            element.animation = gsap.to(element.split.chars, {
+                                scrollTrigger: { trigger: element, start: "top 95%" },
+                                x: "0",
+                                y: "0",
+                                rotateX: "0",
+                                opacity: 1,
+                                duration: 1,
+                                ease: "back.out(1.7)",
+                                stagger: 0.02,
+                            });
+                        });
+                    }
+                    break;
+                
+                case 'characters':
+                    if(typeof SplitType !== "undefined"){
+                        document.fonts.ready.then(()=>{
+                            target.addClass('eel-text-characters');
+                            const split = new SplitType(target[0], { types: 'chars' });
+                            gsap.from(split.chars, {
+                                x: 150,
+                                opacity: 0,
+                                duration: 0.7,
+                                ease: "power4",
+                                stagger: 0.04,
+                                scrollTrigger: { trigger: $wrap[0], start: "top 80%" }
+                            });                           
+                        });
+                    }
+                    break;
+                
+                case 'split-lines-bottom-v2':
+                    if(typeof SplitType !== "undefined"){
+                        document.fonts.ready.then(()=>{
+                            target.addClass('eel-lines-bottom-v2');
+                            const split = new SplitType(target[0], { types: 'lines' });
+                            let animation = gsap.from(split.lines, {
+                                rotationX: -100,
+                                transformOrigin: "50% 50% -160px",
+                                opacity: 0,
+                                duration: 0.8,
+                                ease: "power3",
+                                stagger: 0.25,
+                                scrollTrigger: { trigger: $wrap[0], start: "top 80%" }
+                            });
+                        });
+                    }
+                    break;
+
+                case 'text-word':
+                    if (typeof SplitType !== "undefined") {
+                        document.fonts.ready.then(() => {
+                            target.addClass('eel-text-word');
+                            const split = new SplitType(target[0], { types: 'words' });
+                            gsap.from(split.words, {
+                                y: -100,
+                                opacity: 0,
+                                rotation: "random(-80, 80)",
+                                duration: 0.7,
+                                ease: "back",
+                                stagger: 0.15,
+                                scrollTrigger: { trigger: $wrap[0], start: "top 80%" }
+                            });
+                        });
+                    }
+                    break;
+                
+
+                case 'words-slide-up':
+                    if (typeof SplitType !== "undefined") {
+                        document.fonts.ready.then(() => {
+                            target.addClass('eel-words-slide-up');
+                            const split = new SplitType(target[0], { types: 'words' });
+                            const words = split.words;
+                            const tl = gsap.timeline({ paused: true });
+                            tl.from(words, {
+                                opacity: 0,
+                                yPercent: 100,
+                                duration: 0.5,
+                                ease: "back.out(2)",
+                                stagger: { amount: 0.5 },
+                            });
+                            ScrollTrigger.create({
+                                trigger: $wrap[0],
+                                start: "top 80%",
+                                onEnter: () => tl.play(),
+                                onLeaveBack: () => tl.progress(0).pause()
+                            });
+                        });
+                    }
+                    break;
+
+                case 'words-rotate-in':
+                    if (typeof SplitType !== "undefined") {
+                        document.fonts.ready.then(() => {
+                            target.addClass('eel-words-rotate-in');
+                            const split = new SplitType(target[0], { types: 'words' });
+                            const words = split.words;
+                            const tl = gsap.timeline({ paused: true });
+                            tl.set(words, { transformPerspective: 1000 });
+                            tl.from(words, {
+                                rotationX: -90,
+                                opacity: 0,
+                                duration: 0.6,
+                                ease: "power2.out",
+                                stagger: { amount: 0.6 },
+                            });
+                            ScrollTrigger.create({
+                                trigger: $wrap[0],
+                                start: "top 80%",
+                                onEnter: () => tl.play(),
+                                onLeaveBack: () => tl.progress(0).pause()
+                            });
+                        });
+                    }
+                    break;
+
+
+                case 'split-scroll-pin':
+                    if (typeof SplitText !== "undefined") {
+                        document.fonts.ready.then(() => {
+                            target.addClass('eel-split-scroll-pin');
+
+                            let split, tl;
+                            const createSplit = () => {
+                                split && split.revert();
+                                tl && tl.revert();
+
+                                split = new SplitText(target[0], { type: "chars" });
+
+                                tl = gsap.timeline({
+                                    scrollTrigger: {
+                                        trigger: $wrap[0],
+                                        start: "top top",
+                                        end: "+=150%",
+                                        pin: true,
+                                        scrub: 0.75,
+                                    }
+                                }).set(split.chars, { color: "#ffcc66", stagger: 0.1 }, 0.1);
+                            };
+                            createSplit();
+
+                            const debouncer = gsap.delayedCall(0.2, createSplit).pause();
+                            window.addEventListener("resize", () => debouncer.restart(true));
+                        });
+                    }
+                    break;
+                
+                case 'text-reveal-scroll':
+                    if (typeof SplitType !== "undefined") {
+                        target.addClass('eel-text-reveal-scroll'); 
+                        const bgColor = $wrap.data('bg-color') || "#333";
+                        const fgColor = $wrap.data('fg-color') || "#ffcc66";
+                        const revealText = new SplitType(target[0], { types: 'chars' });
+
+                        gsap.fromTo(
+                            revealText.chars,
+                            { color: bgColor, opacity: 0.6 },
+                            {
+                                color: fgColor,
+                                opacity: 1,
+                                duration: 0.3,
+                                stagger: 0.02,
+                                scrollTrigger: {
+                                    trigger: $wrap[0],
+                                    start: "top 80%",
+                                    end: "top 20%",
+                                    scrub: true,
+                                    markers: false
+                                }
+                            }
+                        );
+                    }
+                    break;
+
+
                 case 'split-words':
                     splitTextNodes(target,'words');
                     if(target.find('.easy-split-word').length){
