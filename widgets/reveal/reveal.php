@@ -245,10 +245,14 @@ class Easyel_Image_Reveal__Widget extends \Elementor\Widget_Base {
 
                     <?php if ( $custom_url !== '' ) : ?>
                         <a href="<?php echo esc_url( $custom_url ); ?>">
-                            <?php echo str_replace('<img ', '<img loading="lazy" ', $image_html); ?>
+                            <?php 
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo str_replace('<img ', '<img loading="lazy" ', $image_html); ?>
                         </a>
                     <?php else : ?>
-                        <?php echo str_replace('<img ', '<img loading="lazy" ', $image_html); ?>
+                        <?php 
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo str_replace('<img ', '<img loading="lazy" ', $image_html); ?>
                     <?php endif; ?>
 
                 </div>

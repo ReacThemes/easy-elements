@@ -62,11 +62,7 @@ function easyelements_include_file( $file ) {
     $filepath = EASYELEMENTS_DIR_PATH . $file;
     if ( file_exists( $filepath ) ) {
         require_once $filepath;
-    } else {
-        if ( is_admin() ) {
-            trigger_error( "EasyElements missing file: $file", E_USER_WARNING );
-        }
-    }
+    } 
 }
 
 foreach ( $includes as $group ) {

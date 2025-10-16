@@ -16,7 +16,7 @@ class Easyel_custom_class {
         $element->start_controls_section(
             'rt_jarallax_section',
             [
-                'label' => esc_html__( 'Image Parallax', 'easy-elements-pro' ),
+                'label' => esc_html__( 'Image Parallax', 'easy-elements' ),
                 'tab' => \Elementor\Controls_Manager::TAB_ADVANCED,
             ]
         );
@@ -24,10 +24,10 @@ class Easyel_custom_class {
         $element->add_control(
             'enable_jarallax',
             [
-                'label' => esc_html__( 'Enable Parallax', 'easy-elements-pro' ),
+                'label' => esc_html__( 'Enable Parallax', 'easy-elements' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Yes', 'easy-elements-pro' ),
-                'label_off' => esc_html__( 'No', 'easy-elements-pro' ),
+                'label_on' => esc_html__( 'Yes', 'easy-elements' ),
+                'label_off' => esc_html__( 'No', 'easy-elements' ),
                 'return_value' => 'has-jarallax-img',
                 'prefix_class' => '',
             ]
@@ -36,7 +36,7 @@ class Easyel_custom_class {
         $element->add_responsive_control(
             'jarallax_image_width',
             [
-                'label' => esc_html__( 'Width', 'easy-elements-pro' ),
+                'label' => esc_html__( 'Width', 'easy-elements' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range' => [
@@ -60,7 +60,7 @@ class Easyel_custom_class {
         $element->add_responsive_control(
             'jarallax_image_height',
             [
-                'label' => esc_html__( 'Height', 'easy-elements-pro' ),
+                'label' => esc_html__( 'Height', 'easy-elements' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range' => [
@@ -84,12 +84,12 @@ class Easyel_custom_class {
         $element->add_control(
             'object_fit_cover',
             [
-                'label'   => esc_html__('Object Fit', 'easy-elements-pro'),
+                'label'   => esc_html__('Object Fit', 'easy-elements'),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'rtimg-contain',
                 'options' => [
-                    'rtimg-contain' => esc_html__('Contain', 'easy-elements-pro'),                    
-                    'rtimg-cover' => esc_html__('Cover', 'easy-elements-pro'),                   
+                    'rtimg-contain' => esc_html__('Contain', 'easy-elements'),                    
+                    'rtimg-cover' => esc_html__('Cover', 'easy-elements'),                   
                 ],
                 'prefix_class' => '',
             ]
@@ -98,7 +98,7 @@ class Easyel_custom_class {
         $element->add_responsive_control(
             'jarallax_image_border_radius',
             [
-                'label' => esc_html__( 'Image Border Radius', 'easy-elements-pro' ),
+                'label' => esc_html__( 'Image Border Radius', 'easy-elements' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
                 'selectors' => [

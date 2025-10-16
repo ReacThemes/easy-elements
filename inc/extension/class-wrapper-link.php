@@ -67,7 +67,7 @@ final class EasyEl_Wrapper_Link {
         $element->start_controls_section(
             'easyel_wrapper_link_section',
             [
-                'label' => __( 'Easy Wrapper Link', 'elementor-wrapper-link' ),
+                'label' => __( 'Easy Wrapper Link', 'easy-elements' ),
                 'tab'   => \Elementor\Controls_Manager::TAB_ADVANCED,
             ]
         );
@@ -82,7 +82,16 @@ final class EasyEl_Wrapper_Link {
     }
 
     public function easyel_enqueue_styles() {
-        wp_register_style( 'easyel-wrapper-link-style', false );
+       
+        $version = defined('EASYELEMENTS_VER') ? EASYELEMENTS_VER : '1.0.0';
+
+        wp_register_style( 
+            'easyel-wrapper-link-style', 
+            false, 
+            array(), 
+            $version 
+        );
+
         wp_enqueue_style( 'easyel-wrapper-link-style' );
 
         $css = '
@@ -94,8 +103,10 @@ final class EasyEl_Wrapper_Link {
         .easyel-wrapper-link:focus { outline: none; }
         .elementor-widget .easyel-wrapper-inner { height: 100%; }
         ';
+
         wp_add_inline_style( 'easyel-wrapper-link-style', $css );
     }
+
 
     public function easyel_maybe_open_wrapper( $widget ) {
         $settings = $widget->get_settings_for_display();
@@ -115,8 +126,8 @@ final class EasyEl_Wrapper_Link {
         echo sprintf(
             '<a class="easyel-wrapper-link" href="%s"%s%s><span class="easyel-wrapper-inner">',
             esc_url( $link['url'] ),
-            $target,
-            $rel
+            esc_attr( $target ),
+            esc_attr( $rel )
         );
 
         $this->easyel_push_open_wrapper( $widget );

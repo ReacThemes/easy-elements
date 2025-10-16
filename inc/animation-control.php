@@ -13,7 +13,7 @@ add_action( 'elementor/element/eel-heading/content_section/before_section_end', 
     $element->add_control(
         'animation_type',
         [
-            'label'   => esc_html__( 'Animation Type', 'easy-elements-pro' ),
+            'label'   => esc_html__( 'Animation Type', 'easy-elements' ),
             'type'    => \Elementor\Controls_Manager::SELECT,
             'default' => 'default',
             'options' => $animation_options,
@@ -23,12 +23,11 @@ add_action( 'elementor/element/eel-heading/content_section/before_section_end', 
     $element->add_control(
         'eel_parallax_title',
         [
-            'label'        => __('Enable Parallax', 'easy-elements-pro'),
+            'label'        => __('Enable Parallax', 'easy-elements'),
             'type'         => \Elementor\Controls_Manager::SWITCHER,
-            'label_on'     => __('Yes', 'easy-elements-pro'),
-            'label_off'    => __('No'),
+            'label_on'     => __('Yes', 'easy-elements'),
+            'label_off'    => __('No', 'easy-elements'),
             'return_value' => 'yes',
-            'default'      => '',
         ]
     );
 
@@ -36,11 +35,11 @@ add_action( 'elementor/element/eel-heading/content_section/before_section_end', 
     $element->add_control(
         'eel_parallax_direction',
         [
-            'label'     => __('Direction', 'easy-elements-pro'),
+            'label'     => __('Direction', 'easy-elements'),
             'type'      => \Elementor\Controls_Manager::SELECT,
             'options'   => [
-                'left'  => __('Right to Left', 'easy-elements-pro'),
-                'right' => __('Left to Right', 'easy-elements-pro'),
+                'left'  => __('Right to Left', 'easy-elements'),
+                'right' => __('Left to Right', 'easy-elements'),
             ],
             'default'   => 'left',
             'condition' => [
@@ -53,7 +52,7 @@ add_action( 'elementor/element/eel-heading/content_section/before_section_end', 
     $element->add_control(
         'eel_parallax_percent',
         [
-            'label'     => __('Movement Percent', 'easy-elements-pro'),
+            'label'     => __('Movement Percent', 'easy-elements'),
             'type'      => \Elementor\Controls_Manager::SLIDER,
             'size_units' => ['%'],
             'range'     => [
