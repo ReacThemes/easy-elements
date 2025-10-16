@@ -897,20 +897,28 @@ class Easyel_Elements {
 
             'image_gallery_filter' => [
                 'icon'        => 'easyelIcon-marquee-logo',
-                'title'       => 'filterable Gallery',
+                'title'       => 'Filterable Gallery',
                 'description' => 'filterable Gallery',
                 'demo_url'    => 'https://wpeasyelements.com/simple-gallery/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/simple-gallery/',
                 'is_pro'      => true,
                 'tab' => 'widget',
             ],
-
             'portfolio_pro' => [
                 'icon'        => 'easyelIcon-marquee-logo',
                 'title'       => 'Portfolio',
                 'description' => 'Portfolio',
                 'demo_url'    => 'https://wpeasyelements.com/portfolio/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/portfolio/',
+                'is_pro'      => true,
+                'tab' => 'widget',
+            ],
+            'protected_content' => [
+                'icon'        => 'easyelIcon-marquee-logo',
+                'title'       => 'Protected Content',
+                'description' => 'This Widget is protected content',
+                'demo_url'    => 'https://wpeasyelements.com/protected-content/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/protected-content/',
                 'is_pro'      => true,
                 'tab' => 'widget',
             ],

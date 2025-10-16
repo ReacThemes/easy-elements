@@ -1,0 +1,159 @@
+#rtElementsTemplatesLibrary {
+    .dialog-message {
+        height: 90vh;
+        max-height: 90vh;
+    }
+    .dialog-buttons-wrapper {
+        height: 35px;
+    }
+    .rt-elements-template-requesting-status {
+        text-align: center;
+        width: 100%;
+    }
+    #rt-elements-preloader,#rt-elements-preloader-small {
+        /* Pulsing animation */
+        @keyframes rtPreloaderPulse {
+            0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+            }
+            50% {
+            transform: scale(1.2);
+            opacity: 0.2;
+            }
+        }
+        background-color: var(--e-a-bg-default);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 2;
+        .rt-elements-preloader-inner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            border-radius: 100%;
+            .rt-elements-preloader-rt-shape {
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: rtPreloaderPulse 1.5s infinite ease-in-out;
+                img{
+                    height: 60px;
+                }
+            }
+        }
+    }
+    #rt-elements-preloader-small {
+        display: none;
+        height: 60px;
+        width: 60px;
+        position: absolute;
+        top: unset;
+        bottom: 3%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .rt-elements-preloader-inner {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+    .rt-elements-layout-library--logo-area {
+        position: relative;
+        #elementor-template-library-header-preview-back,
+        .elementor-templates-modal__header__logo {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+        }
+        .elementor-templates-modal__header__logo__icon-wrapper {
+            padding: 0;
+            line-height: unset;
+            background: transparent;
+            img {
+                height: 30px;
+            }
+        }
+    }
+    .dialog-lightbox-content {
+        position: relative;
+        overflow: hidden;
+        
+        div#elementor-template-library-templates {
+            position: relative;
+        }
+        #elementor-template-library-toolbar {
+            z-index: 3;
+            position: relative;
+        }
+        #elementor-template-library-templates-container-wrapper {
+            height: calc(75vh - 80px) !important;
+            overflow-y: auto;
+            padding-bottom: 100px;
+        }
+        #elementor-template-library-templates-container {
+            margin: 0 -15px; 
+            .elementor-template-library-template {
+                width: calc(25% - 30px);
+                overflow: hidden;
+                .elementor-template-library-template-footer {
+                    display: fleX;
+                    transform: unset !important;
+                    position: relative !important;
+                    bottom: unset !important;
+                    .elementor-template-library-template-name {
+                        display: inline-flex;
+                    }
+                    .elementor-template-library-template-action {
+                        margin-right: 5px;
+                    }
+                }
+                &.elementor-template-library-template-templates {
+                    > .elementor-template-library-template-footer .elementor-template-library-template-action {
+                        display: none !important;
+                    }
+                }
+                .elementor-template-library-template-body {
+                    overflow: hidden;
+                }
+                &.elementor-template-library-template-pages {
+                    .elementor-template-library-template-body {
+                        height: 250px;
+                    }
+                }
+            }
+        }
+        .rt-elements-template-library-templates-preview {
+            width: 100%;
+            position: absolute;
+            height: 100%;
+            top: 0;
+            overflow-y: auto;
+            display: none;
+            z-index: 3;
+            img {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    }
+    &[data-templates-tab="templates"] {
+        .elementor-template-library-filter-toolbar {
+            visibility: hidden;
+        }
+    }
+}
+
