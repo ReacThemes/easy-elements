@@ -86,10 +86,17 @@
 }
 .eel-team-wraps .grid-item .eel-team-social.t_left ul, .eel-team-wraps .grid-item .eel-team-social.t_right ul {
   flex-direction: column;
+  gap: 8px;
 }
 .eel-team-wraps .grid-item .eel-team-social.t_left ul li a, .eel-team-wraps .grid-item .eel-team-social.t_right ul li a {
   background: #5933FF;
   color: #fff;
+  width: 45px;
+  height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
 }
 
 .eel-popup-modal {

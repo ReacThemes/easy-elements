@@ -177,6 +177,20 @@ function easyel_get_extension_fields() {
             'group' => 'General Extensions',
             'demo_url'    => 'https://easyelements.reactheme.com/',
         ],
+        'enable_dynamic_content' => [
+            'label'   => __('Dynamic Content', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'General Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
+        'enable_live_copy_paste' => [
+            'label'   => __('Live Copy Paste', 'easy-elements'),
+            'icon'        => 'dashicons-format-gallery',
+            'is_pro'  => true,
+            'group' => 'General Extensions',
+            'demo_url'    => 'https://easyelements.reactheme.com/',
+        ],
         
     ];
 
@@ -184,6 +198,10 @@ function easyel_get_extension_fields() {
 }
 
 add_action('deactivated_plugin', function($plugin) {
+
+    if ($plugin !== 'easy-elements-pro/easy-elements-pro.php') {
+        return; 
+    }
    
     if ($plugin === 'easy-elements-pro/easy-elements-pro.php') {
          $available_elements = Easyel_Elements::get_instance()->easyel_elements_get_available_widgets();

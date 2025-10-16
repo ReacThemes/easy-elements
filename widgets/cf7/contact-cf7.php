@@ -112,7 +112,7 @@ class easyel__CF7_Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__( 'Chosse Your Form', 'easy-elements' ),
                 'type' => Controls_Manager::SELECT,
                 'label_block' => true,
-                'options' => ['' => esc_html__( '', 'easy-elements' ) ] + \easyel_get_cf7_forms(),
+                'options' => ['' => esc_html__( 'Select', 'easy-elements' ) ] + \easyel_get_cf7_forms(),
             ]
         );      
 
@@ -311,6 +311,7 @@ class easyel__CF7_Widget extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'field_focus_box_shadow',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [
                     'box_shadow_position',
                 ],
@@ -621,6 +622,7 @@ class easyel__CF7_Widget extends \Elementor\Widget_Base {
             $form = \WPCF7_ContactForm::get_instance( $settings['selected_form_id'] );
             if ( $form ) {
                 echo '<div class="form__btn__' . esc_attr($settings['btn_item_alignment']) . '">';
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo $form->form_html();
                 echo '</div>';
             }

@@ -289,11 +289,12 @@ if ( ! class_exists( 'Easyel_Theme_Builder_CPT' ) ) {
             
             if( isset($_POST['conditions'], $_POST['template_type'], $_POST['template_name']) ) {
 
-               // $conditions    = isset($_POST['conditions']) ? wp_json_encode( array_map('sanitize_text_field', wp_unslash((array) $_POST['conditions']) ) ) : '';
+              
                 $template_type = isset($_POST['template_type']) ? sanitize_text_field( wp_unslash($_POST['template_type']) ) : '';
                 $template_name = isset($_POST['template_name']) ? sanitize_text_field( wp_unslash($_POST['template_name']) ) : '';
 
                 $conditions = isset($_POST['conditions']) 
+                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
                 ? wp_json_encode( sanitize_conditions_array($_POST['conditions']) )
                 : '';
 

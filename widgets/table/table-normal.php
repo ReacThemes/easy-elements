@@ -47,7 +47,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Table', 'easyelements' );
+		return esc_html__( 'Table', 'easy-elements' );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return [ 'easyelements_category' ];
+		return [ 'easy-elements_category' ];
 	}
 
 	/**
@@ -91,7 +91,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_table_header',
 			[
-				'label' => esc_html__( 'Table Header', 'easyelements' ),
+				'label' => esc_html__( 'Table Header', 'easy-elements' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -99,62 +99,62 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'table_header',
 			[
-				'label' => esc_html__( 'Table Header Cell', 'easyelements' ),
+				'label' => esc_html__( 'Table Header Cell', 'easy-elements' ),
 				'type' => Controls_Manager::REPEATER,
 				'prevent_empty' => false,
 				'fields' => [
 					[
 						'name' => 'text',
-						'label' => esc_html__( 'Text', 'easyelements' ),
+						'label' => esc_html__( 'Text', 'easy-elements' ),
 						'type' => Controls_Manager::TEXT,
 						'label_block' => true,
-						'placeholder' => esc_html__( 'Table Header', 'easyelements' ),
-						'default' => esc_html__( 'Table Header', 'easyelements' ),
+						'placeholder' => esc_html__( 'Table Header', 'easy-elements' ),
+						'default' => esc_html__( 'Table Header', 'easy-elements' ),
 						'dynamic' => [
 		                    'active' => true,
 		                ]
 					],
 					[
 						'name'	=> 'advance',
-						'label' => esc_html__( 'Advance Settings', 'easyelements' ),
+						'label' => esc_html__( 'Advance Settings', 'easy-elements' ),
 						'type' => Controls_Manager::SWITCHER,
-						'label_off' => esc_html__( 'No', 'easyelements' ),
-						'label_on' => esc_html__( 'Yes', 'easyelements' ),
+						'label_off' => esc_html__( 'No', 'easy-elements' ),
+						'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'colspan',
-						'label' => esc_html__( 'colSpan', 'easyelements' ),
+						'label' => esc_html__( 'colSpan', 'easy-elements' ),
 						'type' => Controls_Manager::SWITCHER,
 						'condition' => [
 							'advance' => 'yes',
 						],
-						'label_off' => esc_html__( 'No', 'easyelements' ),
-						'label_on' => esc_html__( 'Yes', 'easyelements' ),
+						'label_off' => esc_html__( 'No', 'easy-elements' ),
+						'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'colspannumber',
-						'label' => esc_html__( 'colSpan Number', 'elementor' ),
+						'label' => esc_html__( 'colSpan Number', 'easy-elements' ),
 						'type' => Controls_Manager::TEXT,
 						'condition' => [
 							'advance' => 'yes',
 							'colspan' => 'yes',
 						],
-						'placeholder' => esc_html__( '1', 'easyelements' ),
-						'default' => esc_html__( '1', 'easyelements' ),
+						'placeholder' => esc_html__( '1', 'easy-elements' ),
+						'default' => esc_html__( '1', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'customwidth',
-						'label' => esc_html__( 'Custom Width', 'easyelements' ),
+						'label' => esc_html__( 'Custom Width', 'easy-elements' ),
 						'type' => Controls_Manager::SWITCHER,
 						'condition' => [
 							'advance' => 'yes',
 						],
-						'label_off' => esc_html__( 'No', 'easyelements' ),
-						'label_on' => esc_html__( 'Yes', 'easyelements' ),
+						'label_off' => esc_html__( 'No', 'easy-elements' ),
+						'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'width',
-						'label' => esc_html__( 'Width', 'elementor' ),
+						'label' => esc_html__( 'Width', 'easy-elements' ),
 						'type' => Controls_Manager::SLIDER,
 						'condition' => [
 							'advance' => 'yes',
@@ -180,26 +180,26 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					],
 					[
 						'name' => 'align', 
-						'label' => esc_html__( 'Alignment', 'easyelements' ),
+						'label' => esc_html__( 'Alignment', 'easy-elements' ),
 						'type' => Controls_Manager::CHOOSE,
 						'condition' => [
 							'advance' => 'yes',
 						],
 						'options' => [
 							'left' => [
-								'title' => esc_html__( 'Left', 'easyelements' ),
+								'title' => esc_html__( 'Left', 'easy-elements' ),
 								'icon' => 'eicon-text-align-left',
 							],
 							'center' => [
-								'title' => esc_html__( 'Center', 'easyelements' ),
+								'title' => esc_html__( 'Center', 'easy-elements' ),
 								'icon' => 'eicon-text-align-center',
 							],
 							'right' => [
-								'title' => esc_html__( 'Right', 'easyelements' ),
+								'title' => esc_html__( 'Right', 'easy-elements' ),
 								'icon' => 'eicon-text-align-right',
 							],
 							'justify' => [
-								'title' => esc_html__( 'Justified', 'easyelements' ),
+								'title' => esc_html__( 'Justified', 'easy-elements' ),
 								'icon' => 'eicon-text-align-justify',
 							],
 						],
@@ -210,22 +210,22 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					],
 					[
 						'name' => 'vertical_align', 
-						'label' => esc_html__( 'Vertical Alignment', 'easyelements' ),
+						'label' => esc_html__( 'Vertical Alignment', 'easy-elements' ),
 						'type' => Controls_Manager::CHOOSE,
 						'condition' => [
 							'advance' => 'yes',
 						],
 						'options' => [
 							'top' => [
-								'title' => esc_html__( 'Top', 'easyelements' ),
+								'title' => esc_html__( 'Top', 'easy-elements' ),
 								'icon' => 'fa fa-arrow-up',
 							],
 							'middle' => [
-								'title' => esc_html__( 'Middle', 'easyelements' ),
+								'title' => esc_html__( 'Middle', 'easy-elements' ),
 								'icon' => 'fa fa-arrows-v',
 							],
 							'bottom' => [
-								'title' => esc_html__( 'Bottom', 'easyelements' ),
+								'title' => esc_html__( 'Bottom', 'easy-elements' ),
 								'icon' => 'fa fa-arrow-down',
 							],
 						],
@@ -238,17 +238,17 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					
 					[
 						'name'	=> 'decoration',
-						'label' => esc_html__( 'Decoration', 'easyelements' ),
+						'label' => esc_html__( 'Decoration', 'easy-elements' ),
 						'type' => Controls_Manager::SELECT,
 						'condition' => [
 							'advance' => 'yes',
 						],
 						'options' => [
-							''  => esc_html__( 'Default', 'easyelements' ),
-							'underline' => esc_html__( 'Underline', 'easyelements' ),
-							'overline' => esc_html__( 'Overline', 'easyelements' ),
-							'line-through' => esc_html__( 'Line Through', 'easyelements' ),
-							'none' => esc_html__( 'None', 'easyelements' ),
+							''  => esc_html__( 'Default', 'easy-elements' ),
+							'underline' => esc_html__( 'Underline', 'easy-elements' ),
+							'overline' => esc_html__( 'Overline', 'easy-elements' ),
+							'line-through' => esc_html__( 'Line Through', 'easy-elements' ),
+							'none' => esc_html__( 'None', 'easy-elements' ),
 						],
 						'default' => '',
 						'selectors' => [
@@ -257,14 +257,14 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					],
 					[
 						'name'	=> 'table_head_tooltip',
-						'label' => esc_html__( 'Tooltip Settings', 'easyelements' ),
+						'label' => esc_html__( 'Tooltip Settings', 'easy-elements' ),
 						'type' => Controls_Manager::SWITCHER,
-						'label_off' => esc_html__( 'No', 'easyelements' ),
-						'label_on' => esc_html__( 'Yes', 'easyelements' ),
+						'label_off' => esc_html__( 'No', 'easy-elements' ),
+						'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'table_head_tooltip_icon',
-						'label' => esc_html__( 'Tooltip Icon', 'easyelements' ),
+						'label' => esc_html__( 'Tooltip Icon', 'easy-elements' ),
 						'type' => \Elementor\Controls_Manager::ICONS,
 						'default' => [
 							'value' => 'fas fa-question-circle',
@@ -276,10 +276,10 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					],
 					[
 						'name'	=> 'table_head_tooltip_description',
-						'label' => esc_html__('Tooltip Description', 'easyelements' ),
+						'label' => esc_html__('Tooltip Description', 'easy-elements' ),
 						'type' => \Elementor\Controls_Manager::TEXTAREA,
 						'rows' => 10,
-						'placeholder' => esc_html__( 'Type your tooltip description here', 'easyelements' ),
+						'placeholder' => esc_html__( 'Type your tooltip description here', 'easy-elements' ),
 						'condition' => [
 							'table_head_tooltip' => 'yes',
 						],
@@ -296,69 +296,69 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_table_footer',
 			[
-				'label' => esc_html__( 'Table footer', 'easyelements' ),
+				'label' => esc_html__( 'Table footer', 'easy-elements' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
 		$this->add_control(
 			'table_footer',
 			[
-				'label' => esc_html__( 'Table footer Cell', 'easyelements' ),
+				'label' => esc_html__( 'Table footer Cell', 'easy-elements' ),
 				'type' => Controls_Manager::REPEATER,
 				 'prevent_empty' => false,
 				'fields' => [
 					[
 						'name' => 'text',
-						'label' => esc_html__( 'Text', 'easyelements' ),
+						'label' => esc_html__( 'Text', 'easy-elements' ),
 						'type' => Controls_Manager::TEXT,
 						'label_block' => true,
-						'placeholder' => esc_html__( 'Table footer', 'easyelements' ),
-						'default' => esc_html__( 'Table footer', 'easyelements' ),
+						'placeholder' => esc_html__( 'Table footer', 'easy-elements' ),
+						'default' => esc_html__( 'Table footer', 'easy-elements' ),
 						'dynamic' => [
 							'active' => true,
 						]
 					],
 					[
 						'name'	=> 'advance',
-						'label' => esc_html__( 'Advance Settings', 'easyelements' ),
+						'label' => esc_html__( 'Advance Settings', 'easy-elements' ),
 						'type' => Controls_Manager::SWITCHER,
-						'label_off' => esc_html__( 'No', 'easyelements' ),
-						'label_on' => esc_html__( 'Yes', 'easyelements' ),
+						'label_off' => esc_html__( 'No', 'easy-elements' ),
+						'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'colspan',
-						'label' => esc_html__( 'colSpan', 'easyelements' ),
+						'label' => esc_html__( 'colSpan', 'easy-elements' ),
 						'type' => Controls_Manager::SWITCHER,
 						'condition' => [
 							'advance' => 'yes',
 						],
-						'label_off' => esc_html__( 'No', 'easyelements' ),
-						'label_on' => esc_html__( 'Yes', 'easyelements' ),
+						'label_off' => esc_html__( 'No', 'easy-elements' ),
+						'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'colspannumber',
-						'label' => esc_html__( 'colSpan Number', 'elementor' ),
+						'label' => esc_html__( 'colSpan Number', 'easy-elements' ),
 						'type' => Controls_Manager::TEXT,
 						'condition' => [
 							'advance' => 'yes',
 							'colspan' => 'yes',
 						],
-						'placeholder' => esc_html__( '1', 'easyelements' ),
-						'default' => esc_html__( '1', 'easyelements' ),
+						'placeholder' => esc_html__( '1', 'easy-elements' ),
+						'default' => esc_html__( '1', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'customwidth',
-						'label' => esc_html__( 'Custom Width', 'easyelements' ),
+						'label' => esc_html__( 'Custom Width', 'easy-elements' ),
 						'type' => Controls_Manager::SWITCHER,
 						'condition' => [
 							'advance' => 'yes',
 						],
-						'label_off' => esc_html__( 'No', 'easyelements' ),
-						'label_on' => esc_html__( 'Yes', 'easyelements' ),
+						'label_off' => esc_html__( 'No', 'easy-elements' ),
+						'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'width',
-						'label' => esc_html__( 'Width', 'elementor' ),
+						'label' => esc_html__( 'Width', 'easy-elements' ),
 						'type' => Controls_Manager::SLIDER,
 						'condition' => [
 							'advance' => 'yes',
@@ -384,26 +384,26 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					],
 					[
 						'name' => 'align', 
-						'label' => esc_html__( 'Alignment', 'easyelements' ),
+						'label' => esc_html__( 'Alignment', 'easy-elements' ),
 						'type' => Controls_Manager::CHOOSE,
 						'condition' => [
 							'advance' => 'yes',
 						],
 						'options' => [
 							'left' => [
-								'title' => esc_html__( 'Left', 'easyelements' ),
+								'title' => esc_html__( 'Left', 'easy-elements' ),
 								'icon' => 'eicon-text-align-left',
 							],
 							'center' => [
-								'title' => esc_html__( 'Center', 'easyelements' ),
+								'title' => esc_html__( 'Center', 'easy-elements' ),
 								'icon' => 'eicon-text-align-center',
 							],
 							'right' => [
-								'title' => esc_html__( 'Right', 'easyelements' ),
+								'title' => esc_html__( 'Right', 'easy-elements' ),
 								'icon' => 'eicon-text-align-right',
 							],
 							'justify' => [
-								'title' => esc_html__( 'Justified', 'easyelements' ),
+								'title' => esc_html__( 'Justified', 'easy-elements' ),
 								'icon' => 'eicon-text-align-justify',
 							],
 						],
@@ -414,22 +414,22 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					],
 					[
 						'name' => 'vertical_align', 
-						'label' => esc_html__( 'Vertical Alignment', 'easyelements' ),
+						'label' => esc_html__( 'Vertical Alignment', 'easy-elements' ),
 						'type' => Controls_Manager::CHOOSE,
 						'condition' => [
 							'advance' => 'yes',
 						],
 						'options' => [
 							'top' => [
-								'title' => esc_html__( 'Top', 'easyelements' ),
+								'title' => esc_html__( 'Top', 'easy-elements' ),
 								'icon' => 'eicon-v-align-up',
 							],
 							'middle' => [
-								'title' => esc_html__( 'Middle', 'easyelements' ),
+								'title' => esc_html__( 'Middle', 'easy-elements' ),
 								'icon' => 'eicon-v-align-middle',
 							],
 							'bottom' => [
-								'title' => esc_html__( 'Bottom', 'easyelements' ),
+								'title' => esc_html__( 'Bottom', 'easy-elements' ),
 								'icon' => 'eicon-v-align-bottom',
 							],
 						],
@@ -441,17 +441,17 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					
 					[
 						'name'	=> 'decoration',
-						'label' => esc_html__( 'Decoration', 'easyelements' ),
+						'label' => esc_html__( 'Decoration', 'easy-elements' ),
 						'type' => Controls_Manager::SELECT,
 						'condition' => [
 							'advance' => 'yes',
 						],
 						'options' => [
-							''  => esc_html__( 'Default', 'easyelements' ),
-							'underline' => esc_html__( 'Underline', 'easyelements' ),
-							'overline' => esc_html__( 'Overline', 'easyelements' ),
-							'line-through' => esc_html__( 'Line Through', 'easyelements' ),
-							'none' => esc_html__( 'None', 'easyelements' ),
+							''  => esc_html__( 'Default', 'easy-elements' ),
+							'underline' => esc_html__( 'Underline', 'easy-elements' ),
+							'overline' => esc_html__( 'Overline', 'easy-elements' ),
+							'line-through' => esc_html__( 'Line Through', 'easy-elements' ),
+							'none' => esc_html__( 'None', 'easy-elements' ),
 						],
 						'default' => '',
 						'selectors' => [
@@ -460,14 +460,14 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					],
 					[
 						'name'	=> 'table_foot_tooltip',
-						'label' => esc_html__( 'Tooltip Settings', 'easyelements' ),
+						'label' => esc_html__( 'Tooltip Settings', 'easy-elements' ),
 						'type' => Controls_Manager::SWITCHER,
-						'label_off' => esc_html__( 'No', 'easyelements' ),
-						'label_on' => esc_html__( 'Yes', 'easyelements' ),
+						'label_off' => esc_html__( 'No', 'easy-elements' ),
+						'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 					],
 					[
 						'name'	=> 'table_foot_tooltip_icon',
-						'label' => esc_html__( 'Tooltip Icon', 'easyelements' ),
+						'label' => esc_html__( 'Tooltip Icon', 'easy-elements' ),
 						'type' => \Elementor\Controls_Manager::ICONS,
 						'default' => [
 							'value' => 'fas fa-question-circle',
@@ -479,10 +479,10 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 					],
 					[
 						'name'	=> 'table_foot_tooltip_description',
-						'label' => esc_html__('Tooltip Description', 'easyelements' ),
+						'label' => esc_html__('Tooltip Description', 'easy-elements' ),
 						'type' => \Elementor\Controls_Manager::TEXTAREA,
 						'rows' => 10,
-						'placeholder' => esc_html__( 'Type your tooltip description here', 'easyelements' ),
+						'placeholder' => esc_html__( 'Type your tooltip description here', 'easy-elements' ),
 						'condition' => [
 							'table_foot_tooltip' => 'yes',
 						],
@@ -498,7 +498,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_table_body',
 			[
-				'label' => esc_html__( 'Table Body', 'easyelements' ),
+				'label' => esc_html__( 'Table Body', 'easy-elements' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -508,28 +508,28 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		
 		$repeater->add_control(
 			'row', [
-				'label' => esc_html__( 'New Row', 'easyelements' ),
+				'label' => esc_html__( 'New Row', 'easy-elements' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'No', 'easyelements' ),
-				'label_on' => esc_html__( 'Yes', 'easyelements' ),
+				'label_off' => esc_html__( 'No', 'easy-elements' ),
+				'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 			]
 		);
 
 		$repeater->add_control(
 			'table_icon',
 			[
-				'label' => esc_html__( 'Icon', 'easyelements' ),
+				'label' => esc_html__( 'Icon', 'easy-elements' ),
 				'type' => \Elementor\Controls_Manager::ICONS,
 			]
 		);
 
 		$repeater->add_control(
 			'text', [
-				'label' => esc_html__( 'Text', 'easyelements' ),
+				'label' => esc_html__( 'Text', 'easy-elements' ),
 				'type' => Controls_Manager::WYSIWYG,
 				'label_block' => true,
-				'placeholder' => esc_html__( 'Table Data', 'easyelements' ),
-				'default' => esc_html__( 'Table Data', 'easyelements' ),
+				'placeholder' => esc_html__( 'Table Data', 'easy-elements' ),
+				'default' => esc_html__( 'Table Data', 'easy-elements' ),
 				'dynamic' => [
 		            'active' => true,
 		        ]
@@ -538,85 +538,85 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 
 		$repeater->add_control(
 			'advance', [
-				'label' => esc_html__( 'Advance Settings', 'easyelements' ),
+				'label' => esc_html__( 'Advance Settings', 'easy-elements' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'No', 'easyelements' ),
-				'label_on' => esc_html__( 'Yes', 'easyelements' ),
+				'label_off' => esc_html__( 'No', 'easy-elements' ),
+				'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 			]
 		);
 
 		$repeater->add_control(
 			'colspan', [
-				'label' => esc_html__( 'colSpan', 'easyelements' ),
+				'label' => esc_html__( 'colSpan', 'easy-elements' ),
 				'type' => Controls_Manager::SWITCHER,
 				'condition' => [
 					'advance' => 'yes',
 				],
-				'label_off' => esc_html__( 'No', 'easyelements' ),
-				'label_on' => esc_html__( 'Yes', 'easyelements' ),
+				'label_off' => esc_html__( 'No', 'easy-elements' ),
+				'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 			]
 		);
 
 		$repeater->add_control(
 			'colspannumber', [
-				'label' => esc_html__( 'colSpan Number', 'elementor' ),
+				'label' => esc_html__( 'colSpan Number', 'easy-elements' ),
 				'type' => Controls_Manager::TEXT,
 				'condition' => [
 					'advance' => 'yes',
 					'colspan' => 'yes',
 				],
-				'placeholder' => esc_html__( '1', 'easyelements' ),
-				'default' => esc_html__( '1', 'easyelements' ),
+				'placeholder' => esc_html__( '1', 'easy-elements' ),
+				'default' => esc_html__( '1', 'easy-elements' ),
 			]
 		);
 
 		$repeater->add_control(
 			'rowspan', [
-				'label' => esc_html__( 'rowSpan', 'easyelements' ),
+				'label' => esc_html__( 'rowSpan', 'easy-elements' ),
 				'type' => Controls_Manager::SWITCHER,
 				'condition' => [
 					'advance' => 'yes',
 				],
-				'label_off' => esc_html__( 'No', 'easyelements' ),
-				'label_on' => esc_html__( 'Yes', 'easyelements' ),
+				'label_off' => esc_html__( 'No', 'easy-elements' ),
+				'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 			]
 		);
 
 		$repeater->add_control(
 			'rowspannumber', [
-				'label' => esc_html__( 'rowSpan Number', 'elementor' ),
+				'label' => esc_html__( 'rowSpan Number', 'easy-elements' ),
 				'type' => Controls_Manager::TEXT,
 				'condition' => [
 					'advance' => 'yes',
 					'rowspan' => 'yes',
 				],
-				'placeholder' => esc_html__( '1', 'easyelements' ),
-				'default' => esc_html__( '1', 'easyelements' ),
+				'placeholder' => esc_html__( '1', 'easy-elements' ),
+				'default' => esc_html__( '1', 'easy-elements' ),
 			]
 		);
 
 		$repeater->add_control(
 			'align', [
-				'label' => esc_html__( 'Alignment', 'easyelements' ),
+				'label' => esc_html__( 'Alignment', 'easy-elements' ),
 				'type' => Controls_Manager::CHOOSE,
 				'condition' => [
 					'advance' => 'yes',
 				],
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'easyelements' ),
+						'title' => esc_html__( 'Left', 'easy-elements' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'easyelements' ),
+						'title' => esc_html__( 'Center', 'easy-elements' ),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'easyelements' ),
+						'title' => esc_html__( 'Right', 'easy-elements' ),
 						'icon' => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'easyelements' ),
+						'title' => esc_html__( 'Justified', 'easy-elements' ),
 						'icon' => 'eicon-text-align-justify',
 					],
 				],
@@ -628,22 +628,22 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		);
 		$repeater->add_control(
 			'vertical_align', [
-				'label' => esc_html__( 'Vetical Alignment', 'easyelements' ),
+				'label' => esc_html__( 'Vetical Alignment', 'easy-elements' ),
 				'type' => Controls_Manager::CHOOSE,
 				'condition' => [
 					'advance' => 'yes',
 				],
 				'options' => [
 				'top' => [
-					'title' => esc_html__( 'Top', 'easyelements' ),
+					'title' => esc_html__( 'Top', 'easy-elements' ),
 					'icon' => 'eicon-v-align-top',
 				],
 				'middle' => [
-					'title' => esc_html__( 'Middle', 'easyelements' ),
+					'title' => esc_html__( 'Middle', 'easy-elements' ),
 					'icon' => 'eicon-v-align-middle',
 				],
 				'bottom' => [
-					'title' => esc_html__( 'Bottom', 'easyelements' ),
+					'title' => esc_html__( 'Bottom', 'easy-elements' ),
 					'icon' => 'eicon-v-align-bottom',
 				],
 			],
@@ -656,7 +656,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'advanced_item_bg_color',
 			[
-				'label' => esc_html__( 'Background Color', 'easyelements' ),
+				'label' => esc_html__( 'Background Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-table-body {{CURRENT_ITEM}}' => 'background-color: {{VALUE}};',
@@ -666,7 +666,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'advanced_item_text_color',
 			[
-				'label' => esc_html__( 'Color', 'easyelements' ),
+				'label' => esc_html__( 'Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-table-body {{CURRENT_ITEM}}' => 'color: {{VALUE}};',
@@ -676,20 +676,20 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'tb_cswidthS',
 			[
-				'label' => esc_html__( 'Custom Width', 'easyelements' ),
+				'label' => esc_html__( 'Custom Width', 'easy-elements' ),
 				'type' => Controls_Manager::SELECT,
 				'type' => Controls_Manager::SWITCHER,
 				'condition' => [
 					'advance' => 'yes',
 				],
-				'label_off' => esc_html__( 'No', 'easyelements' ),
-				'label_on' => esc_html__( 'Yes', 'easyelements' ),
+				'label_off' => esc_html__( 'No', 'easy-elements' ),
+				'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 			]
 		);	
 		$repeater->add_control(
 			'tb_cswidth',
 			[
-			'label' => esc_html__( 'Width', 'elementor' ),
+			'label' => esc_html__( 'Width', 'easy-elements' ),
 			'type' => Controls_Manager::SLIDER,
 			'size_units' => [ '%', 'px' ],
 			'condition' => [
@@ -715,17 +715,17 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'decoration',
 			[
-				'label' => esc_html__( 'Decoration', 'easyelements' ),
+				'label' => esc_html__( 'Decoration', 'easy-elements' ),
 				'type' => Controls_Manager::SELECT,
 				'condition' => [
 					'advance' => 'yes',
 				],
 				'options' => [
-					''  => esc_html__( 'Default', 'easyelements' ),
-					'underline' => esc_html__( 'Underline', 'easyelements' ),
-					'overline' => esc_html__( 'Overline', 'easyelements' ),
-					'line-through' => esc_html__( 'Line Through', 'easyelements' ),
-					'none' => esc_html__( 'None', 'easyelements' ),
+					''  => esc_html__( 'Default', 'easy-elements' ),
+					'underline' => esc_html__( 'Underline', 'easy-elements' ),
+					'overline' => esc_html__( 'Overline', 'easy-elements' ),
+					'line-through' => esc_html__( 'Line Through', 'easy-elements' ),
+					'none' => esc_html__( 'None', 'easy-elements' ),
 				],
 				'default' => '',
 				'selectors' => [
@@ -736,16 +736,16 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'table_body_tooltip',
 			[
-			'label' => esc_html__( 'Tooltip Settings', 'easyelements' ),
+			'label' => esc_html__( 'Tooltip Settings', 'easy-elements' ),
 			'type' => Controls_Manager::SWITCHER,
-			'label_off' => esc_html__( 'No', 'easyelements' ),
-			'label_on' => esc_html__( 'Yes', 'easyelements' ),
+			'label_off' => esc_html__( 'No', 'easy-elements' ),
+			'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 			]
 			);
 		$repeater->add_control(
 			'table_body_tooltip_icon',
 			[
-				'label' => esc_html__( 'Tooltip Icon', 'easyelements' ),
+				'label' => esc_html__( 'Tooltip Icon', 'easy-elements' ),
 				'type' => \Elementor\Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-question-circle',
@@ -759,10 +759,10 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$repeater->add_control(
 			'table_body_tooltip_description',
 			[
-				'label' => esc_html__('Tooltip Description', 'easyelements' ),
+				'label' => esc_html__('Tooltip Description', 'easy-elements' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 10,
-				'placeholder' => esc_html__( 'Type your tooltip description here', 'easyelements' ),
+				'placeholder' => esc_html__( 'Type your tooltip description here', 'easy-elements' ),
 				'condition' => [
 					'table_body_tooltip' => 'yes',
 				],
@@ -772,12 +772,12 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'table_body',
 			[
-				'label' => esc_html__( 'Table Body Cell', 'easyelements' ),
+				'label' => esc_html__( 'Table Body Cell', 'easy-elements' ),
 				'type' => Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
-						'text' => esc_html__( 'Table Data', 'easyelements' ),
+						'text' => esc_html__( 'Table Data', 'easy-elements' ),
 					],
 				],
 				'title_field' => '{{{ text }}}',
@@ -792,26 +792,26 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style',
 			[
-				'label' => esc_html__( 'General Style', 'easyelements' ),
+				'label' => esc_html__( 'General Style', 'easy-elements' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
 			'vertical_align_table', [
-				'label' => esc_html__( 'Vetical Alignment', 'easyelements' ),
+				'label' => esc_html__( 'Vetical Alignment', 'easy-elements' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 				'top' => [
-					'title' => esc_html__( 'Top', 'easyelements' ),
+					'title' => esc_html__( 'Top', 'easy-elements' ),
 					'icon' => 'eicon-v-align-top',
 				],
 				'middle' => [
-					'title' => esc_html__( 'Middle', 'easyelements' ),
+					'title' => esc_html__( 'Middle', 'easy-elements' ),
 					'icon' => 'eicon-v-align-middle',
 				],
 				'bottom' => [
-					'title' => esc_html__( 'Bottom', 'easyelements' ),
+					'title' => esc_html__( 'Bottom', 'easy-elements' ),
 					'icon' => 'eicon-v-align-bottom',
 				],
 			],
@@ -825,7 +825,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'table_padding',
 			[
-				'label' => esc_html__( 'Table Padding', 'easyelements' ),
+				'label' => esc_html__( 'Table Padding', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -839,14 +839,14 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'table_border',
-				'label' => esc_html__( 'Border', 'easyelements' ),
+				'label' => esc_html__( 'Border', 'easy-elements' ),
 				'selector' => '{{WRAPPER}} table.easyel-table tbody',
 			]
 		);
 		$this->add_control(
 			'table_radius',
 			[
-				'label' => esc_html__( 'Table Border Radius', 'easyelements' ),
+				'label' => esc_html__( 'Table Border Radius', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -859,7 +859,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'table_header_style',
 			[
-				'label' => esc_html__( 'Table Header Style', 'easyelements' ),
+				'label' => esc_html__( 'Table Header Style', 'easy-elements' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -867,23 +867,23 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'header_align',
 			[
-				'label' => esc_html__( 'Alignment', 'easyelements' ),
+				'label' => esc_html__( 'Alignment', 'easy-elements' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'easyelements' ),
+						'title' => esc_html__( 'Left', 'easy-elements' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'easyelements' ),
+						'title' => esc_html__( 'Center', 'easy-elements' ),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'easyelements' ),
+						'title' => esc_html__( 'Right', 'easy-elements' ),
 						'icon' => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'easyelements' ),
+						'title' => esc_html__( 'Justified', 'easy-elements' ),
 						'icon' => 'eicon-text-align-justify',
 					],
 				],
@@ -896,7 +896,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'header_text_color',
 			[
-				'label' => esc_html__( 'Text Color', 'easyelements' ),
+				'label' => esc_html__( 'Text Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-table-header' => 'color: {{VALUE}};',
@@ -916,7 +916,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'header_bg_color',
 			[
-				'label' => esc_html__( 'Background Color', 'easyelements' ),
+				'label' => esc_html__( 'Background Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-table-header' => 'background-color: {{VALUE}};',
@@ -933,7 +933,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'table_thead_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'easyelements' ),
+				'label' => esc_html__( 'Border Radius', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -944,7 +944,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'table_thead_padding',
 			[
-				'label' => esc_html__( 'Padding', 'easyelements' ),
+				'label' => esc_html__( 'Padding', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -957,7 +957,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'table_footer_style',
 			[
-				'label' => esc_html__( 'Table footer Style', 'easyelements' ),
+				'label' => esc_html__( 'Table footer Style', 'easy-elements' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -965,23 +965,23 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'footer_align',
 			[
-				'label' => esc_html__( 'Alignment', 'easyelements' ),
+				'label' => esc_html__( 'Alignment', 'easy-elements' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'easyelements' ),
+						'title' => esc_html__( 'Left', 'easy-elements' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'easyelements' ),
+						'title' => esc_html__( 'Center', 'easy-elements' ),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'easyelements' ),
+						'title' => esc_html__( 'Right', 'easy-elements' ),
 						'icon' => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'easyelements' ),
+						'title' => esc_html__( 'Justified', 'easy-elements' ),
 						'icon' => 'eicon-text-align-justify',
 					],
 				],
@@ -995,7 +995,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'footer_text_color',
 			[
-				'label' => esc_html__( 'Text Color', 'easyelements' ),
+				'label' => esc_html__( 'Text Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-table-footer' => 'color: {{VALUE}};',
@@ -1015,7 +1015,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'footer_bg_color',
 			[
-				'label' => esc_html__( 'Background Color', 'easyelements' ),
+				'label' => esc_html__( 'Background Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-table-footer' => 'background-color: {{VALUE}};',
@@ -1025,7 +1025,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'table_tfoot_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'easyelements' ),
+				'label' => esc_html__( 'Border Radius', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1036,7 +1036,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'table_tfoot_padding',
 			[
-				'label' => esc_html__( 'Padding', 'easyelements' ),
+				'label' => esc_html__( 'Padding', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1058,7 +1058,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'table_body_style',
 			[
-				'label' => esc_html__( 'Table Body Style', 'easyelements' ),
+				'label' => esc_html__( 'Table Body Style', 'easy-elements' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -1066,23 +1066,23 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'body_align',
 			[
-				'label' => esc_html__( 'Alignment', 'easyelements' ),
+				'label' => esc_html__( 'Alignment', 'easy-elements' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'easyelements' ),
+						'title' => esc_html__( 'Left', 'easy-elements' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'easyelements' ),
+						'title' => esc_html__( 'Center', 'easy-elements' ),
 						'icon' => 'eicon-text-align-center',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'easyelements' ),
+						'title' => esc_html__( 'Right', 'easy-elements' ),
 						'icon' => 'eicon-text-align-right',
 					],
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'easyelements' ),
+						'title' => esc_html__( 'Justified', 'easy-elements' ),
 						'icon' => 'eicon-text-align-justify',
 					],
 				],
@@ -1095,7 +1095,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'body_text_color',
 			[
-				'label' => esc_html__( 'Text Color', 'easyelements' ),
+				'label' => esc_html__( 'Text Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-table-body' => 'color: {{VALUE}};',
@@ -1116,7 +1116,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'body_bg_color',
 			[
-				'label' => esc_html__( 'Background Color', 'easyelements' ),
+				'label' => esc_html__( 'Background Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-table-body' => 'background-color: {{VALUE}};',
@@ -1127,16 +1127,16 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'striped_bg', 
 			[
-				'label' => esc_html__( 'Striped Background', 'easyelements' ),
+				'label' => esc_html__( 'Striped Background', 'easy-elements' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'No', 'easyelements' ),
-				'label_on' => esc_html__( 'Yes', 'easyelements' ),
+				'label_off' => esc_html__( 'No', 'easy-elements' ),
+				'label_on' => esc_html__( 'Yes', 'easy-elements' ),
 			]
 		);
 		$this->add_control(
 			'striped_bg_color', 
 			[
-				'label' => esc_html__( 'Secondary Background Color', 'easyelements' ),
+				'label' => esc_html__( 'Secondary Background Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'condition' => [
 					'striped_bg' => 'yes',
@@ -1149,7 +1149,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'body_icon_color',
 			[
-				'label' => esc_html__( 'Icon Color', 'easyelements' ),
+				'label' => esc_html__( 'Icon Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-table-body td i' => 'color: {{VALUE}};',
@@ -1160,7 +1160,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'body_icon_size',
 			[
-				'label' => esc_html__( 'Icon Size', 'easyelements' ),
+				'label' => esc_html__( 'Icon Size', 'easy-elements' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'range' => [
@@ -1182,7 +1182,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'body_icon_gap',
 			[
-				'label' => esc_html__( 'Icon Margin', 'easyelements' ),
+				'label' => esc_html__( 'Icon Margin', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1194,7 +1194,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'table_tbody_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'easyelements' ),
+				'label' => esc_html__( 'Border Radius', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1205,7 +1205,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'table_tbody_padding',
 			[
-				'label' => esc_html__( 'Padding', 'easyelements' ),
+				'label' => esc_html__( 'Padding', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1223,7 +1223,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tooltip_heading',
 			[
-				'label' => esc_html__( 'Tooltip Options', 'textdomain' ),
+				'label' => esc_html__( 'Tooltip Options', 'easy-elements' ),
 				'type' => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -1231,7 +1231,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tooltip_icon_color',
 			[
-				'label' => esc_html__( 'Tooltip Icon Color', 'easyelements' ),
+				'label' => esc_html__( 'Tooltip Icon Color', 'easy-elements' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} table.easyel-table .easyel-tooltip i' => 'color: {{VALUE}} !important;',
@@ -1242,7 +1242,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tooltip_icon_size',
 			[
-				'label' => esc_html__( 'Tooltip Icon Size', 'easyelements' ),
+				'label' => esc_html__( 'Tooltip Icon Size', 'easy-elements' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'range' => [
@@ -1264,7 +1264,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'tooltip_icon_margin',
 			[
-				'label' => esc_html__( 'Tooltip Icon Margin', 'easyelements' ),
+				'label' => esc_html__( 'Tooltip Icon Margin', 'easy-elements' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -1276,23 +1276,23 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'tooltip_align',
 			[
-				'label' => esc_html__( 'Tooltip Align', 'easyelements' ),
+				'label' => esc_html__( 'Tooltip Align', 'easy-elements' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'easyelements' ),
+						'title' => esc_html__( 'Left', 'easy-elements' ),
 						'icon' => 'eicon-h-align-left',
 					],
 					'top' => [
-						'title' => esc_html__( 'Top', 'easyelements' ),
+						'title' => esc_html__( 'Top', 'easy-elements' ),
 						'icon' => 'eicon-v-align-top',
 					],
 					'right' => [
-						'title' => esc_html__( 'Right', 'easyelements' ),
+						'title' => esc_html__( 'Right', 'easy-elements' ),
 						'icon' => 'eicon-h-align-right',
 					],
 					'bottom' => [
-						'title' => esc_html__( 'Bottom', 'easyelements' ),
+						'title' => esc_html__( 'Bottom', 'easy-elements' ),
 						'icon' => 'eicon-v-align-bottom',
 					],
 				],
@@ -1316,7 +1316,7 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 	protected function render() {
 
 		$settings = $this->get_settings_for_display();
-		$unique = rand(10,6554120);	
+		$unique = wp_rand(10,6554120);	
 		$tooltip_align = $settings['tooltip_align'];
 
 		?>
@@ -1325,15 +1325,35 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 			<thead  class="easyel-table-header">
 				<tr class="single-plan__header">
 					<?php
-					foreach ($settings['table_header'] as $index => $headeritem) {
+					foreach ( $settings['table_header'] as $index => $headeritem ) {
+
 						$repeater_setting_key = $this->get_repeater_setting_key( 'text', 'table_header', $index );
 						$this->add_inline_editing_attributes( $repeater_setting_key );
 
-						$colspan = ($headeritem['colspan'] == 'yes' && $headeritem['advance'] == 'yes') ? 'colSpan="'.$headeritem['colspannumber'].'"' : '';
-						echo '<th class="header-title elementor-inline-editing elementor-repeater-item-'.$headeritem['_id'].'"  '.$colspan.' '.$this->get_render_attribute_string( $repeater_setting_key ).'>'.$headeritem['text'];
-						if ($headeritem['table_head_tooltip'] == 'yes') {
-							echo '<span class="easyel-tooltip" data-bs-custom-class="tooltip-table-title" data-bs-toggle="tooltip" data-bs-placement="'.$tooltip_align.'" title="'.wp_kses_post( $headeritem['table_head_tooltip_description'] ).'">';
-							\Elementor\Icons_Manager::render_icon( $headeritem['table_head_tooltip_icon'], [ 'aria-hidden' => 'true' ] );
+						$colspan = ( isset( $headeritem['colspan'], $headeritem['advance'] ) && 
+									$headeritem['colspan'] === 'yes' && $headeritem['advance'] === 'yes' )
+							? 'colspan="' . esc_attr( $headeritem['colspannumber'] ) . '"'
+							: '';
+
+						echo '<th class="header-title elementor-inline-editing elementor-repeater-item-' . esc_attr( $headeritem['_id'] ) . '" '
+							. esc_attr( $colspan ) . ' '
+							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							. $this->get_render_attribute_string( $repeater_setting_key ) . '>';
+
+						echo wp_kses_post( $headeritem['text'] );
+
+						if ( isset( $headeritem['table_head_tooltip'] ) && $headeritem['table_head_tooltip'] === 'yes' ) {
+							echo '<span class="easyel-tooltip" '
+								. 'data-bs-custom-class="tooltip-table-title" '
+								. 'data-bs-toggle="tooltip" '
+								. 'data-bs-placement="' . esc_attr( $tooltip_align ) . '" '
+								. 'title="' . esc_attr( $headeritem['table_head_tooltip_description'] ) . '">';
+
+							\Elementor\Icons_Manager::render_icon(
+								$headeritem['table_head_tooltip_icon'],
+								[ 'aria-hidden' => 'true' ]
+							);
+
 							echo '</span>';
 						}
 
@@ -1345,31 +1365,48 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 			<tbody class="easyel-table-body">
 				<tr class="single-plan__content">
 					<?php
-						foreach ($settings['table_body'] as $index => $item) {
+						foreach ( $settings['table_body'] as $index => $item ) {
 
-							$table_icon = !empty($item['table_icon']) ? $item['table_icon'] : '';
+							$table_icon = ! empty( $item['table_icon'] ) ? $item['table_icon'] : '';
 
-							$table_body_key = $this->get_repeater_setting_key('text', 'table_body', $index);
-							$this->add_render_attribute($table_body_key, 'class', 'plan-title elementor-repeater-item-' . $item['_id']);
-							$this->add_inline_editing_attributes($table_body_key);
+							$table_body_key = $this->get_repeater_setting_key( 'text', 'table_body', $index );
+							$this->add_render_attribute( $table_body_key, 'class', 'plan-title elementor-repeater-item-' . esc_attr( $item['_id'] ) );
+							$this->add_inline_editing_attributes( $table_body_key );
 
-							if ($item['row'] == 'yes') {
+							if ( isset( $item['row'] ) && $item['row'] === 'yes' ) {
 								echo '</tr><tr class="single-plan__content">';
 							}
 
-							$colspan = ($item['colspan'] == 'yes' && $item['advance'] == 'yes') ? 'colspan="' . $item['colspannumber'] . '"' : '';
-							$rowspan = ($item['rowspan'] == 'yes' && $item['advance'] == 'yes') ? 'rowspan="' . $item['rowspannumber'] . '"' : '';
+							$colspan = ( isset( $item['colspan'], $item['advance'] ) && $item['colspan'] === 'yes' && $item['advance'] === 'yes' )
+								? 'colspan="' . esc_attr( $item['colspannumber'] ) . '"'
+								: '';
 
-							echo '<td ' . $colspan . ' ' . $rowspan . ' ' . $this->get_render_attribute_string($table_body_key) . '>';
-							if (!empty($item['table_icon'])) {
-								\Elementor\Icons_Manager::render_icon($item['table_icon'], ['aria-hidden' => 'true']);
+							$rowspan = ( isset( $item['rowspan'], $item['advance'] ) && $item['rowspan'] === 'yes' && $item['advance'] === 'yes' )
+								? 'rowspan="' . esc_attr( $item['rowspannumber'] ) . '"'
+								: '';
+							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo '<td ' . esc_attr( $colspan ) . ' ' . esc_attr( $rowspan ). ' ' . $this->get_render_attribute_string( $table_body_key ) . '>';
+
+							if ( ! empty( $table_icon ) ) {
+								\Elementor\Icons_Manager::render_icon( $table_icon, [ 'aria-hidden' => 'true' ] );
 							}
-							echo $item['text'];
-							if ($item['table_body_tooltip'] == 'yes') {
-								echo '<span class="easyel-tooltip" data-bs-custom-class="tooltip-table-title" data-bs-toggle="tooltip" data-bs-placement="'.$tooltip_align.'" title="'.wp_kses_post( $item['table_body_tooltip_description'] ).'">';
-								\Elementor\Icons_Manager::render_icon( $item['table_body_tooltip_icon'], [ 'aria-hidden' => 'true' ] );
+
+							echo wp_kses_post( $item['text'] );
+
+							if ( isset( $item['table_body_tooltip'] ) && $item['table_body_tooltip'] === 'yes' ) {
+								echo '<span class="easyel-tooltip" '
+									. 'data-bs-custom-class="tooltip-table-title" '
+									. 'data-bs-toggle="tooltip" '
+									. 'data-bs-placement="' . esc_attr( $tooltip_align ) . '" '
+									. 'title="' . esc_attr( $item['table_body_tooltip_description'] ) . '">';
+								
+								\Elementor\Icons_Manager::render_icon(
+									$item['table_body_tooltip_icon'], 
+									[ 'aria-hidden' => 'true' ]
+								);
 								echo '</span>';
 							}
+
 							echo '</td>';
 						}
 					?>
@@ -1378,15 +1415,34 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 			<tfoot class="easyel-table-footer">
 				<tr class="easyel-single-plane-footer">
 					<?php
-					foreach ($settings['table_footer'] as $index => $footeritem) {
+					foreach ( $settings['table_footer'] as $index => $footeritem ) {
+
 						$repeater_setting_key = $this->get_repeater_setting_key( 'text', 'table_footer', $index );
 						$this->add_inline_editing_attributes( $repeater_setting_key );
 
-						$colspan = ($footeritem['colspan'] == 'yes' && $footeritem['advance'] == 'yes') ? 'colSpan="'.$footeritem['colspannumber'].'"' : '';
-						echo '<th class="footer-title elementor-inline-editing elementor-repeater-item-'.$footeritem['_id'].'"  '.$colspan.' '.$this->get_render_attribute_string( $repeater_setting_key ).'>'.$footeritem['text'];
-						if ($footeritem['table_foot_tooltip'] == 'yes') {
-							echo '<span class="easyel-tooltip" data-bs-custom-class="tooltip-table-title" data-bs-toggle="tooltip" data-bs-placement="'.$tooltip_align.'" title="'.wp_kses_post( $footeritem['table_foot_tooltip_description'] ).'">';
-							\Elementor\Icons_Manager::render_icon( $footeritem['table_foot_tooltip_icon'], [ 'aria-hidden' => 'true' ] );
+						$colspan = ( $footeritem['colspan'] === 'yes' && $footeritem['advance'] === 'yes' ) 
+							? 'colspan="' . esc_attr( $footeritem['colspannumber'] ) . '"' 
+							: '';
+
+						echo '<th class="footer-title elementor-inline-editing elementor-repeater-item-' . esc_attr( $footeritem['_id'] ) . '" ' 
+							. esc_attr( $colspan ) . ' ' 
+							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							. $this->get_render_attribute_string( $repeater_setting_key ) 
+							. '>' 
+							. wp_kses_post( $footeritem['text'] );
+
+						if ( isset( $footeritem['table_foot_tooltip'] ) && $footeritem['table_foot_tooltip'] === 'yes' ) {
+							echo '<span class="easyel-tooltip" '
+								. 'data-bs-custom-class="tooltip-table-title" '
+								. 'data-bs-toggle="tooltip" '
+								. 'data-bs-placement="' . esc_attr( $tooltip_align ) . '" '
+								. 'title="' . esc_attr( $footeritem['table_foot_tooltip_description'] ) . '">';
+
+							\Elementor\Icons_Manager::render_icon(
+								$footeritem['table_foot_tooltip_icon'], 
+								[ 'aria-hidden' => 'true' ]
+							);
+
 							echo '</span>';
 						}
 

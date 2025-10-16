@@ -127,10 +127,10 @@ class Easyel_Elements {
 
         check_ajax_referer( 'easy_elements_widget_settings_nonce', 'nonce' );
 
-        $tab        = isset( $_POST['tab'] ) ? sanitize_text_field( $_POST['tab'] ) : 'extensions';
-        $keys       = isset( $_POST['keys'] ) ? (array) $_POST['keys'] : [];
-        $status     = isset( $_POST['status'] ) ? intval( $_POST['status'] ) : 0;
-        $group_slug = isset( $_POST['group'] ) ? sanitize_text_field( $_POST['group'] ) : '';
+        $tab        = isset( $_POST['tab'] ) ? sanitize_text_field( wp_unslash( $_POST['tab'] ) ) : 'extensions';
+        $keys       = isset( $_POST['keys'] ) ? array_map( 'sanitize_text_field', (array) wp_unslash( $_POST['keys'] ) ) : [];
+        $status     = isset( $_POST['status'] ) ? intval( wp_unslash( $_POST['status'] ) ) : 0;
+        $group_slug = isset( $_POST['group'] ) ? sanitize_text_field( wp_unslash( $_POST['group'] ) ) : '';
 
         if ( empty( $keys ) ) {
             wp_send_json_error( [ 'message' => __( 'No keys provided', 'easy-elements' ) ] );
@@ -157,9 +157,9 @@ class Easyel_Elements {
 
         check_ajax_referer('easy_elements_widget_settings_nonce', 'nonce');
 
-        $tab    = isset($_POST['tab']) ? sanitize_text_field($_POST['tab']) : 'extensions';
-        $key    = isset($_POST['key']) ? sanitize_text_field($_POST['key']) : '';
-        $status = isset($_POST['status']) ? intval($_POST['status']) : 0;
+        $tab        = isset( $_POST['tab'] ) ? sanitize_text_field( wp_unslash( $_POST['tab'] ) ) : 'extensions';
+        $key        = isset($_POST['key']) ? sanitize_text_field( wp_unslash( $_POST['key'] )) : '';
+        $status     = isset( $_POST['status'] ) ? intval( wp_unslash( $_POST['status'] ) ) : 0;
 
         if (!$key) {
             wp_send_json_error(['message' => __('Invalid key', 'easy-elements')]);
@@ -182,9 +182,9 @@ class Easyel_Elements {
         }
         check_ajax_referer('easy_elements_widget_settings_nonce', 'nonce');
         
-        $widget_key = isset($_POST['widget_key']) ? sanitize_text_field(wp_unslash($_POST['widget_key'])) : '';
+        $widget_key = isset($_POST['widget_key']) ? sanitize_text_field( wp_unslash($_POST['widget_key'] ) ) : '';
         $status = isset($_POST['status']) && $_POST['status'] === '1' ? '1' : '0';
-        $tab_slug   = isset($_POST['tab']) ? sanitize_text_field(wp_unslash($_POST['tab'])) : 'widget';
+        $tab_slug   = isset($_POST['tab']) ? sanitize_text_field( wp_unslash( $_POST['tab'] ) ) : 'widget';
         
         if (!empty( $widget_key ) ) {
             $option_name = 'easy_element_' . $tab_slug . '_' . $widget_key;
@@ -208,7 +208,7 @@ class Easyel_Elements {
         check_ajax_referer('easy_elements_bulk_action_nonce', 'nonce');
         
         $bulk_action = isset($_POST['bulk_action']) ? sanitize_text_field(wp_unslash($_POST['bulk_action'])) : '';
-        $tab = isset($_POST['tab']) ? sanitize_text_field($_POST['tab']) : 'widget';
+        $tab = isset($_POST['tab']) ? sanitize_text_field( wp_unslash( $_POST['tab'] ) ) : 'widget';
         $status = $bulk_action === 'activate_all' ? '1' : '0';
         
         $available_elements = $this->easyel_elements_get_available_widgets();
@@ -251,7 +251,7 @@ class Easyel_Elements {
             }
             wp_enqueue_style(
                 'ee-admin-hide-notices',
-                plugin_dir_url(__DIR__) . 'assets/css/admin/admin-hide-notices.css',
+                EASYELEMENTS_DIR_URL . 'assets/css/admin/admin-hide-notices.css',
                 [],
                 '1.0.0'
             );
@@ -272,7 +272,8 @@ class Easyel_Elements {
 
         ?>
         <div class="easyel-overview-header">
-            <img src="<?php echo plugin_dir_url( __DIR__ ).'admin/img/easy-logo.png'; ?>" alt="logo">
+            <img src="<?php echo esc_url( EASYELEMENTS_DIR_URL . 'admin/img/easy-logo.png' ); ?>" alt="<?php echo esc_attr( 'logo' ); ?>">
+
         </div>
         <div class="wrap easyel-plugin-settings-wrapper">
             <div class="easyel-nav-tab-item">
@@ -846,7 +847,8 @@ class Easyel_Elements {
                 'description' => 'Easy Scroll To Top.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
-                'group'       => 'Theme Builder Widget'
+                'group'       => 'Theme Builder Widget',
+                'tab' => 'widget',
             ], 
             'easy_table' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -854,6 +856,7 @@ class Easyel_Elements {
                 'description' => 'Easy Table.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => true,
+                'tab' => 'widget',
             ],
             'easytypewriter' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -861,7 +864,8 @@ class Easyel_Elements {
                 'description' => 'Animated typewriter text effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Animations'
+                'group'       => 'Animations',
+                'tab' => 'widget',
             ],
             'animated_title' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -869,7 +873,8 @@ class Easyel_Elements {
                 'description' => 'Animated title text effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Animations'
+                'group'       => 'Animations',
+                'tab' => 'widget',
             ],
             'animated_heading' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -877,7 +882,8 @@ class Easyel_Elements {
                 'description' => 'Animated heading text effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Animations'
+                'group'       => 'Animations',
+                'tab' => 'widget',
             ],
             'easytext_animation' => [
                 'icon'        => 'easyelIcon-format-image',
@@ -885,7 +891,8 @@ class Easyel_Elements {
                 'description' => 'Animated text animation effect.',
                 'demo_url'    => 'https://easyelements.reactheme.com/',
                 'is_pro'      => false,
-                'group'       => 'Animations'
+                'group'       => 'Animations',
+                'tab' => 'widget',
             ], 
             
             'easy_gallery' => [
@@ -900,14 +907,13 @@ class Easyel_Elements {
 
             'image_gallery_filter' => [
                 'icon'        => 'easyelIcon-marquee-logo',
-                'title'       => 'filterable Gallery',
+                'title'       => 'Filterable Gallery',
                 'description' => 'filterable Gallery',
                 'demo_url'    => 'https://wpeasyelements.com/simple-gallery/',
                 'docx_url'    => 'https://wpeasyelements.com/docs/simple-gallery/',
                 'is_pro'      => true,
                 'tab' => 'widget',
             ],
-
             'portfolio_pro' => [
                 'icon'        => 'easyelIcon-marquee-logo',
                 'title'       => 'Portfolio',
@@ -917,13 +923,12 @@ class Easyel_Elements {
                 'is_pro'      => true,
                 'tab' => 'widget',
             ],
-
-            'animated_title' => [
-                'icon'        => 'easyelIcon-heading',
-                'title'       => 'Animated Title',
-                'description' => 'Animated Title',
-                'demo_url'    => 'https://wpeasyelements.com/animated-title/',
-                'docx_url'    => 'https://wpeasyelements.com/docs/animated-title/',
+            'protected_content' => [
+                'icon'        => 'easyelIcon-marquee-logo',
+                'title'       => 'Protected Content',
+                'description' => 'This Widget is protected content',
+                'demo_url'    => 'https://wpeasyelements.com/protected-content/',
+                'docx_url'    => 'https://wpeasyelements.com/docs/protected-content/',
                 'is_pro'      => true,
                 'tab' => 'widget',
             ],

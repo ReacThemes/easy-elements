@@ -1285,18 +1285,30 @@ class EASY_EHF_Target_Rules_Fields {
 		$all_headers = wp_cache_get( $cache_key );
 
 		if ( false === $all_headers ) {
-			$all_headers = $wpdb->get_results( $wpdb->prepare(
-				"SELECT p.ID, p.post_title, pm.meta_value 
-				FROM {$wpdb->postmeta} pm 
-				INNER JOIN {$wpdb->posts} p ON pm.post_id = p.ID 
-				WHERE pm.meta_key = %s 
-				AND p.post_type = %s 
-				AND p.post_status = 'publish'",
-				$location,
-				$post_type
-			));
+			$args = [
+				'post_type'      => $post_type,
+				'post_status'    => 'publish',
+				'meta_key'       => $location, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'posts_per_page' => -1,
+				'fields'         => 'ids', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+			];
+
+			$posts = get_posts( $args );
+			$all_headers = [];
+
+			if ( $posts ) {
+				foreach ( $posts as $post_id ) {
+					$all_headers[] = [
+						'ID'         => $post_id,
+						'post_title' => get_the_title( $post_id ),
+						'meta_value' => get_post_meta( $post_id, $location, true ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+					];
+				}
+			}
+
 			wp_cache_set( $cache_key, $all_headers, '', 3600 );
 		}
+
 
 
 		foreach ( $all_headers as $header ) {

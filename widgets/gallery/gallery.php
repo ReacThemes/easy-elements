@@ -47,7 +47,7 @@ class Easyel__Gallery_Widget extends \Elementor\Widget_Base {
 
         // Normal script loading
         if ( ! wp_script_is( $handle, 'registered' ) && file_exists( $js_path ) ) {
-            wp_register_script( $handle, plugins_url( 'js/simple-gallery.js', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $js_path ) : '1.0.0' );
+            wp_register_script( $handle, plugins_url( 'js/simple-gallery.js', __FILE__ ), [], defined( 'WP_DEBUG' ) && WP_DEBUG ? filemtime( $js_path ) : '1.0.0', true );
         }
 
         return [ $handle ];

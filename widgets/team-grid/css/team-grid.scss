@@ -85,9 +85,16 @@
             left: 0;
             ul{
                 flex-direction: column;
+                gap: 8px;
                 li a{
                     background: #5933FF;
                     color: #fff;
+                    width: 45px;
+                    height: 45px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 100%;
                 }
             }
         }

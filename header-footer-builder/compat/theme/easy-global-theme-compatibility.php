@@ -65,9 +65,11 @@ class EASY_EHF_Theme_Compatibility {
 	public function easy_force_fullwidth() {
 
 		$handle = 'easy-ehf-style';
+
+		$version = EASYELEMENTS_VER; 
 		
 		if ( ! wp_style_is( $handle, 'registered' ) ) {
-			wp_register_style( $handle, false ); 
+			wp_register_style( $handle, false, [], $version ); 
 		}
 
 		// Enqueue the style so inline CSS attaches properly.

@@ -60,7 +60,7 @@ final class Easyel_Elements_Elementor_Extension {
 		$dir = plugin_dir_url( __FILE__ );
 		wp_enqueue_style( 'e-e-elements-admin', $dir . 'assets/css/admin/admin.css', [], self::VERSION );
 		wp_enqueue_style( 'e-e-easy-custom-icons', $dir . 'admin/icons/css/easy-icons.css', [], self::VERSION );
-		wp_enqueue_style('e-e-admin-fonts-inter','https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',false);
+		wp_enqueue_style('e-e-admin-fonts-inter','https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',false, self::VERSION );
 
 		if ( ( 'ee-elementor-hf' == $screen->id && ( 'post.php' == $pagenow || 'post-new.php' == $pagenow ) ) || ( 'edit.php' == $pagenow && 'edit-ee-elementor-hf' == $screen->id ) ) {
 			wp_enqueue_script( 'easy-ehf-admin-script',  $dir . 'assets/header-footer/js/ee-ehf-admin.js', [ 'jquery', 'updates' ], time(), true );
@@ -129,7 +129,7 @@ final class Easyel_Elements_Elementor_Extension {
 			'icon'  => 'fa fa-plug',
 		] );
 		$elements_manager->add_category( 'easyelements_category_pro', [
-			'title' => esc_html__( 'Easy Elements Pro', 'easy-elements-pro' ),
+			'title' => esc_html__( 'Easy Elements Pro', 'easy-elements' ),
 			'icon'  => 'fa fa-plug',
 		] );		
 	}
