@@ -39,7 +39,7 @@ $includes = [
 		'inc/extension/class-wrapper-link.php',
 		'inc/animation-control.php',
         'inc/jaralax-control.php',
-        'elementor-template-library/class-easy-elements-template-library.php'
+        'easy-template-library/class-easy-elements-template-library.php'
     ],
     'admin' => [
         'admin/settings.php',
