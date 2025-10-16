@@ -51,10 +51,12 @@ class Easyel_Image_Reveal__Widget extends \Elementor\Widget_Base {
             ]
         ); 
 
+        
         $this->add_group_control(
 			\Elementor\Group_Control_Image_Size::get_type(),
 			[
 				'name' => 'thumbnail', 
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 				'exclude' => [ 'custom' ],
 				'include' => [],
 				'default' => 'large',

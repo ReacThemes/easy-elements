@@ -311,6 +311,7 @@ class easyel__CF7_Widget extends \Elementor\Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'field_focus_box_shadow',
+                // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
                 'exclude' => [
                     'box_shadow_position',
                 ],

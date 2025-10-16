@@ -1325,15 +1325,35 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 			<thead  class="easyel-table-header">
 				<tr class="single-plan__header">
 					<?php
-					foreach ($settings['table_header'] as $index => $headeritem) {
+					foreach ( $settings['table_header'] as $index => $headeritem ) {
+
 						$repeater_setting_key = $this->get_repeater_setting_key( 'text', 'table_header', $index );
 						$this->add_inline_editing_attributes( $repeater_setting_key );
 
-						$colspan = ($headeritem['colspan'] == 'yes' && $headeritem['advance'] == 'yes') ? 'colSpan="'.$headeritem['colspannumber'].'"' : '';
-						echo '<th class="header-title elementor-inline-editing elementor-repeater-item-'.$headeritem['_id'].'"  '.$colspan.' '.$this->get_render_attribute_string( $repeater_setting_key ).'>'.$headeritem['text'];
-						if ($headeritem['table_head_tooltip'] == 'yes') {
-							echo '<span class="easyel-tooltip" data-bs-custom-class="tooltip-table-title" data-bs-toggle="tooltip" data-bs-placement="'.$tooltip_align.'" title="'.wp_kses_post( $headeritem['table_head_tooltip_description'] ).'">';
-							\Elementor\Icons_Manager::render_icon( $headeritem['table_head_tooltip_icon'], [ 'aria-hidden' => 'true' ] );
+						$colspan = ( isset( $headeritem['colspan'], $headeritem['advance'] ) && 
+									$headeritem['colspan'] === 'yes' && $headeritem['advance'] === 'yes' )
+							? 'colspan="' . esc_attr( $headeritem['colspannumber'] ) . '"'
+							: '';
+
+						echo '<th class="header-title elementor-inline-editing elementor-repeater-item-' . esc_attr( $headeritem['_id'] ) . '" '
+							. esc_attr( $colspan ) . ' '
+							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							. $this->get_render_attribute_string( $repeater_setting_key ) . '>';
+
+						echo wp_kses_post( $headeritem['text'] );
+
+						if ( isset( $headeritem['table_head_tooltip'] ) && $headeritem['table_head_tooltip'] === 'yes' ) {
+							echo '<span class="easyel-tooltip" '
+								. 'data-bs-custom-class="tooltip-table-title" '
+								. 'data-bs-toggle="tooltip" '
+								. 'data-bs-placement="' . esc_attr( $tooltip_align ) . '" '
+								. 'title="' . esc_attr( $headeritem['table_head_tooltip_description'] ) . '">';
+
+							\Elementor\Icons_Manager::render_icon(
+								$headeritem['table_head_tooltip_icon'],
+								[ 'aria-hidden' => 'true' ]
+							);
+
 							echo '</span>';
 						}
 
@@ -1345,31 +1365,48 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 			<tbody class="easyel-table-body">
 				<tr class="single-plan__content">
 					<?php
-						foreach ($settings['table_body'] as $index => $item) {
+						foreach ( $settings['table_body'] as $index => $item ) {
 
-							$table_icon = !empty($item['table_icon']) ? $item['table_icon'] : '';
+							$table_icon = ! empty( $item['table_icon'] ) ? $item['table_icon'] : '';
 
-							$table_body_key = $this->get_repeater_setting_key('text', 'table_body', $index);
-							$this->add_render_attribute($table_body_key, 'class', 'plan-title elementor-repeater-item-' . $item['_id']);
-							$this->add_inline_editing_attributes($table_body_key);
+							$table_body_key = $this->get_repeater_setting_key( 'text', 'table_body', $index );
+							$this->add_render_attribute( $table_body_key, 'class', 'plan-title elementor-repeater-item-' . esc_attr( $item['_id'] ) );
+							$this->add_inline_editing_attributes( $table_body_key );
 
-							if ($item['row'] == 'yes') {
+							if ( isset( $item['row'] ) && $item['row'] === 'yes' ) {
 								echo '</tr><tr class="single-plan__content">';
 							}
 
-							$colspan = ($item['colspan'] == 'yes' && $item['advance'] == 'yes') ? 'colspan="' . $item['colspannumber'] . '"' : '';
-							$rowspan = ($item['rowspan'] == 'yes' && $item['advance'] == 'yes') ? 'rowspan="' . $item['rowspannumber'] . '"' : '';
+							$colspan = ( isset( $item['colspan'], $item['advance'] ) && $item['colspan'] === 'yes' && $item['advance'] === 'yes' )
+								? 'colspan="' . esc_attr( $item['colspannumber'] ) . '"'
+								: '';
 
-							echo '<td ' . $colspan . ' ' . $rowspan . ' ' . $this->get_render_attribute_string($table_body_key) . '>';
-							if (!empty($item['table_icon'])) {
-								\Elementor\Icons_Manager::render_icon($item['table_icon'], ['aria-hidden' => 'true']);
+							$rowspan = ( isset( $item['rowspan'], $item['advance'] ) && $item['rowspan'] === 'yes' && $item['advance'] === 'yes' )
+								? 'rowspan="' . esc_attr( $item['rowspannumber'] ) . '"'
+								: '';
+							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo '<td ' . esc_attr( $colspan ) . ' ' . esc_attr( $rowspan ). ' ' . $this->get_render_attribute_string( $table_body_key ) . '>';
+
+							if ( ! empty( $table_icon ) ) {
+								\Elementor\Icons_Manager::render_icon( $table_icon, [ 'aria-hidden' => 'true' ] );
 							}
-							echo $item['text'];
-							if ($item['table_body_tooltip'] == 'yes') {
-								echo '<span class="easyel-tooltip" data-bs-custom-class="tooltip-table-title" data-bs-toggle="tooltip" data-bs-placement="'.$tooltip_align.'" title="'.wp_kses_post( $item['table_body_tooltip_description'] ).'">';
-								\Elementor\Icons_Manager::render_icon( $item['table_body_tooltip_icon'], [ 'aria-hidden' => 'true' ] );
+
+							echo wp_kses_post( $item['text'] );
+
+							if ( isset( $item['table_body_tooltip'] ) && $item['table_body_tooltip'] === 'yes' ) {
+								echo '<span class="easyel-tooltip" '
+									. 'data-bs-custom-class="tooltip-table-title" '
+									. 'data-bs-toggle="tooltip" '
+									. 'data-bs-placement="' . esc_attr( $tooltip_align ) . '" '
+									. 'title="' . esc_attr( $item['table_body_tooltip_description'] ) . '">';
+								
+								\Elementor\Icons_Manager::render_icon(
+									$item['table_body_tooltip_icon'], 
+									[ 'aria-hidden' => 'true' ]
+								);
 								echo '</span>';
 							}
+
 							echo '</td>';
 						}
 					?>
@@ -1378,15 +1415,34 @@ class Easyel_Table_Elementor_Widget extends \Elementor\Widget_Base {
 			<tfoot class="easyel-table-footer">
 				<tr class="easyel-single-plane-footer">
 					<?php
-					foreach ($settings['table_footer'] as $index => $footeritem) {
+					foreach ( $settings['table_footer'] as $index => $footeritem ) {
+
 						$repeater_setting_key = $this->get_repeater_setting_key( 'text', 'table_footer', $index );
 						$this->add_inline_editing_attributes( $repeater_setting_key );
 
-						$colspan = ($footeritem['colspan'] == 'yes' && $footeritem['advance'] == 'yes') ? 'colSpan="'.$footeritem['colspannumber'].'"' : '';
-						echo '<th class="footer-title elementor-inline-editing elementor-repeater-item-'.$footeritem['_id'].'"  '.$colspan.' '.$this->get_render_attribute_string( $repeater_setting_key ).'>'.$footeritem['text'];
-						if ($footeritem['table_foot_tooltip'] == 'yes') {
-							echo '<span class="easyel-tooltip" data-bs-custom-class="tooltip-table-title" data-bs-toggle="tooltip" data-bs-placement="'.$tooltip_align.'" title="'.wp_kses_post( $footeritem['table_foot_tooltip_description'] ).'">';
-							\Elementor\Icons_Manager::render_icon( $footeritem['table_foot_tooltip_icon'], [ 'aria-hidden' => 'true' ] );
+						$colspan = ( $footeritem['colspan'] === 'yes' && $footeritem['advance'] === 'yes' ) 
+							? 'colspan="' . esc_attr( $footeritem['colspannumber'] ) . '"' 
+							: '';
+
+						echo '<th class="footer-title elementor-inline-editing elementor-repeater-item-' . esc_attr( $footeritem['_id'] ) . '" ' 
+							. esc_attr( $colspan ) . ' ' 
+							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							. $this->get_render_attribute_string( $repeater_setting_key ) 
+							. '>' 
+							. wp_kses_post( $footeritem['text'] );
+
+						if ( isset( $footeritem['table_foot_tooltip'] ) && $footeritem['table_foot_tooltip'] === 'yes' ) {
+							echo '<span class="easyel-tooltip" '
+								. 'data-bs-custom-class="tooltip-table-title" '
+								. 'data-bs-toggle="tooltip" '
+								. 'data-bs-placement="' . esc_attr( $tooltip_align ) . '" '
+								. 'title="' . esc_attr( $footeritem['table_foot_tooltip_description'] ) . '">';
+
+							\Elementor\Icons_Manager::render_icon(
+								$footeritem['table_foot_tooltip_icon'], 
+								[ 'aria-hidden' => 'true' ]
+							);
+
 							echo '</span>';
 						}
 
